@@ -2,8 +2,12 @@
 > A D&D campaign helper.
 
 ## Table of Contents
-* [Description](#general-information)
+* [Description](#description)
+* [GeneralInformation](#general-information)
+* [TechnologiesUsed](#technologies-used)
+* [Features](#features)
 * [Contact](#contact)
+
 <!-- * [License](#license) -->
 
 
@@ -13,7 +17,7 @@
 - Improve the quality of life and gameflow of DM's and players.
 - We are doing this to save some time for players and improve the QoL for players
 
-## General Info  
+## General Information 
 
 
 ## Technologies Used
@@ -22,8 +26,15 @@
 - Cloud Tunnel
 
 ## Features
-- TODO:
-- TODO:
+- Device Connectivity:
+   - Users should be able to connect to each others device to give an update about combat and etc..  
+   - The DM and the players are going to be connected to show the game
+- DM Interface
+   - DM has a list of players info and character sheets  
+   - edit and take notes
+- Player Interface
+   - Toggle dice roller. Have their own character sheets and status.
+   - Players should have their own screen
 
 
 ## Contact
