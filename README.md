@@ -18,6 +18,7 @@
 - We are doing this to save some time for players and improve the QoL for players
 
 ## General Information 
+![Logo](./assets/logo.jpg)
 
 
 ## Technologies Used
