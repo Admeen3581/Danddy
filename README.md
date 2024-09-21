@@ -21,9 +21,9 @@
 
 
 ## Technologies Used
-- React 
-- Type-Script
-- Cloud Tunnel
+- [React Native](https://reactnative.dev/)
+- [Type-Script](https://www.typescriptlang.org/)
+- [Cloud Tunnel](https://www.cloudflare.com/products/tunnel/)
 
 ## Features
 - Device Connectivity:
