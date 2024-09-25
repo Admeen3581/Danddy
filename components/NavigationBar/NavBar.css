@@ -11,3 +11,8 @@
   font-weight: bold;
   color: #fff;
 }
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
