@@ -1,0 +1,21 @@
+.footer {
+  background-color: #222;
+  color: white;
+  padding: 1rem;
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footerLeft h4 {
+  margin-bottom: 0.5rem;
+}
+
+.footerRight p {
+  font-size: 0.875rem;
+  color: #aaa;
+}
