@@ -10,7 +10,7 @@ const Footer = () => {
           <p>Stuff here</p>
         </div>
         <div className="footerRight">
-          <p>&copy; {new Date().getFullYear()} Danddy. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Danddy.Co All rights reserved.</p>
         </div>
       </div>
     </footer>
