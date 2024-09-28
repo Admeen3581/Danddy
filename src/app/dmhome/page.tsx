@@ -9,6 +9,9 @@ const DMHome = () => {
        </div>
        <div className="ButtonsBox">
           <h1>Buttons:</h1>
+          <button className='button'>Character Sheets</button>
+          <button className='button'>NPC</button>
+          <button className='button'>Enemy</button>
        </div>
        <div className="NotesBox">
           <h1>Notes:</h1>
