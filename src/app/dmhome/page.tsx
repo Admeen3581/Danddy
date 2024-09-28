@@ -1,5 +1,6 @@
 import React from 'react';
 import './dmhome.css';
+import Link from 'next/link';
 
 const DMHome = () => {
   return (
@@ -9,9 +10,13 @@ const DMHome = () => {
        </div>
        <div className="ButtonsBox">
           <h1>Buttons:</h1>
-          <button className='button'>Character Sheets</button>
+          <div className="button-container">
+          <Link href="/chars" className="button"> {}
+            Characters
+          </Link>
           <button className='button'>NPC</button>
           <button className='button'>Enemy</button>
+          </div>
        </div>
        <div className="NotesBox">
           <h1>Notes:</h1>
