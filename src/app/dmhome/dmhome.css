@@ -71,6 +71,10 @@ body {
    text-decoration: none;
 }
 
+.ButtonsBox .button-container {
+   text-align: left;
+}
+
 .button:hover {
    color: #000000;
 }
