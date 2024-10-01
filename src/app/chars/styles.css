@@ -1,8 +1,17 @@
-.container {
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    padding: 20px; 
-    max-width: 1200px; 
-    margin: 0 auto; 
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%; 
+  gap: 20px;
+}
+
+.stats-container > div {
+  flex: 1; 
 }
