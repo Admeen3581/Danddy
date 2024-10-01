@@ -2,7 +2,7 @@ import React from 'react';
 import DMHeader from '../../../DmComponents/dmHeader/dmheader';
 import DMButtons from '../../../DmComponents/DMButtons/dmbuttons';
 import DMNotes from '../../../DmComponents/DMNotes/dmnotes';
-import { createRoom, generateRoomCode } from '@/utils/httpRequester';
+import { createRoom, generateRoomCode, updateDatabaseRoute } from '@/utils/httpRequester';
 
 const DMHome = () => {
 
@@ -16,7 +16,9 @@ const DMHome = () => {
       }
   };
 
-createRoom(roomCode, roomData);
+  createRoom(roomCode, roomData);
+
+  updateDatabaseRoute("rooms/AAAAAA/players", roomData)
 
   return (
    <>
