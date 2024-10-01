@@ -10,6 +10,9 @@ function Navbar() {
                 <li>
                     <Link href="/chars">chars</Link>
                 </li>
+                <li>
+                    <Link href="/playerhome">playerhome</Link>
+                </li>
             </ul>
         </nav>
     );

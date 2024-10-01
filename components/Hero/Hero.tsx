@@ -11,7 +11,7 @@ const Hero = () => {
         <Link href="/dmhome" className="hero-button">
             DM Start
           </Link>
-          <Link href="/dmhome" className="hero-button">
+          <Link href="/playerhome" className="hero-button">
             Player Start
           </Link>
       </div>
