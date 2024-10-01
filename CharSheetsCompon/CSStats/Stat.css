@@ -1,0 +1,15 @@
+.stat {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #34495e;
+  border-radius: 5px;
+}
+
+.stat-label {
+  font-weight: bold;
+}
+
+.stat-value {
+  color: #1abc9c;
+}
