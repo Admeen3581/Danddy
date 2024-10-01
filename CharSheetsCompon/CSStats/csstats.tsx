@@ -11,7 +11,6 @@ const CSStats = () => {
     int: 100,
     wis: 50,
     rizz: 999
-
   };
 
   return (
