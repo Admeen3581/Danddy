@@ -6,7 +6,7 @@ export async function updateDatabaseRoute(route: string, data: object): Promise<
     try {
         // Use PATCH to update specific fields or PUT to overwrite the data at the given route
         const response = await fetch(url, {
-            method: 'PATCH',  // PATCH updates the existing data without overwriting everything
+            method: 'PUT',  // PATCH updates the existing data without overwriting everything
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -48,6 +48,31 @@ export async function readDatabaseRoute(route: string): Promise<any> {
 
     } catch (error) {
         console.error('Error reading from database:', error);
+    }
+}
+
+
+// Function to delete data from a given route in the Firebase Realtime Database
+export async function deleteDatabaseRoute(route: string): Promise<void> {
+    const baseUrl = 'https://danddy-23d02-default-rtdb.firebaseio.com/';
+    const url = `${baseUrl}${route}.json`;  // Construct the full URL with the provided route
+
+    try {
+        // Send a DELETE request to remove the data at the specified route
+        const response = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to delete data. Status: ${response.status}`);
+        }
+
+        console.log(`Data at route '${route}' deleted successfully`);
+    } catch (error) {
+        console.error('Error deleting data:', error);
     }
 }
 

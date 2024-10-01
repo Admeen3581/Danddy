@@ -2,7 +2,7 @@ import React from 'react';
 import DMHeader from '../../../DmComponents/dmHeader/dmheader';
 import DMButtons from '../../../DmComponents/DMButtons/dmbuttons';
 import DMNotes from '../../../DmComponents/DMNotes/dmnotes';
-import { createRoom, generateRoomCode, readDatabaseRoute, updateDatabaseRoute } from '@/utils/httpRequester';
+import { createRoom, deleteDatabaseRoute, generateRoomCode, readDatabaseRoute, updateDatabaseRoute } from '@/utils/httpRequester';
 
 const DMHome = async () => {
 
@@ -16,11 +16,14 @@ const DMHome = async () => {
   //     }
   // };
 
-  //await createRoom(roomCode, roomData);
+  // await createRoom(roomCode, roomData);
 
-  //await updateDatabaseRoute("rooms/AAAAAA/players", roomData)
+  // await updateDatabaseRoute("rooms/AAAAAA/players", roomData)
+  // await updateDatabaseRoute("rooms/BBB/players", roomData)
 
-  //console.log(readDatabaseRoute("rooms/AAAAAA/players/host"))
+  // console.log(readDatabaseRoute("rooms/AAAAAA/players/host"))
+
+  // await deleteDatabaseRoute("rooms/4QFY8Z")
 
   return (
    <>
