@@ -107,3 +107,23 @@ export async function createRoom(roomCode: string, roomData: object): Promise<vo
         console.error('Error creating room:', error);
     }
 }
+
+  // Example calling of functions:
+  // const roomCode = generateRoomCode();  // Generate a random room code
+  // const roomData = {
+  //     host: "John Doe",
+  //     players: {},
+  //     settings: {
+  //         maxPlayers: 4,
+  //         isPrivate: true
+  //     }
+  // };
+
+  // await createRoom(roomCode, roomData);
+
+  // await updateDatabaseRoute("rooms/AAAAAA/players", roomData)
+  // await updateDatabaseRoute("rooms/BBB/players", roomData)
+
+  // console.log(readDatabaseRoute("rooms/AAAAAA/players/host"))
+
+  // await deleteDatabaseRoute("rooms/4QFY8Z")
