@@ -3,7 +3,7 @@ Objects:
         user_id (Primary Key, unique identifier) 
         username 
         email 
-        Password (encypted or hashed) 
+        password (encypted or hashed) 
         created_at 
         last_login 
     Characters: Each user can control one or more characters, with stats, inventory, and conditions 
