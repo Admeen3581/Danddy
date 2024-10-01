@@ -1,25 +1,30 @@
-// Define a utility function to update the database
-export async function updatePlayerData(playerId: string, data: object): Promise<void> {
+// Function to generate a random room code (optional if you already have a code)
+export function generateRoomCode(): string {
+    return Math.random().toString(36).substr(2, 6).toUpperCase();  // Generates a 6-character alphanumeric string
+}
+
+// Function to create a new room in the database
+export async function createRoom(roomCode: string, roomData: object): Promise<void> {
     const baseUrl = 'https://danddy-23d02-default-rtdb.firebaseio.com/';
-    const path = `rooms/players/${playerId}.json`;  // Construct the full path
+    const path = `rooms/${roomCode}.json`;  // Path for the new room
     const url = `${baseUrl}${path}`;
 
     try {
-        // Use PATCH to update only the specified fields, or PUT to overwrite the data
+        // Send a PUT request to create the room with the provided data
         const response = await fetch(url, {
-            method: 'PATCH',  // You can change this to 'PUT' if you want to overwrite the data
+            method: 'PUT',  // Use PUT to create/overwrite the room at the specified path
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data),  // Convert the data to JSON format
+            body: JSON.stringify(roomData),  // Room data as JSON
         });
 
         if (!response.ok) {
-            throw new Error(`Failed to update player data. Status: ${response.status}`);
+            throw new Error(`Failed to create room. Status: ${response.status}`);
         }
 
-        console.log('Player data updated successfully');
+        console.log(`Room ${roomCode} created successfully`);
     } catch (error) {
-        console.error('Error updating player data:', error);
+        console.error('Error creating room:', error);
     }
 }
