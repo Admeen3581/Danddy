@@ -23,6 +23,34 @@ export async function updateDatabaseRoute(route: string, data: object): Promise<
     }
 }
 
+// Function to read data from any given route in the Firebase Realtime Database
+export async function readDatabaseRoute(route: string): Promise<any> {
+    const baseUrl = 'https://danddy-23d02-default-rtdb.firebaseio.com/';
+    const url = `${baseUrl}${route}.json`;  // Construct the full URL with the provided route
+
+    try {
+        // Send a GET request to retrieve data from the specified route
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch data. Status: ${response.status}`);
+        }
+
+        // Parse and return the JSON data from the response
+        const data = await response.json();
+        console.log(`Data from route '${route}':`, data);
+        return data;
+
+    } catch (error) {
+        console.error('Error reading from database:', error);
+    }
+}
+
 
 // Function to generate a random room code (optional if you already have a code)
 export function generateRoomCode(): string {
