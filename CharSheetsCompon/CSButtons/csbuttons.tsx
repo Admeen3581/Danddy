@@ -1,12 +1,9 @@
 import React from 'react';
-import './charsheets.css';
+import './csbuttons.css';
 
-const TestChar = () => {
+const CSButtons = () => {
   return (
     <div className="charsheets-section">
-       <div className="headerBox">
-          <h1>Character Sheets</h1>
-       </div>
        <div className="ButtonsBox">
           <h1>Characters:</h1>
           <button className='button'>Character 1</button>
@@ -17,4 +14,4 @@ const TestChar = () => {
   );
 };
 
-export default TestChar;
+export default CSButtons;

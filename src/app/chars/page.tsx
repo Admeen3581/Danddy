@@ -1,10 +1,12 @@
 import React from 'react';
-import TestChar from '../../../DmComponents/charsheets/charsheets';
+import CSHeader from '../../../CharSheetsCompon/CSHeader/csheader';
+import CSButtons from '../../../CharSheetsCompon/CSButtons/csbuttons';
 
 const CharHome = () => {
   return (
    <>
-   <TestChar />
+   <CSHeader />
+   <CSButtons />
    </>
   );
 };
