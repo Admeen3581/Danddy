@@ -2,23 +2,25 @@ import React from 'react';
 import DMHeader from '../../../DmComponents/dmHeader/dmheader';
 import DMButtons from '../../../DmComponents/DMButtons/dmbuttons';
 import DMNotes from '../../../DmComponents/DMNotes/dmnotes';
-import { createRoom, generateRoomCode, updateDatabaseRoute } from '@/utils/httpRequester';
+import { createRoom, generateRoomCode, readDatabaseRoute, updateDatabaseRoute } from '@/utils/httpRequester';
 
-const DMHome = () => {
+const DMHome = async () => {
 
-  const roomCode = generateRoomCode();  // Generate a random room code
-  const roomData = {
-      host: "John Doe",
-      players: {},
-      settings: {
-          maxPlayers: 4,
-          isPrivate: true
-      }
-  };
+  // const roomCode = generateRoomCode();  // Generate a random room code
+  // const roomData = {
+  //     host: "John Doe",
+  //     players: {},
+  //     settings: {
+  //         maxPlayers: 4,
+  //         isPrivate: true
+  //     }
+  // };
 
-  createRoom(roomCode, roomData);
+  //await createRoom(roomCode, roomData);
 
-  updateDatabaseRoute("rooms/AAAAAA/players", roomData)
+  //await updateDatabaseRoute("rooms/AAAAAA/players", roomData)
+
+  //console.log(readDatabaseRoute("rooms/AAAAAA/players/host"))
 
   return (
    <>
