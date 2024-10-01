@@ -24,6 +24,7 @@ export async function updateDatabaseRoute(route: string, data: object): Promise<
 }
 
 // Function to read data from any given route in the Firebase Realtime Database
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function readDatabaseRoute(route: string): Promise<any> {
     const baseUrl = 'https://danddy-23d02-default-rtdb.firebaseio.com/';
     const url = `${baseUrl}${route}.json`;  // Construct the full URL with the provided route
