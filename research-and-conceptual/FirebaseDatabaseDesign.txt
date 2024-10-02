@@ -1,0 +1,44 @@
+https://danddy-23d02-default-rtdb.firebaseio.com/
+    - rooms
+        - {roomId}
+            - campaignId
+            - dm
+                - (DM Info to grab data from DM)
+            - players
+                - (Player Info here to grab data from users)
+            - combat
+                - (Combat sessions array)
+    - users
+        - {user_id}
+            - username 
+            - email 
+            - Password (encypted or hashed) 
+            - created_at 
+            - last_login 
+            - Characters
+                - {character_id}
+                    - user_id (Foreign Key) 
+                    - name 
+                    - class 
+                    - level
+                    - health
+                        - Current HP
+                        - Max HP
+                        - Temp HP
+                    - spells (if applicable)
+                    - spell slots (if applicable)
+                        - {level}
+                            - Current Amount
+                            - Max Amount
+                    - stats (JSON or map for strength, dexterity, etc.)
+                        - strength
+                        - dexterity
+                        - consitution
+                        - wisdom
+                        - intelegence
+                        - charisma
+                        - profiencies
+                            - JSON -> {profiencies} : bool
+                    - inventory (could be a separate entity or embedded array)
+                    - current_conditions
+                        - JSON -> {condition_id (Primary Key)} : effect_duration
