@@ -3,7 +3,7 @@ import './playerstats.css';
 
 const PlayerStats = () => {
   return (
-    <div className="section">
+    <div className="PAHome-section">
        <div className="StatsBox">
        <span className="inline-text">Strength</span>
        <span className="inline-text">Dexterity</span>

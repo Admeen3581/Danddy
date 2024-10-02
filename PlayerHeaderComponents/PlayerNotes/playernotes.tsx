@@ -3,7 +3,7 @@ import './playernotes.css';
 
 const PlayerNotes = () => {
   return (
-    <div className="PANotes-section">
+    <div className="PAHome-section">
        <div className="PANotesBox">
           <h1>Notes:</h1>
        </div>
