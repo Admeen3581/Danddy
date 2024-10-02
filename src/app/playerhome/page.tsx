@@ -1,5 +1,5 @@
 import React from 'react';
-import PlayerHeader from '../../../PhComp/PlayerHeader/playerheader';
+import PlayerHeader from '../../../PlayerHeaderComponents/PlayerHeader/playerheader';
 
 
 const DMHome = () => {
