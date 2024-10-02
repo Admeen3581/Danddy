@@ -1,0 +1,21 @@
+Adam Long
+09/25/2024
+Danddy - Research
+
++Appwrtie training/research
+
++To learn in Appwrite (BaaS) is the platform that fits our needs.
+
++I expect to learn the basics of the capabilities of Appwrite, not necessarily how to implement it. I will figure out implementation
+play-by-play.
+
++I need it to be able to keep record of player & DM information. Everything within our application will have a direct or indirect reliance
+on this technology. Critical to ensure it is the platform for us.
+
++Research Appwrite BaaS
+---------------------------------------------------------------------------
+Title or name of research/training
+Why you are doing it.
+What you expect to learn/do.   Be specific by identifying what code/modules will be affected by the research/training.
+What do you expect to do with it, including any code you expect to write.  Be specific.  For example, "Writing the UI" is not sufficient.   "Writing the Login class" is.
+What task(s) in Jira represent the work you will do that was/is dependent on the research/training.
