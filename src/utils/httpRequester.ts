@@ -1,8 +1,8 @@
+const BASE_URL = process.env.REACT_APP_DATABASE_URL;
+
 // Function to update any given route in the Firebase Realtime Database
 export async function updateDatabaseRoute(route: string, data: object): Promise<void> {
-    const baseUrl = 'https://danddy-23d02-default-rtdb.firebaseio.com/';
-    const url = `${baseUrl}${route}.json`;  // Construct the full URL with the provided route
-
+    const url = `${BASE_URL}${route}.json`;  // Construct the full URL with the provided route
     try {
         // Use PATCH to update specific fields or PUT to overwrite the data at the given route
         const response = await fetch(url, {
@@ -26,9 +26,7 @@ export async function updateDatabaseRoute(route: string, data: object): Promise<
 // Function to read data from any given route in the Firebase Realtime Database
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function readDatabaseRoute(route: string): Promise<any> {
-    const baseUrl = 'https://danddy-23d02-default-rtdb.firebaseio.com/';
-    const url = `${baseUrl}${route}.json`;  // Construct the full URL with the provided route
-
+    const url = `${BASE_URL}${route}.json`;  // Construct the full URL with the provided route
     try {
         // Send a GET request to retrieve data from the specified route
         const response = await fetch(url, {
@@ -52,11 +50,9 @@ export async function readDatabaseRoute(route: string): Promise<any> {
     }
 }
 
-
 // Function to delete data from a given route in the Firebase Realtime Database
 export async function deleteDatabaseRoute(route: string): Promise<void> {
-    const baseUrl = 'https://danddy-23d02-default-rtdb.firebaseio.com/';
-    const url = `${baseUrl}${route}.json`;  // Construct the full URL with the provided route
+    const url = `${BASE_URL}${route}.json`;  // Construct the full URL with the provided route
 
     try {
         // Send a DELETE request to remove the data at the specified route
@@ -77,7 +73,6 @@ export async function deleteDatabaseRoute(route: string): Promise<void> {
     }
 }
 
-
 // Function to generate a random room code (optional if you already have a code)
 export function generateRoomCode(): string {
     return Math.random().toString(36).substr(2, 6).toUpperCase();  // Generates a 6-character alphanumeric string
@@ -85,10 +80,8 @@ export function generateRoomCode(): string {
 
 // Function to create a new room in the database
 export async function createRoom(roomCode: string, roomData: object): Promise<void> {
-    const baseUrl = 'https://danddy-23d02-default-rtdb.firebaseio.com/';
     const path = `rooms/${roomCode}.json`;  // Path for the new room
-    const url = `${baseUrl}${path}`;
-
+    const url = `${BASE_URL}${path}`;
     try {
         // Send a PUT request to create the room with the provided data
         const response = await fetch(url, {
