@@ -1,34 +1,96 @@
-Objects: 
-    Users: Each player or DM has their own profile. 
-        user_id (Primary Key, unique identifier) 
-        username 
-        email 
-        Password (encypted or hashed) 
-        created_at 
-        last_login 
-    Characters: Each user can control one or more characters, with stats, inventory, and conditions 
-        character_id (Primary Key) 
-        user_id (Foreign Key) 
-        name 
-        class 
-        level 
-        health 
-        spells (if applicable) 
-        spell slots (if applicable) 
-        stats (JSON or map for strength, dexterity, etc.) 
-        inventory (could be a separate entity or embedded array) 
-        current_conditions (references conditions object) 
-    Conditions: Status effects like "Poisoned," "Stunned," or "Blessed" that impact characters during combat. 
-        condition_id (Primary Key) 
-        name (e.g., "Poisoned", "Stunned") 
-        description 
-        effect_duration 
-    Combat Sessions: Logs of combat events, including participants and outcomes. 
-        session_id (Primary Key) 
-        user_id (Foreign Key, DM managing the session) 
-        participants (Array of character_ids) 
-        combat_log (Array of events like "Character A attacks Character B") 
-        start_time 
-        end_time 
- 
-Join table might be needed for combat: Link the session_id and character_id 
+{
+  "users": {
+    "user_id_1": {
+      "username": "player1",
+      "email": "player1@email.com",
+      "password": "hashed_password_here",
+      "created_at": "2023-10-01T12:34:56Z",
+      "last_login": "2024-09-29T08:22:16Z"
+    },
+    "user_id_2": {
+      "username": "player2",
+      "email": "player2@email.com",
+      "password": "hashed_password_here",
+      "created_at": "2023-09-15T08:22:16Z",
+      "last_login": "2024-09-29T12:10:45Z"
+    }
+  }
+}
+
+{
+  "characters": {
+    "character_id_1": {
+      "user_id": "user_id_1",
+      "name": "Thorn",
+      "class": "Wizard",
+      "level": 5,
+      "health": 30,
+      "spells": ["Fireball", "Magic Missile"],
+      "spell_slots": {
+        "level_1": 3,
+        "level_2": 2
+      },
+      "stats": {
+        "strength": 10,
+        "dexterity": 12,
+        "constitution": 14,
+        "intelligence": 18,
+        "wisdom": 12,
+        "charisma": 8
+      },
+      "inventory": ["Dagger", "Potion of Healing"],
+      "current_conditions": ["condition_id_1"]
+    },
+    "character_id_2": {
+      "user_id": "user_id_2",
+      "name": "Garrosh",
+      "class": "Warrior",
+      "level": 3,
+      "health": 50,
+      "spells": null,
+      "spell_slots": null,
+      "stats": {
+        "strength": 18,
+        "dexterity": 10,
+        "constitution": 16,
+        "intelligence": 8,
+        "wisdom": 10,
+        "charisma": 12
+      },
+      "inventory": ["Greatsword", "Shield"],
+      "current_conditions": []
+    }
+  }
+}
+
+{
+  "conditions": {
+    "condition_id_1": {
+      "name": "Poisoned",
+      "description": "Character has disadvantage on attack rolls and ability checks.",
+      "effect_duration": "5 rounds"
+    },
+    "condition_id_2": {
+      "name": "Stunned",
+      "description": "Character cannot take actions or reactions.",
+      "effect_duration": "2 rounds"
+    }
+  }
+}
+
+{
+  "combat_sessions": {
+    "session_id_1": {
+      "user_id": "user_id_1",
+      "participants": ["character_id_1", "character_id_2"],
+      "combat_log": [
+        "Thorn casts Fireball on Garrosh",
+        "Garrosh takes 18 damage",
+        "Garrosh swings Greatsword at Thorn",
+        "Thorn dodges the attack"
+      ],
+      "start_time": "2024-09-28T19:00:00Z",
+      "end_time": "2024-09-28T20:15:00Z"
+    }
+  }
+}
