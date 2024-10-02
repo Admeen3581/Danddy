@@ -1,4 +1,4 @@
-import {SendHorizonalIcon} from 'lucide-react'
+import {CircleX, SendHorizonalIcon} from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import {
     Drawer,
@@ -27,16 +27,18 @@ export function MessagePopUp()
                     </DrawerHeader>
                     <div className="p-4 pb-0">
                         <div className="flex items-center justify-center space-x-2">
-                            <Textarea placeholder="Type your message here."></Textarea>
+                            <Textarea placeholder="Type your message here." ></Textarea>
                         </div>
                     </div>
 
                     <DrawerFooter>
                         <Button>
-                            <SendHorizonalIcon/><br/>Send
+                            <SendHorizonalIcon/>&ensp;Send
                         </Button>
                         <DrawerClose asChild>
-                            <Button>Cancel</Button>
+                            <Button>
+                                <CircleX/>&ensp;Cancel
+                            </Button>
                         </DrawerClose>
                     </DrawerFooter>
                 </div>
