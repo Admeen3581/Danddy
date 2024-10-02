@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { Loader2, LogOutIcon } from "lucide-react"
+//import React, { useState } from "react"
+//import { Loader2, LogOutIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
     Drawer,
@@ -11,6 +11,8 @@ import {
     DrawerHeader,
     DrawerTitle,
 } from "@/components/ui/drawer"
+import React from "react";
+import {Textarea} from "@/components/ui/textarea";
 
 export function MessagePopUp()
 {
@@ -18,17 +20,16 @@ export function MessagePopUp()
         <>
         <Drawer>
             <DrawerTrigger asChild>
-                <Button variant="outline">Message Daddy</Button>
+                <button className='button'>Message Daddy</button>
             </DrawerTrigger>
             <DrawerContent>
                 <div className="mx-auto w-full max-w-sm">
                     <DrawerHeader>
-                        <DrawerTitle>Move Goal</DrawerTitle>
-                        <DrawerDescription>Set your daily activity goal.</DrawerDescription>
+                        <DrawerTitle>Send your message to the daddy</DrawerTitle>
                     </DrawerHeader>
                     <div className="p-4 pb-0">
                         <div className="flex items-center justify-center space-x-2">
-                            <h1>TEXTBOX</h1>
+                            <Textarea placeholder="Type your message here."></Textarea>
                         </div>
                     </div>
 
