@@ -41,4 +41,4 @@ https://danddy-23d02-default-rtdb.firebaseio.com/
                             - JSON -> {profiencies} : bool
                     - inventory (could be a separate entity or embedded array)
                     - current_conditions
-                        - JSON -> {condition_id (Primary Key)} : effect_duration 
+                        - JSON -> {condition_id (Primary Key)} : effect_duration
