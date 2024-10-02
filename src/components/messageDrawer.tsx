@@ -1,12 +1,10 @@
-//import React, { useState } from "react"
-//import { Loader2, LogOutIcon } from "lucide-react"
+import {SendHorizonalIcon} from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import {
     Drawer,
     DrawerTrigger,
     DrawerClose,
     DrawerContent,
-    DrawerDescription,
     DrawerFooter,
     DrawerHeader,
     DrawerTitle,
@@ -34,9 +32,11 @@ export function MessagePopUp()
                     </div>
 
                     <DrawerFooter>
-                        <Button>Send</Button>
+                        <Button>
+                            <SendHorizonalIcon/><br/>Send
+                        </Button>
                         <DrawerClose asChild>
-                            <Button variant="outline">Cancel</Button>
+                            <Button>Cancel</Button>
                         </DrawerClose>
                     </DrawerFooter>
                 </div>
