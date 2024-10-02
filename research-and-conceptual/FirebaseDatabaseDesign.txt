@@ -1,0 +1,13 @@
+https://danddy-23d02-default-rtdb.firebaseio.com/
+    - rooms
+        - {roomId}
+            - campaignId
+            - dm
+                - (DM Info to grab data from DM)
+            - players
+                - (Player Info here to grab data from users)
+            - combat
+                - (Combat sessions array)
+    - users
+        - {username}
+            - (User info)
