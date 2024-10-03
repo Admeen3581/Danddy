@@ -48,98 +48,27 @@ export async function deleteDatabaseRoute(route: string): Promise<void> {
     return await fetchFromDatabase(route, 'DELETE');
 }
 
-
-
-// Function to update any given route in the Firebase Realtime Database using PUT, which overwrites the data at the given route
-/*export async function updateDatabaseRoute(route: string, data: object): Promise<void> {
-    const url = `${BASE_URL}${route}.json`;  // Construct the full URL with the provided route
-    try {
-        const response = await fetch(url, {
-            method: 'PUT',  
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),  // Convert the data to a JSON string
-        });
-        if (!response.ok) {
-            throw new Error(`Failed to update database. Status: ${response.status}`);
-        }
-        console.log(`Database at route '${route}' updated successfully`);
-    } catch (error) {
-        console.error('Error updating database:', error);
-    }
-}
-
-// Function to update any given route in the Firebase Realtime Database using PATCH, which only updates the provided fields
-export async function patchDatabaseRoute(route: string, data: object): Promise<void> {
+//Function to listen for changes in the Firebase Realtime Database
+export function listenToDatabaseChanges(route: string, callback: (data: any) => void): void {
     const url = `${BASE_URL}${route}.json`;
-    try {
-        const response = await fetch(url, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
-        if (!response.ok) {
-            throw new Error(`Failed to patch database. Status: ${response.status}`);
-        }
-        console.log(`Database at route '${route}' patched successfully`);
-    } catch (error) {
-        console.error('Error patching database:', error);
-    }
+    const eventSource = new EventSource(url);
+    eventSource.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        console.log('Realtime update:', data);
+        callback(data);
+    };
+    eventSource.onerror = (error) => {
+        console.error('Error in event listener:', error);
+    };
 }
 
-// Function to read data from any given route in the Firebase Realtime Database
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function readDatabaseRoute(route: string): Promise<any> {
-    const url = `${BASE_URL}${route}.json`;  // Construct the full URL with the provided route
-    try {
-        // Send a GET request to retrieve data from the specified route
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error(`Failed to fetch data. Status: ${response.status}`);
-        }
-
-        // Parse and return the JSON data from the response
-        const data = await response.json();
-        console.log(`Data from route '${route}':`, data);
-        return data;
-
-    } catch (error) {
-        console.error('Error reading from database:', error);
-    }
+//One of many functions that can be used to query the database with a filter
+export async function getCharactersByUserId(userId: string): Promise<any> {
+    const url = `${BASE_URL}characters.json?orderBy="user_id"&equalTo="${userId}"`;
+    return await fetchFromDatabase(url, 'GET');
 }
 
-// Function to delete data from a given route in the Firebase Realtime Database
-export async function deleteDatabaseRoute(route: string): Promise<void> {
-    const url = `${BASE_URL}${route}.json`;  // Construct the full URL with the provided route
-
-    try {
-        // Send a DELETE request to remove the data at the specified route
-        const response = await fetch(url, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error(`Failed to delete data. Status: ${response.status}`);
-        }
-
-        console.log(`Data at route '${route}' deleted successfully`);
-    } catch (error) {
-        console.error('Error deleting data:', error);
-    }
-}*/
-
+/*
 // Function to generate a random room code (optional if you already have a code)
 export function generateRoomCode(): string {
     return Math.random().toString(36).substr(2, 6).toUpperCase();  // Generates a 6-character alphanumeric string
@@ -167,7 +96,10 @@ export async function createRoom(roomCode: string, roomData: object): Promise<vo
     } catch (error) {
         console.error('Error creating room:', error);
     }
-}
+}*/
+
+
+
 
   // Example calling of functions:
   // const roomCode = generateRoomCode();  // Generate a random room code
