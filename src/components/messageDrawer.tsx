@@ -1,3 +1,5 @@
+'use client'
+
 // Author: Adam Long
 // Date: October 2, 2024
 // Description: Component for a message drawer popup. See messenger.ts
@@ -13,34 +15,63 @@ import {
     DrawerHeader,
     DrawerTitle,
 } from "@/components/ui/drawer"
-import React from "react";
+import React, {useState} from "react";
 import {Textarea} from "@/components/ui/textarea";
+import {initFirestore} from "@/lib/messenger";
+import {addDoc, collection} from "firebase/firestore";
+import {serverTimestamp} from "@firebase/database";
 
 
 export function MessagePopUp()
 {
+    const [text, setText] = useState('');
+
+    const handleChange = (e) => {
+        setText(e.target.value);
+    }
+
+    const extractText = async(e) => {
+        e.preventDefault();
+
+        const db = initFirestore();
+
+        const messagesCollection = collection(db, 'messages');
+        const data = {
+            text: text,
+            sentOn: serverTimestamp()
+        }
+
+        const newDocRef = await addDoc(messagesCollection, data);
+        console.log("New message created successfully with ID:", newDocRef);
+    }
 
     return (
         <>
         <Drawer>
             <DrawerTrigger asChild>
-                <button className='button'>Message Daddy</button>
+                <button className='button'>Message Danddy</button>
             </DrawerTrigger>
             <DrawerContent>
                 <div className="mx-auto w-full max-w-sm">
                     <DrawerHeader>
-                        <DrawerTitle>Send your message to the daddy</DrawerTitle>
+                        <DrawerTitle>Send your message to the danddy</DrawerTitle>
                     </DrawerHeader>
                     <div className="p-4 pb-0">
                         <div className="flex items-center justify-center space-x-2">
-                            <Textarea placeholder="Type your message here." ></Textarea>
+                            <Textarea
+                                value={text}
+                                onChange={handleChange}
+                                placeholder="Type your message here."
+                            />
                         </div>
                     </div>
 
                     <DrawerFooter>
-                        <Button>
-                            <SendHorizonalIcon/>&ensp;Send
-                        </Button>
+                        <DrawerClose asChild>
+                            <Button onClick={extractText}>
+                                <SendHorizonalIcon/>&ensp;Send
+                            </Button>
+                        </DrawerClose>
                         <DrawerClose asChild>
                             <Button>
                                 <CircleX/>&ensp;Cancel
@@ -53,5 +84,3 @@ export function MessagePopUp()
         </>
     )
 }
-
-
