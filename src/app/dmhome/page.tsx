@@ -12,7 +12,7 @@ const DMHome = async () => {
         <DMHeader />
         <DMButtons />
         <DMNotes />
-
+       <MessageRecievePopUp/>
    </>
   );
 };

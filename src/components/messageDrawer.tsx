@@ -27,6 +27,7 @@ export function MessagePopUp()
     const [msg, setMsg] = useState('');
     const db = initFirestore();
 
+    //prevent empty messages from being sent
     const handleSubmit = async () => {
         if (msg.trim() === "") {
             alert("Please enter a message.");
