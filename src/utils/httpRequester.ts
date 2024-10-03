@@ -98,7 +98,18 @@ export async function createRoom(roomCode: string, roomData: object): Promise<vo
     }
 }*/
 
+/* Functions that could be used for combat sections
+// Create a new combat session
+export async function createCombatSession(sessionData: object): Promise<void> {
+    const sessionCode = generateRoomCode();  // Use a room code as session ID
+    return await fetchFromDatabase(`sessions/${sessionCode}`, 'PUT', sessionData);
+}
 
+// End a combat session (mark as finished)
+export async function endCombatSession(sessionId: string): Promise<void> {
+    const updateData = { end_time: new Date().toISOString() };
+    return await patchDatabaseRoute(`sessions/${sessionId}`, updateData);
+}*/
 
 
   // Example calling of functions:
