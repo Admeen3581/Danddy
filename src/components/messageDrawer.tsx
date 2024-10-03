@@ -1,3 +1,7 @@
+// Author: Adam Long
+// Date: October 2, 2024
+// Description: Component for a message drawer popup. See messenger.ts
+
 import {CircleX, SendHorizonalIcon} from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import {
@@ -12,8 +16,10 @@ import {
 import React from "react";
 import {Textarea} from "@/components/ui/textarea";
 
+
 export function MessagePopUp()
 {
+
     return (
         <>
         <Drawer>
