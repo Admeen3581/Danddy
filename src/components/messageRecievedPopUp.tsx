@@ -17,6 +17,7 @@ export function MessageRecievePopUp()
                     <Terminal className="h-4 w-4" />
                     <AlertTitle>Message Received!</AlertTitle>
                     <AlertDescription>
+                        [Insert message here]
                     </AlertDescription>
                 </Alert>
             </div>

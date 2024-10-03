@@ -24,25 +24,32 @@ import {serverTimestamp} from "firebase/firestore";
 
 export function MessagePopUp()
 {
-    const [text, setText] = useState('');
+    const [msg, setMsg] = useState('');
+    const db = initFirestore();
 
-    const handleChange = (e) => {
-        setText(e.target.value);
-    }
-
-    const extractText = async(e) => {
-        e.preventDefault();
-
-        const db = initFirestore();
-
-        const messagesCollection = collection(db, 'messages');
-        const data = {
-            text: text,
-            sentOn: serverTimestamp()
+    const handleSubmit = async () => {
+        if (msg.trim() === "") {
+            alert("Please enter a message.");
+            return;
         }
 
-        const newDocRef = await addDoc(messagesCollection, data);
-        console.log("New message created successfully with ID:", newDocRef);
+        try {
+            // Create a new document in the 'messages' collection
+            const docRef = await addDoc(collection(db, "messages"), {
+                text: msg,                // Store the text from the Textarea
+                sentOn: serverTimestamp()     // Store the server timestamp
+            });
+
+            console.log("Document written with ID: ", docRef.id);
+            alert("Message sent!");
+
+            // Clear the text field after submission
+            setMsg("");
+
+        } catch (error) {
+            console.error("Error adding document: ", error);
+            alert("Failed to send message.");
+        }
     }
 
     return (
@@ -59,8 +66,8 @@ export function MessagePopUp()
                     <div className="p-4 pb-0">
                         <div className="flex items-center justify-center space-x-2">
                             <Textarea
-                                value={text}
-                                onChange={handleChange}
+                                value={msg}
+                                onChange={(e) => setMsg(e.target.value)}
                                 placeholder="Type your message here."
                             />
                         </div>
@@ -68,7 +75,7 @@ export function MessagePopUp()
 
                     <DrawerFooter>
                         <DrawerClose asChild>
-                            <Button onClick={extractText}>
+                            <Button onClick={handleSubmit}>
                                 <SendHorizonalIcon/>&ensp;Send
                             </Button>
                         </DrawerClose>
