@@ -1,4 +1,4 @@
-const BASE_URL = process.env.REACT_APP_DATABASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_DATABASE_URL;
 
 // Function to update any given route in the Firebase Realtime Database
 export async function updateDatabaseRoute(route: string, data: object): Promise<void> {
