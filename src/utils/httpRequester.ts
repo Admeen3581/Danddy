@@ -1,25 +1,92 @@
 const BASE_URL = process.env.REACT_APP_DATABASE_URL;
 
-// Function to update any given route in the Firebase Realtime Database
-export async function updateDatabaseRoute(route: string, data: object): Promise<void> {
+//Centralized function to GET, POST, PUT, PATCH, or DELETE data from the Firebase Realtime Database
+//string route: the path to the data in the database, method: request wanted, data: data to be sent
+async function fetchFromDatabase(route: string, method: string, data?: object): Promise<any> {
     const url = `${BASE_URL}${route}.json`;  // Construct the full URL with the provided route
     try {
-        // Use PATCH to update specific fields or PUT to overwrite the data at the given route
         const response = await fetch(url, {
-            method: 'PUT',  // PATCH updates the existing data without overwriting everything
+            method: method,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: data ? JSON.stringify(data) : null,
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to ${method} data. Status: ${response.status}`);
+        }
+
+        if (method !== 'DELETE') {
+            return await response.json();
+        }
+        return null;
+    } catch (error) {
+        console.error(`Error with ${method} request:`, error);
+        throw error;
+    }
+}
+
+//Functions to interact with the Firebase Realtime Database using the centralized fetchFromDatabase function
+export async function updateDatabaseRoute(route: string, data: object): Promise<void> {
+    return await fetchFromDatabase(route, 'PUT', data);
+}
+
+export async function patchDatabaseRoute(route: string, data: object): Promise<void> {
+    return await fetchFromDatabase(route, 'PATCH', data);
+}
+
+export async function readDatabaseRoute(route: string): Promise<any> {
+    return await fetchFromDatabase(route, 'GET');
+}
+
+export async function postDatabaseRoute(route: string, data: object): Promise<void> {
+    return await fetchFromDatabase(route, 'POST', data);
+}
+
+export async function deleteDatabaseRoute(route: string): Promise<void> {
+    return await fetchFromDatabase(route, 'DELETE');
+}
+
+
+
+// Function to update any given route in the Firebase Realtime Database using PUT, which overwrites the data at the given route
+/*export async function updateDatabaseRoute(route: string, data: object): Promise<void> {
+    const url = `${BASE_URL}${route}.json`;  // Construct the full URL with the provided route
+    try {
+        const response = await fetch(url, {
+            method: 'PUT',  
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),  // Convert the data to a JSON string
         });
-
         if (!response.ok) {
             throw new Error(`Failed to update database. Status: ${response.status}`);
         }
-
         console.log(`Database at route '${route}' updated successfully`);
     } catch (error) {
         console.error('Error updating database:', error);
+    }
+}
+
+// Function to update any given route in the Firebase Realtime Database using PATCH, which only updates the provided fields
+export async function patchDatabaseRoute(route: string, data: object): Promise<void> {
+    const url = `${BASE_URL}${route}.json`;
+    try {
+        const response = await fetch(url, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        if (!response.ok) {
+            throw new Error(`Failed to patch database. Status: ${response.status}`);
+        }
+        console.log(`Database at route '${route}' patched successfully`);
+    } catch (error) {
+        console.error('Error patching database:', error);
     }
 }
 
@@ -71,7 +138,7 @@ export async function deleteDatabaseRoute(route: string): Promise<void> {
     } catch (error) {
         console.error('Error deleting data:', error);
     }
-}
+}*/
 
 // Function to generate a random room code (optional if you already have a code)
 export function generateRoomCode(): string {
