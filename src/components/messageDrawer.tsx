@@ -19,7 +19,7 @@ import React, {useState} from "react";
 import {Textarea} from "@/components/ui/textarea";
 import {initFirestore} from "@/lib/messenger";
 import {addDoc, collection} from "firebase/firestore";
-import {serverTimestamp} from "@firebase/database";
+import {serverTimestamp} from "firebase/firestore";
 
 
 export function MessagePopUp()
