@@ -16,7 +16,7 @@ import {Message} from "@/lib/utils";
 export function MessageRecievePopUp()
 {
     const db = initFirestore();
-    const [isVisible, setVisiblity] = useState(true);
+    const [isVisible, setVisiblity] = useState(false);
     const [latestMessage, setLatestMessage] = useState('');
 
 
