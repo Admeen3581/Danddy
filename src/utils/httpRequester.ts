@@ -1,4 +1,4 @@
-const BASE_URL = process.env.REACT_APP_DATABASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_DATABASE_URL;
 
 //Centralized function to GET, POST, PUT, PATCH, or DELETE data from the Firebase Realtime Database
 //string route: the path to the data in the database, method: request wanted, data: data to be sent
