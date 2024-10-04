@@ -42,7 +42,6 @@ export function MessagePopUp()
             });
 
             console.log("Document written with ID: ", docRef.id);
-            alert("Message sent!");
 
             // Clear the text field after submission
             setMsg("");
