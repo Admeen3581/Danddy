@@ -19,8 +19,8 @@ const DMHome = () => {
       const roomId = generateRoomCode()
       const roomJson = {
         "campaign_id": "campaign_id_1",
-        "user_id": "user_id_1",
-        "participants": ["character_id_1", "character_id_2"],
+        "user_id": "dm",
+        "participants": [],
         "combat_log": [
           "Thorn casts Fireball on Garrosh",
           "Garrosh takes 18 damage",
