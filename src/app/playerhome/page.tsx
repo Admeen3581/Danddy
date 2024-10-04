@@ -6,7 +6,7 @@ import PlayerInfo from '../../../PlayerHeaderComponents/PlayerInfo/playerinfo';
 
 
 
-const DMHome = () => {
+const PlayerHome = () => {
   return (
    <>
       <PlayerHeader />
@@ -17,4 +17,4 @@ const DMHome = () => {
   );
 };
 
-export default DMHome;
+export default PlayerHome;
