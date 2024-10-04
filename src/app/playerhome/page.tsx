@@ -18,10 +18,21 @@ const PlayerHome = () => {
   useEffect(() => {
     if(!isRoomCreated.current){
       try{
-        console.log(readDatabaseRoute("rooms/"+roomId))
+        readDatabaseRoute("rooms/"+roomId)
+          .then((result) => {
+            if(result == null){
+              console.log("Room not found");
+              setRoomId("null")
+            }
+            else{
+              result.participants.push("joinedPlayer")
+              updateDatabaseRoute("rooms/"+roomId, result)
+            }
+          })
       }
       catch{
         console.log("Room not found")
+        setRoomId("null")
       }
 
       isRoomCreated.current = true;
