@@ -1,11 +1,11 @@
 "use client"
-import SignUpForm from "../../../components/SignUp/SignUpForm";
+import SignUp from "../../../components/SignUp/SignUp";
 
 export default function Home() {
 
   return (
     <>
-    <SignUpForm/>
+    <SignUp/>
     </>
   );
 }
