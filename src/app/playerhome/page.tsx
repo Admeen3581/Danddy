@@ -1,19 +1,33 @@
 "use client"
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PlayerHeader from '../../../PlayerHeaderComponents/PlayerHeader/playerheader';
 import PlayerStats from '../../../PlayerHeaderComponents/PlayerStats/playerstats';
 import PlayerNotes from '../../../PlayerHeaderComponents/PlayerNotes/playernotes';
 import PlayerInfo from '../../../PlayerHeaderComponents/PlayerInfo/playerinfo';
 import useLocalStore from '@/utils/store';
+import { readDatabaseRoute, updateDatabaseRoute } from '@/utils/httpRequester';
 
 
 
-const DMHome = () => {
+const PlayerHome = () => {
 
+  const isRoomCreated = useRef(false)
   const {roomId, setRoomId} = useLocalStore()
 
-  console.log(roomId)
+  useEffect(() => {
+    if(!isRoomCreated.current){
+      try{
+        console.log(readDatabaseRoute("rooms/"+roomId))
+      }
+      catch{
+        console.log("Room not found")
+      }
+
+      isRoomCreated.current = true;
+    }
+  });
+
 
   return (
    <>
