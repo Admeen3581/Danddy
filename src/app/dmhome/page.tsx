@@ -7,6 +7,7 @@ import DMNotes from '../../../DmComponents/DMNotes/dmnotes';
 import { createRoom, deleteDatabaseRoute, generateRoomCode, readDatabaseRoute, updateDatabaseRoute } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
 import DMHeader from '../../../DmComponents/dmHeader/dmheader';
+import {MessageRecievePopUp} from "@/components/messageRecievedPopUp";
 
 const DMHome = () => {
 
@@ -43,6 +44,7 @@ const DMHome = () => {
    <DMHeader />
    <DMButtons />
    <DMNotes />
+     <MessageRecievePopUp/>
    </>
   );
 };
