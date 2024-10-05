@@ -13,6 +13,7 @@ const Combat = () => {
      <CombatStats />
      <CombatSkills />
      <CombatBox />
+       <!--Add message alert popup when CP-46 merged to main.-->
    </>
   );
 };
