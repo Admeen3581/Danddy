@@ -17,6 +17,18 @@
   border-radius: 10px;
 }
 
+.hero-input {
+  width: 100%; /* Make the input take the full width */
+  height: 50px; /* Set a larger height */
+  font-size: 18px; /* Increase font size for better readability */
+  padding: 10px; /* Add some padding inside the input */
+  margin: 20px 0; /* Add margin for spacing */
+  border: 1px solid white; /* White border for visibility */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #333; /* Dark background for the input */
+  color: white; /* Text color inside the input */
+}
+
 h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
