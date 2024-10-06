@@ -68,7 +68,7 @@ export async function getCharactersByUserId(userId: string): Promise<any> {
     return await fetchFromDatabase(url, 'GET');
 }
 
-/*
+
 // Function to generate a random room code (optional if you already have a code)
 export function generateRoomCode(): string {
     return Math.random().toString(36).substr(2, 6).toUpperCase();  // Generates a 6-character alphanumeric string
@@ -96,7 +96,7 @@ export async function createRoom(roomCode: string, roomData: object): Promise<vo
     } catch (error) {
         console.error('Error creating room:', error);
     }
-}*/
+}
 
 /* Functions that could be used for combat sections
 // Create a new combat session
