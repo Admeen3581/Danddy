@@ -48,27 +48,6 @@ export async function deleteDatabaseRoute(route: string): Promise<void> {
     return await fetchFromDatabase(route, 'DELETE');
 }
 
-//Function to listen for changes in the Firebase Realtime Database
-export function listenToDatabaseChanges(route: string, callback: (data: any) => void): void {
-    const url = `${BASE_URL}${route}.json`;
-    const eventSource = new EventSource(url);
-    eventSource.onmessage = (event) => {
-        const data = JSON.parse(event.data);
-        console.log('Realtime update:', data);
-        callback(data);
-    };
-    eventSource.onerror = (error) => {
-        console.error('Error in event listener:', error);
-    };
-}
-
-//One of many functions that can be used to query the database with a filter
-export async function getCharactersByUserId(userId: string): Promise<any> {
-    const url = `${BASE_URL}characters.json?orderBy="user_id"&equalTo="${userId}"`;
-    return await fetchFromDatabase(url, 'GET');
-}
-
-/*
 // Function to generate a random room code (optional if you already have a code)
 export function generateRoomCode(): string {
     return Math.random().toString(36).substr(2, 6).toUpperCase();  // Generates a 6-character alphanumeric string
@@ -96,20 +75,9 @@ export async function createRoom(roomCode: string, roomData: object): Promise<vo
     } catch (error) {
         console.error('Error creating room:', error);
     }
-}*/
-
-/* Functions that could be used for combat sections
-// Create a new combat session
-export async function createCombatSession(sessionData: object): Promise<void> {
-    const sessionCode = generateRoomCode();  // Use a room code as session ID
-    return await fetchFromDatabase(`sessions/${sessionCode}`, 'PUT', sessionData);
 }
 
-// End a combat session (mark as finished)
-export async function endCombatSession(sessionId: string): Promise<void> {
-    const updateData = { end_time: new Date().toISOString() };
-    return await patchDatabaseRoute(`sessions/${sessionId}`, updateData);
-}*/
+
 
 
   // Example calling of functions:
