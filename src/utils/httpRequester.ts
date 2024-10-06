@@ -1,83 +1,74 @@
-// Function to update any given route in the Firebase Realtime Database
+const BASE_URL = process.env.NEXT_PUBLIC_DATABASE_URL;
+
+//Centralized function to GET, POST, PUT, PATCH, or DELETE data from the Firebase Realtime Database
+//string route: the path to the data in the database, method: request wanted, data: data to be sent
+async function fetchFromDatabase(route: string, method: string, data?: object): Promise<any> {
+    const url = `${BASE_URL}${route}.json`;  // Construct the full URL with the provided route
+    try {
+        const response = await fetch(url, {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: data ? JSON.stringify(data) : null,
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to ${method} data. Status: ${response.status}`);
+        }
+
+        if (method !== 'DELETE') {
+            return await response.json();
+        }
+        return null;
+    } catch (error) {
+        console.error(`Error with ${method} request:`, error);
+        throw error;
+    }
+}
+
+//Functions to interact with the Firebase Realtime Database using the centralized fetchFromDatabase function
 export async function updateDatabaseRoute(route: string, data: object): Promise<void> {
-    const baseUrl = 'https://danddy-23d02-default-rtdb.firebaseio.com/';
-    const url = `${baseUrl}${route}.json`;  // Construct the full URL with the provided route
-
-    try {
-        // Use PATCH to update specific fields or PUT to overwrite the data at the given route
-        const response = await fetch(url, {
-            method: 'PUT',  // PATCH updates the existing data without overwriting everything
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),  // Convert the data to a JSON string
-        });
-
-        if (!response.ok) {
-            throw new Error(`Failed to update database. Status: ${response.status}`);
-        }
-
-        console.log(`Database at route '${route}' updated successfully`);
-    } catch (error) {
-        console.error('Error updating database:', error);
-    }
+    return await fetchFromDatabase(route, 'PUT', data);
 }
 
-// Function to read data from any given route in the Firebase Realtime Database
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function patchDatabaseRoute(route: string, data: object): Promise<void> {
+    return await fetchFromDatabase(route, 'PATCH', data);
+}
+
 export async function readDatabaseRoute(route: string): Promise<any> {
-    const baseUrl = 'https://danddy-23d02-default-rtdb.firebaseio.com/';
-    const url = `${baseUrl}${route}.json`;  // Construct the full URL with the provided route
-
-    try {
-        // Send a GET request to retrieve data from the specified route
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error(`Failed to fetch data. Status: ${response.status}`);
-        }
-
-        // Parse and return the JSON data from the response
-        const data = await response.json();
-        console.log(`Data from route '${route}':`, data);
-        return data;
-
-    } catch (error) {
-        console.error('Error reading from database:', error);
-    }
+    return await fetchFromDatabase(route, 'GET');
 }
 
+export async function postDatabaseRoute(route: string, data: object): Promise<void> {
+    return await fetchFromDatabase(route, 'POST', data);
+}
 
-// Function to delete data from a given route in the Firebase Realtime Database
 export async function deleteDatabaseRoute(route: string): Promise<void> {
-    const baseUrl = 'https://danddy-23d02-default-rtdb.firebaseio.com/';
-    const url = `${baseUrl}${route}.json`;  // Construct the full URL with the provided route
-
-    try {
-        // Send a DELETE request to remove the data at the specified route
-        const response = await fetch(url, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error(`Failed to delete data. Status: ${response.status}`);
-        }
-
-        console.log(`Data at route '${route}' deleted successfully`);
-    } catch (error) {
-        console.error('Error deleting data:', error);
-    }
+    return await fetchFromDatabase(route, 'DELETE');
 }
 
+//Function to listen for changes in the Firebase Realtime Database
+export function listenToDatabaseChanges(route: string, callback: (data: any) => void): void {
+    const url = `${BASE_URL}${route}.json`;
+    const eventSource = new EventSource(url);
+    eventSource.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        console.log('Realtime update:', data);
+        callback(data);
+    };
+    eventSource.onerror = (error) => {
+        console.error('Error in event listener:', error);
+    };
+}
 
+//One of many functions that can be used to query the database with a filter
+export async function getCharactersByUserId(userId: string): Promise<any> {
+    const url = `${BASE_URL}characters.json?orderBy="user_id"&equalTo="${userId}"`;
+    return await fetchFromDatabase(url, 'GET');
+}
+
+/*
 // Function to generate a random room code (optional if you already have a code)
 export function generateRoomCode(): string {
     return Math.random().toString(36).substr(2, 6).toUpperCase();  // Generates a 6-character alphanumeric string
@@ -85,10 +76,8 @@ export function generateRoomCode(): string {
 
 // Function to create a new room in the database
 export async function createRoom(roomCode: string, roomData: object): Promise<void> {
-    const baseUrl = 'https://danddy-23d02-default-rtdb.firebaseio.com/';
     const path = `rooms/${roomCode}.json`;  // Path for the new room
-    const url = `${baseUrl}${path}`;
-
+    const url = `${BASE_URL}${path}`;
     try {
         // Send a PUT request to create the room with the provided data
         const response = await fetch(url, {
@@ -107,7 +96,21 @@ export async function createRoom(roomCode: string, roomData: object): Promise<vo
     } catch (error) {
         console.error('Error creating room:', error);
     }
+}*/
+
+/* Functions that could be used for combat sections
+// Create a new combat session
+export async function createCombatSession(sessionData: object): Promise<void> {
+    const sessionCode = generateRoomCode();  // Use a room code as session ID
+    return await fetchFromDatabase(`sessions/${sessionCode}`, 'PUT', sessionData);
 }
+
+// End a combat session (mark as finished)
+export async function endCombatSession(sessionId: string): Promise<void> {
+    const updateData = { end_time: new Date().toISOString() };
+    return await patchDatabaseRoute(`sessions/${sessionId}`, updateData);
+}*/
+
 
   // Example calling of functions:
   // const roomCode = generateRoomCode();  // Generate a random room code

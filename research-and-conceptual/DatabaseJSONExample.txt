@@ -1,0 +1,204 @@
+{
+  "users": {
+    "user_id_1": {
+      "username": "player1",
+      "email": "player1@email.com",
+      "password": "hashed/encrypted_password_here",
+      "created_at": "2023-10-01T12:34:56Z",
+      "last_login": "2024-09-29T08:22:16Z",
+      "characters": ["character_id_1, character_id_4],
+      "campaigns": ["campaign_id_1]
+    },
+    "user_id_2": {
+      "username": "player2",
+      "email": "player2@email.com",
+      "password": "hashed/encrypted_password_here",
+      "created_at": "2023-09-15T08:22:16Z",
+      "last_login": "2024-09-29T12:10:45Z",
+      "characters": ["character_id_2, character_id_3]
+    }
+  }
+}
+
+{
+  "characters": {
+    "character_id_1": {
+      "user_id": "user_id_1",
+      "name": "Thorn",
+      "class": "Wizard",
+      "level": 5,
+      "health": {
+        "max_health": 30,
+        "current_health": 30,
+        "temp_health": 0
+      },
+      "spells": ["Fireball", "Magic Missile"],
+      "spell_slots": {
+        "level_1": {
+          "max_slots": 3
+          "current_slots": 3
+        },
+        "level_2": {
+          "max_slots": 2
+          "current_slots": 2
+        },
+      },
+      "stats": {
+        "strength": {
+          "value": 10,
+          "saving_throw": false,
+          "skills": {
+            "athletics": true
+          }
+        },
+        "dexterity": {
+          "value": 12,
+          "saving_throw": false,
+          "skills": {
+            "acrobatics": false,
+            "sleight_of_hand": true,
+            "stealth": true
+          }
+        },
+        "constitution": {
+          "value": 14,
+          "saving_throw": false,
+          "skills": {}
+        },
+        "intelligence": {
+          "value": 18,
+          "saving_throw": true,
+          "skills": {
+            "arcana": true,
+            "history": false,
+            "investigation": true,
+            "nature": false,
+            "religion": true
+          }
+        },
+        "wisdom": {
+          "value": 12,
+          "saving_throw": true,
+          "skills": {
+            "animal_handling": true,
+            "insight": false,
+            "medicine": false,
+            "perception": true,
+            "survival": false
+          }
+        },
+        "charisma": {
+          "value": 8,
+          "saving_throw": false,
+          "skills": {
+            "deception": false,
+            "intimidation": false,
+            "performance": false,
+            "persuasion": true
+          }
+        }
+      },
+      "inventory": ["Dagger", "Potion of Healing"],
+      "current_conditions": ["condition_id_1"]
+    },
+    "character_id_2": {
+      "user_id": "user_id_2",
+      "name": "Garrosh",
+      "class": "Fighter",
+      "level": 3,
+      "health": 50,
+      "spells": null,
+      "spell_slots": null,
+      "stats": {
+        "strength": {
+          "value": 18,
+          "saving_throw": true,
+          "skills": {
+            "athletics": true
+          }
+        },
+        "dexterity": {
+          "value": 10,
+          "saving_throw": false,
+          "skills": {
+            "acrobatics": false,
+            "sleight_of_hand": false,
+            "stealth": false
+          }
+        },
+        "constitution": {
+          "value": 16,
+          "saving_throw": true,
+          "skills": {}
+        },
+        "intelligence": {
+          "value": 8,
+          "saving_throw": false,
+          "skills": {
+            "arcana": false,
+            "history": false,
+            "investigation": false,
+            "nature": false,
+            "religion": false
+          }
+        },
+        "wisdom": {
+          "value": 10,
+          "saving_throw": false,
+          "skills": {
+            "animal_handling": false,
+            "insight": false,
+            "medicine": false,
+            "perception": false,
+            "survival": false
+          }
+        },
+        "charisma": {
+          "value": 12,
+          "saving_throw": false,
+          "skills": {
+            "deception": true,
+            "intimidation": false,
+            "performance": false,
+            "persuasion": true
+          }
+        }
+      },
+      "inventory": ["Greatsword", "Shield"],
+      "current_conditions": []
+    }
+  }
+}
+
+{
+  "conditions": {
+    "condition_id_1": {
+      "name": "Poisoned",
+      "description": "Character has disadvantage on attack rolls and ability checks.",
+      "effect_duration": 5
+    },
+    "condition_id_2": {
+      "name": "Stunned",
+      "description": "Character cannot take actions or reactions.",
+      "effect_duration": 2
+    }
+  }
+}
+
+{
+  "rooms": {
+    "room_ID": {
+      "campaign_id": "campaign_id_1",
+      "user_id": "user_id_1",
+      "participants": ["character_id_1", "character_id_2"],
+      "combat_log": [
+        "Thorn casts Fireball on Garrosh",
+        "Garrosh takes 18 damage",
+        "Garrosh swings Greatsword at Thorn",
+        "Thorn dodges the attack"
+      ],
+      "start_time": "2024-09-28T19:00:00Z",
+      "end_time": "2024-09-28T20:15:00Z"
+    }
+  }
+}
