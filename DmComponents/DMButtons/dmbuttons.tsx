@@ -1,8 +1,9 @@
-import React from 'react';
 import './dmbuttons.css';
 import Link from 'next/link';
+import {MessagePopUp} from "@/components/messageDrawer";
 
 const DMButtons = () => {
+
   return (
     <div className="dmhome-section">
        <div className="ButtonsBox">
@@ -13,6 +14,7 @@ const DMButtons = () => {
           </Link>
           <button className='button'>NPC</button>
           <button className='button'>Enemy</button>
+              <MessagePopUp/>
           </div>
        </div>
     </div>
