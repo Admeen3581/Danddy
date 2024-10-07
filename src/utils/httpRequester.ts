@@ -74,7 +74,6 @@ export function generateRoomCode(): string {
     return Math.random().toString(36).substr(2, 6).toUpperCase();  // Generates a 6-character alphanumeric string
 }
 
-
 // Function to create a new room in the database
 export async function createRoom(roomCode: string, roomData: object): Promise<void> {
     const path = `rooms/${roomCode}.json`;  // Path for the new room
@@ -98,7 +97,6 @@ export async function createRoom(roomCode: string, roomData: object): Promise<vo
         console.error('Error creating room:', error);
     }
 }*/
-
 
 /* Functions that could be used for combat sections
 // Create a new combat session
