@@ -49,30 +49,35 @@
    - `Jira Task: Implement Google Firebase`
       - [CP-81](https://cs3398-luna-f24.atlassian.net/browse/CP-81), [Bitbucket]()
    - `Jira Task: Implement DM to Player messaging system`
-      -[CP-46](https://cs3398-luna-f24.atlassian.net/browse/CP-46), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-46-implement-dm-to-player-messaging-system)
+      - [CP-46](https://cs3398-luna-f24.atlassian.net/browse/CP-46), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-46-implement-dm-to-player-messaging-system)
 
-**Joshua**:
+**Joshua**: ""
+   - `Jira Task: Create Room System for Players and DM`
+      - [CP-83](https://cs3398-luna-f24.atlassian.net/browse/CP-83), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-83-create-room-system-for-players-and)
+   - `Jira Task: Create base project file structure using Next.js`
+      - [CP-75](https://cs3398-luna-f24.atlassian.net/browse/CP-75), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-75-create-base-project-file-structure)
+   - `Jira Task: Database Schema Design for Combat Tracking`
+      - [CP-27](https://cs3398-luna-f24.atlassian.net/browse/CP-45), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-27-database-schema-design-for-combat-)
+   - `Jira Task: Investigate DND API`
+      - [CP-44](https://cs3398-luna-f24.atlassian.net/browse/CP-27), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-44-investigate-dnd-api)
+   - `Jira Task: Build local multiplayer integration`
+      - [CP-5](https://cs3398-luna-f24.atlassian.net/browse/CP-5), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-5-build-local-multiplayer-integration)
+
+**Olivia**: ""
+   - `Jira Task:`
    - `Jira Task:`
    - `Jira Task:`
    - `Jira Task:`
    - `Jira Task:`
    - `Jira Task:`
 
-**Olivia**:
-   - `Jira Task:`
-   - `Jira Task:`
-   - `Jira Task:`
-   - `Jira Task:`
-   - `Jira Task:`
-   - `Jira Task:`
-
-**Roman**:
+**Roman**: ""
    - `Jira Task:`
    - `Jira Task:`
    - `Jira Task:`
    - `Jira Task:`
 
-**Lorenz**:
+**Lorenz**: ""
    - `Jira Task:`
    - `Jira Task:`
    - `Jira Task:`
