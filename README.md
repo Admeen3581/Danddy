@@ -37,6 +37,35 @@
    - Toggle dice roller. Have their own character sheets and status.
    - Players should have their own screen
 
+## Sprint 1
+
+#### Contributions
+
+**Adam**:
+
+**Joshua**:
+
+**Olivia**:
+
+**Roman**:
+
+**Lorenz**:
+
+### Reports
+
+![Burnup Chart](research-and-conceptual/burnupCharts/danddySprint1Burnup.png)
+
+#### Next Steps
+
+**Adam**:
+
+**Joshua**:
+
+**Olivia**:
+
+**Roman**:
+
+**Lorenz**:
 
 ## Contact
 Adam Long  
