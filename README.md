@@ -41,16 +41,43 @@
 
 #### Contributions
 
-**Adam**:
+**Adam**: "Developed a public messaging system and reasearched the best fitting database"
+   - `Jira Task: Implement UI for Combat Order`
+      - [CP-26](https://cs3398-luna-f24.atlassian.net/browse/CP-26?atlOrigin=eyJpIjoiNzQxNTI2YTZkOTQ3NGE1NDhmODIxYzdjZjc4NDlmMTciLCJwIjoiaiJ9), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-24-design--implement-ui-for-combat-pa)
+   - `Jira Task: Research AppwWrite BaaS`
+      - [CP-74](https://cs3398-luna-f24.atlassian.net/browse/CP-74), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-74-research-appwwrite-baas)
+   - `Jira Task: Implement Google Firebase`
+      - [CP-81](https://cs3398-luna-f24.atlassian.net/browse/CP-81), [Bitbucket]()
+   - `Jira Task: Implement DM to Player messaging system`
+      -[CP-46](https://cs3398-luna-f24.atlassian.net/browse/CP-46), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-46-implement-dm-to-player-messaging-system)
 
 **Joshua**:
+   - `Jira Task:`
+   - `Jira Task:`
+   - `Jira Task:`
+   - `Jira Task:`
+   - `Jira Task:`
 
 **Olivia**:
+   - `Jira Task:`
+   - `Jira Task:`
+   - `Jira Task:`
+   - `Jira Task:`
+   - `Jira Task:`
+   - `Jira Task:`
 
 **Roman**:
+   - `Jira Task:`
+   - `Jira Task:`
+   - `Jira Task:`
+   - `Jira Task:`
 
 **Lorenz**:
-
+   - `Jira Task:`
+   - `Jira Task:`
+   - `Jira Task:`
+   - `Jira Task:`
+   - `Jira Task:`
 ### Reports
 
 ![Burnup Chart](research-and-conceptual/burnupCharts/danddySprint1Burnup.png)
