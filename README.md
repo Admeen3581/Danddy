@@ -64,12 +64,18 @@
       - [CP-5](https://cs3398-luna-f24.atlassian.net/browse/CP-5), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-5-build-local-multiplayer-integration)
 
 **Olivia**: ""
-   - `Jira Task:`
-   - `Jira Task:`
-   - `Jira Task:`
-   - `Jira Task:`
-   - `Jira Task:`
-   - `Jira Task:`
+   - `Jira Task: Implement Player UI`
+      - [CP-82](https://cs3398-luna-f24.atlassian.net/browse/CP-82), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-82-implement-player-ui)
+   - `Jira Task: Implement DM interface`
+      - [CP-77](https://cs3398-luna-f24.atlassian.net/browse/CP-77), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-77-implement-dm-interface)
+   - `Jira Task: Design/ Implement UI for Combat Page`
+      - [CP-24](https://cs3398-luna-f24.atlassian.net/browse/CP-24), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-24-design--implement-ui-for-combat-pa)
+   - `Jira Task:  Design Player Management UI`
+      - [CP-18](https://cs3398-luna-f24.atlassian.net/browse/CP-18), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-18-design-player-ui)
+   - `Jira Task: Creating Components for DM Home and Character Sheets`
+      - [CP-8](https://cs3398-luna-f24.atlassian.net/browse/CP-8), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-8-implement-dm-pages-charsheets-npc-e)
+   - `Jira Task: Design DM interface`
+      - [CP-7](https://cs3398-luna-f24.atlassian.net/browse/CP-7), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-7-design-dm-interface)
 
 **Roman**: ""
    - `Jira Task:`
