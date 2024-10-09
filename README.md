@@ -52,7 +52,7 @@
       - [CP-46](https://cs3398-luna-f24.atlassian.net/browse/CP-46), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-46-implement-dm-to-player-messaging-system) </br>
 
 
-**Joshua**: "" </br>
+**Joshua**: "Created the database connection, as well as the lobby joining process." </br>
    >- `Jira Task: Create Room System for Players and DM` </br>
       - [CP-83](https://cs3398-luna-f24.atlassian.net/browse/CP-83), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-83-create-room-system-for-players-and) </br>
    - `Jira Task: Create base project file structure using Next.js` </br>
