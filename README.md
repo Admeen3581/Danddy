@@ -90,9 +90,9 @@
       - [CP-37](https://cs3398-luna-f24.atlassian.net/browse/CP-37), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-37-implement-backend-api) </br>
 
 **Lorenz**: "Designed,implemented and integrated Homescreen,Character Page, and Login Page (Front-end)" </br>
-   - `Jira Task: Design home screen` </br>
-      - [CP-3](https://cs3398-luna-f24.atlassian.net/browse/CP-3)  
-      - [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-3-design-home-screen) </br>
+   >- `Jira Task: Design home screen` </br>
+         - [CP-3](https://cs3398-luna-f24.atlassian.net/browse/CP-3)  
+         - [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-3-design-home-screen) </br>
    - `Jira Task: Track Player data in database` </br>
       - [CP-43](https://cs3398-luna-f24.atlassian.net/browse/CP-43)  
       - [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-43-track-player-data-in-database) </br>
