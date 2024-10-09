@@ -77,18 +77,27 @@
    - `Jira Task: Design DM interface`
       - [CP-7](https://cs3398-luna-f24.atlassian.net/browse/CP-7), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-7-design-dm-interface)
 
-**Roman**: ""
-   - `Jira Task:`
-   - `Jira Task:`
-   - `Jira Task:`
-   - `Jira Task:`
+**Roman**: "Designed and integrated database and authentication through Firebase"
+   - `Jira Task: Design Database Schema`
+      - [CP-36](https://cs3398-luna-f24.atlassian.net/browse/CP-36), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-36-design-database-schema)
+   - `Jira Task: Implement Initial Structure of the Database`
+      - [CP-78](https://cs3398-luna-f24.atlassian.net/browse/CP-78), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/feature/CP-78-implement-initial-structure-of-the)
+   - `Jira Task: Implement Authentication for User Data Secuirty`
+      - [CP-39](https://cs3398-luna-f24.atlassian.net/browse/CP-39), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-39-implement-authentication)
+   - `Jira Task: Implement Backend API to Connect to Cloud Database`
+      - [CP-37](https://cs3398-luna-f24.atlassian.net/browse/CP-37), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-37-implement-backend-api)
 
 **Lorenz**: ""
-   - `Jira Task:`
-   - `Jira Task:`
-   - `Jira Task:`
-   - `Jira Task:`
-   - `Jira Task:`
+   - `Jira Task: Design home screen`
+      - [CP-3](https://cs3398-luna-f24.atlassian.net/browse/CP-3), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-3-design-home-screen)
+   - `Jira Task: Track Player data in database`
+      - [CP-43](https://cs3398-luna-f24.atlassian.net/browse/CP-43), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-43-track-player-data-in-database)
+   - `Jira Task: Use 5ednd API to create a test and mockup for the API`
+      - [CP-51](https://cs3398-luna-f24.atlassian.net/browse/CP-51), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-51-use-an-api-that-has-dd-related-con)
+   - `Jira Task: Implement Player List Component`
+      - [CP-19](https://cs3398-luna-f24.atlassian.net/browse/CP-19), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-19-implement-player-list-component)
+   - `Jira Task: Implement Home screen design`
+      - [CP-76](https://cs3398-luna-f24.atlassian.net/browse/CP-76), [Bitbucket](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-76-implement-home-screen-design)
 ### Reports
 
 ![Burnup Chart](research-and-conceptual/burnupCharts/danddySprint1Burnup.png)
