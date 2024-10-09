@@ -112,23 +112,27 @@
 
 #### Next Steps
 
-**Adam**:
-   >- Fleshing out the functionality of the messaging system
-   >- Setting up basic tutorial structure
+**Adam**:</br>
+   >- Fleshing out the functionality of the messaging system</br>
+   >- Setting up basic tutorial structure </br>
+   
 **Joshua**:
-   >- Work on player syncronization with the front end and database
-   >- Setting up combat backend functionality 
+   >- Work on player syncronization with the front end and database</br>
+   >- Setting up combat backend functionality </br>
+   
 **Olivia**:
-   >- Make the front end look better
-   >- Make the front end functional for player and DM
-   >- Assist in making the combat page
+   >- Make the front end look better</br>
+   >- Make the front end functional for player and DM</br>
+   >- Assist in making the combat page</br>
+   
 **Roman**:
-   >- Working on user authentication and tying user data
-   >- Getting the DM syncronization with the front end and database
+   >- Working on user authentication and tying user data</br>
+   >- Getting the DM syncronization with the front end and database</br>
+   
 **Lorenz**:
-   >- Data pulling for the players and characters
-   >- Assisting in desiging front end
-   >- Making the combat page
+   >- Data pulling for the players and characters</br>
+   >- Assisting in desiging front end</br>
+   >- Making the combat page</br>
    
 ## Contact
 Adam Long  
