@@ -42,7 +42,7 @@
 #### Contributions
 
 **Adam**: "Developed a public messaging system and reasearched the best fitting database" </br>
-   - `Jira Task: Implement UI for Combat Order`</br>
+   >- `Jira Task: Implement UI for Combat Order`</br>
       - [CP-26](https://cs3398-luna-f24.atlassian.net/browse/CP-26?atlOrigin=eyJpIjoiNzQxNTI2YTZkOTQ3NGE1NDhmODIxYzdjZjc4NDlmMTciLCJwIjoiaiJ9), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-24-design--implement-ui-for-combat-pa) </br>
    - `Jira Task: Research AppwWrite BaaS` </br>
       - [CP-74](https://cs3398-luna-f24.atlassian.net/browse/CP-74), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-74-research-appwwrite-baas) </br>
@@ -53,7 +53,7 @@
 
 
 **Joshua**: "" </br>
-   - `Jira Task: Create Room System for Players and DM` </br>
+   >- `Jira Task: Create Room System for Players and DM` </br>
       - [CP-83](https://cs3398-luna-f24.atlassian.net/browse/CP-83), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-83-create-room-system-for-players-and) </br>
    - `Jira Task: Create base project file structure using Next.js` </br>
       - [CP-75](https://cs3398-luna-f24.atlassian.net/browse/CP-75), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-75-create-base-project-file-structure) </br>
@@ -66,7 +66,7 @@
 
 
 **Olivia**: "" </br>
-   - `Jira Task: Implement Player UI` </br>
+   >- `Jira Task: Implement Player UI` </br>
       - [CP-82](https://cs3398-luna-f24.atlassian.net/browse/CP-82), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-82-implement-player-ui) </br>
    - `Jira Task: Implement DM interface` </br>
       - [CP-77](https://cs3398-luna-f24.atlassian.net/browse/CP-77), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-77-implement-dm-interface) </br>
@@ -80,7 +80,7 @@
       - [CP-7](https://cs3398-luna-f24.atlassian.net/browse/CP-7), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-7-design-dm-interface) </br>
 
 **Roman**: "Designed and integrated database and authentication through Firebase" </br>
-   - `Jira Task: Design Database Schema` </br>
+   >- `Jira Task: Design Database Schema` </br>
       - [CP-36](https://cs3398-luna-f24.atlassian.net/browse/CP-36), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-36-design-database-schema) </br>
    - `Jira Task: Implement Initial Structure of the Database` </br>
       - [CP-78](https://cs3398-luna-f24.atlassian.net/browse/CP-78), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/feature/CP-78-implement-initial-structure-of-the) </br>
@@ -91,8 +91,8 @@
 
 **Lorenz**: "Designed,implemented and integrated Homescreen,Character Page, and Login Page (Front-end)" </br>
    >- `Jira Task: Design home screen` </br>
-         - [CP-3](https://cs3398-luna-f24.atlassian.net/browse/CP-3)  
-         - [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-3-design-home-screen) </br>
+      - [CP-3](https://cs3398-luna-f24.atlassian.net/browse/CP-3)  
+      - [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-3-design-home-screen) </br>
    - `Jira Task: Track Player data in database` </br>
       - [CP-43](https://cs3398-luna-f24.atlassian.net/browse/CP-43)  
       - [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-43-track-player-data-in-database) </br>
@@ -113,15 +113,23 @@
 #### Next Steps
 
 **Adam**:
-
+   >- Fleshing out the functionality of the messaging system
+   >- Setting up basic tutorial structure
 **Joshua**:
-
+   >- Work on player syncronization with the front end and database
+   >- Setting up combat backend functionality 
 **Olivia**:
-
+   >- Make the front end look better
+   >- Make the front end functional for player and DM
+   >- Assist in making the combat page
 **Roman**:
-
+   >- Working on user authentication and tying user data
+   >- Getting the DM syncronization with the front end and database
 **Lorenz**:
-
+   >- Data pulling for the players and characters
+   >- Assisting in desiging front end
+   >- Making the combat page
+   
 ## Contact
 Adam Long  
 Joshua Mason  
