@@ -14,7 +14,25 @@ h1 {
 
 p {
   font-size: 1.1rem;
-  color: #eceee8; /* Slightly off-white text */
+  color: #eceee8; 
   line-height: 1.6;
   margin-bottom: 1.5rem;
 }
+
+.mission, .team, .contact {
+  margin-top: 2rem;
+}
+
+h2 {
+  font-size: 2rem;
+  color: #eceee8;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #ab5555;
+  padding-bottom: 0.5rem;
+}
+
+a {
+  color: #ab5555; 
+  text-decoration: none;
+}
+
