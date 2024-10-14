@@ -76,7 +76,8 @@ p {
   font-size: 16px; 
   padding: 10px 20px;
   color: white;
-  background-color: #0a2148;
+  background-color: #4b0f04;
+  margin-top: 5px;
   border: none;
   border-radius: 5px;
   max-width: 400px;
@@ -87,5 +88,5 @@ p {
 
 
 .hero-button:hover {
-  background-color: #041025;
+  box-shadow: 0 0 5px 5px #eceee8; /* Glowing effect */
 }
