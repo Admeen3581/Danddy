@@ -12,14 +12,18 @@ export default function About(){
       <section className="mission">
         <h2>Our Mission</h2>
         <p>
-            stuff here
+         We aim to enhance the overall experience of Dungeons & Dragons campaigns, 
+         ensuring that DMs and players can focus more on the story and less on the logistics.
+         By improving the flow of combat and gameplay, we help players and DMs stay connected and engaged.
         </p>
       </section>
 
       <section className="features">
         <h2>Key Features</h2>
         <p>
-            stuff here
+            Device Connectivity: Players and DMs can connect to each other to keep the game updated, particularly for combat updates.<br />
+            DM Interface: DMs can access a list of players, character sheets, and take notes.<br />
+            Player Interface: Players have their own character sheets and can toggle the dice roller or update their status in real time.
         </p>
       </section>
 
