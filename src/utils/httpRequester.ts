@@ -80,7 +80,7 @@ export async function createRoom(roomCode: string, roomData: object): Promise<vo
 
 
 //Dnd Calling
-export async function getDnDAPI(route: String) {
+export async function getDnDAPI(route: String) : Promise<JSON> {
     const url = "https://www.dnd5eapi.co/api/"+route;
     
     try {
@@ -90,11 +90,10 @@ export async function getDnDAPI(route: String) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data : JSON = await response.json();
-        console.log(data)
         return data;
     } catch (error) {
         console.error('An error occurred:', error);
-        return {}
+        return JSON
     }
 }
 
