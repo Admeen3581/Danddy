@@ -79,6 +79,26 @@ export async function createRoom(roomCode: string, roomData: object): Promise<vo
 }
 
 
+//Dnd Calling
+export async function getDnDClasses() {
+    const url = "https://www.dnd5eapi.co/api/classes";
+    
+    try {
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data : JSON = await response.json();
+        console.log(data)
+        return data;
+    } catch (error) {
+        console.error('An error occurred:', error);
+        return {}
+    }
+}
+
+
   // Example calling of functions:
   // const roomCode = generateRoomCode();  // Generate a random room code
   // const roomData = {

@@ -6,11 +6,13 @@ import PlayerStats from '../../../PlayerHeaderComponents/PlayerStats/playerstats
 import PlayerNotes from '../../../PlayerHeaderComponents/PlayerNotes/playernotes';
 import PlayerInfo from '../../../PlayerHeaderComponents/PlayerInfo/playerinfo';
 import useLocalStore from '@/utils/store';
-import { readDatabaseRoute, updateDatabaseRoute } from '@/utils/httpRequester';
+import { getDnDClasses, readDatabaseRoute, updateDatabaseRoute } from '@/utils/httpRequester';
 
 
 
 const PlayerHome = () => {
+
+  getDnDClasses()
 
   const isRoomCreated = useRef(false)
   const {roomId, setRoomId} = useLocalStore()
