@@ -46,17 +46,7 @@
   background-color: #161314; 
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 20px 5px #eceee8; /* Initial glowing effect */
-  animation: breathingGlow 6s infinite ease-in-out;
-}
-
-@keyframes breathingGlow {
-  0%, 100% {
-    box-shadow: 0 0 10px 5px #eceee8; /* Initial glow */
-  }
-  50% {
-    box-shadow: 0 0 30px 15px #eceee8; /* Increased glow */
-  }
+  box-shadow: 0 0 20px 5px #eceee8; /* Glowing effect */
 }
 
 .hero-input {
@@ -72,7 +62,7 @@
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 2rem;
   margin-bottom: 1rem;
 }
 
@@ -86,8 +76,7 @@ p {
   font-size: 16px; 
   padding: 10px 20px;
   color: white;
-  background-color: #4b0f04;
-  margin-top: 5px;
+  background-color: #0a2148;
   border: none;
   border-radius: 5px;
   max-width: 400px;
@@ -98,5 +87,5 @@ p {
 
 
 .hero-button:hover {
-  box-shadow: 0 0 5px 5px #eceee8; /* Glowing effect */
+  background-color: #041025;
 }
