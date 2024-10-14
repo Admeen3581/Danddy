@@ -1,0 +1,20 @@
+.about-container {
+  padding: 2rem;
+  background-color: #161314;
+  height: 100vh;
+  color: white; 
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #eceee8; 
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+p {
+  font-size: 1.1rem;
+  color: #eceee8; /* Slightly off-white text */
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
