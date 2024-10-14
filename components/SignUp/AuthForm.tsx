@@ -13,8 +13,6 @@ import {Loader2} from 'lucide-react';
 import { authFormSchema } from '@/lib/utils';
 import { signIn, signUp } from '@/lib/actions/user.actions';
 import {useRouter} from 'next/navigation'
-import AlertPopUp from '@/components/erroralert';
-import PlaidLink from './plaidlink';
 
 const AuthForm = ({type}: {type : string}) =>
 {
@@ -44,15 +42,9 @@ const AuthForm = ({type}: {type : string}) =>
             if(type === 'sign-up')
             {
                 const userNames = {
-                    firstName: values.firstName!,
-                    lastName: values.lastName!,
-                    address: values.address!,
-                    city: values.city!,
-                    state: values.state!,
-                    code: values.code!,
-                    birthday: values.birthday!,
                     email: values.email,
                     password: values.password,
+                    username: values.username
                 }
 
                 const newUserResponse = await signUp(userNames);
@@ -84,11 +76,6 @@ const AuthForm = ({type}: {type : string}) =>
         }
     }
 
-    const handleAlertClose = () =>
-    {
-        setShowAlert(false);
-    }
-
     return (
         <section className='auth-form'>
             <header className='flex flex-col gap-5 md:gap-8'>
@@ -97,7 +84,7 @@ const AuthForm = ({type}: {type : string}) =>
                         src="/icons/logo.svg"
                         width={34}
                         height={34}
-                        alt="Youngin Logo"
+                        alt="Danddy Logo"
                     />
 
                     <h1 className='text-26 font-ibm-plex-serif font-bold text-black-1'>
@@ -114,20 +101,12 @@ const AuthForm = ({type}: {type : string}) =>
                                 : "Sign Up"
                         }
                     </h1>
-                    <p className='text-16 font-normal text-gray-600'>
-                        {user
-                            ? "Link your account to get started"
-                            : "Let's start by entering your details"
-                        }
-                    </p>
                 </div>
             </header>
 
             {user ? (
                 <div className='flex flex-col gap-4'>
-                    <PlaidLink
-                        user={user} variant='primary'
-                    />
+                    <h1>Ummm User hii???</h1>
                 </div>
             ):(
                 <div>
@@ -198,15 +177,6 @@ const AuthForm = ({type}: {type : string}) =>
                                         )}
                                 </Button>
                             </div>
-
-                            {showAlert &&
-                                (
-                                    <AlertPopUp
-                                        title='Error'
-                                        desc='Invalid email and/or password. Try again.'
-                                        onClose={handleAlertClose}
-                                    />
-                                )}
 
                         </form>
 
