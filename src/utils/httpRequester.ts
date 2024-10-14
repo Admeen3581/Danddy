@@ -80,8 +80,8 @@ export async function createRoom(roomCode: string, roomData: object): Promise<vo
 
 
 //Dnd Calling
-export async function getDnDClasses() {
-    const url = "https://www.dnd5eapi.co/api/classes";
+export async function getDnDAPI(route: String) {
+    const url = "https://www.dnd5eapi.co/api/"+route;
     
     try {
         const response = await fetch(url);
