@@ -12,8 +12,6 @@ import { getDnDAPI, readDatabaseRoute, updateDatabaseRoute } from '@/utils/httpR
 
 const PlayerHome = () => {
 
-  getDnDAPI("classes")
-
   const isRoomCreated = useRef(false)
   const {roomId, setRoomId} = useLocalStore()
 
