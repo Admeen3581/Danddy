@@ -1,5 +1,3 @@
-import { ChangeEvent } from 'react';
-import styles from './SignUp.module.css';
 import React from 'react'
 import {
   Form,
@@ -9,7 +7,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { FieldPath, UseFormReturn } from 'react-hook-form';
+import {FieldPath, useForm, UseFormReturn} from 'react-hook-form';
 import { authFormSchema } from '@/lib/utils';
 import { z } from 'zod';
 
@@ -27,7 +25,7 @@ export default function InputField({form, name, label, placeholder, type=""}: In
 
   return (
       <FormField
-          control={form.control}
+          control={useForm().control}
           name={name}
           render={({ field }) => (
               <div className='form-item'>
@@ -51,8 +49,6 @@ export default function InputField({form, name, label, placeholder, type=""}: In
       />
   )
 }
-
-export default InputField
 
 {/*
     <input

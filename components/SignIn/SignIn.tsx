@@ -6,6 +6,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/firebaseConfig';
 import styles from './SignIn.module.css';
 import InputField from '../SignUp/InputField';
+import SignUpForm from "../SignUp/SignUpForm";
 
 export default function SignIn() {
   const [email, setEmail] = useState<string>('');
@@ -33,28 +34,6 @@ export default function SignIn() {
   };
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Sign In</h1>
-      {error && <p className={styles.error}>{error}</p>}
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <InputField
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={setEmail}
-          required
-        />
-        <InputField
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={setPassword}
-          required
-        />
-        <button type="submit" className={styles.button} disabled={loading}>
-          {loading ? 'Signing in...' : 'Sign In'}
-        </button>
-      </form>
-    </div>
+    <SignUpForm type={"sign-in"}/>
   );
 }
