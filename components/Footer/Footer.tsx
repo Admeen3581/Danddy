@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="footerContent">
         <div className="footerLeft">
           <h4>Danddy</h4>
-          <p>Stuff here</p>
+          <p>A D&D Campaign helper that improves quality of life for campaigns and combat.</p>
         </div>
         <div className="footerRight">
           <p>&copy; {new Date().getFullYear()} Danddy.Co All rights reserved.</p>
