@@ -17,7 +17,7 @@ const Hero = () => {
     <div className="hero-section">
       <div className="hero-content">
         <h1>Welcome to Danddy</h1>
-        <p>Stuff here</p>
+        <p></p>
 
         <input
           type="text"
