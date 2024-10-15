@@ -8,6 +8,8 @@ const CharacterCreation = () => {
     const { classesJson, setClassesJson } = useLocalStore();
     const [fetchedData, setFetchedData] = useState<JSON[]>([]);
     const [loading, setLoading] = useState(true);
+    const [selectedClass, setSelectedClass] = useState('');
+    const [dropdownOpen, setDropdownOpen] = useState(false);
 
     useEffect(() => {
         const fetchClasses = async () => {
@@ -24,25 +26,31 @@ const CharacterCreation = () => {
         fetchClasses();
     }, []);
 
-    const handleClassChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        console.log('Selected class:', e.target.value);
+    const handleClassChange = (className) => {
+        console.log('Selected class:', className);
+        setSelectedClass(className);
+        setDropdownOpen(false); // Close dropdown after selection
     };
+
+    const toggleDropdown = () => {
+        setDropdownOpen(prev => !prev);
+    };
+
+    const iconUrl = 'https://img.icons8.com/?size=512&id=104704&format=png';
 
     return (
         <div style={{ display: 'flex', height: '100vh', backgroundColor: 'black' }}>
             <div style={{
                 flex: 1,
-                padding: '20px',
-                marginLeft: '-400px',
                 backgroundImage: 'url(https://external-preview.redd.it/u0bZOwzMBYZ7vvp8lJ0U_VeonHAIvX87SS_vGDe0Y-M.jpg?width=1080&crop=smart&auto=webp&s=87214f42d64b1a5b87859bfee903080fdd3f9330)',
                 backgroundSize: 'cover',
-                backgroundPosition: 'left center',
+                backgroundPosition: 'center', // Center the background image
                 color: 'white',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                flexDirection: 'column',
                 overflow: 'hidden',
+                marginLeft: '-400px', // Shift the image to the left
             }}>
                 <h1 style={{
                     textAlign: 'center',
@@ -52,7 +60,7 @@ const CharacterCreation = () => {
                     color: 'white',
                     padding: '10px 20px',
                     borderRadius: '10px',
-                    marginLeft: '400px',
+                    margin: 0,
                 }}>
                     Welcome to the D&D Character Creator!
                 </h1>
@@ -65,30 +73,85 @@ const CharacterCreation = () => {
                 boxShadow: '-2px 0 5px rgba(0,0,0,0.1)',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center',
+                justifyContent: 'flex-start',
                 color: 'white',
                 flexShrink: 0,
             }}>
                 <h2 style={{ fontFamily: 'Georgia, serif', fontSize: '24px', marginBottom: '10px' }}>
                     Select a Class
                 </h2>
-                <select
-                    onChange={handleClassChange}
-                    disabled={loading}
-                    style={{
-                        fontFamily: 'Georgia, serif',
-                        fontSize: '16px',
-                        backgroundColor: 'black',
-                        color: 'white'
-                    }}>
-                    <option value="" disabled>Select a class</option>
-                    {fetchedData.map((dndClass) => (
-                        <option key={dndClass['index']} value={dndClass['index']}>
-                            {dndClass['name']}
-                        </option>
-                    ))}
-                </select>
+                <hr style={{ border: '1px solid white', margin: '10px 0' }} />
+                <div style={{ position: 'relative', marginTop: '20px' }}>
+                    <button 
+                        onClick={toggleDropdown}
+                        style={{
+                            fontFamily: 'Georgia, serif',
+                            fontSize: '16px',
+                            backgroundColor: 'black',
+                            color: 'white',
+                            padding: '10px',
+                            width: '100%',
+                            border: 'none',
+                            cursor: 'pointer',
+                            textAlign: 'left',
+                        }}
+                    >
+                        {selectedClass || 'Select a class'}
+                    </button>
+                    {dropdownOpen && (
+                        <ul style={{
+                            position: 'absolute',
+                            top: '100%',
+                            left: 0,
+                            backgroundColor: 'black',
+                            color: 'white',
+                            padding: '10px',
+                            margin: 0,
+                            listStyleType: 'none',
+                            zIndex: 1,
+                            display: loading ? 'none' : 'block',
+                            borderRadius: '5px',
+                            boxShadow: '0 2px 5px rgba(0,0,0,0.5)',
+                            maxHeight: '200px',
+                            overflowY: 'auto',
+                            width: '100%', // Make options wider
+                        }}>
+                            {fetchedData.map((dndClass) => (
+                                <li key={dndClass['index']} 
+                                    onClick={() => handleClassChange(dndClass['name'])} 
+                                    style={{
+                                        padding: '8px',
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        fontSize: '16px',
+                                    }}
+                                >
+                                    <img src={iconUrl} alt={dndClass.name} style={{ marginRight: '8px', width: '20px', height: '20px' }} />
+                                    {dndClass['name']}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
             </div>
+
+            <style jsx>{`
+                /* Scrollbar styles */
+                ul::-webkit-scrollbar {
+                    width: 8px;
+                }
+                ul::-webkit-scrollbar-track {
+                    background: black;
+                }
+                ul::-webkit-scrollbar-thumb {
+                    background: rgba(255, 255, 255, 0.5);
+                    border-radius: 4px;
+                }
+                ul::-webkit-scrollbar-thumb:hover {
+                    background: rgba(255, 255, 255, 0.7);
+                }
+            `}</style>
         </div>
     );
 };
