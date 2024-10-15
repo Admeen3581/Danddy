@@ -50,4 +50,4 @@ export const authFormSchema = (type: string) => z.object({
           message: 'Passwords must match'
       });
   }
-})
+});

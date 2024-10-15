@@ -12,6 +12,7 @@ import { authFormSchema } from '@/lib/utils';
 import { z } from 'zod';
 
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const formSchema = authFormSchema('sign-up');
 interface InputFieldProps {
   form: UseFormReturn<z.infer<typeof formSchema>>;
@@ -49,14 +50,3 @@ export default function InputField({form, name, label, placeholder, type=""}: In
       />
   )
 }
-
-{/*
-    <input
-      className={styles.input}
-      type={type}
-      placeholder={placeholder}
-      value={value}
-      onChange={handleChange}
-      required={required}
-    />
-*/}
