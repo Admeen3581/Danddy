@@ -6,7 +6,7 @@ import PlayerStats from '../../../PlayerHeaderComponents/PlayerStats/playerstats
 import PlayerNotes from '../../../PlayerHeaderComponents/PlayerNotes/playernotes';
 import PlayerInfo from '../../../PlayerHeaderComponents/PlayerInfo/playerinfo';
 import useLocalStore from '@/utils/store';
-import { readDatabaseRoute, updateDatabaseRoute } from '@/utils/httpRequester';
+import { getDnDAPI, readDatabaseRoute, updateDatabaseRoute } from '@/utils/httpRequester';
 
 
 
