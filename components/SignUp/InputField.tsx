@@ -25,14 +25,14 @@ export default function InputField({form, name, label, placeholder, type=""}: In
 
   return (
       <FormField
-          control={useForm().control}
+          control={form.control}
           name={name}
           render={({ field }) => (
               <div className='form-item'>
                 <FormLabel className='form-label'>
                   {label}
                 </FormLabel>
-                <div className='flex w-full flex-col'>
+                <div className='flex max-w-md flex-col'>
                   <FormControl>
                     <Input
                         placeholder={placeholder}

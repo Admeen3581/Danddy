@@ -1,199 +1,151 @@
-'use client';
+'use client'
 
-import Link from 'next/link'
+import React, { useState, FormEvent } from 'react';
+import { User } from './User';
+import InputField from './InputField';
+import {Form} from "@/components/ui/form";
+import {Button} from "@/components/ui/button";
+import {authFormSchema} from "@/lib/utils";
+import {useForm} from "react-hook-form";
+import {z} from "zod";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {useRouter} from "next/navigation";
+import Link from "next/link";
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
-import {z} from "zod" /*This is a reminder that all form events must be client side */
-import {zodResolver} from "@hookform/resolvers/zod"
-import {useForm} from "react-hook-form"
-import {Button} from "@/components/ui/button"
-import {Form} from "@/components/ui/form"
-import {Loader2} from 'lucide-react';
-import { authFormSchema } from '@/lib/utils';
-import { signIn, signUp } from '@/lib/actions/user.actions';
-import {useRouter} from 'next/navigation'
+import {Loader2} from "lucide-react";
 
-const AuthForm = ({type}: {type : string}) =>
-{
-    //Form Definiton
-    const formSchema = authFormSchema(type);
-    const router = useRouter();
-    const form = useForm<z.infer<typeof formSchema>>(
-        {
-            resolver: zodResolver(formSchema),
-            defaultValues: {
-                email: "",
-                password: "",
-            },
-        })
+export default function AuthForm({type} : {type : string}) {
 
-    const [user, setUser] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
-    /*Sets initial loading state to false. If any action could cause a load, switch the bool val. */
-    const [showAlert, setShowAlert] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [authError, setAuthError] = useState("");
+  const [userData, setUserData] = useState<User>({
+    username: '',
+    email: '',
+    password: '',
+    first_joined: new Date().toISOString(),
+    last_login: new Date().toISOString(),
+    characters: [''],
+    campaigns: []
+  });
 
-    // Submission handler
-    const onSubmit = async (values: z.infer<typeof formSchema>) =>
+  //Form Definiton
+  const formSchema = authFormSchema(type);
+  const router = useRouter();
+  const form = useForm<z.infer<typeof formSchema>>(
+      {
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+          email: "",
+          password: "",
+          username: ""
+        },
+      })
+
+  // Submission handler
+  const onSubmit = async (values: z.infer<typeof formSchema>) =>
+  {
+    setIsLoading(true);
+    setAuthError("");
+
+    //Authenticate user here
+    const response = true;
+
+    setIsLoading(false);
+    if(response)
     {
-        setIsLoading(true);
-        try
-        {
-            if(type === 'sign-up')
-            {
-                const userNames = {
-                    email: values.email,
-                    password: values.password,
-                    username: values.username
-                }
-
-                const newUserResponse = await signUp(userNames);
-                setUser(newUserResponse);
-            }
-            if(type === 'sign-in')
-            {
-                const currUserResponse = await signIn({
-                    email: values.email,
-                    password: values.password
-                });
-                setUser(currUserResponse);
-
-                if(currUserResponse)
-                {
-                    router.push('/');
-                }
-
-            }
-        }
-        catch(error)//you are able to catch a user already exists error to alert the screen.
-        {
-            setShowAlert(true);
-        }
-        finally
-        {
-            console.log(values)
-            setIsLoading(false);
-        }
+      router.push("/");
     }
+    else
+    {
+      setAuthError("Error logging in, try again later.")
+    }
+  }
 
-    return (
-        <section className='auth-form'>
-            <header className='flex flex-col gap-5 md:gap-8'>
-                <div>
-                    <Image
-                        src="/icons/logo.svg"
-                        width={34}
-                        height={34}
-                        alt="Danddy Logo"
-                    />
+  const handleInputChange = (field: keyof User, value: string) => {
+    setUserData({ ...userData, [field]: value });
+  };
 
-                    <h1 className='text-26 font-ibm-plex-serif font-bold text-black-1'>
-                        Youngin
-                    </h1>
-                </div>
+  const handleCharactersChange = (value: string) => {
+    setUserData({
+      ...userData,
+      characters: value.split(',').map(char => char.trim())
+    });
+  };
 
-                <div className='flex flex-col gap-1 md:gap-3'>
-                    <h1 className='text-24 lg:text-36 font-semibold text-gray-900'>
-                        {user
-                            ? 'Link your account!'
-                            : type === 'sign-in'
-                                ? "Sign In"
-                                : "Sign Up"
-                        }
-                    </h1>
-                </div>
-            </header>
+  const validateUserData = (user: User) => {
+    return user.username && user.email && user.password;
+  };
 
-            {user ? (
-                <div className='flex flex-col gap-4'>
-                    <h1>Ummm User hii???</h1>
-                </div>
-            ):(
-                <div>
-                    <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (validateUserData(userData)) {
+      onSubmit(userData);
+    }
+  };
 
-                            {type === 'sign-up' &&
-                                (
-                                    <div className='flex flex-col gap-3'>
-                                        {/*Username/Email */}
-                                        <SignUpFormTemplate
-                                            form={form}
-                                            name="username"
-                                            label="Username"
-                                            placeholder="Enter your username"
-                                        />
+  return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <section className="max-w-md w-full p-6 bg-white shadow-md rounded-md">
+          <header className="flex flex-col items-center gap-6 mb-6">
+            <h1 className="font-semibold text-gray-900">
+              {type === 'sign-in' ? 'Sign In' : 'Sign Up'}
+            </h1>
+            <p className="text-sm text-gray-600">
+              {type === 'sign-in' ? "Enter your credentials to continue." : "Fill in your details to create an account."}
+            </p>
+          </header>
 
-                                        {/*Password */}
-                                        <SignUpFormTemplate
-                                            form={form}
-                                            name='password'
-                                            label='Password'
-                                            placeholder='Enter your password'
-                                            type='password'
-                                        />
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <InputField
+                  form={form}
+                  name="email"
+                  label="Email"
+                  placeholder="Enter your email"
+              />
+              <InputField
+                  form={form}
+                  name="username"
+                  label="Username"
+                  placeholder="Choose a username"
+              />
+              <InputField
+                  form={form}
+                  name="password"
+                  label="Password"
+                  placeholder="Enter your password"
+                  type="password"
+              />
+              <InputField
+                  form={form}
+                  name="confirmPassword"
+                  label="Confirm Password"
+                  placeholder="Confirm your password"
+                  type="password"
+              />
 
-                                        {/*Password Confirm*/}
-                                        <SignUpFormTemplate
-                                            form={form}
-                                            name='confirmPass'
-                                            label='Confirm Password'
-                                            placeholder=''
-                                            type='password'
-                                        />
-                                    </div>
-                                )}
+              <Button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md" disabled={isLoading}>
+                {isLoading ? (
+                    <div className="flex justify-center items-center">
+                      <Loader2 className="animate-spin" size={20} />
+                    </div>
+                ) : (
+                    type === 'sign-in' ? 'Sign In' : 'Sign Up'
+                )}
+              </Button>
+            </form>
+          </Form>
 
-                            {type === 'sign-in' &&
-                                (
-                                    <div className='flex flex-col gap-3'>
-                                        {/*Username/Email */}
-                                        <SignUpFormTemplate
-                                            form={form}
-                                            name="email"
-                                            label="Email"
-                                            placeholder="Enter your email"
-                                        />
-                                        {/*Password */}
-                                        <SignUpFormTemplate
-                                            form={form}
-                                            name='password'
-                                            label='Password'
-                                            placeholder='Enter your password'
-                                            type='password'
-                                        />
-                                    </div>
-                                )}
+          <footer className='flex justify-center gap-1 mt-3'>
+            <p className='text-14 font-normal text-gray-600'>
+              {type === 'sign-in' ? "Don't have an account?" : "Already have an account?"}
 
-                            <div className='flex flex-col gap-4'>
-                                <Button type="submit" className='form-btn' disabled={isLoading}>
-                                    {isLoading ?
-                                        (
-                                            <div className='mt-6'>
-                                                <Loader2 size={20} className="animate-spin" /> &nbsp;
-                                            </div>
-                                        ):(
-                                            type !== 'sign-in' ? 'Sign Up' : 'Sign In'
-                                        )}
-                                </Button>
-                            </div>
-
-                        </form>
-
-                        <footer className='flex justify-center gap-1 mt-3'>
-                            <p className='text-14 font-normal text-gray-600'>
-                                {type === 'sign-in' ? "Don't have an account?" : "Already have an account?"}
-
-                                <Link href={type === 'sign-in' ? '/sign_up' : '/sign_in'} className='form-link flex justify-center'>
-                                    {type === 'sign-in' ? "Sign Up!" : "Sign In!"}
-                                </Link>
-                            </p>
-                        </footer>
-                    </Form>
-                </div>
-            )}
+              <Link href={type === 'sign-in' ? '/signup' : '/signin'} className='form-link flex justify-center'>
+                {type === 'sign-in' ? "Sign Up!" : "Sign In!"}
+              </Link>
+            </p>
+          </footer>
         </section>
-
-    )
+      </div>
+  );
 }
-
-export default AuthForm
