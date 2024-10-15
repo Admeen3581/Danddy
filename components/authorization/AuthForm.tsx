@@ -79,12 +79,12 @@ export default function AuthForm({type} : {type : string}) {
 
   return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <section className="max-w-md w-full p-8 bg-white shadow-lg rounded-lg">
-          <header className="text-center mb-8">
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">
+        <section className="auth-form w-full max-w-md p-8 bg-white shadow-lg rounded-lg">
+          <header className="flex flex-col gap-5 md:gap-8 text-center">
+            <h1 className="text-4xl font-semibold">
               {type === 'sign-in' ? 'Sign In' : 'Sign Up'}
             </h1>
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-600 mt-2">
               {type === 'sign-in'
                   ? 'Enter your credentials to continue.'
                   : 'Fill in your details to create an account.'}
@@ -92,9 +92,9 @@ export default function AuthForm({type} : {type : string}) {
           </header>
 
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-5">
               {type === 'sign-up' && (
-                  <>
+                  <div className="flex flex-col gap-3">
                     <InputField
                         form={form}
                         name="email"
@@ -121,10 +121,10 @@ export default function AuthForm({type} : {type : string}) {
                         placeholder="Confirm your password"
                         type="password"
                     />
-                  </>
+                  </div>
               )}
               {type === 'sign-in' && (
-                  <>
+                  <div className="flex flex-col gap-3">
                     <InputField
                         form={form}
                         name="email"
@@ -138,33 +138,34 @@ export default function AuthForm({type} : {type : string}) {
                         placeholder="Enter your password"
                         type="password"
                     />
-                  </>
+                  </div>
               )}
 
-              <Button
-                  type="submit"
-                  className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                  disabled={isLoading}
-              >
-                {isLoading ? (
-                    <div className="flex justify-center">
-                      <Loader2 className="animate-spin" size={20} />
-                    </div>
-                ) : (
-                    type === 'sign-in' ? 'Sign In' : 'Sign Up'
-                )}
-              </Button>
+              <div className='flex flex-col gap-4 mt-5'>
+                <Button
+                    type="submit"
+                    className="form-btn"
+                    disabled={isLoading}
+                >
+                  {isLoading ? (
+                      <div className="mt-6">
+                        <Loader2 className="animate-spin" size={20} />
+                      </div>
+                  ) : (
+                      type === 'sign-in' ? 'Sign In' : 'Sign Up'
+                  )}
+                </Button>
+              </div>
             </form>
           </Form>
 
-          <footer className="mt-6 text-center">
-            <p className="text-gray-600 text-sm">
-              {type === 'sign-in'
-                  ? "Don't have an account?"
-                  : 'Already have an account?'}
+          <footer className="flex justify-center gap-1 mt-4">
+            <p className="text-14 font-normal text-gray-600">
+              {type === 'sign-in' ? "Don't have an account?" : 'Already have an account?'}
+              <br />
               <Link
                   href={type === 'sign-in' ? '/signup' : '/signin'}
-                  className="text-blue-600 hover:underline ml-1"
+                  className="form-link flex justify-center"
               >
                 {type === 'sign-in' ? 'Sign Up!' : 'Sign In!'}
               </Link>

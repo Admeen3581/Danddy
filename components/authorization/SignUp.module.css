@@ -1,9 +1,35 @@
+
 .input {
   margin-bottom: 10px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 100%;
+}
+
+/* Auth Form */
+.auth-form {
+  @apply flex min-h-screen w-full max-w-[420px] flex-col justify-center gap-5 py-10 md:gap-8;
+}
+
+.form-item {
+  @apply flex flex-col gap-1.5;
+}
+
+.form-label {
+  @apply text-14 w-full max-w-[280px] font-medium text-gray-700;
+}
+
+.form-message {
+  @apply text-12 text-red-500;
+}
+
+.form-btn {
+  @apply text-16 p-8 rounded-lg border border-bankGradient bg-bank-gradient font-semibold text-white shadow-form;
+}
+
+.form-link {
+  @apply text-14 cursor-pointer font-medium text-bankGradient;
 }
 
 .container {
@@ -35,7 +61,7 @@
   border: none;
   border-radius: 4px;
   background-color: #0070f3;
-  color: white;
+  color: blue;
   cursor: pointer;
   font-size: 16px;
   margin-top: 10px;
