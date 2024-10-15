@@ -28,7 +28,7 @@ export default function InputField({form, name, label, placeholder, type=""}: In
           control={form.control}
           name={name}
           render={({ field }) => (
-              <div className='form-item'>
+              <div className='form-item mt-4'>
                 <FormLabel className='form-label'>
                   {label}
                 </FormLabel>
