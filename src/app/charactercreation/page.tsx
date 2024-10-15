@@ -1,9 +1,10 @@
-"use client";
+"use client"
 
 import { getDnDAPI } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
 import { useEffect, useState } from 'react';
-import './CharacterCreation.css'; // Import the CSS file
+import SidebarMenu from './SidebarMenu'; // Import the new component
+import './CharacterCreation.css';
 
 const CharacterCreation = () => {
     const { classesJson, setClassesJson } = useLocalStore();
@@ -73,8 +74,6 @@ const CharacterCreation = () => {
         console.log('Selected Class:', selectedClass);
     };
 
-    const iconUrl = 'https://img.icons8.com/?size=512&id=104704&format=png';
-
     const getClassDescription = (className) => {
         switch (className) {
             case 'Barbarian': return 'Barbarians are fierce warriors who excel in combat, drawing strength from their rage.';
@@ -114,56 +113,33 @@ const CharacterCreation = () => {
                 <h1 className="welcome-text">Welcome to the Danddy Character Creator!</h1>
             </div>
 
-            <div className="sidebar">
-                <h2>Select a Race</h2>
-                <hr />
-                <div className="dropdown-container">
-                    <button onClick={toggleRaceDropdown}>
-                        {selectedRace || 'Select a race'}
-                    </button>
-                    {raceDropdownOpen && (
-                        <ul className="dropdown-list" style={{ display: loadingRaces ? 'none' : 'block' }}>
-                            {fetchedRaces.map((race) => (
-                                <li key={race['index']} onClick={() => handleRaceChange(race['name'])}>
-                                    <img src={iconUrl} alt={race.name} />
-                                    {race['name']}
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </div>
+            <SidebarMenu
+                fetchedRaces={fetchedRaces}
+                fetchedClasses={fetchedClasses}
+                loadingRaces={loadingRaces}
+                loadingClasses={loadingClasses}
+                selectedRace={selectedRace}
+                selectedClass={selectedClass}
+                toggleRaceDropdown={toggleRaceDropdown}
+                toggleClassDropdown={toggleClassDropdown}
+                handleRaceChange={handleRaceChange}
+                handleClassChange={handleClassChange}
+                raceDropdownOpen={raceDropdownOpen}
+                classDropdownOpen={classDropdownOpen}
+            />
 
-                <h2>Select a Class</h2>
-                <hr />
-                <div className="dropdown-container">
-                    <button onClick={toggleClassDropdown}>
-                        {selectedClass || 'Select a class'}
-                    </button>
-                    {classDropdownOpen && (
-                        <ul className="dropdown-list" style={{ display: loadingClasses ? 'none' : 'block' }}>
-                            {fetchedClasses.map((dndClass) => (
-                                <li key={dndClass['index']} onClick={() => handleClassChange(dndClass['name'])}>
-                                    <img src={iconUrl} alt={dndClass.name} />
-                                    {dndClass['name']}
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </div>
-
-                {showPopup && (
-                    <div className="popup">
-                        <img className="dragon-image" src="https://png.pngtree.com/png-clipart/20230907/ourmid/pngtree-cute-cartoon-baby-dragon-png-image_10021331.png" alt="Dragon" />
-                        <div className="popup-content">
-                            <h2>{`${selectedRace} ${selectedClass}`}</h2>
-                            <p>{getRaceDescription(selectedRace)}</p>
-                            <p>{getClassDescription(selectedClass)}</p>
-                            <img src={iconUrl} alt="Class Logo" />
-                            <button onClick={handleConfirmSelection}>Confirm Selection</button>
-                        </div>
+            {showPopup && (
+                <div className="popup">
+                    <img className="dragon-image" src="https://png.pngtree.com/png-clipart/20230907/ourmid/pngtree-cute-cartoon-baby-dragon-png-image_10021331.png" alt="Dragon" />
+                    <div className="popup-content">
+                        <h2>{`${selectedRace} ${selectedClass}`}</h2>
+                        <p>{getRaceDescription(selectedRace)}</p>
+                        <p>{getClassDescription(selectedClass)}</p>
+                        <img src="https://img.icons8.com/?size=512&id=104704&format=png" alt="Class Logo" />
+                        <button onClick={handleConfirmSelection}>Confirm Selection</button>
                     </div>
-                )}
-            </div>
+                </div>
+            )}
         </div>
     );
 };
