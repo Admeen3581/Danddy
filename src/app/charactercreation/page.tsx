@@ -5,6 +5,7 @@ import useLocalStore from '@/utils/store';
 import { useEffect, useState } from 'react';
 import SidebarMenu from './SidebarMenu'; // Import the new component
 import './CharacterCreation.css';
+import { createBlankCharacterJSON } from '@/utils/characterJsonFunctions';
 
 const CharacterCreation = () => {
     const { classesJson, setClassesJson } = useLocalStore();
@@ -70,8 +71,10 @@ const CharacterCreation = () => {
     };
 
     const handleConfirmSelection = () => {
-        console.log('Selected Race:', selectedRace);
-        console.log('Selected Class:', selectedClass);
+        setClassesJson(createBlankCharacterJSON())
+        classesJson.race = selectedRace;
+        classesJson.class = selectedClass;
+        console.log(classesJson)
     };
 
     const getClassDescription = (className) => {
