@@ -25,11 +25,15 @@
 }
 
 .form-btn {
-  @apply text-16 p-8 rounded-lg border border-bankGradient bg-bank-gradient font-semibold text-white shadow-form;
+  @apply text-16 p-8 rounded-lg border border-bankGradient font-semibold text-white shadow-form;
 }
 
 .form-link {
-  @apply text-14 cursor-pointer font-medium text-bankGradient;
+  @apply text-14 cursor-pointer font-medium;
+}
+
+.form-heading {
+  @apply text-36, font-semibold
 }
 
 .container {
