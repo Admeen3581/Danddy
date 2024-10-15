@@ -16,7 +16,7 @@ const Hero = () => {
   return (
     <div className="hero-section">
       <div className="hero-content">
-        <h1>Welcome to Danddy</h1>
+        <h1>DANDDY</h1>
         <p></p>
 
         <input

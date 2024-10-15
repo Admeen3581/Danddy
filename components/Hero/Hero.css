@@ -46,7 +46,17 @@
   background-color: #161314; 
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 20px 5px #eceee8; /* Glowing effect */
+  box-shadow: 0 0 20px 5px #eceee8; /* Initial glowing effect */
+  animation: breathingGlow 6s infinite ease-in-out;
+}
+
+@keyframes breathingGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px 5px #eceee8; /* Initial glow */
+  }
+  50% {
+    box-shadow: 0 0 30px 15px #eceee8; /* Increased glow */
+  }
 }
 
 .hero-input {
@@ -62,7 +72,7 @@
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 3rem;
   margin-bottom: 1rem;
 }
 
