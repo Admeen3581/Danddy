@@ -6,34 +6,60 @@ import { useEffect, useState } from 'react';
 
 const CharacterCreation = () => {
     const { classesJson, setClassesJson } = useLocalStore();
-    const [fetchedData, setFetchedData] = useState<JSON[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [fetchedClasses, setFetchedClasses] = useState<JSON[]>([]);
+    const [fetchedRaces, setFetchedRaces] = useState<JSON[]>([]);
+    const [loadingClasses, setLoadingClasses] = useState(true);
+    const [loadingRaces, setLoadingRaces] = useState(true);
     const [selectedClass, setSelectedClass] = useState('');
-    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [selectedRace, setSelectedRace] = useState('');
+    const [classDropdownOpen, setClassDropdownOpen] = useState(false);
+    const [raceDropdownOpen, setRaceDropdownOpen] = useState(false);
 
     useEffect(() => {
         const fetchClasses = async () => {
             try {
                 const results = await getDnDAPI("classes");
-                setFetchedData(results.results || []);
-                setLoading(false);
+                setFetchedClasses(results.results || []);
+                setLoadingClasses(false);
             } catch (error) {
                 console.error("Error fetching classes:", error);
-                setLoading(false);
+                setLoadingClasses(false);
+            }
+        };
+
+        const fetchRaces = async () => {
+            try {
+                const results = await getDnDAPI("races");
+                setFetchedRaces(results.results || []);
+                setLoadingRaces(false);
+            } catch (error) {
+                console.error("Error fetching races:", error);
+                setLoadingRaces(false);
             }
         };
 
         fetchClasses();
+        fetchRaces();
     }, []);
 
     const handleClassChange = (className) => {
         console.log('Selected class:', className);
         setSelectedClass(className);
-        setDropdownOpen(false); // Close dropdown after selection
+        setClassDropdownOpen(false); // Close dropdown after selection
     };
 
-    const toggleDropdown = () => {
-        setDropdownOpen(prev => !prev);
+    const handleRaceChange = (raceName) => {
+        console.log('Selected race:', raceName);
+        setSelectedRace(raceName);
+        setRaceDropdownOpen(false); // Close dropdown after selection
+    };
+
+    const toggleClassDropdown = () => {
+        setClassDropdownOpen(prev => !prev);
+    };
+
+    const toggleRaceDropdown = () => {
+        setRaceDropdownOpen(prev => !prev);
     };
 
     const iconUrl = 'https://img.icons8.com/?size=512&id=104704&format=png';
@@ -44,13 +70,13 @@ const CharacterCreation = () => {
                 flex: 1,
                 backgroundImage: 'url(https://external-preview.redd.it/u0bZOwzMBYZ7vvp8lJ0U_VeonHAIvX87SS_vGDe0Y-M.jpg?width=1080&crop=smart&auto=webp&s=87214f42d64b1a5b87859bfee903080fdd3f9330)',
                 backgroundSize: 'cover',
-                backgroundPosition: 'center', // Center the background image
+                backgroundPosition: 'center',
                 color: 'white',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 overflow: 'hidden',
-                marginLeft: '-400px', // Shift the image to the left
+                marginLeft: '-400px',
             }}>
                 <h1 style={{
                     textAlign: 'center',
@@ -78,12 +104,70 @@ const CharacterCreation = () => {
                 flexShrink: 0,
             }}>
                 <h2 style={{ fontFamily: 'Georgia, serif', fontSize: '24px', marginBottom: '10px' }}>
+                    Select a Race
+                </h2>
+                <hr style={{ border: '1px solid white', margin: '10px 0' }} />
+                <div style={{ position: 'relative', marginTop: '20px' }}>
+                    <button
+                        onClick={toggleRaceDropdown}
+                        style={{
+                            fontFamily: 'Georgia, serif',
+                            fontSize: '16px',
+                            backgroundColor: 'black',
+                            color: 'white',
+                            padding: '10px',
+                            width: '100%',
+                            border: 'none',
+                            cursor: 'pointer',
+                            textAlign: 'left',
+                        }}
+                    >
+                        {selectedRace || 'Select a race'}
+                    </button>
+                    {raceDropdownOpen && (
+                        <ul style={{
+                            position: 'absolute',
+                            top: '100%',
+                            left: 0,
+                            backgroundColor: 'black',
+                            color: 'white',
+                            padding: '10px',
+                            margin: 0,
+                            listStyleType: 'none',
+                            zIndex: 1,
+                            display: loadingRaces ? 'none' : 'block',
+                            borderRadius: '5px',
+                            boxShadow: '0 2px 5px rgba(0,0,0,0.5)',
+                            maxHeight: '200px',
+                            overflowY: 'auto',
+                            width: '100%',
+                        }}>
+                            {fetchedRaces.map((race) => (
+                                <li key={race['index']}
+                                    onClick={() => handleRaceChange(race['name'])}
+                                    style={{
+                                        padding: '8px',
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        fontSize: '16px',
+                                    }}
+                                >
+                                    <img src={iconUrl} alt={race.name} style={{ marginRight: '8px', width: '20px', height: '20px' }} />
+                                    {race['name']}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+
+                <h2 style={{ fontFamily: 'Georgia, serif', fontSize: '24px', marginBottom: '10px', marginTop: '20px' }}>
                     Select a Class
                 </h2>
                 <hr style={{ border: '1px solid white', margin: '10px 0' }} />
                 <div style={{ position: 'relative', marginTop: '20px' }}>
-                    <button 
-                        onClick={toggleDropdown}
+                    <button
+                        onClick={toggleClassDropdown}
                         style={{
                             fontFamily: 'Georgia, serif',
                             fontSize: '16px',
@@ -98,7 +182,7 @@ const CharacterCreation = () => {
                     >
                         {selectedClass || 'Select a class'}
                     </button>
-                    {dropdownOpen && (
+                    {classDropdownOpen && (
                         <ul style={{
                             position: 'absolute',
                             top: '100%',
@@ -109,16 +193,16 @@ const CharacterCreation = () => {
                             margin: 0,
                             listStyleType: 'none',
                             zIndex: 1,
-                            display: loading ? 'none' : 'block',
+                            display: loadingClasses ? 'none' : 'block',
                             borderRadius: '5px',
                             boxShadow: '0 2px 5px rgba(0,0,0,0.5)',
                             maxHeight: '200px',
                             overflowY: 'auto',
-                            width: '100%', // Make options wider
+                            width: '100%',
                         }}>
-                            {fetchedData.map((dndClass) => (
-                                <li key={dndClass['index']} 
-                                    onClick={() => handleClassChange(dndClass['name'])} 
+                            {fetchedClasses.map((dndClass) => (
+                                <li key={dndClass['index']}
+                                    onClick={() => handleClassChange(dndClass['name'])}
                                     style={{
                                         padding: '8px',
                                         cursor: 'pointer',
