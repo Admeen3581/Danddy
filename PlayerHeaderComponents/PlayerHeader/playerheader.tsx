@@ -6,7 +6,6 @@ const PlayerHeader = () => {
   return (
     <div className="PAHome-section">
       <div className="headerBox">
-        {/* The sliding menu on top of the header */}
         <div className="menu-container">
           <button className="menu-button">☰</button>
           <div className="menu-content">
@@ -18,7 +17,6 @@ const PlayerHeader = () => {
           </div>
         </div>
 
-        {/* Player home page title */}
         <h1>PLAYER HOME PAGE</h1>
       </div>
     </div>

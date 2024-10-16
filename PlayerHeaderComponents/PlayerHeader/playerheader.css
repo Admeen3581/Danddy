@@ -3,21 +3,24 @@
    display: flex;
    justify-content: center;
    align-items: center;
+   font-family: 'Trebuchet MS', sans-serif;
+   font-weight: bold;
  }
  
  .headerBox {
    position: relative;
    text-align: center;
+   justify-content: center;
+   border-radius: 5px; 
    width: 100%;
-   padding: 20px;
-   background-color: #f9f9f9;
-   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   padding: 10px;
+   background-color: #ECEEE8;
+   box-shadow: 0 6px 10px #041025;
  }
  
- /* Sliding menu setup */
  .menu-container {
    position: absolute;
-   top: 10px; /* Positioning it above the header */
+   top: 10px; 
    left: 10px;
  }
  
@@ -55,7 +58,7 @@
  }
  
  .menu-content ul li a {
-   color: white;
+   color: #ECEEE8;
    font-size: 24px;
    text-decoration: none;
  }
@@ -66,15 +69,15 @@
  }
  
  h1 {
-   margin: 20px 0 0 0;
    font-size: 2rem;
+   align-self: center;
  }
  
  .button {
    text-decoration: none;
    padding: 10px 20px;
    background-color: #4CAF50;
-   color: white;
+   color: #ECEEE8;
    border-radius: 5px;
  }
  

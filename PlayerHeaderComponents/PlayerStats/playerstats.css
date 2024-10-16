@@ -5,19 +5,15 @@ body {
 }
 
 .StatsBox {
-   background-color: #f5f5f5;  
-   color: #1E1E1E;            
-   padding: 0 20px;           
-   font-size: 24px;           
-   font-weight: bold;        
-   border-radius: 5px;          
-   margin: 20px auto;          
-   max-width: 1400px;
-   height: 65px;  
-   top: 50px;    
-   display: flex; /* Flexbox layout for inline-like behavior */
-   align-items: center; /* Vertically aligns text */
-   justify-content: space-between; /* Optional: space out text if needed */
+   position: relative;       
+   text-align: center;
+   justify-content: center;
+   border-radius: 5px;       
+   width: 96.5%;              
+   padding: 20px;             
+   background-color: #ECEEE8;
+   box-shadow: 0 6px 10px #041025;
+   margin: 10px auto; 
 }
 
 .inline-text {

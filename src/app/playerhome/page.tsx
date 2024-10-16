@@ -44,8 +44,8 @@ const PlayerHome = () => {
    <>
       <PlayerHeader />
       <PlayerStats />
-      <PlayerNotes />
-      <PlayerInfo />
+      {/*<PlayerNotes /> */}
+      {/*<PlayerInfo />*/}
    </>
   );
 };
