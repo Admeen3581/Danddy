@@ -1,9 +1,10 @@
-"use client"
+"use client";
 
+import { useEffect, useState } from 'react';
 import { getDnDAPI } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
-import { useEffect, useState } from 'react';
-import SidebarMenu from './SidebarMenu'; // Import the new component
+import SidebarMenu from './SidebarMenu';
+import AbilityScoresMenu from './AbilityScoresMenu';
 import './CharacterCreation.css';
 import { createBlankCharacterJSON } from '@/utils/characterJsonFunctions';
 
@@ -15,9 +16,12 @@ const CharacterCreation = () => {
     const [loadingRaces, setLoadingRaces] = useState(true);
     const [selectedClass, setSelectedClass] = useState('');
     const [selectedRace, setSelectedRace] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
+    const [selectedMethod, setSelectedMethod] = useState('');
     const [classDropdownOpen, setClassDropdownOpen] = useState(false);
     const [raceDropdownOpen, setRaceDropdownOpen] = useState(false);
-    const [showPopup, setShowPopup] = useState(false);
+    const [sidebarVisible, setSidebarVisible] = useState(true);
+    const [readyForScores, setReadyForScores] = useState(false); // Track readiness for ability scores
 
     useEffect(() => {
         const fetchClasses = async () => {
@@ -62,19 +66,16 @@ const CharacterCreation = () => {
         }
     };
 
-    const toggleClassDropdown = () => {
-        setClassDropdownOpen(prev => !prev);
-    };
-
-    const toggleRaceDropdown = () => {
-        setRaceDropdownOpen(prev => !prev);
-    };
-
     const handleConfirmSelection = () => {
-        setClassesJson(createBlankCharacterJSON())
+        setClassesJson(createBlankCharacterJSON());
         classesJson.race = selectedRace;
         classesJson.class = selectedClass;
         console.log(classesJson)
+
+        // Hide sidebar and popup after confirmation
+        setSidebarVisible(false);
+        setShowPopup(false);
+        setReadyForScores(true); // Indicate readiness for ability scores
     };
 
     const getClassDescription = (className) => {
@@ -110,26 +111,38 @@ const CharacterCreation = () => {
         }
     };
 
+    const handleMethodSelect = (method) => {
+        setSelectedMethod(method);
+        // Add any logic for what happens after selecting an ability score method
+    };
+
     return (
         <div className="character-creation-container">
             <div className="background-image">
                 <h1 className="welcome-text">Welcome to the Danddy Character Creator!</h1>
             </div>
 
-            <SidebarMenu
-                fetchedRaces={fetchedRaces}
-                fetchedClasses={fetchedClasses}
-                loadingRaces={loadingRaces}
-                loadingClasses={loadingClasses}
-                selectedRace={selectedRace}
-                selectedClass={selectedClass}
-                toggleRaceDropdown={toggleRaceDropdown}
-                toggleClassDropdown={toggleClassDropdown}
-                handleRaceChange={handleRaceChange}
-                handleClassChange={handleClassChange}
-                raceDropdownOpen={raceDropdownOpen}
-                classDropdownOpen={classDropdownOpen}
-            />
+            {sidebarVisible && !readyForScores ? (
+                <SidebarMenu
+                    fetchedRaces={fetchedRaces}
+                    fetchedClasses={fetchedClasses}
+                    loadingRaces={loadingRaces}
+                    loadingClasses={loadingClasses}
+                    selectedRace={selectedRace}
+                    selectedClass={selectedClass}
+                    toggleRaceDropdown={() => setRaceDropdownOpen(prev => !prev)}
+                    toggleClassDropdown={() => setClassDropdownOpen(prev => !prev)}
+                    handleRaceChange={handleRaceChange}
+                    handleClassChange={handleClassChange}
+                    raceDropdownOpen={raceDropdownOpen}
+                    classDropdownOpen={classDropdownOpen}
+                />
+            ) : (
+                <AbilityScoresMenu
+                    onMethodSelect={handleMethodSelect}
+                    selectedMethod={selectedMethod}
+                />
+            )}
 
             {showPopup && (
                 <div className="popup">
