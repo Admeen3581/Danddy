@@ -9,7 +9,7 @@ const FinishingTouchesMenu = () => {
     const [selectedProficiencies, setSelectedProficiencies] = useState([]);
     const [proficiencyChoices, setProficiencyChoices] = useState([]);
     const [spells, setSpells] = useState(['Fireball', 'Heal', 'Lightning Bolt']);
-    const [selectedSpell, setSelectedSpell] = useState('');
+    const [selectedSpells, setSelectedSpells] = useState([]);
     const [inventory, setInventory] = useState(['Sword', 'Shield', 'Potion']);
     const [selectedItem, setSelectedItem] = useState('');
 
@@ -54,6 +54,19 @@ const FinishingTouchesMenu = () => {
         }
     };
 
+    const handleSpellSelect = (spell) => {
+        const newSelections = [...selectedSpells];
+
+        if (newSelections.includes(spell)) {
+            // Deselect spell
+            setSelectedSpells(newSelections.filter(s => s !== spell));
+        } else {
+            // Select spell
+            newSelections.push(spell);
+            setSelectedSpells(newSelections);
+        }
+    };
+
     const handleFinish = () => {
         alert('Character Created!');
     };
@@ -95,7 +108,7 @@ const FinishingTouchesMenu = () => {
                     <div key={index} className="dropdown-container">
                         <h4>Choose {choice.choose}</h4>
                         <button onClick={() => toggleDropdown('proficiency')}>
-                            {selectedProficiencies.length > 0 ? 'Proficiencies Selected' : 'Select Proficiencies'}
+                            {selectedProficiencies.length > 0 ? `${selectedProficiencies.join(', ')}` : 'Select Proficiencies'}
                         </button>
                         {dropdownOpen.proficiency && (
                             <ul className="dropdown-list">
@@ -115,13 +128,13 @@ const FinishingTouchesMenu = () => {
                 <hr />
                 <div className="dropdown-container">
                     <button onClick={() => toggleDropdown('spell')}>
-                        {selectedSpell || 'Select Spell'}
+                        {selectedSpells.length > 0 ? `${selectedSpells.join(', ')}` : 'Select Spells'}
                     </button>
                     {dropdownOpen.spell && (
                         <ul className="dropdown-list">
                             {spells.map((spell, index) => (
-                                <li key={index} onClick={() => setSelectedSpell(spell)}>
-                                    {spell}
+                                <li key={index} onClick={() => handleSpellSelect(spell)}>
+                                    {spell} {selectedSpells.includes(spell) && '✓'}
                                 </li>
                             ))}
                         </ul>
