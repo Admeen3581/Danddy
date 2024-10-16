@@ -4,9 +4,10 @@ import useLocalStore from '@/utils/store';
 
 interface AbilityScoresProps {
     onMethodSelect: (method: string) => void;
+    onFinish: () => void;
 }
 
-const AbilityScoresMenu: React.FC<AbilityScoresProps> = ({ onMethodSelect }) => {
+const AbilityScoresMenu: React.FC<AbilityScoresProps> = ({ onMethodSelect, onFinish }) => {
     const { classesJson, setClassesJson } = useLocalStore();
     const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
     const [stats, setStats] = useState<string[]>(['', '', '', '', '', '']); // Start with empty strings for custom input
@@ -61,6 +62,7 @@ const AbilityScoresMenu: React.FC<AbilityScoresProps> = ({ onMethodSelect }) => 
         classesJson.stats.charisma.value = finalStats[5];
 
         console.log(classesJson);
+        onFinish();
         onMethodSelect(selectedMethod!);
     };
 

@@ -5,6 +5,7 @@ import { getDnDAPI } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
 import SidebarMenu from './SidebarMenu';
 import AbilityScoresMenu from './AbilityScoresMenu';
+import FinishingTouchesMenu from './FinishingTouchesMenu'; // Import the new menu
 import './CharacterCreation.css';
 import { createBlankCharacterJSON } from '@/utils/characterJsonFunctions';
 
@@ -21,7 +22,8 @@ const CharacterCreation = () => {
     const [classDropdownOpen, setClassDropdownOpen] = useState(false);
     const [raceDropdownOpen, setRaceDropdownOpen] = useState(false);
     const [sidebarVisible, setSidebarVisible] = useState(true);
-    const [readyForScores, setReadyForScores] = useState(false); // Track readiness for ability scores
+    const [readyForScores, setReadyForScores] = useState(false);
+    const [showFinishingTouches, setShowFinishingTouches] = useState(false); // New state for finishing touches
 
     useEffect(() => {
         const fetchClasses = async () => {
@@ -70,13 +72,19 @@ const CharacterCreation = () => {
         setClassesJson(createBlankCharacterJSON());
         classesJson.race = selectedRace;
         classesJson.class = selectedClass;
-        console.log(classesJson)
+        console.log(classesJson);
 
         // Hide sidebar and popup after confirmation
         setSidebarVisible(false);
         setShowPopup(false);
-        setReadyForScores(true); // Indicate readiness for ability scores
+        setReadyForScores(true); // Go to the ability scores menu
     };
+
+    const handleFinishAbilityScores = () => {
+        setReadyForScores(false); // Hide the ability scores menu
+        setShowFinishingTouches(true); // Show finishing touches menu
+    };
+
 
     const getClassDescription = (className) => {
         switch (className) {
@@ -111,18 +119,13 @@ const CharacterCreation = () => {
         }
     };
 
-    const handleMethodSelect = (method) => {
-        setSelectedMethod(method);
-        // Add any logic for what happens after selecting an ability score method
-    };
-
     return (
         <div className="character-creation-container">
             <div className="background-image">
                 <h1 className="welcome-text">Welcome to the Danddy Character Creator!</h1>
             </div>
 
-            {sidebarVisible && !readyForScores ? (
+            {sidebarVisible && !readyForScores && !showFinishingTouches ? (
                 <SidebarMenu
                     fetchedRaces={fetchedRaces}
                     fetchedClasses={fetchedClasses}
@@ -137,12 +140,14 @@ const CharacterCreation = () => {
                     raceDropdownOpen={raceDropdownOpen}
                     classDropdownOpen={classDropdownOpen}
                 />
-            ) : (
+            ) : readyForScores ? (
                 <AbilityScoresMenu
-                    onMethodSelect={handleMethodSelect}
-                    selectedMethod={selectedMethod}
+                    onMethodSelect={setSelectedMethod}
+                    onFinish={handleFinishAbilityScores} // Pass the finish function here
                 />
-            )}
+            ) : showFinishingTouches ? (
+                <FinishingTouchesMenu />
+            ) : null}
 
             {showPopup && (
                 <div className="popup">
