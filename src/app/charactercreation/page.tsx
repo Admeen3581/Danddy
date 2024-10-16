@@ -72,6 +72,7 @@ const CharacterCreation = () => {
         setClassesJson(createBlankCharacterJSON());
         classesJson.race = selectedRace;
         classesJson.class = selectedClass;
+        setClassesJson(classesJson)
         console.log(classesJson);
 
         // Hide sidebar and popup after confirmation
