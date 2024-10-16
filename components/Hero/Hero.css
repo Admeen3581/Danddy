@@ -4,17 +4,59 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #333; 
-  padding: 1rem; 
+  background-color: #161314;
+  padding: 1rem;
   text-align: center;
   color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(153deg, #683434 25%, transparent 25%),
+    linear-gradient(206deg, #ab5555 25%, transparent 25%);
+  background-size: 60px 60px;
+  animation: scaleShimmer 3s infinite linear;
+  opacity: 0.3;
+}
+
+@keyframes scaleShimmer {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 0 60px, 0 60px;
+  }
+}
+
+.hero-section > * {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-content {
   max-width: 800px;
-  background-color: #444; 
+  background-color: #161314; 
   padding: 20px;
   border-radius: 10px;
+  box-shadow: 0 0 20px 5px #eceee8; /* Initial glowing effect */
+  animation: breathingGlow 6s infinite ease-in-out;
+}
+
+@keyframes breathingGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px 5px #eceee8; /* Initial glow */
+  }
+  50% {
+    box-shadow: 0 0 30px 15px #eceee8; /* Increased glow */
+  }
 }
 
 .hero-input {
@@ -30,7 +72,7 @@
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 3rem;
   margin-bottom: 1rem;
 }
 
@@ -44,7 +86,8 @@ p {
   font-size: 16px; 
   padding: 10px 20px;
   color: white;
-  background-color: #002366;
+  background-color: #4b0f04;
+  margin-top: 5px;
   border: none;
   border-radius: 5px;
   max-width: 400px;
@@ -55,5 +98,5 @@ p {
 
 
 .hero-button:hover {
-  background-color: #001a4b;
+  box-shadow: 0 0 5px 5px #eceee8; /* Glowing effect */
 }
