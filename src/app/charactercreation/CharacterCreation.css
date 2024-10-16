@@ -234,16 +234,21 @@
 
 .custom-input-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Center contents horizontally */
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 8px; /* Space between each stat */
 }
 
-.custom-input-container select,
-.custom-input-container input {
+.custom-input-container label {
+    margin-right: 8px; /* Space between label and input */
+}
+
+.custom-input-container input,
+.custom-input-container select {
     color: black;
     margin-left: 8px;
     padding: 4px;
     border: 1px solid #666;
     border-radius: 4px;
+    width: 150px; /* Adjusted width for wider input boxes */
 }
