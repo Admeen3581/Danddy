@@ -20,16 +20,17 @@ const FinishingTouchesMenu = () => {
             <p>Customize your character further!</p>
             
             <div className="custom-input-container">
-                <label>Name:</label>
-                <input type="text" placeholder="Enter character name" />
+                <span className="stat-label">Name:</span>
+                <input type="text" placeholder="Enter name" />
             </div>
 
             <div className="custom-input-container">
-                <label>HP:</label>
+                <span className="stat-label">HP:</span>
                 <input 
                     type="number" 
                     value={hp} 
                     onChange={(e) => setHp(e.target.value)} 
+                    min={1} // Optional: Set a minimum value
                     placeholder="Enter HP" 
                 />
             </div>
