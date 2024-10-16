@@ -144,6 +144,16 @@
     margin-top: 10px;
 }
 
+.content button {
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 35%;
+}
+
 
 .dropdown-list::-webkit-scrollbar {
     width: 8px;
@@ -182,4 +192,8 @@
     opacity: 0.8; /* Slightly transparent */
 }
 
+.stat-label {
+    font-weight: bold; /* Makes the label bold for emphasis */
+    margin-right: 8px; /* Adds some space between the label and the stat */
+}
 
