@@ -8,14 +8,17 @@ const FinishingTouchesMenu = () => {
     const [hp, setHp] = useState('');
     const [selectedProficiencies, setSelectedProficiencies] = useState([]);
     const [proficiencyChoices, setProficiencyChoices] = useState([]);
-    const [spells, setSpells] = useState([]);
-    const [selectedSpells, setSelectedSpells] = useState([]);
+    const [cantrips, setCantrips] = useState([]);
+    const [level1Spells, setLevel1Spells] = useState([]);
+    const [selectedCantrips, setSelectedCantrips] = useState([]);
+    const [selectedLevel1Spells, setSelectedLevel1Spells] = useState([]);
     const [inventory, setInventory] = useState(['Sword', 'Shield', 'Potion']);
     const [selectedItem, setSelectedItem] = useState('');
 
     const [dropdownOpen, setDropdownOpen] = useState({
         proficiency: false,
-        spell: false,
+        cantrip: false,
+        level1Spell: false,
         inventory: false,
     });
 
@@ -34,9 +37,11 @@ const FinishingTouchesMenu = () => {
                 // Fetch spells for the class
                 if (response && response.spellcasting) {
                     const spellsResponse = await getDnDAPI(`classes/${classesJson.class.toLowerCase()}/spells`);
-                    console.log(spellsResponse)
                     if (spellsResponse && spellsResponse.results) {
-                        setSpells(spellsResponse.results.map(spell => spell.name));
+                        const cantrips = spellsResponse.results.filter(spell => spell.level === 0);
+                        const level1 = spellsResponse.results.filter(spell => spell.level === 1);
+                        setCantrips(cantrips.map(spell => spell.name));
+                        setLevel1Spells(level1.map(spell => spell.name));
                     }
                 }
             } catch (error) {
@@ -61,14 +66,25 @@ const FinishingTouchesMenu = () => {
         }
     };
 
-    const handleSpellSelect = (spell) => {
-        const newSelections = [...selectedSpells];
+    const handleCantripSelect = (cantrip) => {
+        const newSelections = [...selectedCantrips];
+
+        if (newSelections.includes(cantrip)) {
+            setSelectedCantrips(newSelections.filter(c => c !== cantrip));
+        } else {
+            newSelections.push(cantrip);
+            setSelectedCantrips(newSelections);
+        }
+    };
+
+    const handleLevel1SpellSelect = (spell) => {
+        const newSelections = [...selectedLevel1Spells];
 
         if (newSelections.includes(spell)) {
-            setSelectedSpells(newSelections.filter(s => s !== spell));
+            setSelectedLevel1Spells(newSelections.filter(s => s !== spell));
         } else {
             newSelections.push(spell);
-            setSelectedSpells(newSelections);
+            setSelectedLevel1Spells(newSelections);
         }
     };
 
@@ -128,20 +144,42 @@ const FinishingTouchesMenu = () => {
                 ))}
             </div>
 
-            {/* Conditionally render the Spells section */}
-            {spells.length > 0 && (
+            {/* Cantrips section */}
+            {cantrips.length > 0 && (
                 <div className="section">
-                    <h3>Spells</h3>
+                    <h3>Cantrips</h3>
                     <hr />
                     <div className="dropdown-container">
-                        <button onClick={() => toggleDropdown('spell')}>
-                            {selectedSpells.length > 0 ? `${selectedSpells.join(', ')}` : 'Select Spells'}
+                        <button onClick={() => toggleDropdown('cantrip')}>
+                            {selectedCantrips.length > 0 ? `${selectedCantrips.join(', ')}` : 'Select Cantrips'}
                         </button>
-                        {dropdownOpen.spell && (
+                        {dropdownOpen.cantrip && (
                             <ul className="dropdown-list">
-                                {spells.map((spell, index) => (
-                                    <li key={index} onClick={() => handleSpellSelect(spell)}>
-                                        {spell} {selectedSpells.includes(spell) && '✓'}
+                                {cantrips.map((cantrip, index) => (
+                                    <li key={index} onClick={() => handleCantripSelect(cantrip)}>
+                                        {cantrip} {selectedCantrips.includes(cantrip) && '✓'}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                </div>
+            )}
+
+            {/* Level 1 Spells section */}
+            {level1Spells.length > 0 && (
+                <div className="section">
+                    <h3>Level 1 Spells</h3>
+                    <hr />
+                    <div className="dropdown-container">
+                        <button onClick={() => toggleDropdown('level1Spell')}>
+                            {selectedLevel1Spells.length > 0 ? `${selectedLevel1Spells.join(', ')}` : 'Select Level 1 Spells'}
+                        </button>
+                        {dropdownOpen.level1Spell && (
+                            <ul className="dropdown-list">
+                                {level1Spells.map((spell, index) => (
+                                    <li key={index} onClick={() => handleLevel1SpellSelect(spell)}>
+                                        {spell} {selectedLevel1Spells.includes(spell) && '✓'}
                                     </li>
                                 ))}
                             </ul>
