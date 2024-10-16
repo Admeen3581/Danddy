@@ -8,7 +8,7 @@ const FinishingTouchesMenu = () => {
     const [hp, setHp] = useState('');
     const [selectedProficiencies, setSelectedProficiencies] = useState([]);
     const [proficiencyChoices, setProficiencyChoices] = useState([]);
-    const [spells, setSpells] = useState(['Fireball', 'Heal', 'Lightning Bolt']);
+    const [spells, setSpells] = useState([]);
     const [selectedSpells, setSelectedSpells] = useState([]);
     const [inventory, setInventory] = useState(['Sword', 'Shield', 'Potion']);
     const [selectedItem, setSelectedItem] = useState('');
@@ -30,6 +30,15 @@ const FinishingTouchesMenu = () => {
                     }));
                     setProficiencyChoices(choices);
                 }
+
+                // Fetch spells for the class
+                if (response && response.spellcasting) {
+                    const spellsResponse = await getDnDAPI(`classes/${classesJson.class.toLowerCase()}/spells`);
+                    console.log(spellsResponse)
+                    if (spellsResponse && spellsResponse.results) {
+                        setSpells(spellsResponse.results.map(spell => spell.name));
+                    }
+                }
             } catch (error) {
                 console.error('Error fetching class data:', error);
             }
@@ -43,10 +52,8 @@ const FinishingTouchesMenu = () => {
         const maxSelections = proficiencyChoices[0]?.choose;
 
         if (newSelections.includes(proficiency)) {
-            // Deselect proficiency
             setSelectedProficiencies(newSelections.filter(p => p !== proficiency));
         } else if (newSelections.length < maxSelections) {
-            // Select proficiency if under limit
             newSelections.push(proficiency);
             setSelectedProficiencies(newSelections);
         } else {
@@ -58,10 +65,8 @@ const FinishingTouchesMenu = () => {
         const newSelections = [...selectedSpells];
 
         if (newSelections.includes(spell)) {
-            // Deselect spell
             setSelectedSpells(newSelections.filter(s => s !== spell));
         } else {
-            // Select spell
             newSelections.push(spell);
             setSelectedSpells(newSelections);
         }
@@ -123,24 +128,27 @@ const FinishingTouchesMenu = () => {
                 ))}
             </div>
 
-            <div className="section">
-                <h3>Spells</h3>
-                <hr />
-                <div className="dropdown-container">
-                    <button onClick={() => toggleDropdown('spell')}>
-                        {selectedSpells.length > 0 ? `${selectedSpells.join(', ')}` : 'Select Spells'}
-                    </button>
-                    {dropdownOpen.spell && (
-                        <ul className="dropdown-list">
-                            {spells.map((spell, index) => (
-                                <li key={index} onClick={() => handleSpellSelect(spell)}>
-                                    {spell} {selectedSpells.includes(spell) && '✓'}
-                                </li>
-                            ))}
-                        </ul>
-                    )}
+            {/* Conditionally render the Spells section */}
+            {spells.length > 0 && (
+                <div className="section">
+                    <h3>Spells</h3>
+                    <hr />
+                    <div className="dropdown-container">
+                        <button onClick={() => toggleDropdown('spell')}>
+                            {selectedSpells.length > 0 ? `${selectedSpells.join(', ')}` : 'Select Spells'}
+                        </button>
+                        {dropdownOpen.spell && (
+                            <ul className="dropdown-list">
+                                {spells.map((spell, index) => (
+                                    <li key={index} onClick={() => handleSpellSelect(spell)}>
+                                        {spell} {selectedSpells.includes(spell) && '✓'}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="section">
                 <h3>Inventory</h3>
