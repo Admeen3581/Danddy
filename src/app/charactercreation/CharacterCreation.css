@@ -197,3 +197,42 @@
     margin-right: 8px; /* Adds some space between the label and the stat */
 }
 
+.stats-container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    margin: 20px 0;
+}
+
+.custom-input-container {
+    display: flex; /* Align label and input in a row */
+    justify-content: space-between; /* Space between label and input */
+    align-items: center;
+    margin-bottom: 8px; /* Space between each stat */
+}
+
+.stat-label {
+    flex: 1; /* Allow label to take available space */
+    text-align: left; /* Align label to the left */
+}
+
+.custom-input-container input {
+    margin-left: 8px; /* Space between label and input */
+    padding: 4px;
+    border: 1px solid #666;
+    border-radius: 4px;
+    width: 50px; /* Fixed width for better alignment */
+    text-align: right; /* Align input text to the right */
+    color: black; /* Set text color to black */
+}
+
+/* Remove the spinner for number inputs */
+.custom-input-container input::-webkit-inner-spin-button,
+.custom-input-container input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+
+
+
