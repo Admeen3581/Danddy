@@ -40,13 +40,17 @@ const FinishingTouchesMenu = () => {
 
     const handleProficiencySelect = (proficiency) => {
         const newSelections = [...selectedProficiencies];
+        const maxSelections = proficiencyChoices[0]?.choose;
+
         if (newSelections.includes(proficiency)) {
+            // Deselect proficiency
             setSelectedProficiencies(newSelections.filter(p => p !== proficiency));
-        } else if (newSelections.length < proficiencyChoices[0]?.choose) { // Limit selections based on the count
+        } else if (newSelections.length < maxSelections) {
+            // Select proficiency if under limit
             newSelections.push(proficiency);
             setSelectedProficiencies(newSelections);
         } else {
-            alert(`You can only select ${proficiencyChoices[0]?.choose} proficiencies.`);
+            alert(`You can only select ${maxSelections} proficiencies.`);
         }
     };
 
