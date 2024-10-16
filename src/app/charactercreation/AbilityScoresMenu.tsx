@@ -60,6 +60,7 @@ const AbilityScoresMenu: React.FC<AbilityScoresProps> = ({ onMethodSelect, onFin
         classesJson.stats.intelligence.value = finalStats[3];
         classesJson.stats.wisdom.value = finalStats[4];
         classesJson.stats.charisma.value = finalStats[5];
+        setClassesJson(classesJson)
 
         console.log(classesJson);
         onFinish();

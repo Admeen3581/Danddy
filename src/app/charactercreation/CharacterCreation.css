@@ -258,3 +258,8 @@
     position: relative; /* Allow for absolute positioning of content */
     height: 50px; /* Fixed height for consistency */
 }
+
+.custom-input-container label {
+    margin-bottom: 0.5em; /* Adjust this value for more or less space */
+    display: block; /* Ensure the label takes a full line */
+}

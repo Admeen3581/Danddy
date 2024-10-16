@@ -1,16 +1,56 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './CharacterCreation.css';
+import { getDnDAPI } from '@/utils/httpRequester';
+import useLocalStore from '@/utils/store';
 
 const FinishingTouchesMenu = () => {
+    const { classesJson } = useLocalStore();
     const [hp, setHp] = useState('');
-    const [proficiency, setProficiency] = useState('');
+    const [selectedProficiencies, setSelectedProficiencies] = useState([]);
+    const [proficiencyChoices, setProficiencyChoices] = useState([]);
     const [spells, setSpells] = useState(['Fireball', 'Heal', 'Lightning Bolt']);
     const [selectedSpell, setSelectedSpell] = useState('');
     const [inventory, setInventory] = useState(['Sword', 'Shield', 'Potion']);
     const [selectedItem, setSelectedItem] = useState('');
 
+    const [dropdownOpen, setDropdownOpen] = useState({
+        proficiency: false,
+        spell: false,
+        inventory: false,
+    });
+
+    useEffect(() => {
+        const fetchClassData = async () => {
+            try {
+                const response = await getDnDAPI(`classes/${classesJson.class.toLowerCase()}`);
+                if (response && response.proficiency_choices) {
+                    const choices = response.proficiency_choices.map(choice => ({
+                        options: choice.from.options.map(option => option.item.name.replace("Skill: ", ""))
+                    }));
+                    setProficiencyChoices(choices);
+                }
+            } catch (error) {
+                console.error('Error fetching class data:', error);
+            }
+        };
+
+        fetchClassData();
+    }, [classesJson.class]);
+
+    const handleProficiencySelect = (proficiency) => {
+        if (selectedProficiencies.includes(proficiency)) {
+            setSelectedProficiencies(selectedProficiencies.filter(p => p !== proficiency));
+        } else {
+            setSelectedProficiencies([...selectedProficiencies, proficiency]);
+        }
+    };
+
     const handleFinish = () => {
         alert('Character Created!');
+    };
+
+    const toggleDropdown = (type) => {
+        setDropdownOpen(prev => ({ ...prev, [type]: !prev[type] }));
     };
 
     return (
@@ -29,12 +69,12 @@ const FinishingTouchesMenu = () => {
 
                 <div className="custom-input-container">
                     <span className="stat-label">HP:</span>
-                    <input 
-                        type="number" 
-                        value={hp} 
-                        onChange={(e) => setHp(e.target.value)} 
-                        min={1} // Optional: Set a minimum value
-                        placeholder="Enter HP" 
+                    <input
+                        type="number"
+                        value={hp}
+                        onChange={(e) => setHp(e.target.value)}
+                        min={1}
+                        placeholder="Enter HP"
                     />
                 </div>
             </div>
@@ -42,51 +82,64 @@ const FinishingTouchesMenu = () => {
             <div className="section">
                 <h3>Character Attributes</h3>
                 <hr />
-                <div className="custom-input-container">
-                    <label>Proficiency:</label>
-                    <select 
-                        value={proficiency} 
-                        onChange={(e) => setProficiency(e.target.value)} 
-                    >
-                        <option value="">Select Proficiency</option>
-                        <option value="+2">+2</option>
-                        <option value="+3">+3</option>
-                        <option value="+4">+4</option>
-                    </select>
+                <div className="dropdown-container">
+                    <button onClick={() => toggleDropdown('proficiency')}>
+                        {selectedProficiencies.length > 0 ? 'Proficiencies Selected' : 'Select Proficiencies'}
+                    </button>
+                    {dropdownOpen.proficiency && (
+                        <ul className="dropdown-list">
+                            {proficiencyChoices.map((choice, index) => (
+                                <li key={index}>
+                                    <h4>Choice {index + 1}</h4>
+                                    <ul>
+                                        {choice.options.map((option, idx) => (
+                                            <li key={idx} onClick={() => handleProficiencySelect(option)}>
+                                                {option} {selectedProficiencies.includes(option) && '✓'}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
             </div>
 
             <div className="section">
                 <h3>Spells</h3>
                 <hr />
-                <div className="custom-input-container">
-                    <label>Spell:</label>
-                    <select 
-                        value={selectedSpell} 
-                        onChange={(e) => setSelectedSpell(e.target.value)} 
-                    >
-                        <option value="">Select Spell</option>
-                        {spells.map((spell, index) => (
-                            <option key={index} value={spell}>{spell}</option>
-                        ))}
-                    </select>
+                <div className="dropdown-container">
+                    <button onClick={() => toggleDropdown('spell')}>
+                        {selectedSpell || 'Select Spell'}
+                    </button>
+                    {dropdownOpen.spell && (
+                        <ul className="dropdown-list">
+                            {spells.map((spell, index) => (
+                                <li key={index} onClick={() => setSelectedSpell(spell)}>
+                                    {spell}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
             </div>
 
             <div className="section">
                 <h3>Inventory</h3>
                 <hr />
-                <div className="custom-input-container">
-                    <label>Inventory:</label>
-                    <select 
-                        value={selectedItem} 
-                        onChange={(e) => setSelectedItem(e.target.value)} 
-                    >
-                        <option value="">Select Item</option>
-                        {inventory.map((item, index) => (
-                            <option key={index} value={item}>{item}</option>
-                        ))}
-                    </select>
+                <div className="dropdown-container">
+                    <button onClick={() => toggleDropdown('inventory')}>
+                        {selectedItem || 'Select Item'}
+                    </button>
+                    {dropdownOpen.inventory && (
+                        <ul className="dropdown-list">
+                            {inventory.map((item, index) => (
+                                <li key={index} onClick={() => setSelectedItem(item)}>
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
             </div>
 
