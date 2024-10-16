@@ -159,3 +159,27 @@
     background: rgba(255, 255, 255, 0.7);
 }
 
+.stats-container {
+    margin: 20px 0;
+}
+
+.draggable-item {
+    margin: 8px 0;
+    background: #444;
+    border: 1px solid #666;
+    padding: 8px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the number */
+    color: white; /* Change text color for better visibility */
+    cursor: grab; /* Change cursor to indicate draggable */
+    transition: 0.3s; /* Smooth background transition */
+}
+
+.draggable-item.dragging {
+    background: #555; /* Change background for the dragged item */
+    opacity: 0.8; /* Slightly transparent */
+}
+
+
