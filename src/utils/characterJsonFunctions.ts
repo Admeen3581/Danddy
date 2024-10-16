@@ -40,6 +40,7 @@ export interface Health {
     spell_slots: Spells;
     stats: Stats;
     inventory: string[];
+    proficiencies: string[];
     current_conditions: string[];
   }
   
@@ -60,10 +61,6 @@ export interface Health {
       spells: [],
       spell_slots: {
         level_1: {
-          max_slots: 0,
-          current_slots: 0,
-        },
-        level_2: {
           max_slots: 0,
           current_slots: 0,
         },
@@ -101,6 +98,7 @@ export interface Health {
         },
       },
       inventory: [],
+      proficiencies: [],
       current_conditions: [],
     };
   }
