@@ -25,6 +25,7 @@ const FinishingTouchesMenu = () => {
                 const response = await getDnDAPI(`classes/${classesJson.class.toLowerCase()}`);
                 if (response && response.proficiency_choices) {
                     const choices = response.proficiency_choices.map(choice => ({
+                        choose: choice.choose,
                         options: choice.from.options.map(option => option.item.name.replace("Skill: ", ""))
                     }));
                     setProficiencyChoices(choices);
@@ -38,10 +39,14 @@ const FinishingTouchesMenu = () => {
     }, [classesJson.class]);
 
     const handleProficiencySelect = (proficiency) => {
-        if (selectedProficiencies.includes(proficiency)) {
-            setSelectedProficiencies(selectedProficiencies.filter(p => p !== proficiency));
+        const newSelections = [...selectedProficiencies];
+        if (newSelections.includes(proficiency)) {
+            setSelectedProficiencies(newSelections.filter(p => p !== proficiency));
+        } else if (newSelections.length < proficiencyChoices[0]?.choose) { // Limit selections based on the count
+            newSelections.push(proficiency);
+            setSelectedProficiencies(newSelections);
         } else {
-            setSelectedProficiencies([...selectedProficiencies, proficiency]);
+            alert(`You can only select ${proficiencyChoices[0]?.choose} proficiencies.`);
         }
     };
 
@@ -82,27 +87,23 @@ const FinishingTouchesMenu = () => {
             <div className="section">
                 <h3>Character Attributes</h3>
                 <hr />
-                <div className="dropdown-container">
-                    <button onClick={() => toggleDropdown('proficiency')}>
-                        {selectedProficiencies.length > 0 ? 'Proficiencies Selected' : 'Select Proficiencies'}
-                    </button>
-                    {dropdownOpen.proficiency && (
-                        <ul className="dropdown-list">
-                            {proficiencyChoices.map((choice, index) => (
-                                <li key={index}>
-                                    <h4>Choice {index + 1}</h4>
-                                    <ul>
-                                        {choice.options.map((option, idx) => (
-                                            <li key={idx} onClick={() => handleProficiencySelect(option)}>
-                                                {option} {selectedProficiencies.includes(option) && '✓'}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </div>
+                {proficiencyChoices.map((choice, index) => (
+                    <div key={index} className="dropdown-container">
+                        <h4>Choose {choice.choose}</h4>
+                        <button onClick={() => toggleDropdown('proficiency')}>
+                            {selectedProficiencies.length > 0 ? 'Proficiencies Selected' : 'Select Proficiencies'}
+                        </button>
+                        {dropdownOpen.proficiency && (
+                            <ul className="dropdown-list">
+                                {choice.options.map((option, idx) => (
+                                    <li key={idx} onClick={() => handleProficiencySelect(option)}>
+                                        {option} {selectedProficiencies.includes(option) && '✓'}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                ))}
             </div>
 
             <div className="section">
