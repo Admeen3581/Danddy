@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { createUserWithEmailAndPassword, sendEmailVerification, deleteUser } from 'firebase/auth';
-import { updateDatabaseRoute, deleteDatabaseRoute } from '@/utils/httpRequester';
+import { updateDatabaseRoute,} from '@/utils/httpRequester';
 import { auth } from '@/firebaseConfig';
 import styles from './SignUp.module.css';
 import SignUpForm from './SignUpForm';
@@ -21,28 +21,11 @@ export default function SignUp() {
       const userCredential = await createUserWithEmailAndPassword(auth, userData.email, userData.password);
       const user = userCredential.user;
       
-      // Send email verification
-      await sendEmailVerification(user);
-
       // Update the database with additional user data
       await updateDatabaseRoute(`/users/${userData.username}`, {
         ...userData,
         uid: user.uid
       });
-
-      alert('Sign-up successful! Please check your email to verify your account.');
-
-      // Set a timeout to check email verification status after a certain period (e.g., 24 hours)
-      setTimeout(async () => {
-        await user.reload(); // Reload user data
-        if (!user.emailVerified) {
-          // Delete user from Firebase Authentication
-          await deleteUser(user);
-          // Delete user data from the database
-          await deleteDatabaseRoute(`/users/${userData.username}`);
-          console.log('User deleted due to unverified email.');
-        }
-      }, 24 * 60 * 60 * 1000); // 24 hours in milliseconds
 
     } catch (error) {
       console.error('Failed to sign up:', error);
