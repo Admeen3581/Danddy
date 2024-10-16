@@ -252,3 +252,9 @@
     border-radius: 4px;
     width: 150px; /* Adjusted width for wider input boxes */
 }
+
+.section {
+    margin: 40px 0; /* Adjust the spacing as needed */
+    position: relative; /* Allow for absolute positioning of content */
+    height: 50px; /* Fixed height for consistency */
+}
