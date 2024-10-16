@@ -9,11 +9,11 @@ interface AbilityScoresProps {
 const AbilityScoresMenu: React.FC<AbilityScoresProps> = ({ onMethodSelect }) => {
     const { classesJson, setClassesJson } = useLocalStore();
     const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
-    const [stats, setStats] = useState<number[]>([10, 12, 14, 16, 18, 8]);
+    const [stats, setStats] = useState<string[]>(['', '', '', '', '', '']); // Start with empty strings for custom input
     const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    const methods = ["Array", "Point Buy", "Roll", "Custom"];
+    const methods = ["Array", "Custom"];
     const statLabels: string[] = ["Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"];
 
     const toggleDropdown = () => {
@@ -25,7 +25,7 @@ const AbilityScoresMenu: React.FC<AbilityScoresProps> = ({ onMethodSelect }) => 
         if (method === "Array") {
             setStats([10, 12, 14, 16, 18, 8]);
         } else {
-            setStats([]);
+            setStats(['', '', '', '', '', '']); // Start with empty strings for custom method
         }
         setDropdownOpen(false);
     };
@@ -44,16 +44,23 @@ const AbilityScoresMenu: React.FC<AbilityScoresProps> = ({ onMethodSelect }) => 
         setDraggedIndex(null);
     };
 
+    const handleCustomInputChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+        const value = e.target.value; // Keep it as a string
+        const newStats = [...stats];
+        newStats[index] = value; // Set to the input value (which can be empty)
+        setStats(newStats);
+    };
+
     const handleConfirm = () => {
-        const finalStats = stats;
+        const finalStats = stats.map(stat => (stat ? parseInt(stat, 10) : 0)); // Convert to numbers, defaulting to 0 if empty
         classesJson.stats.strength.value = finalStats[0];
         classesJson.stats.dexterity.value = finalStats[1];
         classesJson.stats.constitution.value = finalStats[2];
         classesJson.stats.intelligence.value = finalStats[3];
         classesJson.stats.wisdom.value = finalStats[4];
         classesJson.stats.charisma.value = finalStats[5];
-        
-        console.log(classesJson)
+
+        console.log(classesJson);
         onMethodSelect(selectedMethod!);
     };
 
@@ -93,6 +100,26 @@ const AbilityScoresMenu: React.FC<AbilityScoresProps> = ({ onMethodSelect }) => 
                                     >
                                         <span className="stat-label">{statLabels[index]}: </span>
                                         {stat}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {selectedMethod === "Custom" && (
+                        <div>
+                            <h3>Custom Input</h3>
+                            <div className="stats-container">
+                                {stats.map((stat, index) => (
+                                    <div key={index} className="custom-input-container">
+                                        <span className="stat-label">{statLabels[index]}:</span>
+                                        <input
+                                            type="number"
+                                            value={stat}
+                                            onChange={(e) => handleCustomInputChange(e, index)}
+                                            min={1} // Optional: Set a minimum value for ability scores
+                                            placeholder="" // Ensure it starts empty
+                                        />
                                     </div>
                                 ))}
                             </div>
