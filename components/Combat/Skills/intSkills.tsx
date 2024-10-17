@@ -6,6 +6,7 @@ const IntSkills = () => {
     arcana: 11,
     history: 10,
     investigation: 10,
+    nature: 10,
     religion: 10
   };
 
@@ -15,6 +16,7 @@ const IntSkills = () => {
       <div className={styles.statsBox}>
         <Stat label="Arcana" value={stats.arcana} />
         <Stat label="History" value={stats.history} />
+        <Stat label="Nature" value={stats.nature} />
         <Stat label="Investigation" value={stats.investigation} />
         <Stat label="Religion" value={stats.religion} />
       </div>
