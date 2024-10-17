@@ -5,6 +5,7 @@ import DexSkills from "../../../components/Combat/Skills/dexSkills";
 import WisSkills from "../../../components/Combat/Skills/wisSkills";
 import CharacterStats from "../../../components/Combat/Stats/characterStats";
 import ChaSkills from "../../../components/Combat/Skills/chaSkills";
+import StrSkills from "../../../components/Combat/Skills/strSkills";
 
 
 const Combat = () => {
@@ -17,6 +18,7 @@ const Combat = () => {
     <DexSkills/>
     <IntSkills/>
     <ChaSkills/>
+    <StrSkills/>
    </>
   );
 };
