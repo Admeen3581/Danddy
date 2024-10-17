@@ -22,6 +22,9 @@ const FinishingTouchesMenu = () => {
         inventory: false,
     });
 
+    const [cantripLimit, setCantripLimit] = useState(0);
+    const [level1SpellLimit, setLevel1SpellLimit] = useState(0);
+
     useEffect(() => {
         const fetchClassData = async () => {
             try {
@@ -42,6 +45,49 @@ const FinishingTouchesMenu = () => {
                         const level1 = spellsResponse.results.filter(spell => spell.level === 1);
                         setCantrips(cantrips.map(spell => spell.name));
                         setLevel1Spells(level1.map(spell => spell.name));
+                    }
+
+                    switch(classesJson.class.toLowerCase()){
+                        case "bard":
+                            setCantripLimit(2);
+                            setLevel1SpellLimit(4);
+                            break;
+
+                        case "cleric":
+                            setCantripLimit(3);
+                            setLevel1SpellLimit(4);
+                            break;
+
+                        case "druid":
+                            setCantripLimit(2);
+                            setLevel1SpellLimit(4);
+                            break;
+
+                        case "paladin":
+                            setCantripLimit(1);
+                            setLevel1SpellLimit(2);
+                            break;
+
+                        case "ranger":
+                            setCantripLimit(1);
+                            setLevel1SpellLimit(2);
+                            break;
+
+                        case "sorcerer":
+                            setCantripLimit(4);
+                            setLevel1SpellLimit(2);
+                            break;
+
+                        case "warlock":
+                            setCantripLimit(2);
+                            setLevel1SpellLimit(2);
+                            break;
+
+                        case "wizard":
+                            setCantripLimit(3);
+                            setLevel1SpellLimit(4);
+                            break;
+
                     }
                 }
             } catch (error) {
@@ -71,9 +117,11 @@ const FinishingTouchesMenu = () => {
 
         if (newSelections.includes(cantrip)) {
             setSelectedCantrips(newSelections.filter(c => c !== cantrip));
-        } else {
+        } else if (newSelections.length < cantripLimit) {
             newSelections.push(cantrip);
             setSelectedCantrips(newSelections);
+        } else {
+            alert(`You can only select ${cantripLimit} cantrip(s).`);
         }
     };
 
@@ -82,9 +130,11 @@ const FinishingTouchesMenu = () => {
 
         if (newSelections.includes(spell)) {
             setSelectedLevel1Spells(newSelections.filter(s => s !== spell));
-        } else {
+        } else if (newSelections.length < level1SpellLimit) {
             newSelections.push(spell);
             setSelectedLevel1Spells(newSelections);
+        } else {
+            alert(`You can only select ${level1SpellLimit} level 1 spell(s).`);
         }
     };
 
