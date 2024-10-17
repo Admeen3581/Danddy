@@ -86,6 +86,18 @@ const FinishingTouchesMenu = () => {
                             break;
                     }
                 }
+
+                if (response && response.starting_equipment_options) {
+                    const options = response.starting_equipment_options.map(option => {
+                        var description : string = option.desc;
+                        if(!description.includes("or")) return [description, "nothing"];
+                        description = description.substring(3)
+                        const items = description.split(" or (b)").map(item => item.trim()).filter(item => item);
+                        return items;
+                    });
+                    setInventoryOptions(options);
+                    console.log(inventoryOptions)
+                }
             } catch (error) {
                 console.error('Error fetching class data:', error);
             }
@@ -252,7 +264,7 @@ const FinishingTouchesMenu = () => {
                         {dropdownOpen.inventory && (
                             <ul className="dropdown-list">
                                 {inventoryOptions.map((pair, rowIndex) => (
-                                <li className="inventory-row">
+                                <li key={rowIndex} className="inventory-row">
                                     <span onClick={() => handleItemSelect(pair[0], rowIndex)}>
                                         {pair[0]} {selectedItems[rowIndex] === pair[0] && '✓'}
                                     </span>
