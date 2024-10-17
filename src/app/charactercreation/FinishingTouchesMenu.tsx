@@ -4,7 +4,7 @@ import { getDnDAPI } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
 
 const FinishingTouchesMenu = () => {
-    const { classesJson } = useLocalStore();
+    const { classesJson, setClassesJson } = useLocalStore();
     const [hp, setHp] = useState('');
     const [selectedProficiencies, setSelectedProficiencies] = useState([]);
     const [proficiencyChoices, setProficiencyChoices] = useState([]);
@@ -153,8 +153,19 @@ const FinishingTouchesMenu = () => {
     };
 
     const handleFinish = () => {
+        //HP
+        classesJson.health.current_health = parseInt(hp);
+        classesJson.health.max_health = classesJson.health.current_health;
+        //Prof
+        console.log(selectedProficiencies)
+        //Invetory
+        classesJson.inventory = selectedItems
+        //Spell
+        classesJson.spells = selectedCantrips.concat(selectedLevel1Spells)
+
         alert('Character Created!');
-        console.log('Selected Items:', selectedItems); // Log selected items
+        setClassesJson(classesJson)
+        console.log(classesJson)
     };
 
     const toggleDropdown = (type) => {
@@ -172,7 +183,10 @@ const FinishingTouchesMenu = () => {
                 <hr />
                 <div className="custom-input-container">
                     <span className="stat-label">Name:</span>
-                    <input type="text" placeholder="Enter name" />
+                    <input 
+                        type="text" 
+                        onChange={(e) => classesJson.name = e.target.value}
+                        placeholder="Enter name" />
                 </div>
 
                 <div className="custom-input-container">
