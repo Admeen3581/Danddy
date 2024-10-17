@@ -10,5 +10,5 @@ export interface User {
 
 export interface SignUpFormProps {
   onSubmit: (userData: User) => void;
-  loading: boolean;
+  isLoading: boolean;
 }

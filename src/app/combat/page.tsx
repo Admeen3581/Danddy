@@ -6,6 +6,7 @@ import WisSkills from "../../../components/Combat/Skills/wisSkills";
 import CharacterStats from "../../../components/Combat/Stats/characterStats";
 import ChaSkills from "../../../components/Combat/Skills/chaSkills";
 import StrSkills from "../../../components/Combat/Skills/strSkills";
+import HPManager from "../../../components/Combat/Hp/characterHp";
 
 
 const Combat = () => {
@@ -19,6 +20,7 @@ const Combat = () => {
     <IntSkills/>
     <ChaSkills/>
     <StrSkills/>
+    <HPManager/>
    </>
   );
 };
