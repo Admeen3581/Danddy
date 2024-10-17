@@ -15,7 +15,6 @@
    width: 100%;
    padding: 10px;
    background-color: #ECEEE8;
-   box-shadow: 0 6px 10px #041025;
  }
  
  .menu-container {
@@ -63,7 +62,6 @@
    text-decoration: none;
  }
  
- /* Show menu on hover */
  .menu-container:hover .menu-content {
    transform: translateX(0);
  }

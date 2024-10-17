@@ -1,19 +1,19 @@
-body {
+.PAstats-home {
    background-color: #1E1E1E;
-   font-family: Bebas Neue, sans-serif;
    margin: 0; 
+   font-family: 'Trebuchet MS', sans-serif;
+   font-weight: bold;
+   padding: 5px;
 }
 
 .StatsBox {
-   position: relative;       
+   position: relative;
    text-align: center;
    justify-content: center;
-   border-radius: 5px;       
-   width: 96.5%;              
-   padding: 20px;             
+   border-radius: 5px; 
+   width: 100%;
+   padding: 10px;
    background-color: #ECEEE8;
-   box-shadow: 0 6px 10px #041025;
-   margin: 10px auto; 
 }
 
 .inline-text {
