@@ -12,8 +12,12 @@ const FinishingTouchesMenu = () => {
     const [level1Spells, setLevel1Spells] = useState([]);
     const [selectedCantrips, setSelectedCantrips] = useState([]);
     const [selectedLevel1Spells, setSelectedLevel1Spells] = useState([]);
-    const [inventory, setInventory] = useState(['Sword', 'Shield', 'Potion']);
-    const [selectedItem, setSelectedItem] = useState('');
+    const [inventoryOptions, setInventoryOptions] = useState([
+        ['Sword', 'Axe'],
+        ['Shield', 'Bow'],
+        ['Potion', 'Herb']
+    ]);
+    const [selectedItems, setSelectedItems] = useState([]);
 
     const [dropdownOpen, setDropdownOpen] = useState({
         proficiency: false,
@@ -52,42 +56,34 @@ const FinishingTouchesMenu = () => {
                             setCantripLimit(2);
                             setLevel1SpellLimit(4);
                             break;
-
                         case "cleric":
                             setCantripLimit(3);
                             setLevel1SpellLimit(4);
                             break;
-
                         case "druid":
                             setCantripLimit(2);
                             setLevel1SpellLimit(4);
                             break;
-
                         case "paladin":
                             setCantripLimit(1);
                             setLevel1SpellLimit(2);
                             break;
-
                         case "ranger":
                             setCantripLimit(1);
                             setLevel1SpellLimit(2);
                             break;
-
                         case "sorcerer":
                             setCantripLimit(4);
                             setLevel1SpellLimit(2);
                             break;
-
                         case "warlock":
                             setCantripLimit(2);
                             setLevel1SpellLimit(2);
                             break;
-
                         case "wizard":
                             setCantripLimit(3);
                             setLevel1SpellLimit(4);
                             break;
-
                     }
                 }
             } catch (error) {
@@ -138,8 +134,15 @@ const FinishingTouchesMenu = () => {
         }
     };
 
+    const handleItemSelect = (item, rowIndex) => {
+        const newSelectedItems = [...selectedItems];
+        newSelectedItems[rowIndex] = item; // Select item for this row
+        setSelectedItems(newSelectedItems);
+    };
+
     const handleFinish = () => {
         alert('Character Created!');
+        console.log('Selected Items:', selectedItems); // Log selected items
     };
 
     const toggleDropdown = (type) => {
@@ -241,20 +244,26 @@ const FinishingTouchesMenu = () => {
             <div className="section">
                 <h3>Inventory</h3>
                 <hr />
-                <div className="dropdown-container">
-                    <button onClick={() => toggleDropdown('inventory')}>
-                        {selectedItem || 'Select Item'}
-                    </button>
-                    {dropdownOpen.inventory && (
-                        <ul className="dropdown-list">
-                            {inventory.map((item, index) => (
-                                <li key={index} onClick={() => setSelectedItem(item)}>
-                                    {item}
+                
+                    <div className="dropdown-container">
+                        <button onClick={() => toggleDropdown('inventory')}>
+                            {'Select Items'}
+                        </button>
+                        {dropdownOpen.inventory && (
+                            <ul className="dropdown-list">
+                                {inventoryOptions.map((pair, rowIndex) => (
+                                <li className="inventory-row">
+                                    <span onClick={() => handleItemSelect(pair[0], rowIndex)}>
+                                        {pair[0]} {selectedItems[rowIndex] === pair[0] && '✓'}
+                                    </span>
+                                    <span onClick={() => handleItemSelect(pair[1], rowIndex)}>
+                                        {pair[1]} {selectedItems[rowIndex] === pair[1] && '✓'}
+                                    </span>
                                 </li>
-                            ))}
-                        </ul>
-                    )}
-                </div>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
             </div>
 
             <div className="content button">
