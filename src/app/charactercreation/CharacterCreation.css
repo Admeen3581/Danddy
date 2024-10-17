@@ -263,3 +263,15 @@
     margin-bottom: 0.5em; /* Adjust this value for more or less space */
     display: block; /* Ensure the label takes a full line */
 }
+
+.inventory-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+.inventory-row span {
+    cursor: pointer;
+    flex: 1; /* This allows both options to take equal space */
+    text-align: center; /* Centers the text */
+}
