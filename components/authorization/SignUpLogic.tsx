@@ -1,14 +1,15 @@
 "use client";
 
+/*Everything here is from the previous files, feel free to remove Roman -Adam*/
+
 import { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { updateDatabaseRoute } from '@/utils/httpRequester';
 import { auth } from '@/firebaseConfig';
-import styles from './SignUp.module.css';
 import SignUpForm from './SignUpForm';
 import { User } from './User';
 
-export default function SignUp() {
+export default function SignUpLogic() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -36,7 +37,7 @@ export default function SignUp() {
     }
   };
 
-
+//Frontend
   return (
       <section className='flex-center size-full max-sm:px-6 min-h-screen'>
         <SignUpForm type="sign-up" />
