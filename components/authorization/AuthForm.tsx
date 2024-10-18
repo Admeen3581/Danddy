@@ -1,5 +1,9 @@
 'use client';
 
+//@Author: Adam Long
+//Date: 10/17/24
+//Danddy - SCRUM-106_2
+
 import React, { useState } from 'react';
 import InputField from './InputField';
 import {Form} from "@/components/ui/form";
@@ -9,7 +13,7 @@ import Link from "next/link";
 import {Loader2} from "lucide-react";
 import {useForm} from "react-hook-form";
 
-export default function SignUpForm({type} : {type : string}) {
+export default function AuthForm({type} : {type : string}) {
 
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();

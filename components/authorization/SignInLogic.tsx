@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/firebaseConfig';
-import SignUpForm from "./SignUpForm";
+import AuthForm from "./AuthForm";
 
 export default function SignInLogic() {
   const [email, setEmail] = useState<string>('');
@@ -37,7 +37,7 @@ export default function SignInLogic() {
   //Frontend
   return (
       <section className='flex-center size-full max-sm:px-6 min-h-screen'>
-        <SignUpForm type="sign-in" />
+        <AuthForm type="sign-in" />
       </section>
   );
 }
