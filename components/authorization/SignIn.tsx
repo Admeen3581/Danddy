@@ -6,7 +6,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/firebaseConfig';
 import styles from './SignIn.module.css';
 import InputField from './InputField';
-import AuthForm from "./AuthForm";
+import SignUpForm from "./SignUpForm";
 
 export default function SignIn() {
   const [email, setEmail] = useState<string>('');
@@ -34,6 +34,6 @@ export default function SignIn() {
   };
 
   return (
-    <AuthForm type={"sign-in"}/>
+    <SignUpForm type={"sign-in"}/>
   );
 }
