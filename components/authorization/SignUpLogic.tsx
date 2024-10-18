@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { updateDatabaseRoute } from '@/utils/httpRequester';
 import { auth } from '@/firebaseConfig';
-import SignUpForm from './SignUpForm';
+import AuthForm from './AuthForm';
 import { User } from './User';
 
 export default function SignUpLogic() {
@@ -40,7 +40,7 @@ export default function SignUpLogic() {
 //Frontend
   return (
       <section className='flex-center size-full max-sm:px-6 min-h-screen'>
-        <SignUpForm type="sign-up" />
+        <AuthForm type="sign-up" />
       </section>
   );
 }
