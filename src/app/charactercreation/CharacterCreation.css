@@ -1,0 +1,277 @@
+
+.character-creation-container {
+    display: flex;
+    height: 100vh;
+    background-color: black;
+}
+
+.background-image {
+    flex: 1;
+    background-image: url(https://external-preview.redd.it/u0bZOwzMBYZ7vvp8lJ0U_VeonHAIvX87SS_vGDe0Y-M.jpg?width=1080&crop=smart&auto=webp&s=87214f42d64b1a5b87859bfee903080fdd3f9330);
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-left: -400px;
+}
+
+.welcome-text {
+    text-align: center;
+    font-family: Georgia, serif;
+    font-size: 36px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-80%, -50%);
+}
+
+.sidebar {
+    width: 400px;
+    padding: 20px;
+    background-color: #333333;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    color: white;
+    flex-shrink: 0;
+    position: relative;
+    height: 100vh;
+}
+
+
+.dropdown-container {
+    position: relative;
+    margin-top: 20px; 
+    margin-bottom: 20px; 
+}
+
+.dropdown-container button {
+    font-family: Georgia, serif;
+    font-size: 16px;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.dropdown-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 0; 
+    margin: 0;
+    list-style-type: none;
+    z-index: 1;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    max-height: 200px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.dropdown-list li {
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.dropdown-list img {
+    margin-right: 8px;
+    width: 16px; 
+    height: 16px; 
+}
+
+
+.popup {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 2;
+    padding: 20px;
+    width: 400px;
+    background-color: transparent;
+}
+
+.dragon-image {
+    width: 70px;
+    position: absolute;
+    top: 0px;
+    left: 10px;
+}
+
+.popup-content {
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.popup-content img {
+    width: 190px;
+    margin: 10px auto;
+    display: block; 
+}
+
+.popup-content button {
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.content button {
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 35%;
+}
+
+
+.dropdown-list::-webkit-scrollbar {
+    width: 8px;
+}
+.dropdown-list::-webkit-scrollbar-track {
+    background: black;
+}
+.dropdown-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+}
+.dropdown-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.stats-container {
+    margin: 20px 0;
+}
+
+.draggable-item {
+    margin: 8px 0;
+    background: #444;
+    border: 1px solid #666;
+    padding: 8px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the number */
+    color: white; /* Change text color for better visibility */
+    cursor: grab; /* Change cursor to indicate draggable */
+    transition: 0.3s; /* Smooth background transition */
+}
+
+.draggable-item.dragging {
+    background: #555; /* Change background for the dragged item */
+    opacity: 0.8; /* Slightly transparent */
+}
+
+.stat-label {
+    font-weight: bold; /* Makes the label bold for emphasis */
+    margin-right: 8px; /* Adds some space between the label and the stat */
+}
+
+.stats-container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    margin: 20px 0;
+}
+
+.custom-input-container {
+    display: flex; /* Align label and input in a row */
+    justify-content: space-between; /* Space between label and input */
+    align-items: center;
+    margin-bottom: 8px; /* Space between each stat */
+}
+
+.stat-label {
+    flex: 1; /* Allow label to take available space */
+    text-align: left; /* Align label to the left */
+}
+
+.custom-input-container input {
+    margin-left: 8px; /* Space between label and input */
+    padding: 4px;
+    border: 1px solid #666;
+    border-radius: 4px;
+    width: 50px; /* Fixed width for better alignment */
+    text-align: right; /* Align input text to the right */
+    color: black; /* Set text color to black */
+}
+
+/* Remove the spinner for number inputs */
+.custom-input-container input::-webkit-inner-spin-button,
+.custom-input-container input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.custom-input-container {
+    display: flex;
+    justify-content: center; /* Center contents horizontally */
+    align-items: center;
+    margin-bottom: 8px; /* Space between each stat */
+}
+
+.custom-input-container label {
+    margin-right: 8px; /* Space between label and input */
+}
+
+.custom-input-container input,
+.custom-input-container select {
+    color: black;
+    margin-left: 8px;
+    padding: 4px;
+    border: 1px solid #666;
+    border-radius: 4px;
+    width: 150px; /* Adjusted width for wider input boxes */
+}
+
+.section {
+    margin: 40px 0; /* Adjust the spacing as needed */
+    position: relative; /* Allow for absolute positioning of content */
+    height: 50px; /* Fixed height for consistency */
+}
+
+.custom-input-container label {
+    margin-bottom: 0.5em; /* Adjust this value for more or less space */
+    display: block; /* Ensure the label takes a full line */
+}
+
+.inventory-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+.inventory-row span {
+    cursor: pointer;
+    flex: 1; /* This allows both options to take equal space */
+    text-align: center; /* Centers the text */
+}
