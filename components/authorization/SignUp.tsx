@@ -5,7 +5,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { updateDatabaseRoute } from '@/utils/httpRequester';
 import { auth } from '@/firebaseConfig';
 import styles from './SignUp.module.css';
-import AuthForm from './AuthForm';
+import SignUpForm from './SignUpForm';
 import { User } from './User';
 
 export default function SignUp() {
@@ -39,7 +39,7 @@ export default function SignUp() {
 
   return (
       <section className='flex-center size-full max-sm:px-6 min-h-screen'>
-        <AuthForm type="sign-up" />
+        <SignUpForm type="sign-up" />
       </section>
   );
 }

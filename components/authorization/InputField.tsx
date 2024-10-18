@@ -1,30 +1,26 @@
 import React from 'react'
 import {
-  Form,
   FormControl,
   FormField,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import {FieldPath, useForm, UseFormReturn} from 'react-hook-form';
-import { authFormSchema } from '@/lib/utils';
-import { z } from 'zod';
-
+import {useForm} from "react-hook-form";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const formSchema = authFormSchema('sign-up');
 interface InputFieldProps {
-  form: UseFormReturn<z.infer<typeof formSchema>>;
-  name: FieldPath<z.infer<typeof formSchema>>;
+  name: string;
   label: string;
   placeholder: string;
   type?: string;
 }
 
-export default function InputField({form, name, label, placeholder, type=""}: InputFieldProps) {
+export default function InputField({name, label, placeholder, type=""}: InputFieldProps) {
 
-  return (
+    const form = useForm();
+
+    return (
       <FormField
           control={form.control}
           name={name}
