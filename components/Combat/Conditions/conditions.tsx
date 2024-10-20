@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
+import './conditions.css'
 
 enum Condition {
     Blinded = 'Blinded',
@@ -39,7 +40,7 @@ const PlayerConditions: React.FC = () => {
     };
 
     return (
-        <div>
+        <div className="conditions-container">
             <h2>Player Conditions</h2>
 
             {/* Display current conditions */}
