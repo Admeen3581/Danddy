@@ -1,3 +1,5 @@
+import './inventory.css'
+
 interface Item {
   name: string;
   description: string;
@@ -13,7 +15,7 @@ const predefinedInventory: Item[] = [
 const Inventory = () => {
   
   return (
-    <div>
+    <div className="inventory-container">
       <h1>Character Inventory</h1>
       <h2>Items</h2>
       <ul>
