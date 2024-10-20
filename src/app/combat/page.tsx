@@ -9,22 +9,27 @@ import StrSkills from "../../../components/Combat/Skills/strSkills";
 import HPManager from "../../../components/Combat/Hp/characterHp";
 import PlayerConditions from "../../../components/Combat/Conditions/conditions";
 import Inventory from "../../../components/Combat/Inventory/inventory";
-
+import './combatComp.css'
 
 const Combat = () => {
   return (
    <>
     <CharacterStats/>
-    <SavingThrows/>
-    <SensesStats/>
+    <div className="combats-container">
+      <div className="throws">
+        <SavingThrows/>
+        <SensesStats/>
+      </div>
+
     <WisSkills/>
     <DexSkills/>
     <IntSkills/>
     <ChaSkills/>
     <StrSkills/>
-    <HPManager/>
+    <HPManager/>  
     <PlayerConditions/>
     <Inventory/>
+    </div>
    </>
   );
 };
