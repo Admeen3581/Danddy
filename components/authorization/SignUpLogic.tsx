@@ -1,7 +1,5 @@
 "use client";
 
-/*Everything here is from the previous files, feel free to remove Roman -Adam*/
-
 import { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { updateDatabaseRoute } from '@/utils/httpRequester';
@@ -16,6 +14,7 @@ export default function SignUpLogic() {
   const setUserId = useLocalStore((state) => state.setUserId);  // Get the setUserId function from the store
 
   const handleSubmit = async (userData: User) => {
+    
     setError(null);
     setLoading(true);
 
