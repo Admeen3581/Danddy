@@ -7,6 +7,7 @@ import CharacterStats from "../../../components/Combat/Stats/characterStats";
 import ChaSkills from "../../../components/Combat/Skills/chaSkills";
 import StrSkills from "../../../components/Combat/Skills/strSkills";
 import HPManager from "../../../components/Combat/Hp/characterHp";
+import PlayerConditions from "../../../components/Combat/Conditions/conditions";
 
 
 const Combat = () => {
@@ -21,6 +22,7 @@ const Combat = () => {
     <ChaSkills/>
     <StrSkills/>
     <HPManager/>
+    <PlayerConditions/>
    </>
   );
 };
