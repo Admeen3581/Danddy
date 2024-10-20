@@ -3,12 +3,11 @@
 import React, { useEffect, useRef } from 'react';
 import PlayerHeader from '../../../PlayerHeaderComponents/PlayerHeader/playerheader';
 import PlayerStats from '../../../PlayerHeaderComponents/PlayerStats/playerstats';
-import PlayerNotes from '../../../PlayerHeaderComponents/PlayerSaving/playersaving';
-import PlayerInfo from '../../../PlayerHeaderComponents/PlayerInfo/playerinfo';
 import useLocalStore from '@/utils/store';
 import { getDnDAPI, readDatabaseRoute, updateDatabaseRoute } from '@/utils/httpRequester';
 import PlayerSaving from '../../../PlayerHeaderComponents/PlayerSaving/playersaving';
 import PlayerSense from '../../../PlayerHeaderComponents/PlayerSense/playersense';
+import PlayerNotes from '../../../PlayerHeaderComponents/PlayerNotes/playernotes';
 
 
 
@@ -49,7 +48,6 @@ const PlayerHome = () => {
       <PlayerSaving />
       <PlayerSense />
       <PlayerNotes />
-      <PlayerInfo />
    </>
   );
 };

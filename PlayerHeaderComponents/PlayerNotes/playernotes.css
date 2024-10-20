@@ -1,12 +1,21 @@
+body {
+   background-color: #1E1E1E;
+   font-family: Bebas Neue, sans-serif;
+      margin: 0; 
+}
+
 .PANotesBox {
-   background-color: #ECEEE8;  
+   background-color: #f5f5f5;  
    color: #1E1E1E;            
    padding: 20px;              
-   text-align: left;           
+   text-align: left; 
+   font-size: 24px;           
+   font-weight: bold; 
    border-radius: 5px;         
    position: fixed;
-   bottom: 25px;
-   width: 100%;
-   padding: 10px;
+   bottom: 10px;
+   right: 20px;
+   width: 65.5%;
+   height: 65%;
    margin: 0;
 }
