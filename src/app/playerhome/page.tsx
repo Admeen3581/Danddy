@@ -48,6 +48,8 @@ const PlayerHome = () => {
       <PlayerStats />
       <PlayerSaving />
       <PlayerSense />
+      <PlayerNotes />
+      <PlayerInfo />
    </>
   );
 };
