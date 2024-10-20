@@ -21,11 +21,14 @@ const Combat = () => {
         <SensesStats/>
       </div>
 
-    <WisSkills/>
-    <DexSkills/>
-    <IntSkills/>
-    <ChaSkills/>
-    <StrSkills/>
+    <div className="skills-section">
+      <WisSkills/>
+      <DexSkills/>
+      <IntSkills/>
+      <ChaSkills/>
+      <StrSkills/>
+    </div>
+    
     <HPManager/>  
     <PlayerConditions/>
     <Inventory/>
