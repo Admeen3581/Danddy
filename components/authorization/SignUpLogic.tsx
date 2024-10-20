@@ -12,7 +12,8 @@ import useLocalStore from '@/utils/store';
 
 export default function SignUpLogic() {
   const [loading, setLoading] = useState<boolean>(false);
-  const setUserId = useLocalStore((state) => state.setUserId); // Get the setUserId function from the store
+  const [error, setError] = useState<string | null>(null);
+  const setUserId = useLocalStore((state) => state.setUserId);  // Get the setUserId function from the store
 
   const handleSubmit = async (userData: User) => {
     setError(null);
@@ -32,6 +33,7 @@ export default function SignUpLogic() {
         uid: user.uid
       });
 
+      alert('Sign-up successful!');
     } catch (error) {
       console.error('Failed to sign up:', error);
       setError('Failed to sign up. Please try again.');
@@ -43,9 +45,7 @@ export default function SignUpLogic() {
 //Frontend
   return (
       <section className='flex-center size-full max-sm:px-6 min-h-screen'>
-        <AuthForm type="sign-up" />
+        <AuthForm type="sign-up" onSubmit={handleSubmit} loading={loading} />
       </section>
   );
 };
-
-export default SignUp;
