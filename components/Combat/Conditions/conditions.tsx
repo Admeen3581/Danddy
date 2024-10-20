@@ -59,7 +59,6 @@ const PlayerConditions: React.FC = () => {
 
             {/* Dropdown to add new conditions */}
             <div>
-                <label htmlFor="conditionSelect">Add Condition: </label>
                 <select
                     id="conditionSelect"
                     value={newCondition}
