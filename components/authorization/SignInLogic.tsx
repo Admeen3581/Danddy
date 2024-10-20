@@ -1,13 +1,15 @@
 "use client";
 
+/*Everything here is from the previous files, feel free to remove Roman -Adam*/
+
+
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/firebaseConfig';
-import styles from './SignIn.module.css';
-import InputField from '../SignUp/InputField';
+import AuthForm from "./AuthForm";
 
-export default function SignIn() {
+export default function SignInLogic() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
@@ -32,29 +34,10 @@ export default function SignIn() {
     }
   };
 
+  //Frontend
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Sign In</h1>
-      {error && <p className={styles.error}>{error}</p>}
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <InputField
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={setEmail}
-          required
-        />
-        <InputField
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={setPassword}
-          required
-        />
-        <button type="submit" className={styles.button} disabled={loading}>
-          {loading ? 'Signing in...' : 'Sign In'}
-        </button>
-      </form>
-    </div>
+      <section className='flex-center size-full max-sm:px-6 min-h-screen'>
+        <AuthForm type="sign-in" />
+      </section>
   );
 }

@@ -1,16 +1,16 @@
 "use client";
 
+/*Everything here is from the previous files, feel free to remove Roman -Adam*/
+
 import { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { updateDatabaseRoute } from '@/utils/httpRequester';
 import { auth } from '@/firebaseConfig';
-import styles from './SignUp.module.css';
-import SignUpForm from './SignUpForm';
+import AuthForm from './AuthForm';
 import { User } from './User';
 import useLocalStore from '@/utils/store';
 
-const SignUp = () => {
-  const [error, setError] = useState<string | null>(null);
+export default function SignUpLogic() {
   const [loading, setLoading] = useState<boolean>(false);
   const setUserId = useLocalStore((state) => state.setUserId); // Get the setUserId function from the store
 
@@ -40,12 +40,11 @@ const SignUp = () => {
     }
   };
 
+//Frontend
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Sign Up</h1>
-      {error && <p className={styles.error}>{error}</p>}
-      <SignUpForm onSubmit={handleSubmit} loading={loading} />
-    </div>
+      <section className='flex-center size-full max-sm:px-6 min-h-screen'>
+        <AuthForm type="sign-up" />
+      </section>
   );
 };
 

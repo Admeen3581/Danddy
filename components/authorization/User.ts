@@ -7,8 +7,3 @@ export interface User {
   characters: string[];
   campaigns?: string[];
 }
-
-export interface SignUpFormProps {
-  onSubmit: (userData: User) => void;
-  loading: boolean;
-}
