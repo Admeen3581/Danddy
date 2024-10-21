@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './CharacterCreation.css';
-import { getDnDAPI } from '@/utils/httpRequester';
+import { getDnDAPI, updateDatabaseRoute } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
 
 const FinishingTouchesMenu = () => {
@@ -165,6 +165,7 @@ const FinishingTouchesMenu = () => {
 
         alert('Character Created!');
         setClassesJson(classesJson)
+        updateDatabaseRoute("characters/testerCharacterCreation", classesJson);
         console.log(classesJson)
     };
 
