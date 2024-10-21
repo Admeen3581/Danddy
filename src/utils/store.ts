@@ -3,11 +3,11 @@ import { Character, createBlankCharacterJSON } from './characterJsonFunctions';
 
 interface LocalState {
     roomId: String,
-    setRoomId: (roomId: String) => void
-    classesJson: Character
-    setClassesJson: (classesJson: Character) => void
-    userId: String;
-    setUserId: (userId: String) => void;
+    setRoomId: (roomId: String) => void,
+    classesJson: Character,
+    setClassesJson: (classesJson: Character) => void,
+    userId: String,
+    setUserId: (userId: String) => void,
 }
 
 const useLocalStore = create<LocalState>((set) => ({
