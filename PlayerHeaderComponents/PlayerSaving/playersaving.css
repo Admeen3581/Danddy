@@ -1,0 +1,20 @@
+body {
+   background-color: #1E1E1E;
+   font-family: 'Trebuchet MS', sans-serif;
+   font-weight: bold;
+   margin: 0; 
+}
+
+.PASavingBox {
+   background-color: #ECEEE8;  
+   color: #1E1E1E;            
+   padding: 20px;              
+   text-align: left;           
+   border-radius: 5px;         
+   position: fixed;
+   bottom: 225px;
+   left: 20px;
+   width: 46%;
+   height: 300px;
+   margin: 0;
+}
