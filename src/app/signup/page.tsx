@@ -1,11 +1,11 @@
 "use client"
-import SignUp from "../../../components/SignUp/SignUp";
+import SignUpLogic from "../../../components/authorization/SignUpLogic";
 
 export default function Home() {
 
   return (
-    <>
-    <SignUp/>
-    </>
+    <div className="flex-center size-full max-sm:px-6 min-h-screen">
+      <SignUpLogic/>
+    </div>
   );
 }
