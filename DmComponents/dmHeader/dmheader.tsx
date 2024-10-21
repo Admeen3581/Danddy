@@ -1,6 +1,8 @@
 import React from 'react';
 import './dmheader.css';
 import Link from 'next/link';
+import {MessagePopUp} from "@/components/messageDrawer";
+
 
 const DMHeader = () => {
   return (
@@ -10,9 +12,10 @@ const DMHeader = () => {
           <button className="dmmenu-button">☰</button>
           <div className="dmmenu-content">
             <ul>
-              <li><Link href="/combat">Combat</Link></li>
-              <li><Link href="/stats">Stats</Link></li>
-              <li><Link href="/inventory">Inventory</Link></li>
+              <li><Link href="/combat">Characters</Link></li>
+              <li><Link href="/stats">NPC</Link></li>
+              <li><Link href="/inventory">Enemy</Link></li>
+              <MessagePopUp/>
             </ul>
           </div>
         </div>
