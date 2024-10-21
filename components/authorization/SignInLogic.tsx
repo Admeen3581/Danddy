@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/firebaseConfig';
 import AuthForm from "./AuthForm";
+import useLocalStore from '@/utils/store'; // Import the Zustand store
 
 export default function SignInLogic() {
   const [email, setEmail] = useState<string>('');
@@ -15,6 +16,8 @@ export default function SignInLogic() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const setUserId = useLocalStore((state) => state.setUserId); // Get the setUserId function from the store
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,7 +26,12 @@ export default function SignInLogic() {
 
     try {
       // Sign in with Firebase authentication
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Save the uid locally
+      setUserId(user.uid);
+
       alert('Sign-in successful!');
       router.push('/'); // Redirect to the original page (home page in this case)
     } catch (error) {
