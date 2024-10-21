@@ -5,7 +5,7 @@ export default function Home() {
 
   return (
     <div className="flex-center size-full max-sm:px-6 min-h-screen">
-      <SignUpLogic/>
+        <SignUpLogic/>
     </div>
   );
 }
