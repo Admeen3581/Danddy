@@ -45,7 +45,7 @@ export default function SignUpLogic() {
 //Frontend
   return (
       <section className='flex-center size-full max-sm:px-6 min-h-screen'>
-        <AuthForm type="sign-up" onSubmit={handleSubmit} loading={loading} />
+        <AuthForm type="sign-up" />
       </section>
   );
 };
