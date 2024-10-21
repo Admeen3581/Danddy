@@ -21,3 +21,62 @@ body {
    box-sizing: border-box;  
    overflow: hidden;          
 }
+
+.headerBox {
+   position: relative;
+   text-align: center;
+   justify-content: center;
+   border-radius: 5px; 
+   width: 100%;
+   padding: 10px;
+   background-color: #ECEEE8;
+ }
+ 
+ .dmmenu-container {
+   position: absolute;
+   top: 10px; 
+   left: 10px;
+ }
+ 
+ .dmmenu-button {
+   font-size: 30px;
+   background-color: transparent;
+   border: none;
+   cursor: pointer;
+   padding: 10px;
+ }
+ 
+ .dmmenu-content {
+   position: fixed; 
+   top: 0;
+   left: 0;
+   height: 100vh;
+   width: 13vw; 
+   transform: translateX(-100%);
+   transition: transform 0.3s ease;
+   background-color: #041025cb;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   z-index: 100;
+ }
+ 
+ .dmmenu-content ul {
+   list-style-type: none;
+   padding: 0;
+   text-align: center;
+ }
+ 
+ .dmmenu-content ul li {
+   padding: 20px;
+ }
+ 
+ .dmmenu-content ul li a {
+   color: #ECEEE8;
+   font-size: 24px;
+   text-decoration: none;
+ }
+ 
+ .dmmenu-container:hover .dmmenu-content {
+   transform: translateX(0);
+ }
