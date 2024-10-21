@@ -1,5 +1,5 @@
 .footer {
-  background-color: #222;
+  background-color: #161314;
   color: white;
   padding: 1rem;
 }
@@ -14,6 +14,12 @@
 .footerLeft h4 {
   margin-bottom: 0.5rem;
 }
+
+.footerLeft p {
+  font-size: 0.875rem;
+  color: #aaa;
+}
+
 
 .footerRight p {
   font-size: 0.875rem;

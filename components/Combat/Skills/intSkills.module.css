@@ -1,0 +1,21 @@
+.stats {
+  padding: 20px;
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  width: 200px;
+  height: auto;
+  margin: auto;
+
+}
+
+.statsTitle {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+}
+
+.statsBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

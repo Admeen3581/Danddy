@@ -1,17 +1,23 @@
 import { create } from 'zustand';
+import { Character, createBlankCharacterJSON } from './characterJsonFunctions';
 
 interface LocalState {
-    roomId: string;
-    setRoomId: (roomId: string) => void;
-    userId: string;
-    setUserId: (userId: string) => void;
+    roomId: String,
+    setRoomId: (roomId: String) => void,
+    classesJson: Character,
+    setClassesJson: (classesJson: Character) => void,
+    userId: String,
+    setUserId: (userId: String) => void,
 }
 
 const useLocalStore = create<LocalState>((set) => ({
     roomId: "",
-    setRoomId: (roomId: string) => set({ roomId }),
+    setRoomId: (roomId: String) => set({ roomId }),
+    classesJson: createBlankCharacterJSON(),
+    setClassesJson: (classesJson: Character) => set({classesJson}),
     userId: "",
-    setUserId: (userId: string) => set({ userId }),
+    setUserId: (userId: String) => set({ userId }),
 }));
 
 export default useLocalStore;
+
