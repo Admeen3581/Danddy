@@ -1,14 +1,18 @@
+import useLocalStore from "@/utils/store";
 import Stat from "../../../CharSheetsCompon/CSStats/Stat";
 import savingStyles from './savingThrows.module.css'
+import { getModifier } from "@/utils/characterJsonFunctions";
 
 const SavingThrows = () => {
+  const { classesJson, setClassesJson } = useLocalStore();
+ 
   const stats = {
-    strength: "+7",
-    dex: "-1",
-    constitution: "+5",
-    int: "0",
-    wis: "+1",
-    cha: "-1"
+    strength: getModifier(classesJson.stats.strength.value),
+    dex: getModifier(classesJson.stats.dexterity.value),
+    constitution: getModifier(classesJson.stats.constitution.value),
+    int: getModifier(classesJson.stats.intelligence.value),
+    wis: getModifier(classesJson.stats.wisdom.value),
+    cha: getModifier(classesJson.stats.charisma.value)
   };
 
   return (
