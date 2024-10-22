@@ -5,7 +5,6 @@ interface Item {
   description: string;
 }
 
-// fake data
 const predefinedInventory: Item[] = [
   {name: 'Healing Potion', description: 'Restores 20 HP' },
   {name: 'Iron Sword', description: 'A sturdy iron sword' },
@@ -19,8 +18,8 @@ const Inventory = () => {
       <h1>Character Inventory</h1>
       <h2>Items</h2>
       <ul>
-        {predefinedInventory.map(item => (
-          <li>
+        {predefinedInventory.map((item, index) => (
+          <li key={index}>
             {item.name} - {item.description}
           </li>
         ))}
