@@ -3,7 +3,8 @@ import './diceroller.css';
 
 const DiceRoller: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [result, setResult] = useState<string | null>(null);
+  const [rolls, setRolls] = useState<{ sides: number; value: number }[]>([]);
+  const [total, setTotal] = useState<number | null>(null);
 
   const togglePopup = () => setIsOpen(!isOpen);
 
@@ -27,7 +28,8 @@ const DiceRoller: React.FC = () => {
 
   const rollDice = (sides: number) => {
     const rolledValue = Math.floor(Math.random() * sides) + 1;
-    setResult(`Rolled a D${sides}: ${rolledValue}`);
+    setRolls(prevRolls => [...prevRolls, { sides, value: rolledValue }]);
+    setTotal(prevTotal => (prevTotal || 0) + rolledValue);
   };
 
   const diceImages = [
@@ -38,6 +40,11 @@ const DiceRoller: React.FC = () => {
     { src: 'https://static.thenounproject.com/png/2453697-200.png', sides: 12, alt: 'D12' },
     { src: 'https://static.thenounproject.com/png/2453700-200.png', sides: 20, alt: 'D20' },
   ];
+
+  const resetRolls = () => {
+    setRolls([]);
+    setTotal(null);
+  };
 
   return (
     <>
@@ -58,10 +65,18 @@ const DiceRoller: React.FC = () => {
           ))}
         </div>
       )}
-      {result && (
+      {rolls.length > 0 && (
         <div className="result-popup">
-          {result}
-          <button onClick={() => setResult(null)}>Close</button>
+          <h2 style={{ color: 'black' }}>Rolls:</h2>
+          <ul>
+            {rolls.map((roll, index) => (
+              <li key={index}>
+                D{roll.sides}: {roll.value}
+              </li>
+            ))}
+          </ul>
+          {total !== null && <h1 style={{ color: 'red', fontSize: '2.5em' }}>{total}</h1>}
+          <button onClick={resetRolls}>Close</button>
         </div>
       )}
     </>
