@@ -5,14 +5,21 @@ import { getModifier } from "@/utils/characterJsonFunctions";
 
 const SavingThrows = () => {
   const { classesJson, setClassesJson } = useLocalStore();
+
+  var numStats = []
+
+  for(var stat in classesJson.stats){
+    if(classesJson.stats[stat].saving_throw) numStats.push(getModifier(classesJson.stats[stat].value) + 2)
+    else numStats.push(getModifier(classesJson.stats[stat].value))
+  }
  
   const stats = {
-    strength: getModifier(classesJson.stats.strength.value),
-    dex: getModifier(classesJson.stats.dexterity.value),
-    constitution: getModifier(classesJson.stats.constitution.value),
-    int: getModifier(classesJson.stats.intelligence.value),
-    wis: getModifier(classesJson.stats.wisdom.value),
-    cha: getModifier(classesJson.stats.charisma.value)
+    strength: (numStats[0] <= 0 ? numStats[0] : "+"+numStats[0]),
+    dex: (numStats[1] <= 0 ? numStats[1] : "+"+numStats[1]),
+    constitution: (numStats[2] <= 0 ? numStats[2] : "+"+numStats[2]),
+    int: (numStats[3] <= 0 ? numStats[3] : "+"+numStats[3]),
+    wis: (numStats[4] <= 0 ? numStats[4] : "+"+numStats[4]),
+    cha: (numStats[5] <= 0 ? numStats[5] : "+"+numStats[5])
   };
 
   return (

@@ -150,10 +150,6 @@ export function setSkillInJson(skill: String, character: Character, flag: boolea
   return
 }
 
-export function getModifier(abilityScore: number): String {
-  const mod = Math.floor((abilityScore - 10) / 2);
-  if(mod <= 0){
-    return ""+mod
-  }
-  return "+"+mod
+export function getModifier(abilityScore: number): number {
+  return Math.floor((abilityScore - 10) / 2);
 }
