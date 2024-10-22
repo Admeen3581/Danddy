@@ -126,12 +126,26 @@ export interface Health {
     };
   }
   
-// export function findSkillInJson(skill: String, character: Character): boolean{
-//   var formattedSkill = skill.toLowerCase().replace(" ", "_");
-//   for(var stat in character.stats){
-//     for(var prof in character.stats[stat].skills){
+export function findSkillInJson(skill: String, character: Character): boolean{
+  var formattedSkill = skill.toLowerCase().replace(" ", "_");
+  for(var stat in character.stats){
+    for(var skil in character.stats[stat].skills){
+      if(formattedSkill == skil)
+        return character.stats[stat].skills[skil]
+    }
+  }
+  return false
+}
 
-//     }
-//   }
-//   return true
-// }
+export function setSkillInJson(skill: String, character: Character, flag: boolean){
+  var formattedSkill = skill.toLowerCase().replace(" ", "_");
+  for(var stat in character.stats){
+    for(var skil in character.stats[stat].skills){
+      if(formattedSkill == skil){
+        character.stats[stat].skills[skil] = flag
+        return
+      }
+    }
+  }
+  return
+}
