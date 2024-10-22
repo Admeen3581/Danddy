@@ -6,8 +6,13 @@ const DiceRoller: React.FC = () => {
   const [rolls, setRolls] = useState<{ sides: number; value: number }[]>([]);
   const [total, setTotal] = useState<number | null>(null);
 
-  const togglePopup = () => setIsOpen(!isOpen);
-
+  const togglePopup = () => {
+    if (isOpen) {
+      resetRolls();
+    }
+    setIsOpen(!isOpen);
+  };
+  
   const handleClickOutside = (event: MouseEvent) => {
     const popup = document.getElementById('image-popup');
     const button = document.getElementById('popup-button');
@@ -15,6 +20,7 @@ const DiceRoller: React.FC = () => {
       popup && !popup.contains(event.target as Node) &&
       button && !button.contains(event.target as Node)
     ) {
+      resetRolls(); // Reset rolls when clicking outside
       setIsOpen(false);
     }
   };
@@ -48,9 +54,10 @@ const DiceRoller: React.FC = () => {
 
   return (
     <>
-      <div id="popup-button" className="popup-button" onClick={togglePopup}>
-        +
-      </div>
+    <div id="popup-button" className="popup-button" onClick={togglePopup}>
+    <img src="https://cdn-icons-png.flaticon.com/512/6545/6545894.png" alt="Open Dice Roller" style={{ width: '50px', height: '50px' }} />
+    </div>
+
       {isOpen && <div className="overlay" />}
       {isOpen && (
         <div id="image-popup" className="image-popup">
