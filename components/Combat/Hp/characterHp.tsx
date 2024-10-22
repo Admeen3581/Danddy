@@ -1,11 +1,17 @@
 'use client'
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './hp.css'; 
+import useLocalStore from '@/utils/store';
 
 const HPManager = () => {
-  const [currentHP, setCurrentHP] = useState(0); 
-  const maxHP = 100; 
+  const { classesJson, setClassesJson } = useLocalStore();
+  
+  const [currentHP, setCurrentHP] = useState(0);
+  useEffect(() => {
+    setCurrentHP(classesJson.health.current_health) 
+  }, [])
+  const maxHP = classesJson.health.max_health; 
 
   const addHealth = () => {
     setCurrentHP((prevHP) => Math.min(prevHP + 1, maxHP));
