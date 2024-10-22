@@ -1,3 +1,5 @@
+"use client"
+
 import SavingThrows from "../../../components/Combat/Saving/savingThrows";
 import SensesStats from "../../../components/Combat/Senses/sensesStats";
 import IntSkills from "../../../components/Combat/Skills/intSkills";
@@ -9,9 +11,18 @@ import StrSkills from "../../../components/Combat/Skills/strSkills";
 import HPManager from "../../../components/Combat/Hp/characterHp";
 import PlayerConditions from "../../../components/Combat/Conditions/conditions";
 import Inventory from "../../../components/Combat/Inventory/inventory";
+import useLocalStore from '@/utils/store';
+import { readDatabaseRoute } from "@/utils/httpRequester";
 
 
 const Combat = () => {
+  const { classesJson, setClassesJson } = useLocalStore();
+  readDatabaseRoute("characters/testerCharacterCreation")
+    .then((result) => {
+      setClassesJson(result)
+    })
+  
+
   return (
    <>
     <CharacterStats/>

@@ -158,7 +158,6 @@ const FinishingTouchesMenu = () => {
         classesJson.health.current_health = parseInt(hp);
         classesJson.health.max_health = classesJson.health.current_health;
         //Prof
-        console.log(selectedProficiencies)
         for(var prof in selectedProficiencies){
             setSkillInJson(selectedProficiencies[prof], classesJson, true)
         }
