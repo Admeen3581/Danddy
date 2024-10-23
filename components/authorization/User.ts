@@ -24,7 +24,7 @@ export const authFormSchema = (type: string) => z.object({
   }).regex(passwordPattern, {
     message: "Password must include at least 1 number & 1 special character."
   }),
-  confirmPass: type === 'sign-in' ? z.string().optional() : z.string().min(10, {
+  confirmPassword: type === 'sign-in' ? z.string().optional() : z.string().min(10, {
     message: "Password must be at least 10 characters."
   }).regex(passwordPattern, {
     message: "Password must include at least 1 number & 1 special character."

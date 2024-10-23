@@ -20,7 +20,6 @@ import {authFormSchema} from './User'
 export default function AuthForm({type} : {type : string}) {
 
   const [isLoading, setIsLoading] = useState(false);
-  const [user, setUser] = useState(null);
   const router = useRouter();
 
   const formSchema = authFormSchema(type);
@@ -46,7 +45,7 @@ export default function AuthForm({type} : {type : string}) {
           email: values.email!,
           username: values.username!,
           password: values.password!,
-          confirmPass: values.confirmPass!
+          confirmPass: values.confirmPassword!
         };
         //do something with userResponse
 
