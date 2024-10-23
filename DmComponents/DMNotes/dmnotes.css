@@ -1,11 +1,14 @@
 body {
    background-color: #1E1E1E;
-   font-family: Bebas Neue, sans-serif;
-      margin: 0; 
+   font-family: 'Trebuchet MS', sans-serif;
+   margin: 0; 
 }
 
 .NotesBox {
-   background-color: #ECEEE8;  
+   background-image: url('../scroll2.jpg');
+   background-size: cover;
+   background-repeat: no-repeat; 
+   background-position: center; 
    color: #1E1E1E;            
    padding: 20px;              
    text-align: left; 
@@ -19,18 +22,17 @@ body {
    height: 85%;
    margin: 0;
    overflow-y: auto;
-   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.21); 
 }
 
 .textarea-notes {
+   background-color: rgba(255, 255, 255, 0);
    margin-top: 20px;
    padding: 5px;
    font-size: 18px;
    width: 100%;
    height: 70%;
    border-radius: 5px;
-   border: 2px solid #1E1E1E;
    resize: none;
-   background-color: #ECEEE8;
    color: #1E1E1E;
 }

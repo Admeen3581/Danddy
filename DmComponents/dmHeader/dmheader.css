@@ -54,7 +54,7 @@ body {
    width: 13vw; 
    transform: translateX(-100%);
    transition: transform 0.3s ease;
-   background-color: #041025cb;
+   background-color: rgba(78, 9, 9, 0.809);
    display: flex;
    justify-content: center;
    align-items: center;
