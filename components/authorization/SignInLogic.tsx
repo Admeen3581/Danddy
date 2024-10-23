@@ -33,7 +33,7 @@ export default function SignInLogic() {
       setUserId(user.uid);
 
       alert('Sign-in successful!');
-      router.push('/'); // Redirect to the original page (home page in this case)
+      //router.push('/'); // Redirect to the original page (home page in this case)
     } catch (error) {
       console.error('Failed to sign in:', error);
       setError('Failed to sign in. Please try again.');
