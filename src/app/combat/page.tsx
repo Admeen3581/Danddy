@@ -34,16 +34,17 @@ const Combat = () => {
       </div>
 
     <div className="skills-section">
-      <WisSkills/>
+      <StrSkills/>
       <DexSkills/>
       <IntSkills/>
+      <WisSkills/>
       <ChaSkills/>
-      <StrSkills/>
     </div>
     
     <HPManager/>  
     <PlayerConditions/>
     <Inventory/>
+    <DiceRoller/>
     </div>
    </>
   );
