@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useRef } from 'react';
-import DMButtons from '../../../DmComponents/DMButtons/dmbuttons';
+import DMButtons from '../../../DmComponents/DMMaps/dmmaps';
 import DMNotes from '../../../DmComponents/DMNotes/dmnotes';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { createRoom, deleteDatabaseRoute, generateRoomCode, readDatabaseRoute, updateDatabaseRoute } from '@/utils/httpRequester';

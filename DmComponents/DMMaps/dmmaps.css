@@ -4,7 +4,7 @@ body {
       margin: 0; 
 }
 
-.ButtonsBox {
+.MapsBox {
    background-image: url('../scroll2.jpg');
    background-size: cover;
    background-repeat: no-repeat; 
@@ -19,31 +19,11 @@ body {
    font-weight: bold; 
    border-radius: 5px;         
    position: fixed;
-   bottom: 10px;
+   bottom: 300px;
    left: 20px;
    width: 31%;
-   height: 85%;
+   height: 40%;
    margin: 0;
    overflow-y: auto;
    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-}
-
-.button {
-   color: #6e6e6e;      
-   padding: 15px 24px;     
-   font-size: 20px;     
-   display: block;  
-   border: none;   
-   border-radius: 5px;      
-   cursor: pointer;         
-   transition: color 0.3s ease; 
-   text-decoration: none;
-}
-
-.ButtonsBox .button-container {
-   text-align: left;
-}
-
-.button:hover {
-   color: #000000;
 }
