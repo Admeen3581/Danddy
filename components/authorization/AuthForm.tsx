@@ -34,7 +34,7 @@ export default function AuthForm({type} : {type : string}) {
   // Submission handler
   const onSubmit = (values: z.infer<typeof formSchema>) =>
   {
-    console.log("its submitting");
+    console.log("its submitting");//test log -- remove before prod -- security issue
     //Authenticate user here
     setIsLoading(true);
     try
