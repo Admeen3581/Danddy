@@ -13,6 +13,7 @@ import PlayerConditions from "../../../components/Combat/Conditions/conditions";
 import Inventory from "../../../components/Combat/Inventory/inventory";
 import useLocalStore from '@/utils/store';
 import { readDatabaseRoute } from "@/utils/httpRequester";
+import DiceRoller from "../../../components/Combat/DiceRoller/diceroller";
 
 
 const Combat = () => {
@@ -36,6 +37,7 @@ const Combat = () => {
     <HPManager/>
     <PlayerConditions/>
     <Inventory/>
+    <DiceRoller/>
    </>
   );
 };
