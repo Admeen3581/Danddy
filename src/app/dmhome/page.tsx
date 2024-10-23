@@ -1,12 +1,13 @@
 "use client"
 
 import React, { useEffect, useRef } from 'react';
-import DMButtons from '../../../DmComponents/DMMaps/dmmaps';
 import DMNotes from '../../../DmComponents/DMNotes/dmnotes';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { createRoom, deleteDatabaseRoute, generateRoomCode, readDatabaseRoute, updateDatabaseRoute } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
-import DMHeader from '../../../DmComponents/dmHeader/dmheader';
+import DMHeader from '../../../DmComponents/DMHeader/dmheader';
+import DMMaps from '../../../DmComponents/DMMaps/dmmaps';
+import DMActivePlayers from '../../../DmComponents/DMActivePlayers/dmactive';
 import {MessageRecievePopUp} from "@/components/messageRecievedPopUp";
 
 const DMHome = () => {
@@ -42,7 +43,8 @@ const DMHome = () => {
   return (
    <>
    <DMHeader />
-   <DMButtons />
+   <DMActivePlayers />
+   <DMMaps />
    <DMNotes />
      <MessageRecievePopUp/>
    </>
