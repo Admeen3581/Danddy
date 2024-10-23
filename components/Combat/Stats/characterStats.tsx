@@ -1,15 +1,18 @@
 import React from 'react';
 import Stat from '../../../CharSheetsCompon/CSStats/Stat';
 import styles from './characterStats.module.css';
+import useLocalStore from '@/utils/store';
 
 const CharacterStats = () => {
+  const { classesJson, setClassesJson } = useLocalStore();
+
   const stats = {
-    strength: 5000,
-    dex: 30,
-    constitution: 20,
-    int: 100,
-    wis: 50,
-    rizz: 999
+    strength: classesJson.stats.strength.value,
+    dex: classesJson.stats.dexterity.value,
+    constitution: classesJson.stats.constitution.value,
+    int: classesJson.stats.intelligence.value,
+    wis: classesJson.stats.wisdom.value,
+    rizz: classesJson.stats.charisma.value
   };
 
   return (

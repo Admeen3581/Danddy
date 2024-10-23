@@ -1,11 +1,14 @@
+import useLocalStore from "@/utils/store";
 import Stat from "../../../CharSheetsCompon/CSStats/Stat";
 import styles from './sensesStats.module.css'
 
 const SensesStats = () => {
+  const { classesJson, setClassesJson } = useLocalStore();
+  
   const stats = {
-    perception: 11,
-    investigation: 10,
-    insight: 10
+    perception: classesJson.stats.wisdom.value,
+    investigation: classesJson.stats.intelligence.value,
+    insight: classesJson.stats.wisdom.value
   };
 
   return (

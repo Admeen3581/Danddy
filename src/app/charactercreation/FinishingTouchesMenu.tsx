@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './CharacterCreation.css';
-import { getDnDAPI } from '@/utils/httpRequester';
+import { getDnDAPI, updateDatabaseRoute } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
+import { findSkillInJson, setSkillInJson } from '@/utils/characterJsonFunctions';
 
 const FinishingTouchesMenu = () => {
     const { classesJson, setClassesJson } = useLocalStore();
@@ -157,7 +158,9 @@ const FinishingTouchesMenu = () => {
         classesJson.health.current_health = parseInt(hp);
         classesJson.health.max_health = classesJson.health.current_health;
         //Prof
-        console.log(selectedProficiencies)
+        for(var prof in selectedProficiencies){
+            setSkillInJson(selectedProficiencies[prof], classesJson, true)
+        }
         //Invetory
         classesJson.inventory = selectedItems
         //Spell
@@ -165,6 +168,7 @@ const FinishingTouchesMenu = () => {
 
         alert('Character Created!');
         setClassesJson(classesJson)
+        updateDatabaseRoute("characters/testerCharacterCreation", classesJson);
         console.log(classesJson)
     };
 

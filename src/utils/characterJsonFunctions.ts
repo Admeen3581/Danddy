@@ -69,12 +69,18 @@ export interface Health {
         strength: {
           value: 0,
           saving_throw: false,
-          skills: {},
+          skills: {
+            athletics: false
+          }
         },
         dexterity: {
           value: 0,
           saving_throw: false,
-          skills: {},
+          skills: {
+            acrobatics: false,
+            sleight_of_hand: false,
+            stealth: false
+          }
         },
         constitution: {
           value: 0,
@@ -84,17 +90,34 @@ export interface Health {
         intelligence: {
           value: 0,
           saving_throw: false,
-          skills: {},
+          skills: {
+            arcana: false,
+            history: false,
+            investigation: false,
+            nature: false,
+            religion: false
+          }
         },
         wisdom: {
           value: 0,
           saving_throw: false,
-          skills: {},
+          skills: {
+            animal_handling: false,
+            insight: false,
+            medicine: false,
+            perception: false,
+            survival: false
+          }
         },
         charisma: {
           value: 0,
           saving_throw: false,
-          skills: {},
+          skills: {
+            deception: false,
+            intimidation: false,
+            performance: false,
+            persuasion: false
+          }
         },
       },
       inventory: [],
@@ -103,3 +126,30 @@ export interface Health {
     };
   }
   
+export function findSkillInJson(skill: String, character: Character): boolean{
+  var formattedSkill = skill.toLowerCase().replace(" ", "_");
+  for(var stat in character.stats){
+    for(var skil in character.stats[stat].skills){
+      if(formattedSkill == skil)
+        return character.stats[stat].skills[skil]
+    }
+  }
+  return false
+}
+
+export function setSkillInJson(skill: String, character: Character, flag: boolean){
+  var formattedSkill = skill.toLowerCase().replace(" ", "_");
+  for(var stat in character.stats){
+    for(var skil in character.stats[stat].skills){
+      if(formattedSkill == skil){
+        character.stats[stat].skills[skil] = flag
+        return
+      }
+    }
+  }
+  return
+}
+
+export function getModifier(abilityScore: number): number {
+  return Math.floor((abilityScore - 10) / 2);
+}
