@@ -14,7 +14,7 @@ import Inventory from "../../../components/Combat/Inventory/inventory";
 import useLocalStore from '@/utils/store';
 import { readDatabaseRoute } from "@/utils/httpRequester";
 import DiceRoller from "../../../components/Combat/DiceRoller/diceroller";
-
+import './combatComp.css'
 
 const Combat = () => {
   const { classesJson, setClassesJson } = useLocalStore();
@@ -27,17 +27,24 @@ const Combat = () => {
   return (
    <>
     <CharacterStats/>
-    <SavingThrows/>
-    <SensesStats/>
-    <WisSkills/>
-    <DexSkills/>
-    <IntSkills/>
-    <ChaSkills/>
-    <StrSkills/>
-    <HPManager/>
+    <div className="combats-container">
+      <div className="throws">
+        <SavingThrows/>
+        <SensesStats/>
+      </div>
+
+    <div className="skills-section">
+      <WisSkills/>
+      <DexSkills/>
+      <IntSkills/>
+      <ChaSkills/>
+      <StrSkills/>
+    </div>
+    
+    <HPManager/>  
     <PlayerConditions/>
     <Inventory/>
-    <DiceRoller/>
+    </div>
    </>
   );
 };
