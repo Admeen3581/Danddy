@@ -29,4 +29,18 @@ export const authFormSchema = (type: string) => z.object({
   }).regex(passwordPattern, {
     message: "Password must include at least 1 number & 1 special character."
   }),
+}).superRefine(({ password, confirmPassword }, context) => {
+  if (password !== confirmPassword && type === 'sign-up')
+  {
+    context.addIssue({
+      path: ['confirmPassword'],
+      code: 'custom',
+      message: 'Passwords must match'
+    });
+    context.addIssue({
+      path: ['password'],
+      code: 'custom',
+      message: 'Passwords must match'
+    });
+  }
 })
