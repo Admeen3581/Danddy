@@ -4,7 +4,7 @@
 //Date: 10/17/24
 //Danddy - SCRUM-106_2
 
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import InputField from './InputField';
 import {Form} from "@/components/ui/form";
 import {Button} from "@/components/ui/button";
@@ -12,25 +12,66 @@ import {useRouter} from "next/navigation";
 import Link from "next/link";
 import {Loader2} from "lucide-react";
 import {useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod"
+import {z} from "zod"
+import {authFormSchema} from './User'
+
 
 export default function AuthForm({type} : {type : string}) {
 
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const form = useForm();
+
+  const formSchema = authFormSchema(type);
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  })
 
   // Submission handler
-  const onSubmit = async () =>
+  const onSubmit = (values: z.infer<typeof formSchema>) =>
   {
-    setIsLoading(true);
-
+    console.log("its submitting");
     //Authenticate user here
-    const response = true;
-
-    setIsLoading(false);
-    if(response)
+    setIsLoading(true);
+    try
     {
-      router.push("/");
+      if(type === 'sign-up')
+      {
+        const newUserResponse = {
+          email: values.email!,
+          username: values.username!,
+          password: values.password!,
+          confirmPass: values.confirmPassword!
+        };
+        //do something with userResponse
+
+        if(newUserResponse)
+          router.push('./');
+      }
+      if(type === 'sign-in')
+      {
+        const currUserResponse = {
+          email: values.email!,
+          password: values.password!
+        };
+        //do something with userResponse
+
+        if(currUserResponse)
+          router.push('./');
+      }
+    }
+    catch(error)//you are able to catch a user already exists error to alert the screen.
+    {
+      //show alert
+    }
+    finally
+    {
+      console.log(values)
+      setIsLoading(false);
     }
   }
 
