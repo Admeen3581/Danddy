@@ -27,6 +27,7 @@ const DMButtons = () => {
               <button className='button'>Enemy</button>
               <MessagePopUp/>
               <button onClick={openMessageButtonState}>Direct Message</button>
+              <!--implement shadCn component here-->
           </div>
        </div>
     </div>
