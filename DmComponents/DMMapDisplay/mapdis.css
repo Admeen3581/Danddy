@@ -1,0 +1,32 @@
+body {
+   background-color: #1E1E1E;
+   font-family: 'Trebuchet MS', sans-serif;
+      margin: 0; 
+}
+
+/* Parent container */
+.container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+}
+
+/* Centered box */
+.MapsDis {
+   background-image: url('../scroll2.jpg');
+   background-size: cover;
+   background-repeat: no-repeat; 
+   background-position: center; 
+   width: 31%;
+   height: 40%;
+   color: #1E1E1E;            
+   padding: 20px;              
+   text-align: center; 
+   font-size: 24px;           
+   font-weight: bold; 
+   border-radius: 5px;         
+   margin: 0;
+   overflow-y: auto;
+   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
