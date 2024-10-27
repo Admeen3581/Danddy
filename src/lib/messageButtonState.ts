@@ -4,9 +4,10 @@
 
 import {create} from 'zustand';
 
-export const messageButtonState = create((set) => ({
+const messageButtonState = create((set) => ({
     enabled: false,
     setEnabled: (value) => set({ enabled: value }),
 }));
 
 //possible bug -- I may need to 'use client'
+export default messageButtonState;
