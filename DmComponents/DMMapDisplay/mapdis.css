@@ -4,13 +4,6 @@ body {
       margin: 0; 
 }
 
-.container {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   height: 100vh;
-}
-
 .MapsDis {
    background-image: url('../scroll2.jpg');
    background-size: cover;
@@ -18,9 +11,9 @@ body {
    background-position: center;  
    
    position: fixed;
+   transform: translateX(-50%);
    top: 20%; 
    left: 50%;
-   transform: translateX(-50%);
    width: 31%;
    height: 40%;
    color: #1E1E1E;            

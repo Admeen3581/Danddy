@@ -1,14 +1,12 @@
 import './mapdis.css';
 
-const DMButtons = () => {
+const MapDis = () => {
 
   return (
-   <div className="container">
-      <div className="MapsDis">
-         <h1>Maps:</h1>
-      </div>
-    </div>
+   <div className="MapsDis">
+      <h1>Maps Display:</h1>
+   </div>
   );
 };
 
-export default DMButtons;
+export default MapDis;

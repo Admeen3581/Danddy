@@ -6,7 +6,8 @@ body {
 
 .headerBox {
    background-color: #ECEEE8;  
-   color: #1E1E1E;            
+   color: #1E1E1E; 
+   position: fixed;           
    padding: 0 20px;         
    text-align: center;  
    font-size: 24px;           
