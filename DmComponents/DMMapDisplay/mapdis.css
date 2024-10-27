@@ -4,7 +4,6 @@ body {
       margin: 0; 
 }
 
-/* Parent container */
 .container {
    display: flex;
    justify-content: center;
@@ -12,12 +11,16 @@ body {
    height: 100vh;
 }
 
-/* Centered box */
 .MapsDis {
    background-image: url('../scroll2.jpg');
    background-size: cover;
    background-repeat: no-repeat; 
-   background-position: center; 
+   background-position: center;  
+   
+   position: fixed;
+   top: 20%; 
+   left: 50%;
+   transform: translateX(-50%);
    width: 31%;
    height: 40%;
    color: #1E1E1E;            
@@ -27,6 +30,7 @@ body {
    font-weight: bold; 
    border-radius: 5px;         
    margin: 0;
-   overflow-y: auto;
+   overflow: hidden;
    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
+
