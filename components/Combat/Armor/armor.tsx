@@ -5,7 +5,7 @@ const Armor = () => {
   
   return (
     <div className={styles.stats}>
-      <h2 className={styles.statsTitle}>AC & Armor</h2>
+      <h2 className={styles.statsTitle}>AC & Initiative</h2>
       <div className={styles.statsBox}>
         <Stat label="Armor Class" value="16" />
         <Stat label="Initiative" value="+1" />
