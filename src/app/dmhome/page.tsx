@@ -1,5 +1,6 @@
 "use client"
 
+import './dm.css';
 import React, { useEffect, useRef } from 'react';
 import DMNotes from '../../../DmComponents/DMNotes/dmnotes';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -44,10 +45,12 @@ const DMHome = () => {
   return (
    <>
    <DMHeader />
-   <DMActivePlayers />
-   <DMMaps />
+   <div className="containerDM">
+      <DMActivePlayers />
+      <DMMaps />
+      <DMMapDisplay />
+   </div>
    <DMNotes />
-   <DMMapDisplay />
      <MessageRecievePopUp/>
    </>
   );
