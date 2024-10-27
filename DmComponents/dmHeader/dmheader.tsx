@@ -12,8 +12,8 @@ const DMHeader = () => {
           <div className="dmmenu-content">
             <ul>
               <li><Link href="/combat">Characters</Link></li>
-              <li><Link href="/stats">NPC</Link></li>
-              <li><Link href="/inventory">Enemy</Link></li>
+              <li><Link href="/NPC">NPC</Link></li>
+              <li><Link href="/Enemy">Enemy</Link></li>
               <MessagePopUp/>
             </ul>
           </div>
