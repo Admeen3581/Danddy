@@ -15,6 +15,7 @@ import useLocalStore from '@/utils/store';
 import { readDatabaseRoute } from "@/utils/httpRequester";
 import DiceRoller from "../../../components/Combat/DiceRoller/diceroller";
 import './combatComp.css'
+import Armor from "../../../components/Combat/Armor/armor";
 
 const Combat = () => {
   const { classesJson, setClassesJson } = useLocalStore();
@@ -28,6 +29,7 @@ const Combat = () => {
    <>
     <div className="top-container">
     <HPManager/>  
+    <Armor/>
     <PlayerConditions/>
     </div>
     <CharacterStats/>
