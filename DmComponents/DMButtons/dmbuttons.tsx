@@ -1,11 +1,12 @@
 import './dmbuttons.css';
 import Link from 'next/link';
 import {MessagePopUp} from "@/components/messageDrawer";
-import {messageButtonState} from "@/lib/messageButtonState";
+import messageButtonState from "@/lib/messageButtonState";
+
 
 const DMButtons = () => {
 
-    const [enabled, setEnabled] = messageButtonState();
+    const {enabled, setEnabled} = messageButtonState();
 
     const openMessageButtonState = () => {
         setEnabled(true);
@@ -26,8 +27,7 @@ const DMButtons = () => {
               <button className='button'>NPC</button>
               <button className='button'>Enemy</button>
               <MessagePopUp/>
-              <button onClick={openMessageButtonState}>Direct Message</button>
-              <!--implement shadCn component here-->
+              <button className='button' onClick={openMessageButtonState}>Direct Message</button>
           </div>
        </div>
     </div>
