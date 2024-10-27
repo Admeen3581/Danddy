@@ -8,6 +8,7 @@ import useLocalStore from '@/utils/store';
 import DMHeader from '../../../DmComponents/DMHeader/dmheader';
 import DMMaps from '../../../DmComponents/DMMaps/dmmaps';
 import DMActivePlayers from '../../../DmComponents/DMActivePlayers/dmactive';
+import DMMapDisplay from '../../../DmComponents/DMMapDisplay/mapdis';
 import {MessageRecievePopUp} from "@/components/messageRecievedPopUp";
 
 const DMHome = () => {
@@ -46,6 +47,7 @@ const DMHome = () => {
    <DMActivePlayers />
    <DMMaps />
    <DMNotes />
+   <DMMapDisplay />
      <MessageRecievePopUp/>
    </>
   );
