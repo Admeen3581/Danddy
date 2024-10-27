@@ -26,6 +26,10 @@ const Combat = () => {
 
   return (
    <>
+    <div className="top-container">
+    <HPManager/>  
+    <PlayerConditions/>
+    </div>
     <CharacterStats/>
     <div className="combats-container">
       <div className="throws">
@@ -41,8 +45,6 @@ const Combat = () => {
       <ChaSkills/>
     </div>
     
-    <HPManager/>  
-    <PlayerConditions/>
     <Inventory/>
     <DiceRoller/>
     </div>
