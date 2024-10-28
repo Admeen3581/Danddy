@@ -7,7 +7,7 @@ import {DirectMessagePopup} from "@/components/directMessagePopup";
 
 const DMButtons = () => {
 
-    //'MessagePopUp' & 'DirectMessagePopUp' have their own button trigger
+    //'MessagePopUp' has its own button trigger
 
   return (
     <div className="dmhome-section">
@@ -20,7 +20,7 @@ const DMButtons = () => {
               <button className='button'>NPC</button>
               <button className='button'>Enemy</button>
               <MessagePopUp/>
-              <DirectMessagePopup/>
+              <DirectMessagePopup style={'button'}/>
           </div>
        </div>
     </div>
