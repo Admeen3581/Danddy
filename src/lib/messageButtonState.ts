@@ -1,6 +1,8 @@
-//@Author Adam Long
-//@Date 10/26/2024
-//@Project SCRUM-112
+/**
+ * @Author Adam Long
+ * @Date 10/27/2024
+ * @Project SCRUM-113
+ */
 
 import {create} from 'zustand';
 
