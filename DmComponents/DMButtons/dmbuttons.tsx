@@ -2,19 +2,12 @@ import './dmbuttons.css';
 import Link from 'next/link';
 import {MessagePopUp} from "@/components/messageDrawer";
 import messageButtonState from "@/lib/messageButtonState";
+import {DirectMessagePopup} from "@/components/directMessagePopup";
 
 
 const DMButtons = () => {
 
-    const {enabled, setEnabled} = messageButtonState();
-
-    const openMessageButtonState = () => {
-        setEnabled(true);
-    }
-
-    const closeMessageButtonState = () => {
-        setEnabled(false);
-    }
+    //'MessagePopUp' & 'DirectMessagePopUp' have their own button trigger
 
   return (
     <div className="dmhome-section">
@@ -27,7 +20,7 @@ const DMButtons = () => {
               <button className='button'>NPC</button>
               <button className='button'>Enemy</button>
               <MessagePopUp/>
-              <button className='button' onClick={openMessageButtonState}>Direct Message</button>
+              <DirectMessagePopup/>
           </div>
        </div>
     </div>
