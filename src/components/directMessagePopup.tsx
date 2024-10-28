@@ -13,13 +13,13 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet"
 
-export function DirectMessagePopup()
+export function DirectMessagePopup({style})
 {
     //backend elements as required.
 
     return (
         <Sheet>
-            <SheetTrigger className='button'>Direct Message</SheetTrigger>
+            <SheetTrigger className={style}>Direct Message</SheetTrigger>
             <SheetContent side={'right'}>
                 <SheetHeader>
                     <SheetTitle>Direct Message</SheetTitle>
