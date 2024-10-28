@@ -13,22 +13,24 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet"
 
-export function directMessagePopup()
+export function DirectMessagePopup()
 {
     //backend elements as required.
 
     return (
-        <Sheet key={'right'}>
-            <SheetContent>
+        <Sheet>
+            <SheetTrigger className='button'>Direct Message</SheetTrigger>
+            <SheetContent side={'right'}>
                 <SheetHeader>
-                    <SheetTitle>Are you absolutely sure?</SheetTitle>
+                    <SheetTitle>Direct Message</SheetTitle>
                     <SheetDescription>
-                        This action cannot be undone. This will permanently delete your account
-                        and remove your data from our servers.
+                        Talk to your friends in secrecy...
                     </SheetDescription>
                 </SheetHeader>
+                [MAIN BODY]---
+
             </SheetContent>
         </Sheet>
 
-    );
+    )
 }
