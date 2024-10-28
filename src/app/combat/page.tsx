@@ -16,6 +16,7 @@ import { readDatabaseRoute } from "@/utils/httpRequester";
 import DiceRoller from "../../../components/Combat/DiceRoller/diceroller";
 import './combatComp.css'
 import Armor from "../../../components/Combat/Armor/armor";
+import Actions from "../../../components/Combat/Actions/actions";
 
 const Combat = () => {
   const { classesJson, setClassesJson } = useLocalStore();
@@ -48,6 +49,7 @@ const Combat = () => {
     </div>
     
     <Inventory/>
+    <Actions/>
     <DiceRoller/>
     </div>
    </>
