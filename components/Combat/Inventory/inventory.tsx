@@ -1,30 +1,29 @@
+import { Character } from "@/utils/characterJsonFunctions";
+import useLocalStore from "@/utils/store";
 import './inventory.css'
 
-interface Item {
-  name: string;
-  description: string;
-}
-
-const predefinedInventory: Item[] = [
-  {name: 'Healing Potion', description: 'Restores 20 HP' },
-  {name: 'Iron Sword', description: 'A sturdy iron sword' },
-  {name: 'Leather Armor', description: 'Provides basic protection' },
-];
-
 const Inventory = () => {
-  
+  const { classesJson, setClassesJson } = useLocalStore();
+
+  // Extract the inventory field from classesJson and map it to displayable items
+  const inventory = (classesJson as Character).inventory.map((item: string) => {
+    return {
+      name: item,
+      description: ""  // Placeholder, adjust as needed
+    };
+  });
+
   return (
     <div className="inventory-container">
       <h1>Character Inventory</h1>
       <h2>Items</h2>
       <ul>
-        {predefinedInventory.map((item, index) => (
+        {inventory.map((item, index) => (
           <li key={index}>
             {item.name} - {item.description}
           </li>
         ))}
       </ul>
-
     </div>
   );
 };
