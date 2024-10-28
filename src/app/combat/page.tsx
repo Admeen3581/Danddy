@@ -48,8 +48,10 @@ const Combat = () => {
       <ChaSkills/>
     </div>
     
-    <Inventory/>
-    <Actions/>
+    <div className="actions">
+      <Inventory/>
+      <Actions/>
+    </div>
     <DiceRoller/>
     </div>
    </>
