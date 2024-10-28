@@ -1,0 +1,24 @@
+//@Author Adam Long
+//@Date 10/26/2024
+//@Project SCRUM-114
+
+Title or name of research/training:
+    Auth Respective messaging research
+
+Why you are doing it.
+    Team has no knowledge of how to develop a user-to-user messaging system; therefore, I will be researching & developing the end product. We need a
+    messaging system to allow users to privately communicate.
+
+What you expect to learn/do.   Be specific by identifying what code/modules will be affected by the research/training.
+    I expect to learn and implement message history & logging with the database (SCRUM-35), create a UI component using shadCn (SCRUM-113), place new
+    buttons on the existing UI (SCRUM-111 & SCRUM-112), build messaging receiving (SCRUM-115), build message sending (SCRUM-116), and use notifications
+    (SCRUM-33).
+
+What do you expect to do with it, including any code you expect to write.  Be specific.  For example, "Writing the UI" is not sufficient. "Writing the
+Login class" is.
+    I will need to write a UI component using the shadCn library that will hold the messaging system pop-up. I will need to modify 'dmhome/page.tsx' and
+    'playerhome/page.tsx' to add a button to trigger the popup component. I will add database collections & documents to holster the message system & log
+    the data. I will need to create a custom component to place a notification badge on the buttons mentioned above.
+
+What task(s) in Jira represent the work you will do that was/is dependent on the research/training.
+    SCRUM-33, SCRUM-35, SCRUM-111, SCRUM-112, SCRUM-113, SCRUM-115, SCRUM-116.
