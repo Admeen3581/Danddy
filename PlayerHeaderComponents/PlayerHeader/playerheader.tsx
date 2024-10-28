@@ -2,10 +2,11 @@ import React from 'react';
 import './playerheader.css';
 import Link from 'next/link';
 import messageButtonState from "@/lib/messageButtonState";
+import {DirectMessagePopup} from "@/components/directMessagePopup";
 
 const PlayerHeader = () => {
 
-  const {enabled, setEnabled} = messageButtonState();
+  const {setEnabled} = messageButtonState();
 
   const openMessageButtonState = () => {
     setEnabled(true);
@@ -25,7 +26,7 @@ const PlayerHeader = () => {
               <li><Link href="/combat">Combat</Link></li>
               <li><Link href="/stats">Stats</Link></li>
               <li><Link href="/inventory">Inventory</Link></li>
-              <li><button className='msgButton' onClick={openMessageButtonState}>Direct Message</button></li>
+              <li><DirectMessagePopup style={'msgButton'}/></li>
             </ul>
           </div>
         </div>
@@ -37,3 +38,5 @@ const PlayerHeader = () => {
 };
 
 export default PlayerHeader;
+
+//<button className='msgButton' onClick={openMessageButtonState}>Direct Message</button>
