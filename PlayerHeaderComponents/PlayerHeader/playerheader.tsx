@@ -1,20 +1,9 @@
 import React from 'react';
 import './playerheader.css';
 import Link from 'next/link';
-import messageButtonState from "@/lib/messageButtonState";
 import {DirectMessagePopup} from "@/components/directMessagePopup";
 
 const PlayerHeader = () => {
-
-  const {setEnabled} = messageButtonState();
-
-  const openMessageButtonState = () => {
-    setEnabled(true);
-  }
-
-  const closeMessageButtonState = () => {
-    setEnabled(false);
-  }
 
   return (
     <div className="PAHome-section">

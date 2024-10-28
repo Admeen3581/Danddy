@@ -1,7 +1,6 @@
 import './dmbuttons.css';
 import Link from 'next/link';
 import {MessagePopUp} from "@/components/messageDrawer";
-import messageButtonState from "@/lib/messageButtonState";
 import {DirectMessagePopup} from "@/components/directMessagePopup";
 
 
