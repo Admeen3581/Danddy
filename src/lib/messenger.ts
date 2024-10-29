@@ -4,7 +4,6 @@
 
 import {initializeApp} from "firebase/app";
 import {getFirestore} from "firebase/firestore";
-import messageButtonState from "@/lib/messageButtonState";
 
 export function initFirestore()
 {
