@@ -8,6 +8,8 @@ const HPManager = () => {
   const { classesJson, setClassesJson } = useLocalStore();
   
   const [currentHP, setCurrentHP] = useState(0);
+  const [isDead, setIsDead] = useState(false);
+
   useEffect(() => {
     setCurrentHP(classesJson.health.current_health) 
   }, [])
@@ -18,7 +20,14 @@ const HPManager = () => {
   };
 
   const subtractHealth = () => {
-    setCurrentHP((prevHP) => prevHP - 1);
+    setCurrentHP((prevHP) => {
+      const newHP = prevHP - 1;
+      if (newHP <= 0) {
+        setIsDead(true); 
+        return 0; 
+      }
+      return newHP;
+    });
   };
 
   return (
