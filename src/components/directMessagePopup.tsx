@@ -16,6 +16,11 @@ import {
 export function DirectMessagePopup({style})
 {
     //backend elements as required.
+    const messages = [
+        { id: 1, user: 'Alice', content: 'Hey there!' },
+        { id: 2, user: 'Bob', content: 'How are you?' },
+        { id: 3, user: 'Alice', content: 'Doing great, thanks!' },
+    ];//temp
 
     return (
         <Sheet>
@@ -27,7 +32,14 @@ export function DirectMessagePopup({style})
                         Talk to your friends in secrecy...
                     </SheetDescription>
                 </SheetHeader>
-                [MAIN BODY]---
+                <div className="messages-container">
+                    {messages.map(message => (
+                        <div key={message.id} className={`message ${message.user === 'Alice' ? 'outgoing' : 'incoming'}`}>
+                            <span className="user">{message.user}</span>
+                            <p className="content">{message.content}</p>
+                        </div>
+                    ))}
+                </div>
 
             </SheetContent>
         </Sheet>
