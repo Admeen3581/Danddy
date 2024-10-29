@@ -1,6 +1,8 @@
-//@Author Adam Long
-//@Date 10/27/2024
-//@Project SCRUM-113
+/**
+ * @Author Adam Long
+ * @Date 10/29/24
+ * @Project SCRUM-113 & SCRUM-157
+ */
 
 'use client'
 
@@ -11,7 +13,8 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger,
-} from "@/components/ui/sheet"
+} from "@/components/ui/sheet";
+import './directMessagePopup.css';
 
 export function DirectMessagePopup({style})
 {
@@ -40,7 +43,6 @@ export function DirectMessagePopup({style})
                         </div>
                     ))}
                 </div>
-
             </SheetContent>
         </Sheet>
 
