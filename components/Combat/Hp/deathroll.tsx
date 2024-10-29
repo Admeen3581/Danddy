@@ -5,7 +5,7 @@ interface DeathComponentProps {
 }
 
 const DeathComponent: React.FC<DeathComponentProps> = ({ onReset }) => {
-  const [deathCount, setDeathCount] = useState(1);
+  const [deathCount, setDeathCount] = useState(0);
   const [saveCount, setSaveCount] = useState(0);
 
   const handleSave = () => {
@@ -18,9 +18,13 @@ const DeathComponent: React.FC<DeathComponentProps> = ({ onReset }) => {
     });
   };
 
-  const handleNewDeath = () => {
+  const handleDeath = () => {
     setDeathCount((prevCount) => prevCount + 1);
   };
+
+  if (deathCount === 3) {
+    return <h1> You're character has died</h1>
+  }
 
   return (
     <div>
@@ -32,8 +36,8 @@ const DeathComponent: React.FC<DeathComponentProps> = ({ onReset }) => {
       <button onClick={handleSave} style={{ margin: '5px' }}>
         Save
       </button>
-      <button onClick={handleNewDeath} style={{ margin: '5px' }}>
-        Count Another Death
+      <button onClick={handleDeath} style={{ margin: '5px' }}>
+        Death
       </button>
     </div>
   );
