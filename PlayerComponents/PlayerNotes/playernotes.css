@@ -1,26 +1,16 @@
-body {
-   background-color: #1E1E1E;
-   font-family: 'Trebuchet MS', sans-serif;
-   margin: 0; 
-}
-
 .PANotesBox {
-   background-image: url('../scroll2.jpg');
-   background-size: cover;
-   background-repeat: no-repeat; 
-   background-position: center; 
-   color: #1E1E1E;            
-   padding: 20px;              
-   text-align: left; 
-   font-size: 24px;           
-   font-weight: bold; 
-   border-radius: 5px;         
+   background: url('../scroll2.jpg') center / cover no-repeat;
+   color: #1E1E1E;
+   padding: 20px;
+   text-align: left;
+   border-radius: 2px;
    position: fixed;
    bottom: 10px;
-   right: 20px;
    left: 20px;
-   height: 30%;
+   right: 20px;
+   height: 200px;
    margin: 0;
+   display: flex;
    flex-direction: column;
 }
 
@@ -29,9 +19,9 @@ body {
    padding: 5px;
    font-size: 18px;
    width: 100%;
-   height: 70%;
+   height: 65%;
    border-radius: 2px;
    resize: none;
-   background-color: #eceee800;
+   background-color: transparent;
    color: #1E1E1E;
 }

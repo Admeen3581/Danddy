@@ -1,23 +1,19 @@
 .PAstats-home {
-   background-color: #1E1E1E;
-   margin: 0 auto; 
-   padding: 5px;
-   width: 1410px;
-   font-family: 'Trebuchet MS', sans-serif;
-   font-weight: bold;
- }
- 
- .StatsBox {
-   display: flex;
-   justify-content: space-around;
-   align-items: center;
-   border-radius: 2px;
-   padding: 10px;
-   background-color: #ECEEE8;
- }
- 
- .inline-text {
-   display: inline-block;
-   margin: 0 10px; 
- }
- 
+  margin: 0 auto;
+  padding: 5px;
+  width: 1410px;
+}
+
+.StatsBox {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  border-radius: 2px;
+  background-color: #ECEEE8;
+}
+
+.inline-text {
+  display: inline-block;
+  margin: 0 10px;
+}

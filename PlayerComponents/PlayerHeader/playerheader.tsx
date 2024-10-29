@@ -13,8 +13,6 @@ const PlayerHeader = () => {
           <div className="menu-content">
             <ul>
               <li><Link href="/combat">Combat</Link></li>
-              <li><Link href="/stats">Stats</Link></li>
-              <li><Link href="/inventory">Inventory</Link></li>
               <li><DirectMessagePopup style={'msgButton'}/></li>
             </ul>
           </div>
