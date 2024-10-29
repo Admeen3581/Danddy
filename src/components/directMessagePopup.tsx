@@ -17,6 +17,7 @@ import {
 import './directMessagePopup.css';
 import {useState} from "react";
 import { DoorOpen } from 'lucide-react';
+import {ScrollArea} from "@/components/ui/scroll-area";
 
 type convo = {
     id: number;
@@ -71,10 +72,11 @@ export function DirectMessagePopup({style})
                                 </div>
                             </div>
                             <br/>
-                            <div className="message incoming">
-                                <p className="content">{selectedMessage.content}</p>
-                            </div>
-                            {/* Display new messages here if needed */}
+                            <ScrollArea>
+                                <div className="message incoming">
+                                    <p className="content">{selectedMessage.content}</p>
+                                </div>
+                            </ScrollArea>
                         </div>
                         <div className="input-container">
                             <input
