@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import './hp.css'; 
 import useLocalStore from '@/utils/store';
+import DeathComponent from './deathroll';
 
 const HPManager = () => {
   const { classesJson, setClassesJson } = useLocalStore();
@@ -40,15 +41,19 @@ const HPManager = () => {
         <div>
           <h2>Max HP: {maxHP}</h2>
         </div>
-      </div>
-      <div className='changes'>
-        <button onClick={addHealth} style={{ margin: '5px' }}>
-          Add Health
-        </button>
-        <button onClick={subtractHealth} style={{ margin: '5px' }}>
-          Subtract Health
-        </button>
-      </div>
+        </div>
+      {isDead ? (
+        <DeathComponent />
+      ) : (
+        <div className='changes'>
+          <button onClick={addHealth} style={{ margin: '5px' }}>
+            Add Health
+          </button>
+          <button onClick={subtractHealth} style={{ margin: '5px' }}>
+            Subtract Health
+          </button>
+        </div>
+      )}
     </div>
   );
 };
