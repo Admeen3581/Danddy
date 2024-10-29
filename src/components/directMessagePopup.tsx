@@ -73,8 +73,13 @@ export function DirectMessagePopup({style})
                             </div>
                             <br/>
                             <ScrollArea>
-                                <div className="message incoming">
-                                    <p className="content">{selectedMessage.content}</p>
+                                <div className='message-content'>
+                                    <div className="message incoming">
+                                        <p className="content">{selectedMessage.content}</p>
+                                    </div>
+                                    <div className="message outgoing">
+                                        <span className="content">This is a response message!</span>
+                                    </div>
                                 </div>
                             </ScrollArea>
                         </div>
@@ -91,21 +96,23 @@ export function DirectMessagePopup({style})
                     </>
                 ) : (
                     <div className="conversations-container">
-                        {tempConvos.map(convo => (
-                            <div key={convo.id} className="conversation-preview" onClick={() => handleSelectConvo(convo)}>
+                        <ScrollArea>
+                            {tempConvos.map(convo => (
+                                <div key={convo.id} className="conversation-preview" onClick={() => handleSelectConvo(convo)}>
                                 <span className="user">
                                     {convo.user.slice(0,21)}
                                     {convo.user.length > 21 && (
                                         "..."
                                     )}
                                 </span>
-                                <p className="preview-content">
-                                    {convo.content.slice(0,30)}
-                                    {convo.content.length > 30 && (
-                                        "..."
-                                    )}</p>
-                            </div>
-                        ))}
+                                    <p className="preview-content">
+                                        {convo.content.slice(0,30)}
+                                        {convo.content.length > 30 && (
+                                            "..."
+                                        )}</p>
+                                </div>
+                            ))}
+                        </ScrollArea>
                     </div>
                 )}
             </SheetContent>
