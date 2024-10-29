@@ -68,11 +68,11 @@ body {
    text-align: center;
  }
  
- .dmmenu-content ul li {
+ .dmmenu-content ul li, .button {
    padding: 20px;
  }
  
- .dmmenu-content ul li a {
+ .dmmenu-content ul li a, .button {
    color: #ECEEE8;
    font-size: 24px;
    text-decoration: none;
