@@ -36,7 +36,6 @@ body {
   cursor: pointer;        
 }
 
-
 .menu-content {
   position: fixed;
   top: 0;
@@ -85,4 +84,18 @@ h1 {
   color: #ECEEE8;
   font-size: 24px;
   text-decoration: none;
+}
+.glow-text {
+  display: inline-block;
+}
+
+.glow-text span {
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.glow-text span:hover {
+  color: #0004ff; 
+  text-shadow: 
+    0 0 2px #0004ff, 
+    0 0 4px #0004ff; 
 }

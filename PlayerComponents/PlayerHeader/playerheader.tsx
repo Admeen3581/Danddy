@@ -18,7 +18,24 @@ const PlayerHeader = () => {
           </div>
         </div>
 
-        <h1>PLAYER HOME PAGE</h1>
+        <h1 className="glow-text">
+          <span>P</span>
+          <span>L</span>
+          <span>A</span>
+          <span>Y</span>
+          <span>E</span>
+          <span>R</span>
+          <span> </span>
+          <span>H</span>
+          <span>O</span>
+          <span>M</span>
+          <span>E</span>
+          <span> </span>
+          <span>P</span>
+          <span>A</span>
+          <span>G</span>
+          <span>E</span>
+        </h1>
       </div>
     </div>
   );
