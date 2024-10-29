@@ -1,19 +1,28 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-const DeathComponent = () => {
-  const [deathCount, setDeathCount] = useState(0); 
+interface DeathComponentProps {
+  onReset: () => void;
+}
+
+const DeathComponent: React.FC<DeathComponentProps> = ({ onReset }) => {
+  const [deathCount, setDeathCount] = useState(1);
   const [saveCount, setSaveCount] = useState(0);
 
   const handleSave = () => {
-    setSaveCount((prevCount) => prevCount + 1);
+    setSaveCount((prevCount) => {
+      const newCount = prevCount + 1;
+      if (newCount === 3) {
+        onReset();
+      }
+      return newCount;
+    });
   };
 
   const handleNewDeath = () => {
     setDeathCount((prevCount) => prevCount + 1);
   };
 
-
-   return (
+  return (
     <div>
       <h1>You have died</h1>
       <div>
@@ -27,7 +36,7 @@ const DeathComponent = () => {
         Count Another Death
       </button>
     </div>
-   );
+  );
 };
 
 export default DeathComponent;
