@@ -5,7 +5,10 @@ body {
 }
 
 .PANotesBox {
-   background-color: #ECEEE8;  
+   background-image: url('../scroll2.jpg');
+   background-size: cover;
+   background-repeat: no-repeat; 
+   background-position: center; 
    color: #1E1E1E;            
    padding: 20px;              
    text-align: left; 
@@ -28,8 +31,7 @@ body {
    width: 100%;
    height: 70%;
    border-radius: 5px;
-   border: 2px solid #1E1E1E;
    resize: none;
-   background-color: #ECEEE8;
+   background-color: #eceee800;
    color: #1E1E1E;
 }
