@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useEffect, useState } from 'react';
 import './hp.css'; 
@@ -6,7 +6,7 @@ import useLocalStore from '@/utils/store';
 import DeathComponent from './deathroll';
 
 const HPManager = () => {
-  const { classesJson, setClassesJson } = useLocalStore();
+  const { classesJson } = useLocalStore();
   
   const [currentHP, setCurrentHP] = useState(0);
   const [isDead, setIsDead] = useState(false);
@@ -15,7 +15,7 @@ const HPManager = () => {
     setCurrentHP(classesJson.health.current_health) 
   }, [])
   const maxHP = classesJson.health.max_health; 
-
+  
   const addHealth = () => {
     setCurrentHP((prevHP) => Math.min(prevHP + 1, maxHP));
   };
@@ -24,11 +24,16 @@ const HPManager = () => {
     setCurrentHP((prevHP) => {
       const newHP = prevHP - 1;
       if (newHP <= 0) {
-        setIsDead(true); 
+        setIsDead(true);
         return 0; 
       }
       return newHP;
     });
+  };
+
+  const resetDeathState = () => {
+    setIsDead(false);
+    setCurrentHP(1);
   };
 
   return (
@@ -41,9 +46,9 @@ const HPManager = () => {
         <div>
           <h2>Max HP: {maxHP}</h2>
         </div>
-        </div>
+      </div>
       {isDead ? (
-        <DeathComponent />
+        <DeathComponent onReset={resetDeathState} />
       ) : (
         <div className='changes'>
           <button onClick={addHealth} style={{ margin: '5px' }}>
