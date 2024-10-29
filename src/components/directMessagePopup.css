@@ -5,6 +5,7 @@
     height: 100vh;
     padding: 20px;
     background: #FFFFFF;
+    border: #FFFFFF;
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
@@ -40,7 +41,7 @@
 
 .user {
     font-weight: bold;
-    font-size: 1em;
+    font-size: 1.5em;
     color: #4a2f1d;
     margin-bottom: 4px;
 }
