@@ -15,36 +15,90 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet";
 import './directMessagePopup.css';
+import {useState} from "react";
+import { DoorOpen } from 'lucide-react';
+
+type convo = {
+    id: number;
+    user: string;
+    content: string;
+};
+
+const tempConvos = [
+    { id: 1, user: 'Alice', content: 'Hey there!' },
+    { id: 2, user: 'Bob', content: 'Are you free to chat?' },
+    { id: 3, user: 'Charlie', content: 'Let’s meet up tomorrow.' },
+];
 
 export function DirectMessagePopup({style})
 {
-    //backend elements as required.
-    const messages = [
-        { id: 1, user: 'Alice', content: 'Hey there!' },
-        { id: 2, user: 'Bob', content: 'How are you?' },
-        { id: 3, user: 'Alice', content: 'Doing great, thanks!' },
-    ];//temp
+    const [selectedMessage, setSelectedMessage] = useState<convo | null>(null);
+    const [newMessage, setNewMessage] = useState('');
+
+    const handleSelectConvo = (conversation: convo) => {
+        setSelectedMessage(conversation);
+    };
+
+    const handleSelectConvoReturn = () => {
+        setSelectedMessage(null);
+    }
+
+    const handleSendMessage = () => {
+        if (newMessage.trim()) {
+            console.log(`Sending message: ${newMessage}`);
+            setNewMessage('');
+        }
+    };
 
     return (
         <Sheet>
             <SheetTrigger className={style}>Direct Message</SheetTrigger>
-            <SheetContent side={'right'}>
+            <SheetContent side={'right'} className="sheet-content">
                 <SheetHeader>
                     <SheetTitle>Direct Message</SheetTitle>
-                    <SheetDescription>
-                        Talk to your friends in secrecy...
-                    </SheetDescription>
+                    <SheetDescription>Talk to your friends in secrecy...</SheetDescription>
                 </SheetHeader>
-                <div className="messages-container">
-                    {messages.map(message => (
-                        <div key={message.id} className={`message ${message.user === 'Alice' ? 'outgoing' : 'incoming'}`}>
-                            <span className="user">{message.user}</span>
-                            <p className="content">{message.content}</p>
+
+                {selectedMessage ? (
+                    <>
+                        <div className="messages-container">
+                            <div className='messages-header'>
+                                <div className="back-arrow" onClick={handleSelectConvoReturn}>
+                                    <DoorOpen/>
+                                </div>
+                                <div className='nameTitle'>
+                                    <span className='user'>{selectedMessage.user}</span>
+                                </div>
+                            </div>
+                            <br/>
+                            <div className="message incoming">
+                                <span className="user">{selectedMessage.user}</span>
+                                <p className="content">{selectedMessage.content}</p>
+                            </div>
+                            {/* Display new messages here if needed */}
                         </div>
-                    ))}
-                </div>
+                        <div className="input-container">
+                            <input
+                                type="text"
+                                placeholder="Type a message..."
+                                value={newMessage}
+                                onChange={(e) => setNewMessage(e.target.value)}
+                                className="message-input"
+                            />
+                            <button onClick={handleSendMessage} className="send-btn">Send</button>
+                        </div>
+                    </>
+                ) : (
+                    <div className="conversations-container">
+                        {tempConvos.map(convo => (
+                            <div key={convo.id} className="conversation-preview" onClick={() => handleSelectConvo(convo)}>
+                                <span className="user">{convo.user}</span>
+                                <p className="preview-content">{convo.content}</p>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </SheetContent>
         </Sheet>
-
-    )
+    );
 }
