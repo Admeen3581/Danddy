@@ -1,13 +1,29 @@
-.PAHome-section {
-   padding: 20px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
+body {
+   background-color: #1E1E1E;
    font-family: 'Trebuchet MS', sans-serif;
-   font-weight: bold;
- }
- 
- .headerBox {
+      margin: 0; 
+}
+
+.headerBox {
+   background-color: #ECEEE8;  
+   color: #1E1E1E; 
+   position: fixed;           
+   padding: 0 20px;         
+   text-align: center;  
+   font-size: 24px;           
+   font-weight: bold;        
+   border-radius: 5px;          
+   margin: 20px auto;          
+   max-width: 1400px;
+   height: 65px;  
+   justify-content: center; 
+   align-items: center;      
+   display: flex;            
+   box-sizing: border-box;  
+   overflow: hidden;          
+}
+
+.headerBox {
    position: relative;
    text-align: center;
    justify-content: center;
@@ -17,13 +33,13 @@
    background-color: #ECEEE8;
  }
  
- .menu-container {
+ .dmmenu-container {
    position: absolute;
    top: 10px; 
    left: 10px;
  }
  
- .menu-button {
+ .dmmenu-button {
    font-size: 30px;
    background-color: transparent;
    border: none;
@@ -31,7 +47,7 @@
    padding: 10px;
  }
  
- .menu-content {
+ .dmmenu-content {
    position: fixed; 
    top: 0;
    left: 0;
@@ -39,43 +55,29 @@
    width: 13vw; 
    transform: translateX(-100%);
    transition: transform 0.3s ease;
-   background-color: #041025cb;
+   background-color: rgba(78, 9, 9, 0.809);
    display: flex;
    justify-content: center;
    align-items: center;
    z-index: 100;
  }
  
- .menu-content ul {
+ .dmmenu-content ul {
    list-style-type: none;
    padding: 0;
    text-align: center;
  }
  
- .menu-content ul li {
+ .dmmenu-content ul li, .button {
    padding: 20px;
  }
  
- .menu-content ul li a {
+ .dmmenu-content ul li a, .button {
    color: #ECEEE8;
    font-size: 24px;
    text-decoration: none;
  }
  
- .menu-container:hover .menu-content {
+ .dmmenu-container:hover .dmmenu-content {
    transform: translateX(0);
  }
- 
- h1 {
-   font-size: 2rem;
-   align-self: center;
- }
- 
- .button {
-   text-decoration: none;
-   padding: 10px 20px;
-   background-color: #4CAF50;
-   color: #ECEEE8;
-   border-radius: 5px;
- }
- 

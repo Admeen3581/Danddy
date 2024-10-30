@@ -1,0 +1,28 @@
+.PANotesBox {
+   background: url('../scroll2.jpg') center / cover no-repeat;
+   color: #1E1E1E;
+   padding: 20px;
+   text-align: left;
+   border-radius: 2px;
+   position: fixed;
+   bottom: 10px;
+   left: 20px;
+   right: 20px;
+   height: 200px;
+   margin: 0;
+   display: flex;
+   flex-direction: column;
+   font-family: 'Cinzel', serif;
+}
+
+.textarea-notes {
+   margin-top: 20px;
+   padding: 5px;
+   font-size: 18px;
+   width: 100%;
+   height: 65%;
+   border-radius: 2px;
+   resize: none;
+   background-color: transparent;
+   color: #1E1E1E;
+}
