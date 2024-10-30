@@ -5,7 +5,7 @@ import './EncounterCreation.css';
 import { getDnDAPI } from '@/utils/httpRequester';
 
 const EncounterCreation = () => {
-    const itemsPerPage = 5;
+    const itemsPerPage = 25;
     const [currentPage, setCurrentPage] = useState(1);
     const [encounters, setEncounters] = useState([]);
     const [selectedEncounters, setSelectedEncounters] = useState([]); // Top list
@@ -30,8 +30,19 @@ const EncounterCreation = () => {
     };
 
     const addEncounterToTopList = (encounter) => {
-        setSelectedEncounters([...selectedEncounters, encounter]);
-        setEncounters(encounters.filter(item => item !== encounter)); // Remove from bottom list
+        setSelectedEncounters((prevSelected) => {
+            const existingEncounter = prevSelected.find(item => item.name === encounter);
+            if (existingEncounter) {
+                // Increment the count if it already exists
+                return prevSelected.map(item =>
+                    item.name === encounter
+                        ? { ...item, count: item.count + 1 }
+                        : item
+                );
+            }
+            // Add new encounter with count 1
+            return [...prevSelected, { name: encounter, count: 1 }];
+        });
     };
 
     return (
@@ -39,20 +50,20 @@ const EncounterCreation = () => {
             <h1>Create Your Encounter</h1>
 
             <div className="scrollable-section">
-                <h2>Selected Encounters (Top List)</h2>
+                <h2>Selected Encounters</h2>
                 {selectedEncounters.length === 0 ? (
                     <p>No encounters selected.</p>
                 ) : (
                     selectedEncounters.map((encounter, index) => (
                         <div key={index} className="encounter-block">
-                            <p>{encounter}</p>
+                            <p>{encounter.name} x{encounter.count}</p>
                         </div>
                     ))
                 )}
             </div>
 
             <div className="scrollable-section">
-                <h2>Available Encounters (Bottom List)</h2>
+                <h2>Available Encounters</h2>
                 {loading ? (
                     <p>Loading...</p>
                 ) : (
