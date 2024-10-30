@@ -45,6 +45,24 @@ const EncounterCreation = () => {
         });
     };
 
+    const removeEncounterFromTopList = (encounterName) => {
+        setSelectedEncounters((prevSelected) => {
+            return prevSelected
+                .map(item => {
+                    if (item.name === encounterName) {
+                        // Decrement the count if greater than 1
+                        if (item.count > 1) {
+                            return { ...item, count: item.count - 1 };
+                        }
+                        // If count is 1, remove the encounter
+                        return null;
+                    }
+                    return item;
+                })
+                .filter(item => item !== null); // Filter out null values
+        });
+    };
+
     return (
         <div className="encounter-creation-container">
             <h1>Create Your Encounter</h1>
@@ -57,6 +75,7 @@ const EncounterCreation = () => {
                     selectedEncounters.map((encounter, index) => (
                         <div key={index} className="encounter-block">
                             <p>{encounter.name} x{encounter.count}</p>
+                            <button onClick={() => removeEncounterFromTopList(encounter.name)}>Remove</button>
                         </div>
                     ))
                 )}
