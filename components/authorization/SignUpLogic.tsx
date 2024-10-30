@@ -40,7 +40,8 @@ export default function SignUpLogic() {
       // Update the database with additional user data
       await updateDatabaseRoute(`/users/${userData.username}`, {
         ...userData,
-        uid: user.uid
+        uid: user.uid,
+        emailVerified: false
       });
 
       alert('Sign-up successful! Please check your email to verify your account.');
