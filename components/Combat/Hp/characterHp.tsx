@@ -11,10 +11,11 @@ const HPManager = () => {
   const [currentHP, setCurrentHP] = useState(0);
   const [isDead, setIsDead] = useState(false);
 
+  // Temp fix : I can't get it to save current health
+  const maxHP = classesJson.health.max_health; 
   useEffect(() => {
     setCurrentHP(classesJson.health.current_health) 
-  }, [])
-  const maxHP = classesJson.health.max_health; 
+  }, [maxHP])
   
   const addHealth = () => {
     setCurrentHP((prevHP) => Math.min(prevHP + 1, maxHP));
