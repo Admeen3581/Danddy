@@ -71,12 +71,12 @@
   color: white; /* Text color inside the input */
 }
 
-h1 {
+.hero-content h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
 }
 
-p {
+.hero-content p {
   font-size: 1.25rem;
   margin-bottom: 2rem;
 }
