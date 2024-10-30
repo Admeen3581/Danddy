@@ -33,14 +33,12 @@ const EncounterCreation = () => {
         setSelectedEncounters((prevSelected) => {
             const existingEncounter = prevSelected.find(item => item.name === encounter);
             if (existingEncounter) {
-                // Increment the count if it already exists
                 return prevSelected.map(item =>
                     item.name === encounter
                         ? { ...item, count: item.count + 1 }
                         : item
                 );
             }
-            // Add new encounter with count 1
             return [...prevSelected, { name: encounter, count: 1 }];
         });
     };
@@ -50,17 +48,20 @@ const EncounterCreation = () => {
             return prevSelected
                 .map(item => {
                     if (item.name === encounterName) {
-                        // Decrement the count if greater than 1
                         if (item.count > 1) {
                             return { ...item, count: item.count - 1 };
                         }
-                        // If count is 1, remove the encounter
                         return null;
                     }
                     return item;
                 })
-                .filter(item => item !== null); // Filter out null values
+                .filter(item => item !== null);
         });
+    };
+
+    // Function to handle the Finish button click
+    const handleFinish = () => {
+        console.log("Selected Encounters:", selectedEncounters);
     };
 
     return (
@@ -106,6 +107,11 @@ const EncounterCreation = () => {
                     </button>
                 ))}
             </div>
+
+            {/* Finish button */}
+            <button onClick={handleFinish} className="finish-button">
+                Finish
+            </button>
         </div>
     );
 };
