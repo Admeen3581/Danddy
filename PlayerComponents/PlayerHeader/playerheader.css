@@ -1,12 +1,13 @@
 body {
   background: url('../woods.jpeg');
+  overflow: hidden;
 }
 
 .PAHome-section {
-  display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
+  overflow: hidden;
 }
 
 .headerBox {
@@ -19,6 +20,7 @@ body {
   border-radius: 2px;
   background-color: #ECEEE8;
   font-family: 'Cinzel', serif;
+  overflow: hidden;
 }
 
 .menu-container {
@@ -94,8 +96,8 @@ h1 {
 }
 
 .glow-text span:hover {
-  color: #0004ff; 
+  color: #00025d; 
   text-shadow: 
-    0 0 2px #0004ff, 
-    0 0 4px #0004ff; 
+    0 0 2px #00025d, 
+    0 0 4px #00025d; 
 }

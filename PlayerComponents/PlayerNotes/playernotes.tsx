@@ -9,6 +9,7 @@ const PlayerNotes = () => {
   };
 
   return (
+    <div className="PAHome-section">
       <div className="PANotesBox">
         <h1>Notes:</h1>
         <textarea 
@@ -18,6 +19,7 @@ const PlayerNotes = () => {
           placeholder="Type your notes here..."
         />
       </div>
+    </div>
   );
 };
 

@@ -2,6 +2,7 @@
   margin: 0 auto;
   padding: 5px;
   width: 1410px;
+  overflow: hidden;
 }
 
 .StatsBox {
@@ -12,6 +13,7 @@
   border-radius: 2px;
   background-color: #ECEEE8;
   font-family: 'Cinzel', serif;
+  overflow: hidden;
 }
 
 .inline-text {
