@@ -1,8 +1,10 @@
 import React from 'react';
 import './playerheader.css';
 import Link from 'next/link';
+import {DirectMessagePopup} from "@/components/directMessagePopup";
 
 const PlayerHeader = () => {
+
   return (
     <div className="PAHome-section">
       <div className="headerBox">
@@ -13,6 +15,7 @@ const PlayerHeader = () => {
               <li><Link href="/combat">Combat</Link></li>
               <li><Link href="/stats">Stats</Link></li>
               <li><Link href="/inventory">Inventory</Link></li>
+              <li><DirectMessagePopup style={'msgButton'}/></li>
             </ul>
           </div>
         </div>
@@ -24,3 +27,5 @@ const PlayerHeader = () => {
 };
 
 export default PlayerHeader;
+
+//<button className='msgButton' onClick={openMessageButtonState}>Direct Message</button>
