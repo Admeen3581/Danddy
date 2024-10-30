@@ -1,0 +1,14 @@
+.PASenseBox {
+   background: url('../scroll2.jpg') center / cover no-repeat;
+   color: #1E1E1E;
+   padding: 20px;
+   text-align: left;
+   border-radius: 2px;
+   position: fixed;
+   bottom: 225px;
+   right: 20px;
+   width: 50.5%;
+   height: 325px;
+   margin: 0;
+   font-family: 'Cinzel', serif;
+}

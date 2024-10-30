@@ -13,14 +13,19 @@ const PlayerHeader = () => {
           <div className="menu-content">
             <ul>
               <li><Link href="/combat">Combat</Link></li>
-              <li><Link href="/stats">Stats</Link></li>
-              <li><Link href="/inventory">Inventory</Link></li>
               <li><DirectMessagePopup style={'msgButton'}/></li>
+              <li><Link href="/">Home</Link></li>
             </ul>
           </div>
         </div>
 
-        <h1>PLAYER HOME PAGE</h1>
+        <h1 className="glow-text">
+          <span>PLAYER</span>
+          <span> </span>
+          <span>HOME</span>
+          <span> </span>
+          <span>PAGE</span>
+        </h1>
       </div>
     </div>
   );

@@ -1,0 +1,22 @@
+.PAstats-home {
+  margin: 0 auto;
+  padding: 5px;
+  width: 1410px;
+  overflow: hidden;
+}
+
+.StatsBox {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  border-radius: 2px;
+  background-color: #ECEEE8;
+  font-family: 'Cinzel', serif;
+  overflow: hidden;
+}
+
+.inline-text {
+  display: inline-block;
+  margin: 0 10px;
+}
