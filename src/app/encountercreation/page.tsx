@@ -2,23 +2,21 @@
 
 import { useEffect, useState } from 'react';
 import './EncounterCreation.css';
-import { getDnDAPI, readDatabaseRoute } from '@/utils/httpRequester';
+import { getDnDAPI } from '@/utils/httpRequester';
 
 const EncounterCreation = () => {
     const itemsPerPage = 5;
     const [currentPage, setCurrentPage] = useState(1);
     const [encounters, setEncounters] = useState([]);
+    const [selectedEncounters, setSelectedEncounters] = useState([]); // Top list
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchEncounters = async () => {
-            getDnDAPI("/monsters")
-                .then((result) => {
-                    console.log(result)
-                    const dummyData = Array.from({ length: result["count"] }, (_, i) => `${result.results[i].name}`);
-                    setEncounters(dummyData);
-                    setLoading(false);
-                })
+            const result = await getDnDAPI("/monsters");
+            const dummyData = Array.from({ length: result["count"] }, (_, i) => `${result.results[i].name}`);
+            setEncounters(dummyData);
+            setLoading(false);
         };
 
         fetchEncounters();
@@ -31,16 +29,21 @@ const EncounterCreation = () => {
         setCurrentPage(page);
     };
 
+    const addEncounterToTopList = (encounter) => {
+        setSelectedEncounters([...selectedEncounters, encounter]);
+        setEncounters(encounters.filter(item => item !== encounter)); // Remove from bottom list
+    };
+
     return (
         <div className="encounter-creation-container">
             <h1>Create Your Encounter</h1>
 
             <div className="scrollable-section">
-                <h2>Section 1</h2>
-                {loading ? (
-                    <p>Loading...</p>
+                <h2>Selected Encounters (Top List)</h2>
+                {selectedEncounters.length === 0 ? (
+                    <p>No encounters selected.</p>
                 ) : (
-                    currentEncounters.map((encounter, index) => (
+                    selectedEncounters.map((encounter, index) => (
                         <div key={index} className="encounter-block">
                             <p>{encounter}</p>
                         </div>
@@ -49,13 +52,14 @@ const EncounterCreation = () => {
             </div>
 
             <div className="scrollable-section">
-                <h2>Section 2</h2>
+                <h2>Available Encounters (Bottom List)</h2>
                 {loading ? (
                     <p>Loading...</p>
                 ) : (
                     currentEncounters.map((encounter, index) => (
                         <div key={index} className="encounter-block">
                             <p>{encounter}</p>
+                            <button onClick={() => addEncounterToTopList(encounter)}>Add</button>
                         </div>
                     ))
                 )}

@@ -1,3 +1,5 @@
+/* EncounterCreation.css */
+
 .encounter-creation-container {
     padding: 20px;
     font-family: Arial, sans-serif;
@@ -9,12 +11,32 @@
     border: 1px solid #ccc;
     margin: 10px 0;
     padding: 10px;
+    background-color: #f9f9f9; /* Light background for better visibility */
 }
 
 .encounter-block {
     padding: 10px;
     border: 1px solid #ddd;
     margin: 5px 0;
+    background-color: #ffffff; /* White background for encounter blocks */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.encounter-block button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #28a745; /* Green */
+    color: white;
+    border: none;
+    border-radius: 3px;
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.encounter-block button:hover {
+    background-color: #218838; /* Darker green on hover */
 }
 
 .pagination {
@@ -27,10 +49,19 @@
     margin: 0 5px;
     padding: 5px 10px;
     cursor: pointer;
+    background-color: #007bff; /* Blue */
+    color: white;
+    border: none;
+    border-radius: 3px;
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.pagination button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
 }
 
 .pagination .active {
     font-weight: bold;
-    background-color: #007bff;
+    background-color: #0056b3; /* Darker blue for active page */
     color: white;
 }
