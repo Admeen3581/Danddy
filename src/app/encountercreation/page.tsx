@@ -19,7 +19,6 @@ const EncounterCreation = () => {
                     setEncounters(dummyData);
                     setLoading(false);
                 })
-
         };
 
         fetchEncounters();
