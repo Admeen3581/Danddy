@@ -10,6 +10,7 @@ const EncounterCreation = () => {
     const [encounters, setEncounters] = useState([]);
     const [selectedEncounters, setSelectedEncounters] = useState([]); // Top list
     const [loading, setLoading] = useState(true);
+    const [searchTerm, setSearchTerm] = useState(''); // Search input state
 
     useEffect(() => {
         const fetchEncounters = async () => {
@@ -23,7 +24,9 @@ const EncounterCreation = () => {
     }, []);
 
     const totalPages = Math.ceil(encounters.length / itemsPerPage);
-    const currentEncounters = encounters.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+    const currentEncounters = encounters
+        .filter(encounter => encounter.toLowerCase().includes(searchTerm.toLowerCase())) // Filter based on search term
+        .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -84,6 +87,13 @@ const EncounterCreation = () => {
 
             <div className="scrollable-section">
                 <h2>Available Encounters</h2>
+                <input
+                    type="text"
+                    placeholder="Search encounters..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="search-bar"
+                />
                 {loading ? (
                     <p>Loading...</p>
                 ) : (

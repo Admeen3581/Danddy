@@ -65,3 +65,11 @@
     background-color: #0056b3; /* Darker blue for active page */
     color: white;
 }
+
+.search-bar {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
