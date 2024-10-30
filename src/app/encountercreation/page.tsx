@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import './EncounterCreation.css';
+import { getDnDAPI, readDatabaseRoute } from '@/utils/httpRequester';
 
 const EncounterCreation = () => {
     const itemsPerPage = 5;
@@ -11,9 +12,14 @@ const EncounterCreation = () => {
 
     useEffect(() => {
         const fetchEncounters = async () => {
-            const dummyData = Array.from({ length: 20 }, (_, i) => `Encounter ${i + 1}: Details about encounter ${i + 1}`);
-            setEncounters(dummyData);
-            setLoading(false);
+            getDnDAPI("/monsters")
+                .then((result) => {
+                    console.log(result)
+                    const dummyData = Array.from({ length: result["count"] }, (_, i) => `${result.results[i].name}`);
+                    setEncounters(dummyData);
+                    setLoading(false);
+                })
+
         };
 
         fetchEncounters();
