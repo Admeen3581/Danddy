@@ -1,20 +1,21 @@
+import React from 'react';
 import './dmmaps.css';
 
-const DMButtons = () => {
+type DMButtonsProps = {
+  maps: { name: string; filePath: string }[];
+  onSelectMap: (filePath: string) => void;
+};
+
+const DMButtons: React.FC<DMButtonsProps> = ({ maps = [], onSelectMap }) => {
   return (
     <div className="MapsBox">
       <h1>Maps:</h1>
       <div className="scrollable-content">
-        <p>Map 1: beach</p>
-        <p>Map 2: mannor</p>
-        <p>Map 3: dragons den</p>
-        <p>Map 4: meeting room</p>
-        <p>Map 5: etc</p>
-        <p>Map 6: etc</p>
-        <p>Map 7: etc</p>
-        <p>Map 8: etc</p>
-        <p>Map 9: etc</p>
-        <p>Map 10: etc</p>
+        {maps.map((map) => (
+          <p key={map.name} onClick={() => onSelectMap(map.filePath)} style={{ cursor: 'pointer' }}>
+            {map.name}
+          </p>
+        ))}
       </div>
     </div>
   );
