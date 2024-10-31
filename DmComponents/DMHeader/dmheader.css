@@ -38,26 +38,27 @@ body {
  }
  
  .dmmenu-button {
-   font-size: 30px;
-   background-color: transparent;
-   border: none;
-   cursor: pointer;
-   padding: 10px;
+  width: 80px;            
+  height: 50px;                  
+  background: url('../compass.png') center / contain no-repeat;
+  background-color: transparent; 
+  border: none;
+  cursor: pointer;  
  }
  
  .dmmenu-content {
-   position: fixed; 
-   top: 0;
-   left: 0;
-   height: 100vh;
-   width: 13vw; 
-   transform: translateX(-100%);
-   transition: transform 0.3s ease;
-   background-color: rgba(78, 9, 9, 0.809);
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 13vw;
+  height: 100vh;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  background: url('../dragon.jpg') center / cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
  }
  
  .dmmenu-content ul {
