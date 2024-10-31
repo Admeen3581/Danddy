@@ -12,13 +12,7 @@ export default function SignInLogic() {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
   const { userId, setUserId } = useLocalStore();
-  //const setUserId = useLocalStore((state) => state.setUserId); // Get the setUserId function from the store
 
-  // Log the userId to the console whenever it changes
-  useEffect(() => {
-    console.log('Current userId:', userId);
-  }, [userId]);
-  
   const handleSubmit = async (data: { email: string; password: string }) => {
     setError(null);
     setLoading(true);
