@@ -44,7 +44,7 @@ body {
   background-color: transparent; 
   border: none;
   cursor: pointer;  
- }
+ } 
  
  .dmmenu-content {
   position: fixed;
@@ -80,3 +80,18 @@ body {
  .dmmenu-container:hover .dmmenu-content {
    transform: translateX(0);
  }
+
+ .dmglow-text {
+  display: inline-block;
+}
+
+.dmglow-text span {
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.dmglow-text span:hover {
+  color: #00025d; 
+  text-shadow: 
+    0 0 2px #00025d, 
+    0 0 4px #00025d; 
+}
