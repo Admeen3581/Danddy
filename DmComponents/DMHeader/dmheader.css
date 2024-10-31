@@ -1,10 +1,10 @@
 body {
   background: url('../woods.jpeg');
   overflow: hidden;
+  font-family: 'Cinzel', serif;
 }
 
 .headerBox {
-   background-color: #ECEEE8;  
    color: #1E1E1E; 
    position: fixed;           
    padding: 0 20px;         
