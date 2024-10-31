@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/firebaseConfig';
@@ -11,8 +11,14 @@ export default function SignInLogic() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const setUserId = useLocalStore((state) => state.setUserId); // Get the setUserId function from the store
+  const { userId, setUserId } = useLocalStore();
+  //const setUserId = useLocalStore((state) => state.setUserId); // Get the setUserId function from the store
 
+  // Log the userId to the console whenever it changes
+  useEffect(() => {
+    console.log('Current userId:', userId);
+  }, [userId]);
+  
   const handleSubmit = async (data: { email: string; password: string }) => {
     setError(null);
     setLoading(true);
@@ -34,6 +40,7 @@ export default function SignInLogic() {
       setLoading(false);
     }
   };
+  
 
   return (
     <section className='flex-center size-full max-sm:px-6 min-h-screen'>
