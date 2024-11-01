@@ -1,5 +1,4 @@
 "use client"
-
 import { useEffect, useState } from 'react';
 import './EncounterCreation.css';
 import { getDnDAPI } from '@/utils/httpRequester';
@@ -14,11 +13,16 @@ const EncounterCreation = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState('');
+    const [editModalOpen, setEditModalOpen] = useState(false);
+    const [editableStats, setEditableStats] = useState({});
 
     useEffect(() => {
         const fetchEncounters = async () => {
             const result = await getDnDAPI("/monsters");
-            const dummyData = result.results.map(monster => ({ name: monster.name, url: "/monsters/"+monster.name.toLowerCase().replaceAll(" ", "-")}));
+            const dummyData = result.results.map(monster => ({
+                name: monster.name,
+                url: "/monsters/"+monster.name.toLowerCase().replaceAll(" ", "-")
+            }));
             setEncounters(dummyData);
             setLoading(false);
         };
@@ -66,72 +70,52 @@ const EncounterCreation = () => {
     };
 
     const fetchAndLogMonsterStats = async (url) => {
-        await getDnDAPI(url)
-        .then((result) => {
-            console.log(result)
-            var modalStr : String = result["name"]+"\n"
-            modalStr += "--------------------------------\n"
+        const result = await getDnDAPI(url);
+        let modalStr = `${result.name}\n--------------------------------\n`;
+        modalStr += `AC: ${result.armor_class[0].value}\n`;
+        modalStr += `Hit Points: ${result.hit_points}\n`;
+        modalStr += `Speed: ${result.speed.walk}\n--------------------------------\n`;
 
-            modalStr += "AC: "+result["armor_class"][0]["value"]+"\n"
-            modalStr += "Hit Points: "+result["hit_points"]+"\n"
-            modalStr += "Speed: "+result["speed"]["walk"]+"\n"
-            modalStr += "--------------------------------\n"
-
-            modalStr += "STR: "+result["strength"]+" ("+getModifier(result["strength"])+")\n"
-            modalStr += "DEX: "+result["dexterity"]+" ("+getModifier(result["dexterity"])+")\n"
-            modalStr += "CON: "+result["constitution"]+" ("+getModifier(result["constitution"])+")\n"
-            modalStr += "INT: "+result["intelligence"]+" ("+getModifier(result["intelligence"])+")\n"
-            modalStr += "WIS: "+result["wisdom"]+" ("+getModifier(result["wisdom"])+")\n"
-            modalStr += "CHA: "+result["charisma"]+" ("+getModifier(result["charisma"])+")\n"
-            modalStr += "--------------------------------\n"
-
-            for(var prof in result["proficiencies"]){
-                modalStr += result["proficiencies"][prof]["proficiency"]["name"]+": "+result["proficiencies"][prof]["value"]+"\n"
-            }
-
-            for(var res in result["damage_immunities"]){
-                modalStr += "Damage Immunity: "+result["damage_immunities"][res]+"\n"
-            }
-
-            for(var res in result["damage_resistances"]){
-                modalStr += "Damage Resistance: "+result["damage_resistances"][res]+"\n"
-            }
-
-            for(var res in result["damage_vulnerabilities"]){
-                modalStr += "Damage Vulnerability: "+result["damage_vulnerabilities"][res]+"\n"
-            }
-            modalStr += "--------------------------------\n"
-
-            modalStr += "Senses:\n"
-            modalStr += "   -Blindsight: "+result["senses"]["blindsight"]+"\n"
-            modalStr += "   -Darkvision: "+result["senses"]["darkvision"]+"\n"
-            modalStr += "   -Passive Perception: "+result["senses"]["passive_perception"]+"\n"
-            modalStr += "Languages: "+result["languages"]+"\n"
-            modalStr += "Challenge: "+result["challenge_rating"]+"\n"
-            modalStr += "--------------------------------\n"
-
-            for(var res in result["special_abilities"]){
-                modalStr += result["special_abilities"][res]["name"]+": "+result["special_abilities"][res]["desc"]+"\n"
-            }
-            modalStr += "--------------------------------\n"
-
-            modalStr += "Actions\n"
-            for(var res in result["actions"]){
-                modalStr += result["actions"][res]["name"]+": "+result["actions"][res]["desc"]+"\n"
-            }
-            
-            setModalContent(modalStr); // Format the JSON for readability
-            setModalOpen(true);
+        // Add stats and modifiers
+        ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'].forEach(stat => {
+            modalStr += `${stat.toUpperCase()}: ${result[stat]} (${getModifier(result[stat])})\n`;
         });
+        
+        // Additional information...
+        setModalContent(modalStr);
+        setModalOpen(true);
     };
 
-    const handleFinish = () => {
-        console.log("Selected Encounters:", selectedEncounters);
+    const handleEditStats = (encounter) => {
+        setEditableStats(encounter);
+        setEditModalOpen(true);
+    };
+
+    const handleStatChange = (e) => {
+        const { name, value } = e.target;
+        setEditableStats(prev => ({ ...prev, [name]: value }));
+    };
+
+    const saveStats = () => {
+        setSelectedEncounters(prev => 
+            prev.map(item => 
+                item.name === editableStats.name ? editableStats : item
+            )
+        );
+        setEditModalOpen(false);
     };
 
     const closeModal = () => {
         setModalOpen(false);
     };
+
+    const closeEditModal = () => {
+        setEditModalOpen(false);
+    };
+
+    const handleFinish = () => {
+        console.log(selectedEncounters)
+    }
 
     return (
         <div className="encounter-creation-container">
@@ -146,6 +130,7 @@ const EncounterCreation = () => {
                         <div key={index} className="encounter-block">
                             <p>{encounter.name} x{encounter.count}</p>
                             <button onClick={() => removeEncounterFromTopList(encounter.name)}>Remove</button>
+                            <button onClick={() => handleEditStats(encounter)}>Edit Stats</button>
                         </div>
                     ))
                 )}
@@ -194,6 +179,27 @@ const EncounterCreation = () => {
                     <div className="modal-content">
                         <span className="close" onClick={closeModal}>&times;</span>
                         <pre>{modalContent}</pre>
+                    </div>
+                </div>
+            )}
+
+            {editModalOpen && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={closeEditModal}>&times;</span>
+                        <h2>Edit Stats for {editableStats.name}</h2>
+                        {['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'].map(stat => (
+                            <div key={stat}>
+                                <label>{stat.charAt(0).toUpperCase() + stat.slice(1)}:</label>
+                                <input
+                                    type="number"
+                                    name={stat}
+                                    value={editableStats[stat] || ''}
+                                    onChange={handleStatChange}
+                                />
+                            </div>
+                        ))}
+                        <button onClick={saveStats}>Save</button>
                     </div>
                 </div>
             )}
