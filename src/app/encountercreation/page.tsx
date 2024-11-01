@@ -102,6 +102,13 @@ const EncounterCreation = () => {
             }
             modalStr += "--------------------------------\n"
 
+            modalStr += "Senses:\n"
+            modalStr += "   -Blindsight: "+result["senses"]["blindsight"]+"\n"
+            modalStr += "   -Darkvision: "+result["senses"]["darkvision"]+"\n"
+            modalStr += "   -Passive Perception: "+result["senses"]["passive_perception"]+"\n"
+            modalStr += "Languages: "+result["languages"]+"\n"
+            modalStr += "Challenge: "+result["challenge_rating"]+"\n"
+
             
             setModalContent(modalStr); // Format the JSON for readability
             setModalOpen(true);
