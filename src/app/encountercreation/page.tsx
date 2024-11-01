@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import './EncounterCreation.css';
 import { getDnDAPI } from '@/utils/httpRequester';
+import { getModifier } from '@/utils/characterJsonFunctions';
 
 const EncounterCreation = () => {
     const itemsPerPage = 25;
@@ -65,9 +66,29 @@ const EncounterCreation = () => {
     };
 
     const fetchAndLogMonsterStats = async (url) => {
-        const result = await getDnDAPI(url);
-        setModalContent(JSON.stringify(result, null, 2)); // Format the JSON for readability
-        setModalOpen(true);
+        await getDnDAPI(url)
+        .then((result) => {
+            console.log(result)
+            var modalStr : String = result["name"]+"\n"
+            modalStr += "--------------------------------\n"
+
+            modalStr += "AC: "+result["armor_class"][0]["value"]+"\n"
+            modalStr += "Hit Points: "+result["hit_points"]+"\n"
+            modalStr += "Speed: "+result["speed"]["walk"]+"\n"
+            modalStr += "--------------------------------\n"
+
+            modalStr += "STR: "+result["strength"]+" ("+getModifier(result["strength"])+")\n"
+            modalStr += "DEX: "+result["dexterity"]+" ("+getModifier(result["dexterity"])+")\n"
+            modalStr += "CON: "+result["constitution"]+" ("+getModifier(result["constitution"])+")\n"
+            modalStr += "INT: "+result["intelligence"]+" ("+getModifier(result["intelligence"])+")\n"
+            modalStr += "WIS: "+result["wisdom"]+" ("+getModifier(result["wisdom"])+")\n"
+            modalStr += "CHA: "+result["charisma"]+" ("+getModifier(result["charisma"])+")\n"
+            modalStr += "--------------------------------\n"
+
+
+            setModalContent(modalStr); // Format the JSON for readability
+            setModalOpen(true);
+        });
     };
 
     const handleFinish = () => {
