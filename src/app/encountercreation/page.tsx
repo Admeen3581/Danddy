@@ -108,7 +108,17 @@ const EncounterCreation = () => {
             modalStr += "   -Passive Perception: "+result["senses"]["passive_perception"]+"\n"
             modalStr += "Languages: "+result["languages"]+"\n"
             modalStr += "Challenge: "+result["challenge_rating"]+"\n"
+            modalStr += "--------------------------------\n"
 
+            for(var res in result["special_abilities"]){
+                modalStr += result["special_abilities"][res]["name"]+": "+result["special_abilities"][res]["desc"]+"\n"
+            }
+            modalStr += "--------------------------------\n"
+
+            modalStr += "Actions\n"
+            for(var res in result["actions"]){
+                modalStr += result["actions"][res]["name"]+": "+result["actions"][res]["desc"]+"\n"
+            }
             
             setModalContent(modalStr); // Format the JSON for readability
             setModalOpen(true);
