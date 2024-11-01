@@ -39,17 +39,19 @@ const EncounterCreation = () => {
         setCurrentPage(page);
     };
 
-    const addEncounterToTopList = (encounter) => {
+    const addEncounterToTopList = async (encounter) => {
+        const result = await getDnDAPI(encounter.url); // Fetch full JSON data
+        const newEncounter = { ...result, count: 1 }; // Add count to the full data
         setSelectedEncounters((prevSelected) => {
-            const existingEncounter = prevSelected.find(item => item.name === encounter.name);
+            const existingEncounter = prevSelected.find(item => item.name === newEncounter.name);
             if (existingEncounter) {
                 return prevSelected.map(item =>
-                    item.name === encounter.name
+                    item.name === newEncounter.name
                         ? { ...item, count: item.count + 1 }
                         : item
                 );
             }
-            return [...prevSelected, { ...encounter, count: 1 }];
+            return [...prevSelected, newEncounter];
         });
     };
 
@@ -80,7 +82,7 @@ const EncounterCreation = () => {
         ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'].forEach(stat => {
             modalStr += `${stat.toUpperCase()}: ${result[stat]} (${getModifier(result[stat])})\n`;
         });
-        
+
         // Additional information...
         setModalContent(modalStr);
         setModalOpen(true);
@@ -96,14 +98,29 @@ const EncounterCreation = () => {
         setEditableStats(prev => ({ ...prev, [name]: value }));
     };
 
+    const handleFinish = () => {
+        console.log(selectedEncounters)
+    }
+
     const saveStats = () => {
-        setSelectedEncounters(prev => 
+        const updatedStats = {
+            ...editableStats,
+            strength: Number(editableStats.strength),
+            dexterity: Number(editableStats.dexterity),
+            constitution: Number(editableStats.constitution),
+            intelligence: Number(editableStats.intelligence),
+            wisdom: Number(editableStats.wisdom),
+            charisma: Number(editableStats.charisma),
+        };
+    
+        setSelectedEncounters(prev =>
             prev.map(item => 
-                item.name === editableStats.name ? editableStats : item
+                item.name === updatedStats.name ? updatedStats : item
             )
         );
         setEditModalOpen(false);
     };
+    
 
     const closeModal = () => {
         setModalOpen(false);
@@ -112,10 +129,6 @@ const EncounterCreation = () => {
     const closeEditModal = () => {
         setEditModalOpen(false);
     };
-
-    const handleFinish = () => {
-        console.log(selectedEncounters)
-    }
 
     return (
         <div className="encounter-creation-container">
