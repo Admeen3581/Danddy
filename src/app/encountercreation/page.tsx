@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { useEffect, useState } from 'react';
 import './EncounterCreation.css';
@@ -8,14 +8,14 @@ const EncounterCreation = () => {
     const itemsPerPage = 25;
     const [currentPage, setCurrentPage] = useState(1);
     const [encounters, setEncounters] = useState([]);
-    const [selectedEncounters, setSelectedEncounters] = useState([]); // Top list
+    const [selectedEncounters, setSelectedEncounters] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [searchTerm, setSearchTerm] = useState(''); // Search input state
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         const fetchEncounters = async () => {
             const result = await getDnDAPI("/monsters");
-            const dummyData = Array.from({ length: result["count"] }, (_, i) => `${result.results[i].name}`);
+            const dummyData = result.results.map(monster => ({ name: monster.name, url: "/monsters/"+monster.name.toLowerCase().replaceAll(" ", "-")})); // Storing name and URL
             setEncounters(dummyData);
             setLoading(false);
         };
@@ -25,7 +25,7 @@ const EncounterCreation = () => {
 
     const totalPages = Math.ceil(encounters.length / itemsPerPage);
     const currentEncounters = encounters
-        .filter(encounter => encounter.toLowerCase().includes(searchTerm.toLowerCase())) // Filter based on search term
+        .filter(encounter => encounter.name.toLowerCase().includes(searchTerm.toLowerCase()))
         .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
     const handlePageChange = (page) => {
@@ -34,15 +34,15 @@ const EncounterCreation = () => {
 
     const addEncounterToTopList = (encounter) => {
         setSelectedEncounters((prevSelected) => {
-            const existingEncounter = prevSelected.find(item => item.name === encounter);
+            const existingEncounter = prevSelected.find(item => item.name === encounter.name);
             if (existingEncounter) {
                 return prevSelected.map(item =>
-                    item.name === encounter
+                    item.name === encounter.name
                         ? { ...item, count: item.count + 1 }
                         : item
                 );
             }
-            return [...prevSelected, { name: encounter, count: 1 }];
+            return [...prevSelected, { ...encounter, count: 1 }];
         });
     };
 
@@ -62,7 +62,16 @@ const EncounterCreation = () => {
         });
     };
 
-    // Function to handle the Finish button click
+    const fetchAndLogMonsterStats = async (url) => {
+        console.log(url)
+        await getDnDAPI(url).then(
+            (result) => {
+                console.log("Monster Stats:", result)
+            }
+        );
+
+    };
+
     const handleFinish = () => {
         console.log("Selected Encounters:", selectedEncounters);
     };
@@ -99,8 +108,9 @@ const EncounterCreation = () => {
                 ) : (
                     currentEncounters.map((encounter, index) => (
                         <div key={index} className="encounter-block">
-                            <p>{encounter}</p>
+                            <p>{encounter.name}</p>
                             <button onClick={() => addEncounterToTopList(encounter)}>Add</button>
+                            <button onClick={() => fetchAndLogMonsterStats(encounter.url)}>View Stats</button>
                         </div>
                     ))
                 )}
@@ -118,7 +128,6 @@ const EncounterCreation = () => {
                 ))}
             </div>
 
-            {/* Finish button */}
             <button onClick={handleFinish} className="finish-button">
                 Finish
             </button>
