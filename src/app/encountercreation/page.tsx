@@ -85,7 +85,24 @@ const EncounterCreation = () => {
             modalStr += "CHA: "+result["charisma"]+" ("+getModifier(result["charisma"])+")\n"
             modalStr += "--------------------------------\n"
 
+            for(var prof in result["proficiencies"]){
+                modalStr += result["proficiencies"][prof]["proficiency"]["name"]+": "+result["proficiencies"][prof]["value"]+"\n"
+            }
 
+            for(var res in result["damage_immunities"]){
+                modalStr += "Damage Immunity: "+result["damage_immunities"][res]+"\n"
+            }
+
+            for(var res in result["damage_resistances"]){
+                modalStr += "Damage Resistance: "+result["damage_resistances"][res]+"\n"
+            }
+
+            for(var res in result["damage_vulnerabilities"]){
+                modalStr += "Damage Vulnerability: "+result["damage_vulnerabilities"][res]+"\n"
+            }
+            modalStr += "--------------------------------\n"
+
+            
             setModalContent(modalStr); // Format the JSON for readability
             setModalOpen(true);
         });
@@ -159,7 +176,6 @@ const EncounterCreation = () => {
                 <div className="modal">
                     <div className="modal-content">
                         <span className="close" onClick={closeModal}>&times;</span>
-                        <h2>Monster Stats</h2>
                         <pre>{modalContent}</pre>
                     </div>
                 </div>
