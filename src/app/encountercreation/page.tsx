@@ -11,11 +11,13 @@ const EncounterCreation = () => {
     const [selectedEncounters, setSelectedEncounters] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modalContent, setModalContent] = useState('');
 
     useEffect(() => {
         const fetchEncounters = async () => {
             const result = await getDnDAPI("/monsters");
-            const dummyData = result.results.map(monster => ({ name: monster.name, url: "/monsters/"+monster.name.toLowerCase().replaceAll(" ", "-")})); // Storing name and URL
+            const dummyData = result.results.map(monster => ({ name: monster.name, url: "/monsters/"+monster.name.toLowerCase().replaceAll(" ", "-")}));
             setEncounters(dummyData);
             setLoading(false);
         };
@@ -63,17 +65,17 @@ const EncounterCreation = () => {
     };
 
     const fetchAndLogMonsterStats = async (url) => {
-        console.log(url)
-        await getDnDAPI(url).then(
-            (result) => {
-                console.log("Monster Stats:", result)
-            }
-        );
-
+        const result = await getDnDAPI(url);
+        setModalContent(JSON.stringify(result, null, 2)); // Format the JSON for readability
+        setModalOpen(true);
     };
 
     const handleFinish = () => {
         console.log("Selected Encounters:", selectedEncounters);
+    };
+
+    const closeModal = () => {
+        setModalOpen(false);
     };
 
     return (
@@ -131,6 +133,16 @@ const EncounterCreation = () => {
             <button onClick={handleFinish} className="finish-button">
                 Finish
             </button>
+
+            {modalOpen && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={closeModal}>&times;</span>
+                        <h2>Monster Stats</h2>
+                        <pre>{modalContent}</pre>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
