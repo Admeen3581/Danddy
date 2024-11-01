@@ -82,8 +82,43 @@ const EncounterCreation = () => {
         ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'].forEach(stat => {
             modalStr += `${stat.toUpperCase()}: ${result[stat]} (${getModifier(result[stat])})\n`;
         });
+        modalStr += "--------------------------------\n"
 
-        // Additional information...
+        for(var prof in result["proficiencies"]){
+            modalStr += "- "+result["proficiencies"][prof]["proficiency"]["name"]+": "+result["proficiencies"][prof]["value"]+"\n"
+        }
+
+        for(var res in result["damage_immunities"]){
+            modalStr += "- Damage Immunity: "+result["damage_immunities"][res]+"\n"
+        }
+
+        for(var res in result["damage_resistances"]){
+            modalStr += "- Damage Resistance: "+result["damage_resistances"][res]+"\n"
+        }
+
+        for(var res in result["damage_vulnerabilities"]){
+            modalStr += "- Damage Vulnerability: "+result["damage_vulnerabilities"][res]+"\n"
+        }
+        modalStr += "--------------------------------\n"
+
+        modalStr += "Senses:\n"
+        modalStr += "   -Blindsight: "+result["senses"]["blindsight"]+"\n"
+        modalStr += "   -Darkvision: "+result["senses"]["darkvision"]+"\n"
+        modalStr += "   -Passive Perception: "+result["senses"]["passive_perception"]+"\n"
+        modalStr += "Languages: "+result["languages"]+"\n"
+        modalStr += "Challenge: "+result["challenge_rating"]+"\n"
+        modalStr += "--------------------------------\n"
+
+        for(var res in result["special_abilities"]){
+            modalStr += "- "+result["special_abilities"][res]["name"]+": "+result["special_abilities"][res]["desc"]+"\n"
+        }
+        modalStr += "--------------------------------\n"
+
+        modalStr += "Actions\n"
+        for(var res in result["actions"]){
+            modalStr += "- "+result["actions"][res]["name"]+": "+result["actions"][res]["desc"]+"\n"
+        }
+
         setModalContent(modalStr);
         setModalOpen(true);
     };
