@@ -111,6 +111,7 @@ const EncounterCreation = () => {
             intelligence: Number(editableStats.intelligence),
             wisdom: Number(editableStats.wisdom),
             charisma: Number(editableStats.charisma),
+            hit_points: Number(editableStats.hit_points)
         };
     
         setSelectedEncounters(prev =>
@@ -120,6 +121,7 @@ const EncounterCreation = () => {
         );
         setEditModalOpen(false);
     };
+    
     
 
     const closeModal = () => {
@@ -195,27 +197,36 @@ const EncounterCreation = () => {
                     </div>
                 </div>
             )}
-
-            {editModalOpen && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <span className="close" onClick={closeEditModal}>&times;</span>
-                        <h2>Edit Stats for {editableStats.name}</h2>
-                        {['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'].map(stat => (
-                            <div key={stat}>
-                                <label>{stat.charAt(0).toUpperCase() + stat.slice(1)}:</label>
+                {editModalOpen && (
+                    <div className="modal">
+                        <div className="modal-content">
+                            <span className="close" onClick={closeEditModal}>&times;</span>
+                            <h2>Edit Stats for {editableStats.name}</h2>
+                            {/* Ability Scores */}
+                            {['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'].map(stat => (
+                                <div key={stat}>
+                                    <label>{stat.charAt(0).toUpperCase() + stat.slice(1)}:</label>
+                                    <input
+                                        type="number"
+                                        name={stat}
+                                        value={editableStats[stat] || ''}
+                                        onChange={handleStatChange}
+                                    />
+                                </div>
+                            ))}
+                            <div>
+                                <label>Hit Points:</label>
                                 <input
                                     type="number"
-                                    name={stat}
-                                    value={editableStats[stat] || ''}
+                                    name="hit_points"
+                                    value={editableStats.hit_points || ''}
                                     onChange={handleStatChange}
                                 />
                             </div>
-                        ))}
-                        <button onClick={saveStats}>Save</button>
+                            <button onClick={saveStats}>Save</button>
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
         </div>
     );
 };
