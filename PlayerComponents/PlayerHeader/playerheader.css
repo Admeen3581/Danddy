@@ -1,6 +1,7 @@
 body {
   background: url('../woods.jpeg');
   overflow: hidden;
+  font-family: 'Cinzel', serif;
 }
 
 .PAHome-section {
