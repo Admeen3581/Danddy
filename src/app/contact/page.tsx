@@ -1,3 +1,4 @@
+import './contact.css'
 
 export default function Contact() {
     return (
@@ -10,7 +11,7 @@ export default function Contact() {
             <section className="contact-info">
                 <h2>Contact Information</h2>
                 <p>
-                    <a href="mailto:danddysmmith@gmail.com">Email </a>
+                    <a href="mailto:danddysmmith@gmail.com">danddysmmith@gmail.com </a>
                 </p>
             </section>
 
