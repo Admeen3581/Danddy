@@ -14,8 +14,8 @@ import PlayerNotes from '../../../PlayerComponents/PlayerNotes/playernotes';
 const PlayerHome = () => {
 
   const isRoomCreated = useRef(false)
-  const {roomId, setRoomId} = useLocalStore()
-
+  const {roomId, setRoomId, userId} = useLocalStore()
+  
   useEffect(() => {
     if(!isRoomCreated.current){
       try{
