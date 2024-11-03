@@ -183,20 +183,22 @@
     - [SCRUM-](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-147), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-147-track-dm-data-in-database) </br>
 
 **Lorenz**: "Psst. Hey. Summarize what you did." </br>
->- `Jira Task: ` </br>
-  - [SCRUM-](), [Bitbucket Branch]() </br>
-- `Jira Task: Re
-    - [SCRUM-](), [Bitbucket Branch]() </br>
-- `Jira Task: Re
-    - [SCRUM-](), [Bitbucket Branch]() </br>
-- `Jira Task: Re
-    - [SCRUM-](), [Bitbucket Branch]() </br>
-- `Jira Task: Re
-    - [SCRUM-](), [Bitbucket Branch]() </br>
-- `Jira Task: Re
-    - [SCRUM-](), [Bitbucket Branch]() </br>
-- `Jira Task: Re
-    - [SCRUM-](), [Bitbucket Branch]() </br>
+>- `Jira Task: Add visually appealing styles on the homepage` </br>
+  - [SCRUM-126](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-126), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-126-add-visually-appealing-styles-) </br>
+- `Jira Task: Implement About Us Page
+    - [SCRUM-130](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-130), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-130-implement-about-us-page) </br>
+- `Jira Task: Implement Combat Components
+    - [SCRUM-137](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-137), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-137-implement-combat-components) </br>
+- `Jira Task: Implement Player Conditions component for combat
+    - [SCRUM-138](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-138), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-138-implement-player-conditions-co) </br>
+- `Jira Task: Implement Inventory Components for players
+    - [SCRUM-139](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-139), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-139-implement-inventory-components) </br>
+- `Jira Task: Redesign Combat Page for the player and add all components
+    - [SCRUM-140](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-140), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-140-redesign-combat-page-for-the-p) </br>
+- `Jira Task: Pull data from the player to show Spells/Actions
+    - [SCRUM-125](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-125), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-125-pull-data-from-the-player-to-s) </br>
+- `Jira Task: Implement Contact Us Page UI
+    - [SCRUM-136](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-136), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-136-implement-contact-us-page-ui) </br>
 
 ### Reports
 
