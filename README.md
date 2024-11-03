@@ -204,29 +204,27 @@
 
 #### [Insert Burnup chart]
 
-#### Next Steps
+#### Next Steps (Sprint 3)
 
 **Adam**:</br>
-   >- Fleshing out the functionality of the messaging system</br>
-   >- Setting up basic tutorial structure </br>
+   >- Implementing private message backend</br>
+   >- Making small minor non-necessity changes</br>
    
 **Joshua**:
-   >- Work on player syncronization with the front end and database</br>
-   >- Setting up combat backend functionality </br>
+   >- item 0</br>
+   >- item 1 </br>
    
 **Olivia**:
-   >- Make the front end look better</br>
-   >- Make the front end functional for player and DM</br>
-   >- Assist in making the combat page</br>
+   >- item 0</br>
+   >- item 1</br>
    
 **Roman**:
-   >- Working on user authentication and tying user data</br>
-   >- Getting the DM syncronization with the front end and database</br>
+   >- item 0</br>
+   >- item 1</br>
    
 **Lorenz**:
-   >- Data pulling for the players and characters</br>
-   >- Assisting in desiging front end</br>
-   >- Making the combat page</br>
+   >- item 0</br>
+   >- item 1</br>
    
 ## Contact
 Adam Long  
