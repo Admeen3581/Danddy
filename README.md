@@ -121,51 +121,50 @@
     - [SCRUM-106](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-106), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-106_2-implement-sign-up-ui) </br>
 - `Jira Task: Implement SignIn UI` </br>
     - [SCRUM-105](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-105), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-105_2-implement-signin-ui) </br>
-- `Jira Task: Redirect unauthorized users to the SignIn page`
+- `Jira Task: Redirect unauthorized users to the SignIn page` </br>
     - [SCRUM-109](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-109), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-109-redirect-unauthorized-users) </br>
-- `Jira Task: Design the Message System UI
+- `Jira Task: Design the Message System UI` </br>
     - [SCRUM-31](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-31), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-31-design-the-message-system-ui) </br>
-- `Jira Task: Implement chat button on DM homepage
+- `Jira Task: Implement chat button on DM homepage` </br>
     - [SCRUM-112](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-112), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-112-implement-chat-button-on-dm-ho) </br>
-- `Jira Task: Implement chat button on Player homepage
+- `Jira Task: Implement chat button on Player homepage` </br>
     - [SCRUM-111](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-111), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-111-implement-chat-button-on-playe) </br>
-- `Jira Task: Implement shadCn derived drawer component
+- `Jira Task: Implement shadCn derived drawer component` </br>
     - [SCRUM-113](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-113), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-113-implement-shadcn-derived-drawe) </br>
-- `Jira Task: Implement messaging design UI
+- `Jira Task: Implement messaging design UI` </br>
     - [SCRUM-157](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-157), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-157-implement-messaging-design-ui) </br>
-- `Jira Task: Research auth respective messaging
+- `Jira Task: Research auth respective messaging` </br>
     - [SCRUM-114](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-114), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-114-research-auth-respective-messa) </br>
 
 **Joshua**: "Psst. Hey. Summarize what you did." </br>
->-  Jira Task: Re
-    - [SCRUM-](), [Bitbucket Branch]() </br>
-- `Jira Task: Re
-    - [SCRUM-](), [Bitbucket Branch]() </br>
-- `Jira Task: Re
-    - [SCRUM-](), [Bitbucket Branch]() </br>
-- `Jira Task: Re
-    - [SCRUM-](), [Bitbucket Branch]() </br>
-- `Jira Task: Re
-    - [SCRUM-](), [Bitbucket Branch]() </br>
-- `Jira Task: Re
-    - [SCRUM-](), [Bitbucket Branch]() </br>
-- `Jira Task: Re
-    - [SCRUM-](), [Bitbucket Branch]() </br>
-
+>-  `Jira Task: Sync Character Stats from backend` </br>
+    - [SCRUM-129](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-129), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-129-sync-character-stats-from-back) </br>
+- `Jira Task: Create basic dice roller pop up` </br>
+    - [SCRUM-155](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-155), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-155-create-basic-dice-roller-pop-u) </br>
+- `Jira Task: Create Enemy Template Creation Screen` </br>
+    - [SCRUM-158](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-158), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-158-create-enemy-template-creation) </br>
+- `Jira Task: Create character creation UI` </br>
+    - [SCRUM-132](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-132), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-132-create-character-creation-ui) </br>
+- `Jira Task: Create character creation logic` </br>
+    - [SCRUM-131](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-131), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-131-create-character-creation-logi) </br>
+- `Jira Task: Adding DM edit stats of enemy templates` </br>
+    - [SCRUM-160](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-160), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-160-adding-dm-edit-stats-of-enemy-) </br>
 
 **Olivia**: "Psst. Hey. Summarize what you did." </br>
->- `Jira Task: Implement Player UI` </br>
-   - [CP-82](https://cs3398-luna-f24.atlassian.net/browse/CP-82), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-82-implement-player-ui) </br>
-- `Jira Task: Implement DM interface` </br>
-    - [CP-77](https://cs3398-luna-f24.atlassian.net/browse/CP-77), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-77-implement-dm-interface) </br>
-- `Jira Task: Design/ Implement UI for Combat Page` </br>
-    - [CP-24](https://cs3398-luna-f24.atlassian.net/browse/CP-24), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-24-design--implement-ui-for-combat-pa) </br>
-- `Jira Task:  Design Player Management UI` </br>
-    - [CP-18](https://cs3398-luna-f24.atlassian.net/browse/CP-18), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-18-design-player-ui) </br>
-- `Jira Task: Creating Components for DM Home and Character Sheets` </br>
-    - [CP-8](https://cs3398-luna-f24.atlassian.net/browse/CP-8), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-8-implement-dm-pages-charsheets-npc-e) </br>
-- `Jira Task: Design DM interface` </br>
-    - [CP-7](https://cs3398-luna-f24.atlassian.net/browse/CP-7), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-7-design-dm-interface) </br>
+>- `Jira Task: Re
+    - [SCRUM-](), [Bitbucket Branch]() </br>
+- `Jira Task: Re
+    - [SCRUM-](), [Bitbucket Branch]() </br>
+- `Jira Task: Re
+    - [SCRUM-](), [Bitbucket Branch]() </br>
+- `Jira Task: Re
+    - [SCRUM-](), [Bitbucket Branch]() </br>
+- `Jira Task: Re
+    - [SCRUM-](), [Bitbucket Branch]() </br>
+- `Jira Task: Re
+    - [SCRUM-](), [Bitbucket Branch]() </br>
+- `Jira Task: Re
+    - [SCRUM-](), [Bitbucket Branch]() </br>
 
 **Roman**: "Psst. Hey. Summarize what you did." </br>
 >- `Jira Task: Design Database Schema` </br>
