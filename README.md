@@ -115,8 +115,8 @@
 #### Contributions
 
 **Adam**: "Implemented a private messaging system UI, a cleaner authentication frontend, and researched user messaging backend" </br>
->- `Jira Task: Implement a shadCn Forms component`</br>
-   - [SCRUM-107](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-107), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-107-implement-a-shadcn-forms-compo) </br>
+- `Jira Task: Implement a shadCn Forms component`</br>
+    - [SCRUM-107](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-107), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-107-implement-a-shadcn-forms-compo) </br>
 - `Jira Task: Implement SignUp UI` </br>
     - [SCRUM-106](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-106), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-106_2-implement-sign-up-ui) </br>
 - `Jira Task: Implement SignIn UI` </br>
@@ -137,8 +137,8 @@
     - [SCRUM-114](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-114), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-114-research-auth-respective-messa) </br>
 
 **Joshua**: "Psst. Hey. Summarize what you did." </br>
->-  `Jira Task: Sync Character Stats from backend` </br>
-   - [SCRUM-129](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-129), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-129-sync-character-stats-from-back) </br>
+-  `Jira Task: Sync Character Stats from backend` </br>
+    - [SCRUM-129](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-129), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-129-sync-character-stats-from-back) </br>
 - `Jira Task: Create basic dice roller pop up` </br>
     - [SCRUM-155](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-155), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-155-create-basic-dice-roller-pop-u) </br>
 - `Jira Task: Create Enemy Template Creation Screen` </br>
@@ -151,8 +151,8 @@
     - [SCRUM-160](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-160), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-160-adding-dm-edit-stats-of-enemy-) </br>
 
 **Olivia**: "Psst. Hey. Summarize what you did." </br>
->- `Jira Task: Create overall color scheme and design` </br>
-   - [SCRUM-121](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-121), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-121-create-overall-color-scheme-an) </br>
+- `Jira Task: Create overall color scheme and design` </br>
+    - [SCRUM-121](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-121), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-121-create-overall-color-scheme-an) </br>
 - `Jira Task: Add in functional features/buttons for Player` </br>
     - [SCRUM-119](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-119), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-119-add-in-functional-features-but) </br>
 - `Jira Task: Redesign the Player Interface` </br>
@@ -167,8 +167,8 @@
     - [SCRUM-120](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-120), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-120-fixing-bugs-in-css) </br>
 
 **Roman**: "Psst. Hey. Summarize what you did." </br>
->- `Jira Task: Add Email Verification for Sign Up` </br>
-     - [SCRUM-142](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-142), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-142-add-email-verification-for-sig) </br>
+- `Jira Task: Add Email Verification for Sign Up` </br>
+    - [SCRUM-142](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-142), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-142-add-email-verification-for-sig) </br>
 - `Jira Task: Fix Storing of UserID Locally` </br>
     - [SCRUM-145](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-145), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-145-fix-storing-of-userid-locally) </br>
 - `Jira Task: Link SignIn UI With Backend` </br>
@@ -183,8 +183,8 @@
     - [SCRUM-](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-147), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-147-track-dm-data-in-database) </br>
 
 **Lorenz**: "Psst. Hey. Summarize what you did." </br>
->- `Jira Task: Add visually appealing styles on the homepage` </br>
-  - [SCRUM-126](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-126), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-126-add-visually-appealing-styles-) </br>
+- `Jira Task: Add visually appealing styles on the homepage` </br>
+    - [SCRUM-126](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-126), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-126-add-visually-appealing-styles-) </br>
 - `Jira Task: Implement About Us Page
     - [SCRUM-130](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-130), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-130-implement-about-us-page) </br>
 - `Jira Task: Implement Combat Components
