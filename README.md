@@ -151,30 +151,40 @@
     - [SCRUM-160](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-160), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-160-adding-dm-edit-stats-of-enemy-) </br>
 
 **Olivia**: "Psst. Hey. Summarize what you did." </br>
->- `Jira Task: Re
-    - [SCRUM-](), [Bitbucket Branch]() </br>
-- `Jira Task: Re
-    - [SCRUM-](), [Bitbucket Branch]() </br>
-- `Jira Task: Re
-    - [SCRUM-](), [Bitbucket Branch]() </br>
-- `Jira Task: Re
-    - [SCRUM-](), [Bitbucket Branch]() </br>
-- `Jira Task: Re
-    - [SCRUM-](), [Bitbucket Branch]() </br>
-- `Jira Task: Re
-    - [SCRUM-](), [Bitbucket Branch]() </br>
-- `Jira Task: Re
-    - [SCRUM-](), [Bitbucket Branch]() </br>
+>- `Jira Task: Create overall color scheme and design` </br>
+    - [SCRUM-121](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-121), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-121-create-overall-color-scheme-an) </br>
+- `Jira Task: Add in functional features/buttons for Player` </br>
+    - [SCRUM-119](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-119), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-119-add-in-functional-features-but) </br>
+- `Jira Task: Redesign the Player Interface` </br>
+    - [SCRUM-117](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-117), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-117-redesign-the-dm-player-interfa) </br>
+- `Jira Task: Add in functional features/buttons for DM` </br>
+    - [SCRUM-118](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-118), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-118-add-in-functional-features-but) </br>
+- `Jira Task: Fix style of Player pages` </br>
+    - [SCRUM-123](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-123), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-123-fix-style-of-player-pages) </br>
+- `Jira Task: Fix style of DM pages` </br>
+    - [SCRUM-122](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-122), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-122-fix-style-of-dm-pages) </br>
+- `Jira Task: Fixing bugs in CSS` </br>
+    - [SCRUM-120](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-120), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-120-fixing-bugs-in-css) </br>
 
 **Roman**: "Psst. Hey. Summarize what you did." </br>
->- `Jira Task: Design Database Schema` </br>
-   - [CP-36](https://cs3398-luna-f24.atlassian.net/browse/CP-36), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-36-design-database-schema) </br>
-- `Jira Task: Implement Initial Structure of the Database` </br>
-    - [CP-78](https://cs3398-luna-f24.atlassian.net/browse/CP-78), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/feature/CP-78-implement-initial-structure-of-the) </br>
-- `Jira Task: Implement Authentication for User Data Secuirty` </br>
-    - [CP-39](https://cs3398-luna-f24.atlassian.net/browse/CP-39), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-39-implement-authentication) </br>
-- `Jira Task: Implement Backend API to Connect to Cloud Database` </br>
-    - [CP-37](https://cs3398-luna-f24.atlassian.net/browse/CP-37), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/danddy_cs3398project/branch/CP-37-implement-backend-api) </br>
+>- `Jira Task: Re
+     - [SCRUM-](), [Bitbucket Branch]() </br>
+- `Jira Task: Re
+    - [SCRUM-](), [Bitbucket Branch]() </br>
+- `Jira Task: Re
+    - [SCRUM-](), [Bitbucket Branch]() </br>
+- `Jira Task: Re
+    - [SCRUM-](), [Bitbucket Branch]() </br>
+- `Jira Task: Re
+    - [SCRUM-](), [Bitbucket Branch]() </br>
+- `Jira Task: Re
+    - [SCRUM-](), [Bitbucket Branch]() </br>
+- `Jira Task: Re
+    - [SCRUM-](), [Bitbucket Branch]() </br>
+- `Jira Task: Re
+    - [SCRUM-](), [Bitbucket Branch]() </br>
+- `Jira Task: Re
+    - [SCRUM-](), [Bitbucket Branch]() </br>
 
 **Lorenz**: "Psst. Hey. Summarize what you did." </br>
 >- `Jira Task: Design home screen` </br>
