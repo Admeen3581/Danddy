@@ -1,21 +1,21 @@
 "use client"
 
 import React, { useEffect, useRef } from 'react';
-import PlayerHeader from '../../../PlayerHeaderComponents/PlayerHeader/playerheader';
-import PlayerStats from '../../../PlayerHeaderComponents/PlayerStats/playerstats';
+import PlayerHeader from '../../../PlayerComponents/PlayerHeader/playerheader';
+import PlayerStats from '../../../PlayerComponents/PlayerStats/playerstats';
 import useLocalStore from '@/utils/store';
 import { getDnDAPI, readDatabaseRoute, updateDatabaseRoute } from '@/utils/httpRequester';
-import PlayerSaving from '../../../PlayerHeaderComponents/PlayerSaving/playersaving';
-import PlayerSense from '../../../PlayerHeaderComponents/PlayerSense/playersense';
-import PlayerNotes from '../../../PlayerHeaderComponents/PlayerNotes/playernotes';
+import PlayerSaving from '../../../PlayerComponents/PlayerSaving/playersaving';
+import PlayerSense from '../../../PlayerComponents/PlayerSense/playersense';
+import PlayerNotes from '../../../PlayerComponents/PlayerNotes/playernotes';
 
 
 
 const PlayerHome = () => {
 
   const isRoomCreated = useRef(false)
-  const {roomId, setRoomId} = useLocalStore()
-
+  const {roomId, setRoomId, userId} = useLocalStore()
+  
   useEffect(() => {
     if(!isRoomCreated.current){
       try{

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { updateDatabaseRoute } from '@/utils/httpRequester';
 import { auth } from '@/firebaseConfig';
 import AuthForm from './AuthForm';
@@ -35,13 +35,16 @@ export default function SignUpLogic() {
       // Save the uid locally
       setUserId(user.uid);
 
+      await sendEmailVerification(user);
+
       // Update the database with additional user data
       await updateDatabaseRoute(`/users/${userData.username}`, {
         ...userData,
-        uid: user.uid
+        uid: user.uid,
+        emailVerified: false
       });
 
-      alert('Sign-up successful!');
+      alert('Sign-up successful! Please check your email to verify your account.');
     } catch (error: any) {
       console.error('Failed to sign up:', error);
       setError('Failed to sign up. Please try again.');

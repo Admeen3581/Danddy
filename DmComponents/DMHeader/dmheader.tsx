@@ -21,7 +21,13 @@ const DMHeader = () => {
           </div>
         </div>
 
-          <h1>DM HOME PAGE</h1>
+        <h1 className="dmglow-text">
+          <span>DM</span>
+          <span> </span>
+          <span>HOME</span>
+          <span> </span>
+          <span>PAGE</span>
+        </h1>
        </div>
     </div>
   );

@@ -1,18 +1,16 @@
 body {
-   background-color: #1E1E1E;
-   font-family: 'Trebuchet MS', sans-serif;
-      margin: 0; 
+  background: url('../woods.jpeg');
+  overflow: hidden;
+  font-family: 'Cinzel', serif;
 }
 
 .headerBox {
-   background-color: #ECEEE8;  
    color: #1E1E1E; 
    position: fixed;           
    padding: 0 20px;         
    text-align: center;  
-   font-size: 24px;           
-   font-weight: bold;        
-   border-radius: 5px;          
+   font-size: 24px;                  
+   border-radius: 2px;          
    margin: 20px auto;          
    max-width: 1400px;
    height: 65px;  
@@ -27,7 +25,7 @@ body {
    position: relative;
    text-align: center;
    justify-content: center;
-   border-radius: 5px; 
+   border-radius: 2px; 
    width: 100%;
    padding: 10px;
    background-color: #ECEEE8;
@@ -40,26 +38,27 @@ body {
  }
  
  .dmmenu-button {
-   font-size: 30px;
-   background-color: transparent;
-   border: none;
-   cursor: pointer;
-   padding: 10px;
- }
+  width: 80px;            
+  height: 50px;                  
+  background: url('../compass.png') center / contain no-repeat;
+  background-color: transparent; 
+  border: none;
+  cursor: pointer;  
+ } 
  
  .dmmenu-content {
-   position: fixed; 
-   top: 0;
-   left: 0;
-   height: 100vh;
-   width: 13vw; 
-   transform: translateX(-100%);
-   transition: transform 0.3s ease;
-   background-color: rgba(78, 9, 9, 0.809);
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 13vw;
+  height: 100vh;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  background: url('../dragon.jpg') center / cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
  }
  
  .dmmenu-content ul {
@@ -81,3 +80,18 @@ body {
  .dmmenu-container:hover .dmmenu-content {
    transform: translateX(0);
  }
+
+ .dmglow-text {
+  display: inline-block;
+}
+
+.dmglow-text span {
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.dmglow-text span:hover {
+  color: #00025d; 
+  text-shadow: 
+    0 0 2px #00025d, 
+    0 0 4px #00025d; 
+}
