@@ -5,14 +5,14 @@
   color: white; 
 }
 
-h1 {
+.about-container  h1 {
   font-size: 2.5rem;
   color: #eceee8; 
   text-align: center;
   margin-bottom: 1.5rem;
 }
 
-p {
+.about-container p {
   font-size: 1.1rem;
   color: #eceee8; 
   line-height: 1.6;
@@ -23,7 +23,7 @@ p {
   margin-top: 2rem;
 }
 
-h2 {
+.about-container h2  {
   font-size: 2rem;
   color: #eceee8;
   margin-bottom: 1rem;
