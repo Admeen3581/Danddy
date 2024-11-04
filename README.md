@@ -211,8 +211,8 @@
    >- Making small minor non-necessity changes</br>
    
 **Joshua**:
-   >- item 0</br>
-   >- item 1 </br>
+   >- Adding in Saving functionality for characters, and encounters.</br>
+   >- Polishing the room system, and player syncing </br>
    
 **Olivia**:
    >- Notes system backend
