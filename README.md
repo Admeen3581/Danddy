@@ -166,7 +166,7 @@
 - `Jira Task: Fixing bugs in CSS` </br>
     - [SCRUM-120](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-120), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-120-fixing-bugs-in-css) </br>
 
-**Roman**: "Psst. Hey. Summarize what you did." </br>
+**Roman**: "Finshed the Sign In and Sign Up system, including storing userId's for use elsewhere." </br>
 - `Jira Task: Add Email Verification for Sign Up` </br>
     - [SCRUM-142](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-142), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-142-add-email-verification-for-sig) </br>
 - `Jira Task: Fix Storing of UserID Locally` </br>
@@ -219,9 +219,10 @@
    >- Finalizing/cleaning up CSS/style
    >- Cleaning up files and making sure everything is readable/documented 
    
-**Roman**:
-   >- item 0</br>
-   >- item 1</br>
+**Roman**:</br>
+   >- Work on the hosting of the app</br>
+   >- Start on fixing our current known bugs</br>
+   >- Refine the backend for the DMs and Campaigns</br>
    
 **Lorenz**:
    >- Notes system on front-end and backend</br>
