@@ -6,7 +6,7 @@ import {DirectMessagePopup} from "@/components/directMessagePopup";
 
 const DMHeader = () => {
   return (
-    <div className="dmhome-section">
+    <div className="dm-sect">
        <div className="headerBox">
        <div className="dmmenu-container">
           <button className="dmmenu-button">☰</button>
