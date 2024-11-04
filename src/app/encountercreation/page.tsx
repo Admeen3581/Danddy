@@ -1,21 +1,28 @@
-"use client";
-
+"use client"
 import { useEffect, useState } from 'react';
 import './EncounterCreation.css';
 import { getDnDAPI } from '@/utils/httpRequester';
+import { getModifier } from '@/utils/characterJsonFunctions';
 
 const EncounterCreation = () => {
     const itemsPerPage = 25;
     const [currentPage, setCurrentPage] = useState(1);
     const [encounters, setEncounters] = useState([]);
-    const [selectedEncounters, setSelectedEncounters] = useState([]); // Top list
+    const [selectedEncounters, setSelectedEncounters] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [searchTerm, setSearchTerm] = useState(''); // Search input state
+    const [searchTerm, setSearchTerm] = useState('');
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modalContent, setModalContent] = useState('');
+    const [editModalOpen, setEditModalOpen] = useState(false);
+    const [editableStats, setEditableStats] = useState({});
 
     useEffect(() => {
         const fetchEncounters = async () => {
             const result = await getDnDAPI("/monsters");
-            const dummyData = Array.from({ length: result["count"] }, (_, i) => `${result.results[i].name}`);
+            const dummyData = result.results.map(monster => ({
+                name: monster.name,
+                url: "/monsters/"+monster.name.toLowerCase().replaceAll(" ", "-")
+            }));
             setEncounters(dummyData);
             setLoading(false);
         };
@@ -25,24 +32,26 @@ const EncounterCreation = () => {
 
     const totalPages = Math.ceil(encounters.length / itemsPerPage);
     const currentEncounters = encounters
-        .filter(encounter => encounter.toLowerCase().includes(searchTerm.toLowerCase())) // Filter based on search term
+        .filter(encounter => encounter.name.toLowerCase().includes(searchTerm.toLowerCase()))
         .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
 
-    const addEncounterToTopList = (encounter) => {
+    const addEncounterToTopList = async (encounter) => {
+        const result = await getDnDAPI(encounter.url); // Fetch full JSON data
+        const newEncounter = { ...result, count: 1 }; // Add count to the full data
         setSelectedEncounters((prevSelected) => {
-            const existingEncounter = prevSelected.find(item => item.name === encounter);
+            const existingEncounter = prevSelected.find(item => item.name === newEncounter.name);
             if (existingEncounter) {
                 return prevSelected.map(item =>
-                    item.name === encounter
+                    item.name === newEncounter.name
                         ? { ...item, count: item.count + 1 }
                         : item
                 );
             }
-            return [...prevSelected, { name: encounter, count: 1 }];
+            return [...prevSelected, newEncounter];
         });
     };
 
@@ -62,9 +71,100 @@ const EncounterCreation = () => {
         });
     };
 
-    // Function to handle the Finish button click
+    const fetchAndLogMonsterStats = async (url) => {
+        const result = await getDnDAPI(url);
+        let modalStr = `${result.name}\n--------------------------------\n`;
+        modalStr += `AC: ${result.armor_class[0].value}\n`;
+        modalStr += `Hit Points: ${result.hit_points}\n`;
+        modalStr += `Speed: ${result.speed.walk}\n--------------------------------\n`;
+
+        // Add stats and modifiers
+        ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'].forEach(stat => {
+            modalStr += `${stat.toUpperCase()}: ${result[stat]} (${getModifier(result[stat])})\n`;
+        });
+        modalStr += "--------------------------------\n"
+
+        for(var prof in result["proficiencies"]){
+            modalStr += "- "+result["proficiencies"][prof]["proficiency"]["name"]+": "+result["proficiencies"][prof]["value"]+"\n"
+        }
+
+        for(var res in result["damage_immunities"]){
+            modalStr += "- Damage Immunity: "+result["damage_immunities"][res]+"\n"
+        }
+
+        for(var res in result["damage_resistances"]){
+            modalStr += "- Damage Resistance: "+result["damage_resistances"][res]+"\n"
+        }
+
+        for(var res in result["damage_vulnerabilities"]){
+            modalStr += "- Damage Vulnerability: "+result["damage_vulnerabilities"][res]+"\n"
+        }
+        modalStr += "--------------------------------\n"
+
+        modalStr += "Senses:\n"
+        modalStr += "   -Blindsight: "+result["senses"]["blindsight"]+"\n"
+        modalStr += "   -Darkvision: "+result["senses"]["darkvision"]+"\n"
+        modalStr += "   -Passive Perception: "+result["senses"]["passive_perception"]+"\n"
+        modalStr += "Languages: "+result["languages"]+"\n"
+        modalStr += "Challenge: "+result["challenge_rating"]+"\n"
+        modalStr += "--------------------------------\n"
+
+        for(var res in result["special_abilities"]){
+            modalStr += "- "+result["special_abilities"][res]["name"]+": "+result["special_abilities"][res]["desc"]+"\n"
+        }
+        modalStr += "--------------------------------\n"
+
+        modalStr += "Actions\n"
+        for(var res in result["actions"]){
+            modalStr += "- "+result["actions"][res]["name"]+": "+result["actions"][res]["desc"]+"\n"
+        }
+
+        setModalContent(modalStr);
+        setModalOpen(true);
+    };
+
+    const handleEditStats = (encounter) => {
+        setEditableStats(encounter);
+        setEditModalOpen(true);
+    };
+
+    const handleStatChange = (e) => {
+        const { name, value } = e.target;
+        setEditableStats(prev => ({ ...prev, [name]: value }));
+    };
+
     const handleFinish = () => {
-        console.log("Selected Encounters:", selectedEncounters);
+        console.log(selectedEncounters)
+    }
+
+    const saveStats = () => {
+        const updatedStats = {
+            ...editableStats,
+            strength: Number(editableStats.strength),
+            dexterity: Number(editableStats.dexterity),
+            constitution: Number(editableStats.constitution),
+            intelligence: Number(editableStats.intelligence),
+            wisdom: Number(editableStats.wisdom),
+            charisma: Number(editableStats.charisma),
+            hit_points: Number(editableStats.hit_points)
+        };
+    
+        setSelectedEncounters(prev =>
+            prev.map(item => 
+                item.name === updatedStats.name ? updatedStats : item
+            )
+        );
+        setEditModalOpen(false);
+    };
+    
+    
+
+    const closeModal = () => {
+        setModalOpen(false);
+    };
+
+    const closeEditModal = () => {
+        setEditModalOpen(false);
     };
 
     return (
@@ -80,6 +180,7 @@ const EncounterCreation = () => {
                         <div key={index} className="encounter-block">
                             <p>{encounter.name} x{encounter.count}</p>
                             <button onClick={() => removeEncounterFromTopList(encounter.name)}>Remove</button>
+                            <button onClick={() => handleEditStats(encounter)}>Edit Stats</button>
                         </div>
                     ))
                 )}
@@ -99,8 +200,9 @@ const EncounterCreation = () => {
                 ) : (
                     currentEncounters.map((encounter, index) => (
                         <div key={index} className="encounter-block">
-                            <p>{encounter}</p>
+                            <p>{encounter.name}</p>
                             <button onClick={() => addEncounterToTopList(encounter)}>Add</button>
+                            <button onClick={() => fetchAndLogMonsterStats(encounter.url)}>View Stats</button>
                         </div>
                     ))
                 )}
@@ -118,10 +220,48 @@ const EncounterCreation = () => {
                 ))}
             </div>
 
-            {/* Finish button */}
             <button onClick={handleFinish} className="finish-button">
                 Finish
             </button>
+
+            {modalOpen && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={closeModal}>&times;</span>
+                        <pre>{modalContent}</pre>
+                    </div>
+                </div>
+            )}
+                {editModalOpen && (
+                    <div className="modal">
+                        <div className="modal-content">
+                            <span className="close" onClick={closeEditModal}>&times;</span>
+                            <h2>Edit Stats for {editableStats.name}</h2>
+                            {/* Ability Scores */}
+                            {['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'].map(stat => (
+                                <div key={stat}>
+                                    <label>{stat.charAt(0).toUpperCase() + stat.slice(1)}:</label>
+                                    <input
+                                        type="number"
+                                        name={stat}
+                                        value={editableStats[stat] || ''}
+                                        onChange={handleStatChange}
+                                    />
+                                </div>
+                            ))}
+                            <div>
+                                <label>Hit Points:</label>
+                                <input
+                                    type="number"
+                                    name="hit_points"
+                                    value={editableStats.hit_points || ''}
+                                    onChange={handleStatChange}
+                                />
+                            </div>
+                            <button onClick={saveStats}>Save</button>
+                        </div>
+                    </div>
+                )}
         </div>
     );
 };
