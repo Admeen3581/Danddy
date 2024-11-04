@@ -223,8 +223,8 @@
    >- item 1</br>
    
 **Lorenz**:
-   >- item 0</br>
-   >- item 1</br>
+   >- Notes system on front-end and backend</br>
+   >- Fixes on build, styling and etc.. </br>
    
 ## Contact
 Adam Long  
