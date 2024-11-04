@@ -1,8 +1,12 @@
-body {
-  background: url('../woods.jpeg');
+.background {
+  background: url('../woods.jpeg') center / cover no-repeat;
   overflow: hidden;
+  position: fixed;
   font-family: 'Cinzel', serif;
+  min-height: 100vh; 
+  width: 100vw;     
 }
+
 
 .headerBox {
    color: #1E1E1E; 
@@ -29,24 +33,24 @@ body {
    width: 100%;
    padding: 10px;
    background-color: #ECEEE8;
- }
+}
  
- .dmmenu-container {
+.dmmenu-container {
    position: absolute;
    top: 10px; 
    left: 10px;
- }
+}
  
- .dmmenu-button {
+.dmmenu-button {
   width: 80px;            
   height: 50px;                  
   background: url('../compass.png') center / contain no-repeat;
   background-color: transparent; 
   border: none;
   cursor: pointer;  
- } 
+} 
  
- .dmmenu-content {
+.dmmenu-content {
   position: fixed;
   top: 0;
   left: 0;
@@ -59,29 +63,29 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 100;
- }
+}
  
- .dmmenu-content ul {
+.dmmenu-content ul {
    list-style-type: none;
    padding: 0;
    text-align: center;
- }
+}
  
- .dmmenu-content ul li, .button {
+.dmmenu-content ul li, .button {
    padding: 20px;
- }
+}
  
- .dmmenu-content ul li a, .button {
+.dmmenu-content ul li a, .button {
    color: #ECEEE8;
    font-size: 24px;
    text-decoration: none;
- }
+}
  
- .dmmenu-container:hover .dmmenu-content {
+.dmmenu-container:hover .dmmenu-content {
    transform: translateX(0);
- }
+}
 
- .dmglow-text {
+.dmglow-text {
   display: inline-block;
 }
 
