@@ -215,8 +215,8 @@
    >- item 1 </br>
    
 **Olivia**:
-   >- item 0</br>
-   >- item 1</br>
+   >- Notes system backend
+   >- Finalizing/cleaning up CSS/style
    
 **Roman**:
    >- item 0</br>
