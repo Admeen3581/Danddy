@@ -22,7 +22,7 @@ const DMHeader = () => {
         </div>
 
         <h1 className="dmglow-text">
-          <span>PLAYER</span>
+          <span>DM</span>
           <span> </span>
           <span>HOME</span>
           <span> </span>
