@@ -3,7 +3,7 @@
 import './dm.css';
 import React, { useEffect, useRef } from 'react';
 import DMNotes from '../../../DmComponents/DMNotes/dmnotes';
-import { createRoom, deleteDatabaseRoute, generateRoomCode, patchDatabaseRoute, readDatabaseRoute, updateDatabaseRoute } from '@/utils/httpRequester';
+import { createRoom, deleteDatabaseRoute, generateRoomCode, patchDatabaseRoute, readDatabaseRoute, updateDatabaseRoute, generateCampaignId } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
 import DMHeader from '../../../DmComponents/DMHeader/dmheader';
 import DMActivePlayers from '../../../DmComponents/DMActivePlayers/dmactive';
@@ -21,8 +21,9 @@ const DMHome = () => {
         setUserId("guestId")
       }
       const roomId = generateRoomCode()
+      const campaignId = generateCampaignId()
       const roomJson = {
-        "campaign_id": "campaign_id_1",
+        "campaign_id": campaignId,
         "user_id": userId,
         "participants": [""],
         "combat_log": [""],
