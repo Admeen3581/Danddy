@@ -217,6 +217,7 @@
 **Olivia**:
    >- Notes system backend
    >- Finalizing/cleaning up CSS/style
+   >- Cleaning up files and making sure everything is readable/documented 
    
 **Roman**:
    >- item 0</br>
