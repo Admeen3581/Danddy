@@ -3,27 +3,26 @@ import useLocalStore from "@/utils/store";
 import './inventory.css'
 
 const Inventory = () => {
-  const { classesJson, setClassesJson } = useLocalStore();
+  const { classesJson } = useLocalStore();
 
-  // Extract the inventory field from classesJson and map it to displayable items
-  const inventory = (classesJson as Character).inventory.map((item: string) => {
-    return {
-      name: item,
-      description: ""  // Placeholder, adjust as needed
-    };
-  });
+  // Check if classesJson is defined and has an inventory property
+  const inventory = (classesJson as Character)?.inventory || [];
 
   return (
     <div className="inventory-container">
       <h1>Character Inventory</h1>
       <h2>Items</h2>
-      <ul>
-        {inventory.map((item, index) => (
-          <li key={index}>
-            {item.name} - {item.description}
-          </li>
-        ))}
-      </ul>
+      {inventory.length > 0 ? (
+        <ul>
+          {inventory.map((item, index) => (
+            <li key={index}>
+              {item} - {""}  {/* Placeholder for description */}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No items in inventory.</p>
+      )}
     </div>
   );
 };
