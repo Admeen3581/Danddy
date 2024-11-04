@@ -3,7 +3,7 @@
 import './dm.css';
 import React, { useEffect, useRef } from 'react';
 import DMNotes from '../../../DmComponents/DMNotes/dmnotes';
-import { createRoom, deleteDatabaseRoute, generateRoomCode, readDatabaseRoute, updateDatabaseRoute } from '@/utils/httpRequester';
+import { createRoom, deleteDatabaseRoute, generateRoomCode, patchDatabaseRoute, readDatabaseRoute, updateDatabaseRoute, generateCampaignId } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
 import DMHeader from '../../../DmComponents/DMHeader/dmheader';
 import DMActivePlayers from '../../../DmComponents/DMActivePlayers/dmactive';
@@ -12,24 +12,23 @@ import { MessageRecievePopUp } from "@/components/messageRecievedPopUp";
 
 const DMHome = () => {
   const isRoomCreated = useRef(false)
-  const {roomId, setRoomId} = useLocalStore()
+  const {roomId, setRoomId, userId, setUserId} = useLocalStore()
 
   useEffect(() => {
     if(!isRoomCreated.current){
       setRoomId("temp")
+      if (userId == "") {
+        setUserId("guestId")
+      }
       const roomId = generateRoomCode()
+      const campaignId = generateCampaignId()
       const roomJson = {
-        "campaign_id": "campaign_id_1",
-        "user_id": "dm",
-        "participants": ["player1"],
-        "combat_log": [
-          "Thorn casts Fireball on Garrosh",
-          "Garrosh takes 18 damage",
-          "Garrosh swings Greatsword at Thorn",
-          "Thorn dodges the attack"
-        ],
-        "start_time": "2024-09-28T19:00:00Z",
-        "end_time": "2024-09-28T20:15:00Z"
+        "campaign_id": campaignId,
+        "user_id": userId,
+        "participants": [""],
+        "combat_log": [""],
+        "start_time": new Date().toISOString(),
+        "end_time": ""
       };
 
       createRoom(roomId, roomJson)
@@ -37,6 +36,20 @@ const DMHome = () => {
       isRoomCreated.current = true;
     }
   }, []);
+
+  useEffect(() => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      const endTime = new Date().toISOString();
+      patchDatabaseRoute(`rooms/${roomId}`, {end_time: endTime})
+      event.preventDefault();
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  })
 
   return (
     <>

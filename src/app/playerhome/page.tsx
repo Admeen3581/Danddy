@@ -8,6 +8,7 @@ import { getDnDAPI, readDatabaseRoute, updateDatabaseRoute } from '@/utils/httpR
 import PlayerSaving from '../../../PlayerComponents/PlayerSaving/playersaving';
 import PlayerSense from '../../../PlayerComponents/PlayerSense/playersense';
 import PlayerNotes from '../../../PlayerComponents/PlayerNotes/playernotes';
+import { update } from 'firebase/database';
 
 
 
@@ -26,8 +27,18 @@ const PlayerHome = () => {
               setRoomId("null")
             }
             else{
-              result.participants.push("joinedPlayer")
-              updateDatabaseRoute("rooms/"+roomId, result)
+              const containsUserId = result.participants.includes(userId);
+              if (!containsUserId) {
+                const emptyIndex = result.participants.indexOf("");
+                if (emptyIndex !== -1) {
+                  // Replace the empty string with userId
+                  result.participants[emptyIndex] = userId;
+                } else {
+                  // Append userId to the participants array
+                  result.participants.push(userId);
+                }
+                updateDatabaseRoute("rooms/" + roomId, result)
+              }
             }
           })
       }

@@ -53,6 +53,10 @@ export function generateRoomCode(): string {
     return Math.random().toString(36).substr(2, 6).toUpperCase();  // Generates a 6-character alphanumeric string
 }
 
+export function generateCampaignId(): string {
+    return Math.random().toString(36).substr(2, 8).toUpperCase();  // Generates an 8-character alphanumeric string
+}
+
 
 // Function to create a new room in the database
 export async function createRoom(roomCode: string, roomData: object): Promise<void> {
