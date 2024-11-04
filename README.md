@@ -182,7 +182,7 @@
 - `Jira Task: Track DM Data in database` </br>
     - [SCRUM-](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-147), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-147-track-dm-data-in-database) </br>
 
-**Lorenz**: "Psst. Hey. Summarize what you did." </br>
+**Lorenz**: "Worked on UI to make it appealing. Implemented Combat,About and Contact Pages." </br>
 - `Jira Task: Add visually appealing styles on the homepage` </br>
     - [SCRUM-126](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-126), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-126-add-visually-appealing-styles-) </br>
 - `Jira Task: Implement About Us Page
@@ -202,7 +202,7 @@
 
 ### Reports
 
-#### [Insert Burnup chart]
+![Burnup Chart](research-and-conceptual/burnupCharts/sprint2-burnup.png)
 
 #### Next Steps (Sprint 3)
 
