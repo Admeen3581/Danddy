@@ -1,13 +1,13 @@
 "use client"
 
 import React, { useEffect, useRef } from 'react';
-import PlayerHeader from '../../../components/PlayerComponents/PlayerHeader/playerheader';
-import PlayerStats from '../../../components/PlayerComponents/PlayerStats/playerstats';
+import PlayerHeader from '../../components/playerPage/PlayerHeader/playerheader';
+import PlayerStats from '../../components/playerPage/PlayerStats/playerstats';
 import useLocalStore from '@/utils/store';
 import { getDnDAPI, readDatabaseRoute, updateDatabaseRoute } from '@/utils/httpRequester';
-import PlayerSaving from '../../../components/PlayerComponents/PlayerSaving/playersaving';
-import PlayerSense from '../../../components/PlayerComponents/PlayerSense/playersense';
-import PlayerNotes from '../../../components/PlayerComponents/PlayerNotes/playernotes';
+import PlayerSaving from '../../components/playerPage/PlayerSaving/playersaving';
+import PlayerSense from '../../components/playerPage/PlayerSense/playersense';
+import PlayerNotes from '../../components/playerPage/PlayerNotes/playernotes';
 import { update } from 'firebase/database';
 
 

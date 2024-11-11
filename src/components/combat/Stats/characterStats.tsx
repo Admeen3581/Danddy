@@ -1,5 +1,5 @@
 import React from 'react';
-import Stat from '../../CharSheetsComponents/CSStats/Stat';
+import Stat from '../../charSheets/CSStats/Stat';
 import styles from './characterStats.module.css';
 import useLocalStore from '@/utils/store';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import EnemyHeader from '../../../components/EnemyComponents/EnemyHeader/enemyheader';
+import EnemyHeader from '../../components/enemyPage/EnemyHeader/enemyheader';
 
 
 const EnemyHome = () => {
