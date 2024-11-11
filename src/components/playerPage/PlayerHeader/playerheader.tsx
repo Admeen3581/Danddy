@@ -1,7 +1,7 @@
 import React from 'react';
 import './playerheader.css';
 import Link from 'next/link';
-import {DirectMessagePopup} from "@/components/directMessagePopup";
+import {DirectMessagePopup} from "@/components/messaging/directMessagePopup";
 
 const PlayerHeader = () => {
 
