@@ -14,7 +14,7 @@ const PlayerHeader = () => {
             <ul>
               <li><Link href="/combat">Combat</Link></li>
               <li><DirectMessagePopup style={'msgButton'}/></li>
-              <li><Link href="/">Home</Link></li>
+              <li><Link href="/Users/Public">Home</Link></li>
             </ul>
           </div>
         </div>

@@ -2,12 +2,12 @@
 
 import './dm.css';
 import React, { useEffect, useRef } from 'react';
-import DMNotes from '../../../DmComponents/DMNotes/dmnotes';
+import DMNotes from '../../../components/DmComponents/DMNotes/dmnotes';
 import { createRoom, deleteDatabaseRoute, generateRoomCode, patchDatabaseRoute, readDatabaseRoute, updateDatabaseRoute, generateCampaignId } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
-import DMHeader from '../../../DmComponents/DMHeader/dmheader';
-import DMActivePlayers from '../../../DmComponents/DMActivePlayers/dmactive';
-import MapViewer from '../../../DmComponents/MapViewer';
+import DMHeader from '../../../components/DmComponents/DMHeader/dmheader';
+import DMActivePlayers from '../../../components/DmComponents/DMActivePlayers/dmactive';
+import MapViewer from '../../../components/DmComponents/MapViewer';
 import { MessageRecievePopUp } from "@/components/messageRecievedPopUp";
 
 const DMHome = () => {

@@ -1,6 +1,6 @@
 import { getModifier } from "@/utils/characterJsonFunctions";
 import useLocalStore from "@/utils/store";
-import Stat from "../../../CharSheetsCompon/CSStats/Stat";
+import Stat from "../../CharSheetsComponents/CSStats/Stat";
 import styles from './intSkills.module.css'
 
 const IntSkills = () => {
