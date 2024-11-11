@@ -1,4 +1,4 @@
-import Stat from "../../../CharSheetsCompon/CSStats/Stat";
+import Stat from "../../CharSheetsComponents/CSStats/Stat";
 import styles from './armor.module.css'
 
 const Armor = () => {

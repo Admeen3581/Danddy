@@ -1,8 +1,8 @@
 import React from 'react';
-import CSHeader from '../../../CharSheetsCompon/CSHeader/csheader';
-import CSButtons from '../../../CharSheetsCompon/CSButtons/csbuttons';
-import CSStats from '../../../CharSheetsCompon/CSStats/csstats';
-import CSNotes from '../../../CharSheetsCompon/CSNotes/csnotes';
+import CSHeader from '../../../components/CharSheetsComponents/CSHeader/csheader';
+import CSButtons from '../../../components/CharSheetsComponents/CSButtons/csbuttons';
+import CSStats from '../../../components/CharSheetsComponents/CSStats/csstats';
+import CSNotes from '../../../components/CharSheetsComponents/CSNotes/csnotes';
 import './styles.css'; 
 
 const CharHome = () => {

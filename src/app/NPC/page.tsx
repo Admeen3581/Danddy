@@ -1,5 +1,5 @@
 import React from 'react';
-import NPCHeader from '../../../NPCComponents/NPCHeader/npcheader';
+import NPCHeader from '../../../components/NPCComponents/NPCHeader/npcheader';
 
 const NPCHome = () => {
   return (
