@@ -149,6 +149,7 @@ const EncounterCreation = () => {
 
     const handleFinish = async () => {
         await updateDatabaseRoute(`rooms/${roomId}/encounters/${templateName}`, selectedEncounters)
+        await loadRoomEncounters()
     };
 
     const saveStats = () => {
