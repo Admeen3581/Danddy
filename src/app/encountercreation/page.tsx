@@ -179,6 +179,19 @@ const EncounterCreation = () => {
         setEditModalOpen(false);
     };
 
+    const loadPresetEncounter = (event) => {
+        const encounter = event.target.value
+        console.log(encounter)
+        readDatabaseRoute(`rooms/${roomId}/encounters/${encounter}`).then(
+            result => {
+                if(result != null){
+                    console.log(result)
+                    setSelectedEncounters(result)
+                }
+            }
+        )
+    }
+
     return (
         <div className="encounter-creation-container">
             <h1>Create Your Encounter</h1>
@@ -186,7 +199,7 @@ const EncounterCreation = () => {
             {/* Dropdown for saved encounters */}
             <div className="dropdown">
                 <h2>Saved Encounters</h2>
-                <select>
+                <select onChange={loadPresetEncounter}>
                     {(savedEncounters && savedEncounters.length === 0) || !savedEncounters ? (
                         <option>No saved encounters</option>
                     ) : (
