@@ -14,7 +14,7 @@ const DMHeader = () => {
             <ul>
                 <li><Link href="/combat">Characters</Link></li>
                 <li><Link href="/NPC">NPC</Link></li>
-                <li><Link href="/enemy">Enemy</Link></li>
+                <li><Link href="/encountercreation">Enemy</Link></li>
                 <MessagePopUp/>
                 <DirectMessagePopup style={'button'}/>
             </ul>
