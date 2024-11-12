@@ -1,8 +1,8 @@
 import React from 'react';
 import './dmheader.css';
 import Link from 'next/link';
-import { MessagePopUp } from "@/components/messageDrawer";
-import {DirectMessagePopup} from "@/components/directMessagePopup";
+import { MessagePopUp } from "@/components/messaging/messageDrawer";
+import {DirectMessagePopup} from "@/components/messaging/directMessagePopup";
 
 const DMHeader = () => {
   return (

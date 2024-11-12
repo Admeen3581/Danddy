@@ -1,5 +1,5 @@
 import useLocalStore from "@/utils/store";
-import Stat from "../../../CharSheetsCompon/CSStats/Stat";
+import Stat from "../../charSheets/CSStats/Stat";
 import styles from './strSkills.module.css'
 import { getModifier } from "@/utils/characterJsonFunctions";
 
