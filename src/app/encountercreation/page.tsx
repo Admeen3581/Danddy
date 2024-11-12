@@ -39,6 +39,7 @@ const EncounterCreation = () => {
     const loadRoomEncounters = async () => {
         readDatabaseRoute(`rooms/${roomId}/encounters`).then(
             (result) => {
+                console.log(result)
                 setSavedEncounters(result)
             }
         )
