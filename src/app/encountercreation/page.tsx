@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import './EncounterCreation.css';
-import { getDnDAPI, patchDatabaseRoute, updateDatabaseRoute } from '@/utils/httpRequester';
+import { getDnDAPI, patchDatabaseRoute, readDatabaseRoute, updateDatabaseRoute } from '@/utils/httpRequester';
 import { getModifier } from '@/utils/characterJsonFunctions';
 import useLocalStore from '@/utils/store';
 
@@ -10,6 +10,7 @@ const EncounterCreation = () => {
     const itemsPerPage = 25;
     const [currentPage, setCurrentPage] = useState(1);
     const [encounters, setEncounters] = useState([]);
+    const [savedEncounters, setSavedEncounters] = useState([]);
     const [selectedEncounters, setSelectedEncounters] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
@@ -28,11 +29,20 @@ const EncounterCreation = () => {
                 url: "/monsters/"+monster.name.toLowerCase().replaceAll(" ", "-")
             }));
             setEncounters(dummyData);
+            await loadRoomEncounters()
             setLoading(false);
         };
 
         fetchEncounters();
     }, []);
+
+    const loadRoomEncounters = async () => {
+        readDatabaseRoute(`rooms/${roomId}/encounters`).then(
+            (result) => {
+                setSavedEncounters(result)
+            }
+        )
+    }
 
     const totalPages = Math.ceil(encounters.length / itemsPerPage);
     const currentEncounters = encounters
@@ -138,7 +148,7 @@ const EncounterCreation = () => {
     };
 
     const handleFinish = async () => {
-        await updateDatabaseRoute(`rooms/${roomId}/encoutners/${templateName}`, selectedEncounters)
+        await updateDatabaseRoute(`rooms/${roomId}/encounters/${templateName}`, selectedEncounters)
     };
 
     const saveStats = () => {
