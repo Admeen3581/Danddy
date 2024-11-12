@@ -9,9 +9,9 @@ import useLocalStore from '@/utils/store';
 const EncounterCreation = () => {
     const itemsPerPage = 25;
     const [currentPage, setCurrentPage] = useState(1);
-    const [encounters, setEncounters] = useState([]);
-    const [savedEncounters, setSavedEncounters] = useState([]);
-    const [selectedEncounters, setSelectedEncounters] = useState([]);
+    const [encounters, setEncounters] = useState([]);  // Original encounter list (from the D&D API)
+    const [savedEncounters, setSavedEncounters] = useState([""]);  // Saved encounters (from the database)
+    const [selectedEncounters, setSelectedEncounters] = useState([]);  // Encounters currently added to the encounter list
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
@@ -19,17 +19,17 @@ const EncounterCreation = () => {
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [editableStats, setEditableStats] = useState({});
     const [templateName, setTemplateName] = useState(''); // New state for template name
-    const {roomId, setRoomId} = useLocalStore()
+    const { roomId, setRoomId } = useLocalStore();
 
     useEffect(() => {
         const fetchEncounters = async () => {
             const result = await getDnDAPI("/monsters");
             const dummyData = result.results.map(monster => ({
                 name: monster.name,
-                url: "/monsters/"+monster.name.toLowerCase().replaceAll(" ", "-")
+                url: "/monsters/" + monster.name.toLowerCase().replaceAll(" ", "-")
             }));
             setEncounters(dummyData);
-            await loadRoomEncounters()
+            await loadRoomEncounters();
             setLoading(false);
         };
 
@@ -37,12 +37,12 @@ const EncounterCreation = () => {
     }, []);
 
     const loadRoomEncounters = async () => {
-        readDatabaseRoute(`rooms/${roomId}/encounters`).then(
-            (result) => {
-                setSavedEncounters(result)
+        readDatabaseRoute(`rooms/${roomId}/encounters`).then((result) => {
+            if(result != null && typeof result == "object"){
+                setSavedEncounters(Object.keys(result));
             }
-        )
-    }
+        });
+    };
 
     const totalPages = Math.ceil(encounters.length / itemsPerPage);
     const currentEncounters = encounters
@@ -149,6 +149,7 @@ const EncounterCreation = () => {
 
     const handleFinish = async () => {
         await updateDatabaseRoute(`rooms/${roomId}/encounters/${templateName}`, selectedEncounters)
+        await loadRoomEncounters()
     };
 
     const saveStats = () => {
@@ -179,9 +180,39 @@ const EncounterCreation = () => {
         setEditModalOpen(false);
     };
 
+    const loadPresetEncounter = (event) => {
+        const encounter = event.target.value
+        console.log(encounter)
+        readDatabaseRoute(`rooms/${roomId}/encounters/${encounter}`).then(
+            result => {
+                if(result != null){
+                    console.log(result)
+                    setSelectedEncounters(result)
+                }
+            }
+        )
+    }
+
     return (
         <div className="encounter-creation-container">
             <h1>Create Your Encounter</h1>
+
+            {/* Dropdown for saved encounters */}
+            <div className="dropdown">
+                <h2>Saved Encounters</h2>
+                <select onChange={loadPresetEncounter}>
+                    {(savedEncounters && savedEncounters.length === 0) || !savedEncounters ? (
+                        <option>No saved encounters</option>
+                    ) : (
+                        savedEncounters.map((encounter, index) => (
+                            <option key={index} value={encounter}>
+                                {encounter}
+                            </option>
+                        ))
+                    )}
+                </select>
+            </div>
+
 
             <div className="scrollable-section">
                 <h2>Selected Encounters</h2>
@@ -255,6 +286,7 @@ const EncounterCreation = () => {
                     </div>
                 </div>
             )}
+
             {editModalOpen && (
                 <div className="modal">
                     <div className="modal-content">
