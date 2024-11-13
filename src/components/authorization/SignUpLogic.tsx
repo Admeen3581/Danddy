@@ -38,13 +38,11 @@ export default function SignUpLogic() {
       await sendEmailVerification(user);
 
       // Update the database with additional user data
-      await updateDatabaseRoute(`/users/${userData.username}`, {
+      await updateDatabaseRoute(`/users/${user.uid}`, {
         ...userData,
-        uid: user.uid,
-        emailVerified: false
       });
 
-      alert('Sign-up successful! Please check your email to verify your account.');
+      alert('Sign-up successful! Please check your email to verify your account then sign in.');
     } catch (error: any) {
       console.error('Failed to sign up:', error);
       setError('Failed to sign up. Please try again.');
