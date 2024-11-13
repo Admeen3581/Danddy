@@ -176,7 +176,7 @@
 }
 
 .username-input,
-.message-input {
+.message-input-new {
     padding: 10px;
     border-radius: 8px;
     border: 1px solid #ddd;
@@ -184,7 +184,7 @@
     outline: none;
 }
 
-.message-input {
+.message-input-new {
     height: 100px;
     resize: vertical;
 }

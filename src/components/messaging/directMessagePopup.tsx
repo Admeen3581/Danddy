@@ -155,7 +155,7 @@ export function DirectMessagePopup({style})
                                 placeholder="Type your message..."
                                 value={newMessage}
                                 onChange={(e) => setNewMessage(e.target.value)}
-                                className="message-input"
+                                className="message-input-new"
                             />
                             <button onClick={handleCreateConversation} className="create-conversation-btn">
                                 Create Conversation
