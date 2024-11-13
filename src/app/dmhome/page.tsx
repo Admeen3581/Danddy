@@ -15,7 +15,7 @@ const DMHome = () => {
   const {roomId, setRoomId, userId, setUserId} = useLocalStore()
 
   useEffect(() => {
-    if(!isRoomCreated.current){
+    if(!isRoomCreated.current && roomId.length < 1){
       setRoomId("temp")
       if (userId == "") {
         setUserId("guestId")
@@ -28,7 +28,8 @@ const DMHome = () => {
         "participants": [""],
         "combat_log": [""],
         "start_time": new Date().toISOString(),
-        "end_time": ""
+        "end_time": "",
+        "encounters": []
       };
 
       createRoom(roomId, roomJson)

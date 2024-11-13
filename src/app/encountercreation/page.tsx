@@ -1,34 +1,48 @@
 "use client"
+
 import { useEffect, useState } from 'react';
 import './EncounterCreation.css';
-import { getDnDAPI } from '@/utils/httpRequester';
+import { getDnDAPI, patchDatabaseRoute, readDatabaseRoute, updateDatabaseRoute } from '@/utils/httpRequester';
 import { getModifier } from '@/utils/characterJsonFunctions';
+import useLocalStore from '@/utils/store';
 
 const EncounterCreation = () => {
     const itemsPerPage = 25;
     const [currentPage, setCurrentPage] = useState(1);
-    const [encounters, setEncounters] = useState([]);
-    const [selectedEncounters, setSelectedEncounters] = useState([]);
+    const [encounters, setEncounters] = useState([]);  // Original encounter list (from the D&D API)
+    const [savedEncounters, setSavedEncounters] = useState([""]);  // Saved encounters (from the database)
+    const [selectedEncounters, setSelectedEncounters] = useState([]);  // Encounters currently added to the encounter list
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState('');
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [editableStats, setEditableStats] = useState({});
+    const [templateName, setTemplateName] = useState(''); // New state for template name
+    const { roomId, setRoomId } = useLocalStore();
 
     useEffect(() => {
         const fetchEncounters = async () => {
             const result = await getDnDAPI("/monsters");
             const dummyData = result.results.map(monster => ({
                 name: monster.name,
-                url: "/monsters/"+monster.name.toLowerCase().replaceAll(" ", "-")
+                url: "/monsters/" + monster.name.toLowerCase().replaceAll(" ", "-")
             }));
             setEncounters(dummyData);
+            await loadRoomEncounters();
             setLoading(false);
         };
 
         fetchEncounters();
     }, []);
+
+    const loadRoomEncounters = async () => {
+        readDatabaseRoute(`rooms/${roomId}/encounters`).then((result) => {
+            if(result != null && typeof result == "object"){
+                setSavedEncounters(Object.keys(result));
+            }
+        });
+    };
 
     const totalPages = Math.ceil(encounters.length / itemsPerPage);
     const currentEncounters = encounters
@@ -82,41 +96,41 @@ const EncounterCreation = () => {
         ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'].forEach(stat => {
             modalStr += `${stat.toUpperCase()}: ${result[stat]} (${getModifier(result[stat])})\n`;
         });
-        modalStr += "--------------------------------\n"
+        modalStr += "--------------------------------\n";
 
         for(var prof in result["proficiencies"]){
-            modalStr += "- "+result["proficiencies"][prof]["proficiency"]["name"]+": "+result["proficiencies"][prof]["value"]+"\n"
+            modalStr += "- "+result["proficiencies"][prof]["proficiency"]["name"]+": "+result["proficiencies"][prof]["value"]+"\n";
         }
 
         for(var res in result["damage_immunities"]){
-            modalStr += "- Damage Immunity: "+result["damage_immunities"][res]+"\n"
+            modalStr += "- Damage Immunity: "+result["damage_immunities"][res]+"\n";
         }
 
         for(var res in result["damage_resistances"]){
-            modalStr += "- Damage Resistance: "+result["damage_resistances"][res]+"\n"
+            modalStr += "- Damage Resistance: "+result["damage_resistances"][res]+"\n";
         }
 
         for(var res in result["damage_vulnerabilities"]){
-            modalStr += "- Damage Vulnerability: "+result["damage_vulnerabilities"][res]+"\n"
+            modalStr += "- Damage Vulnerability: "+result["damage_vulnerabilities"][res]+"\n";
         }
-        modalStr += "--------------------------------\n"
+        modalStr += "--------------------------------\n";
 
-        modalStr += "Senses:\n"
-        modalStr += "   -Blindsight: "+result["senses"]["blindsight"]+"\n"
-        modalStr += "   -Darkvision: "+result["senses"]["darkvision"]+"\n"
-        modalStr += "   -Passive Perception: "+result["senses"]["passive_perception"]+"\n"
-        modalStr += "Languages: "+result["languages"]+"\n"
-        modalStr += "Challenge: "+result["challenge_rating"]+"\n"
-        modalStr += "--------------------------------\n"
+        modalStr += "Senses:\n";
+        modalStr += "   -Blindsight: "+result["senses"]["blindsight"]+"\n";
+        modalStr += "   -Darkvision: "+result["senses"]["darkvision"]+"\n";
+        modalStr += "   -Passive Perception: "+result["senses"]["passive_perception"]+"\n";
+        modalStr += "Languages: "+result["languages"]+"\n";
+        modalStr += "Challenge: "+result["challenge_rating"]+"\n";
+        modalStr += "--------------------------------\n";
 
         for(var res in result["special_abilities"]){
-            modalStr += "- "+result["special_abilities"][res]["name"]+": "+result["special_abilities"][res]["desc"]+"\n"
+            modalStr += "- "+result["special_abilities"][res]["name"]+": "+result["special_abilities"][res]["desc"]+"\n";
         }
-        modalStr += "--------------------------------\n"
+        modalStr += "--------------------------------\n";
 
-        modalStr += "Actions\n"
+        modalStr += "Actions\n";
         for(var res in result["actions"]){
-            modalStr += "- "+result["actions"][res]["name"]+": "+result["actions"][res]["desc"]+"\n"
+            modalStr += "- "+result["actions"][res]["name"]+": "+result["actions"][res]["desc"]+"\n";
         }
 
         setModalContent(modalStr);
@@ -133,9 +147,10 @@ const EncounterCreation = () => {
         setEditableStats(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleFinish = () => {
-        console.log(selectedEncounters)
-    }
+    const handleFinish = async () => {
+        await updateDatabaseRoute(`rooms/${roomId}/encounters/${templateName}`, selectedEncounters)
+        await loadRoomEncounters()
+    };
 
     const saveStats = () => {
         const updatedStats = {
@@ -156,8 +171,6 @@ const EncounterCreation = () => {
         );
         setEditModalOpen(false);
     };
-    
-    
 
     const closeModal = () => {
         setModalOpen(false);
@@ -167,9 +180,39 @@ const EncounterCreation = () => {
         setEditModalOpen(false);
     };
 
+    const loadPresetEncounter = (event) => {
+        const encounter = event.target.value
+        console.log(encounter)
+        readDatabaseRoute(`rooms/${roomId}/encounters/${encounter}`).then(
+            result => {
+                if(result != null){
+                    console.log(result)
+                    setSelectedEncounters(result)
+                }
+            }
+        )
+    }
+
     return (
         <div className="encounter-creation-container">
             <h1>Create Your Encounter</h1>
+
+            {/* Dropdown for saved encounters */}
+            <div className="dropdown">
+                <h2>Saved Encounters</h2>
+                <select onChange={loadPresetEncounter}>
+                    {(savedEncounters && savedEncounters.length === 0) || !savedEncounters ? (
+                        <option>No saved encounters</option>
+                    ) : (
+                        savedEncounters.map((encounter, index) => (
+                            <option key={index} value={encounter}>
+                                {encounter}
+                            </option>
+                        ))
+                    )}
+                </select>
+            </div>
+
 
             <div className="scrollable-section">
                 <h2>Selected Encounters</h2>
@@ -220,6 +263,17 @@ const EncounterCreation = () => {
                 ))}
             </div>
 
+            {/* Template Name Input */}
+            <div className="template-name-section">
+                <label>Template Name:</label>
+                <input
+                    type="text"
+                    placeholder="Enter template name"
+                    value={templateName}
+                    onChange={(e) => setTemplateName(e.target.value)}
+                />
+            </div>
+
             <button onClick={handleFinish} className="finish-button">
                 Finish
             </button>
@@ -232,36 +286,37 @@ const EncounterCreation = () => {
                     </div>
                 </div>
             )}
-                {editModalOpen && (
-                    <div className="modal">
-                        <div className="modal-content">
-                            <span className="close" onClick={closeEditModal}>&times;</span>
-                            <h2>Edit Stats for {editableStats.name}</h2>
-                            {/* Ability Scores */}
-                            {['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'].map(stat => (
-                                <div key={stat}>
-                                    <label>{stat.charAt(0).toUpperCase() + stat.slice(1)}:</label>
-                                    <input
-                                        type="number"
-                                        name={stat}
-                                        value={editableStats[stat] || ''}
-                                        onChange={handleStatChange}
-                                    />
-                                </div>
-                            ))}
-                            <div>
-                                <label>Hit Points:</label>
+
+            {editModalOpen && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={closeEditModal}>&times;</span>
+                        <h2>Edit Stats for {editableStats.name}</h2>
+                        {/* Ability Scores */}
+                        {['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'].map(stat => (
+                            <div key={stat}>
+                                <label>{stat.charAt(0).toUpperCase() + stat.slice(1)}:</label>
                                 <input
                                     type="number"
-                                    name="hit_points"
-                                    value={editableStats.hit_points || ''}
+                                    name={stat}
+                                    value={editableStats[stat] || ''}
                                     onChange={handleStatChange}
                                 />
                             </div>
-                            <button onClick={saveStats}>Save</button>
+                        ))}
+                        <div>
+                            <label>Hit Points:</label>
+                            <input
+                                type="number"
+                                name="hit_points"
+                                value={editableStats.hit_points || ''}
+                                onChange={handleStatChange}
+                            />
                         </div>
+                        <button onClick={saveStats}>Save</button>
                     </div>
-                )}
+                </div>
+            )}
         </div>
     );
 };
