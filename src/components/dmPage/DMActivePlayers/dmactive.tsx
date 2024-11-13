@@ -4,7 +4,7 @@ import './dmactive.css';
 import useLocalStore from '@/utils/store';
 
 const DMActive = () => {
-  const { roomId, setRoomId } = useLocalStore();
+  const { roomId, setRoomId, classesJson, setClassesJson } = useLocalStore();
   const [activePlayers, setActivePlayers] = useState<any[]>([]); // Use appropriate type here
   const [loading, setLoading] = useState(false);
 
