@@ -10,29 +10,30 @@ const DMActive = () => {
 
   // Function to load active players
   const loadActivePlayers = async (roomId: String) => {
-    var ret: string[] = []
-    await readDatabaseRoute(`users`).then(
-       async (users) => {
+    setLoading(true); // Set loading to true while the data is being fetched
+    var ret: string[] = [];
+    await readDatabaseRoute('users').then(
+      async (users) => {
         await readDatabaseRoute(`rooms/${roomId}/participants`).then(
           async (participants) => {
-            for(var part in participants){
-              var selectedUser = ""
-              for(var user in users){
-                if(users[user]["uid"] == participants[part]){
-                  selectedUser = users[user]["username"]
+            for (var part in participants) {
+              var selectedUser = '';
+              for (var user in users) {
+                if (users[user]['uid'] === participants[part]) {
+                  selectedUser = users[user]['username'];
                 }
               }
-              if(selectedUser != ""){
-                ret.push(selectedUser)
+              if (selectedUser !== '') {
+                ret.push(selectedUser);
               }
             }
           }
-        )
-        await setActivePlayers(ret)
-        console.log(activePlayers)
+        );
+        setActivePlayers(ret); // Update the activePlayers state
       }
-    )
-  }
+    );
+    setLoading(false); // Set loading to false once data is loaded
+  };
 
   // Initial load of active players when component mounts
   useEffect(() => {
@@ -40,6 +41,12 @@ const DMActive = () => {
       loadActivePlayers(roomId);
     }
   }, [roomId]);
+
+  // Handle click on a player's name (button)
+  const handlePlayerClick = (playerName: string) => {
+    console.log(`Player clicked: ${playerName}`);
+    //readDatabaseRoute(`users/${playerName}`).then(result => console.log(result))
+  };
 
   return (
     <div className="PlayerBox">
@@ -50,7 +57,9 @@ const DMActive = () => {
       <ul>
         {activePlayers.map((player, index) => (
           <li key={index}>
-            {index+1}. {player}
+            <button onClick={() => handlePlayerClick(player)}>
+              {index + 1}. {player}
+            </button>
           </li>
         ))}
       </ul>
