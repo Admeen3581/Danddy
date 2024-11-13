@@ -16,8 +16,8 @@ const DMHeader = () => {
                 <li><Link href="/combat">Characters</Link></li>
                 <li><Link href="/NPC">NPC</Link></li>
                 <li><Link href="/encountercreation">Enemy</Link></li>
-                {<!--Do we have an enemy screen? I do not think we have one unless it is named something weird?
-                because the enemy screen is blank so like... whats the game plan my dudes...-->}
+                {/*Do we have an enemy screen? I do not think we have one unless it is named something weird?
+                because the enemy screen is blank so like... whats the game plan my dudes...*/}
                 <MessagePopUp/>
                 <DirectMessagePopup style={'button'}/>
             </ul>
