@@ -9,6 +9,7 @@ import PlayerSaving from '../../components/playerPage/PlayerSaving/playersaving'
 import PlayerSense from '../../components/playerPage/PlayerSense/playersense';
 import PlayerNotes from '../../components/playerPage/PlayerNotes/playernotes';
 import { update } from 'firebase/database';
+import {useRouter} from "next/navigation";
 
 
 
@@ -16,6 +17,16 @@ const PlayerHome = () => {
 
   const isRoomCreated = useRef(false)
   const {roomId, setRoomId, userId} = useLocalStore()
+  const router = useRouter();
+
+  readDatabaseRoute(`users/${userId}/characters/${roomId}`).then(
+    (result) => {
+      if(result == null)
+        {
+          router.push("./charactercreation");
+        }
+    }
+  )
   
   useEffect(() => {
     if(!isRoomCreated.current){
