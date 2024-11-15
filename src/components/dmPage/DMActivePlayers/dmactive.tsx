@@ -2,28 +2,31 @@ import { useEffect, useState } from 'react';
 import { readDatabaseRoute } from '@/utils/httpRequester';
 import './dmactive.css';
 import useLocalStore from '@/utils/store';
+import { useRouter } from 'next/navigation';
 
 const DMActive = () => {
   const { roomId, setRoomId, classesJson, setClassesJson } = useLocalStore();
   const [activePlayers, setActivePlayers] = useState<any[]>([]); // Use appropriate type here
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   // Function to load active players
   const loadActivePlayers = async (roomId: String) => {
     setLoading(true); // Set loading to true while the data is being fetched
-    var ret: string[] = [];
+    var ret: {'uid':String, 'playerName':String}[] = [];
     await readDatabaseRoute('users').then(
       async (users) => {
         await readDatabaseRoute(`rooms/${roomId}/participants`).then(
           async (participants) => {
             for (var part in participants) {
-              var selectedUser = '';
+              var selectedUser = {'uid': "", 'playerName': ""};
               for (var user in users) {
                 if (users[user]['uid'] === participants[part]) {
-                  selectedUser = users[user]['username'];
+                  selectedUser.uid = users[user]['uid'];
+                  selectedUser.playerName = users[user]['username'];
                 }
               }
-              if (selectedUser !== '') {
+              if (selectedUser.uid !== '') {
                 ret.push(selectedUser);
               }
             }
@@ -44,8 +47,20 @@ const DMActive = () => {
 
   // Handle click on a player's name (button)
   const handlePlayerClick = (playerName: string) => {
-    console.log(`Player clicked: ${playerName}`);
-    //readDatabaseRoute(`users/${playerName}`).then(result => console.log(result))
+    readDatabaseRoute(`users/${playerName}/characters/${roomId}`).then(
+      result => {
+        if(result != null){
+          readDatabaseRoute(`characters/${result}`).then(
+            charResult => {
+              if(charResult != null){
+                setClassesJson(result)
+                router.push("/combat")
+              }
+            }
+          )
+
+        }
+      })
   };
 
   return (
@@ -57,8 +72,8 @@ const DMActive = () => {
       <ul>
         {activePlayers.map((player, index) => (
           <li key={index}>
-            <button onClick={() => handlePlayerClick(player)}>
-              {index + 1}. {player}
+            <button onClick={() => handlePlayerClick(player.uid)}>
+              {index + 1}. {player.playerName}
             </button>
           </li>
         ))}
