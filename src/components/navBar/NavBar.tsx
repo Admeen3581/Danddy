@@ -10,6 +10,9 @@ const NavBar = () => {
         <Link href="/about"> {}
           About 
         </Link>
+        <Link href="/charactercreation"> {}
+          Character Creation
+        </Link>
         <Link href="/contact"> {}
           Contact Us
         </Link>
