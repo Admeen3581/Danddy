@@ -136,10 +136,12 @@ const CharacterCreation = () => {
                     selectedClass={selectedClass}
                     toggleRaceDropdown={() => {
                         setRaceDropdownOpen(prev => !prev);
+                        setClassDropdownOpen(false); // Close class dropdown
                         setShowPopup(false); // Reset popup state
                     }}
                     toggleClassDropdown={() => {
                         setClassDropdownOpen(prev => !prev);
+                        setRaceDropdownOpen(false); // Close race dropdown
                         setShowPopup(false); // Reset popup state
                     }}
                     handleRaceChange={handleRaceChange}
