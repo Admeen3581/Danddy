@@ -31,9 +31,9 @@ type convo = {
 };
 
 const tempConvos = [
-    {uid: 1, user: 'Alice the wicked witch', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},
-    {uid: 2, user: 'Bob', content: 'Are you free to chat?' },
-    {uid: 3, user: 'Charlie', content: 'Let’s meet up tomorrow.' },
+    {uid: "1", user: 'Alice the wicked witch', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},
+    {uid: "2", user: 'Bob', content: 'Are you free to chat?' },
+    {uid: "3", user: 'Charlie', content: 'Let’s meet up tomorrow.' },
 ];
 
 export function DirectMessagePopup({style})
@@ -47,11 +47,19 @@ export function DirectMessagePopup({style})
     //Firebase vars
     const firestoreDB = initFirestore();
 
+    /**
+     * Changes state if user is currently creating a new conversation.
+     * @author: Adam Long
+     */
     const handleChatCreate = () =>
     {
         setCreatingMessage(true);
     }
 
+    /**
+     * Creates new conversation based on input fields upon a button press.
+     * @author Adam Long
+     */
     const handleCreateConversation = () => {
         if (newUsername.trim() && newMessage.trim()) {
             // Add logic to create conversation (e.g., update state or API call)
@@ -64,14 +72,29 @@ export function DirectMessagePopup({style})
         }
     };
 
-    const handleSelectConvo = (conversation: convo) => {//enters current conversation
+    /**
+     * Changes state if user is currently entering an existing conversation.
+     * @param conversation Conversation object
+     * @author Adam Long
+     */
+    const handleSelectConvo = (conversation: convo) => {
         setSelectedMessage(conversation);
     };
 
+    /**
+     * Changes state is user exits current conversation.
+     * @author Adam Long
+     */
     const handleSelectConvoReturn = () => { //exits current conversation
         setSelectedMessage(null);
     }
 
+    /**
+     * User is inside existing conversation and sends a message to other user.
+     * @async
+     * @param event async event
+     * @author Adam Long
+     */
     const handleSendMessage = async (event) => {
         event.preventDefault();
 
@@ -93,7 +116,6 @@ export function DirectMessagePopup({style})
                 createdAt: serverTimestamp(),
                 sentTo: recievingUserId,
             })
-
 
             setNewMessage('');
         }
