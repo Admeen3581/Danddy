@@ -22,7 +22,7 @@ import {useCollectionData} from "react-firebase-hooks/firestore";
 import {initFirestore} from "@/lib/messenger";
 import {addDoc, collection, serverTimestamp} from "firebase/firestore";
 import useLocalStore from "@/utils/store";
-import {findExternalUsernames} from "@/app/messaging/fetchUserMessages";
+import findExternalUsernames from "@/app/messaging/fetchUserMessages";
 
 type convo = {
     uid: string;
