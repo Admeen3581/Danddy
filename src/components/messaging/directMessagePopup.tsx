@@ -22,18 +22,21 @@ import {useCollectionData} from "react-firebase-hooks/firestore";
 import {initFirestore} from "@/lib/messenger";
 import {addDoc, collection, serverTimestamp} from "firebase/firestore";
 import useLocalStore from "@/utils/store";
+import listenToUserData from "@/app/messaging/fetchUserMessages";
 
 type convo = {
-    //uid: number;
+    uid: string;
     user: string;
     content: string;
 };
 
 const tempConvos = [
-    {user: 'Alice the wicked witch', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},
-    {user: 'Bob', content: 'Are you free to chat?' },
-    {user: 'Charlie', content: 'Let’s meet up tomorrow.' },
+    {uid: 1, user: 'Alice the wicked witch', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},
+    {uid: 2, user: 'Bob', content: 'Are you free to chat?' },
+    {uid: 3, user: 'Charlie', content: 'Let’s meet up tomorrow.' },
 ];
+
+const realConvos = [];
 
 export function DirectMessagePopup({style})
 {
@@ -63,11 +66,11 @@ export function DirectMessagePopup({style})
         }
     };
 
-    const handleSelectConvo = (conversation: convo) => {
+    const handleSelectConvo = (conversation: convo) => {//enters current conversation
         setSelectedMessage(conversation);
     };
 
-    const handleSelectConvoReturn = () => {
+    const handleSelectConvoReturn = () => { //exits current conversation
         setSelectedMessage(null);
     }
 
@@ -83,13 +86,25 @@ export function DirectMessagePopup({style})
         if (newMessage.trim()) {
             console.log(`Sending message: ${newMessage}`);
 
-            //backend
+            //backend (pushes new message to database
             await addDoc(collection(firestoreDB, 'directMessages'), {
                 text: newMessage,
                 uid: userInfo.userId,
                 createdAt: serverTimestamp(),
-                sentTo: selectedMessage!.user,
+                sentTo: selectedMessage!.uid,
             })
+
+            //grabs username from Realtime Database
+            let username;
+            listenToUserData(userInfo.userId, data => {
+                username = data;
+            });
+
+            //Add message to UI
+            const newConvo : convo = {uid: userInfo.userId, user: username, content: newMessage};
+            realConvos[realConvos.length] = newConvo;
+
+            console.log(realConvos);
 
             setNewMessage('');
         }
@@ -119,14 +134,18 @@ export function DirectMessagePopup({style})
                                 </div>
                             </div>
                             <br/>
+                            {/*Look here for message UI changes.*/}
                             <div className='message-content'>
                                 <ScrollArea>
                                     <div className="message incoming">
                                         <p className="content">{selectedMessage.content}</p>
                                     </div>
-                                    <div className="message outgoing">
-                                        <span className="content">This is a response message!</span>
-                                    </div>
+                                    {realConvos.map((message) => (
+                                        // eslint-disable-next-line react/jsx-key
+                                        <div className="message outgoing">
+                                            {message.content}
+                                        </div>
+                                    ))}
                                 </ScrollArea>
                             </div>
                         </div>
