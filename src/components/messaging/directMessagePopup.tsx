@@ -22,7 +22,7 @@ import {useCollectionData} from "react-firebase-hooks/firestore";
 import {initFirestore} from "@/lib/messenger";
 import {addDoc, collection, serverTimestamp} from "firebase/firestore";
 import useLocalStore from "@/utils/store";
-import listenToUserData from "@/app/messaging/fetchUserMessages";
+import {findExternalUsernames} from "@/app/messaging/fetchUserMessages";
 
 type convo = {
     uid: string;
@@ -35,8 +35,6 @@ const tempConvos = [
     {uid: 2, user: 'Bob', content: 'Are you free to chat?' },
     {uid: 3, user: 'Charlie', content: 'Let’s meet up tomorrow.' },
 ];
-
-const realConvos = [];
 
 export function DirectMessagePopup({style})
 {
@@ -87,24 +85,15 @@ export function DirectMessagePopup({style})
             console.log(`Sending message: ${newMessage}`);
 
             //backend (pushes new message to database
+            const recievingUserId = await findExternalUsernames(selectedMessage!.user);
+
             await addDoc(collection(firestoreDB, 'directMessages'), {
                 text: newMessage,
                 uid: userInfo.userId,
                 createdAt: serverTimestamp(),
-                sentTo: selectedMessage!.uid,
+                sentTo: recievingUserId,
             })
 
-            //grabs username from Realtime Database
-            let username;
-            listenToUserData(userInfo.userId, data => {
-                username = data;
-            });
-
-            //Add message to UI
-            const newConvo : convo = {uid: userInfo.userId, user: username, content: newMessage};
-            realConvos[realConvos.length] = newConvo;
-
-            console.log(realConvos);
 
             setNewMessage('');
         }
@@ -140,7 +129,7 @@ export function DirectMessagePopup({style})
                                     <div className="message incoming">
                                         <p className="content">{selectedMessage.content}</p>
                                     </div>
-                                    {realConvos.map((message) => (
+                                    {tempConvos.map((message) => (
                                         // eslint-disable-next-line react/jsx-key
                                         <div className="message outgoing">
                                             {message.content}
