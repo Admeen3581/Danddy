@@ -232,6 +232,7 @@ const FinishingTouchesMenu = () => {
                     <h3>Cantrips</h3>
                     <hr />
                     <div className="dropdown-container">
+                        <h4>Choose {cantripLimit}</h4>
                         <button onClick={() => toggleDropdown('cantrip')}>
                             {selectedCantrips.length > 0 ? `${selectedCantrips.join(', ')}` : 'Select Cantrips'}
                         </button>
@@ -254,6 +255,7 @@ const FinishingTouchesMenu = () => {
                     <h3>Level 1 Spells</h3>
                     <hr />
                     <div className="dropdown-container">
+                        <h4>Choose {level1SpellLimit}</h4>
                         <button onClick={() => toggleDropdown('level1Spell')}>
                             {selectedLevel1Spells.length > 0 ? `${selectedLevel1Spells.join(', ')}` : 'Select Level 1 Spells'}
                         </button>
