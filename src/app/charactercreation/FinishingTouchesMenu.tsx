@@ -178,6 +178,7 @@ const FinishingTouchesMenu = () => {
 
     return (
         <div className="sidebar">
+            <div className='sidebar-content'>
             <h2>Finishing Touches</h2>
             <hr />
             <p>Bring your Character to Life!</p>
@@ -301,6 +302,7 @@ const FinishingTouchesMenu = () => {
                     Finish Character
                 </button>
             </div>
+        </div>
         </div>
     );
 };
