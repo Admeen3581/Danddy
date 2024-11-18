@@ -209,23 +209,21 @@ const FinishingTouchesMenu = () => {
             <div className="section">
                 <h3>Character Attributes</h3>
                 <hr />
-                {proficiencyChoices.map((choice, index) => (
-                    <div key={index} className="dropdown-container">
-                        <h4>Choose {choice.choose}</h4>
-                        <button onClick={() => toggleDropdown('proficiency')}>
-                            {selectedProficiencies.length > 0 ? `${selectedProficiencies.join(', ')}` : 'Select Proficiencies'}
-                        </button>
-                        {dropdownOpen.proficiency && (
-                            <ul className="dropdown-list">
-                                {choice.options.map((option, idx) => (
-                                    <li key={idx} onClick={() => handleProficiencySelect(option)}>
-                                        {option} {selectedProficiencies.includes(option) && '✓'}
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
-                ))}
+                <div className="dropdown-container">
+                    <h4>Choose {proficiencyChoices[0]?.choose}</h4>
+                    <button onClick={() => toggleDropdown('proficiency')}>
+                        {selectedProficiencies.length > 0 ? `${selectedProficiencies.join(', ')}` : 'Select Proficiencies'}
+                    </button>
+                    {dropdownOpen.proficiency && (
+                        <ul className="dropdown-list">
+                            {proficiencyChoices[0]?.options.map((option, idx) => (
+                                <li key={idx} onClick={() => handleProficiencySelect(option)}>
+                                    {option} {selectedProficiencies.includes(option) && '✓'}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
             </div>
 
             {/* Cantrips section */}
@@ -275,26 +273,25 @@ const FinishingTouchesMenu = () => {
             <div className="section">
                 <h3>Inventory</h3>
                 <hr />
-                
-                    <div className="dropdown-container">
-                        <button onClick={() => toggleDropdown('inventory')}>
-                            {'Select Items'}
-                        </button>
-                        {dropdownOpen.inventory && (
-                            <ul className="dropdown-list">
-                                {inventoryOptions.map((pair, rowIndex) => (
-                                <li key={rowIndex} className="inventory-row">
-                                    <span onClick={() => handleItemSelect(pair[0], rowIndex)}>
-                                        {pair[0]} {selectedItems[rowIndex] === pair[0] && '✓'}
-                                    </span>
-                                    <span onClick={() => handleItemSelect(pair[1], rowIndex)}>
-                                        {pair[1]} {selectedItems[rowIndex] === pair[1] && '✓'}
-                                    </span>
-                                </li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
+                <div className="dropdown-container">
+                    <button onClick={() => toggleDropdown('inventory')}>
+                        {'Select Items'}
+                    </button>
+                    {dropdownOpen.inventory && (
+                        <ul className="dropdown-list">
+                            {inventoryOptions.map((pair, rowIndex) => (
+                            <li key={rowIndex} className="inventory-row">
+                                <span onClick={() => handleItemSelect(pair[0], rowIndex)}>
+                                    {pair[0]} {selectedItems[rowIndex] === pair[0] && '✓'}
+                                </span>
+                                <span onClick={() => handleItemSelect(pair[1], rowIndex)}>
+                                    {pair[1]} {selectedItems[rowIndex] === pair[1] && '✓'}
+                                </span>
+                            </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
             </div>
 
             <div className="content button">
