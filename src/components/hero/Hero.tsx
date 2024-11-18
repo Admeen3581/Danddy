@@ -27,11 +27,11 @@ const Hero = () => {
           className="hero-input"
         />
 
+        <Link href="/playerhome" className="hero-button">
+            Join
+        </Link>
         <Link href="/dmhome" className="hero-button">
-            DM Start
-          </Link>
-          <Link href="/playerhome" className="hero-button">
-            Player Start
+            Create
           </Link>
       </div>
     </div>
