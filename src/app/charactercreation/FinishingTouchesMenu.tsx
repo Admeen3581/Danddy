@@ -1,11 +1,18 @@
+"use client"
+
 import React, { useEffect, useState } from 'react';
 import './CharacterCreation.css';
-import { getDnDAPI, updateDatabaseRoute } from '@/utils/httpRequester';
+import { generateCampaignId, getDnDAPI, updateDatabaseRoute } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
 import { findSkillInJson, setSkillInJson } from '@/utils/characterJsonFunctions';
+import { Router } from 'next/router';
 
-const FinishingTouchesMenu = () => {
-    const { classesJson, setClassesJson } = useLocalStore();
+interface FinishingProps {
+    onFinish: () => void;
+}
+
+const FinishingTouchesMenu: React.FC<FinishingProps> = ({onFinish}) => {
+    const { classesJson, setClassesJson, userId, roomId } = useLocalStore();
     const [hp, setHp] = useState('');
     const [selectedProficiencies, setSelectedProficiencies] = useState([]);
     const [proficiencyChoices, setProficiencyChoices] = useState([]);
@@ -165,11 +172,21 @@ const FinishingTouchesMenu = () => {
         classesJson.inventory = selectedItems
         //Spell
         classesJson.spells = selectedCantrips.concat(selectedLevel1Spells)
+        classesJson.user_id = userId
 
         alert('Character Created!');
         setClassesJson(classesJson)
-        updateDatabaseRoute("characters/testerCharacterCreation", classesJson);
-        console.log(classesJson)
+
+        var charId = generateCampaignId()
+        updateDatabaseRoute(`characters/${charId}`, classesJson).then(
+            () => {
+                updateDatabaseRoute(`users/${userId}/characters/${roomId}`, {charId}).then(
+                    () => {
+                        onFinish();
+                    }
+                )
+            }
+        )
     };
 
     const toggleDropdown = (type) => {

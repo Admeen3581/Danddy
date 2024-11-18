@@ -24,7 +24,7 @@ const DMHome = () => {
       const campaignId = generateCampaignId()
       const roomJson = {
         "campaign_id": campaignId,
-        "user_id": userId,
+        "dm_id": userId,
         "participants": [""],
         "combat_log": [""],
         "start_time": new Date().toISOString(),

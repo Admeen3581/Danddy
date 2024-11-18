@@ -8,6 +8,7 @@ import AbilityScoresMenu from './AbilityScoresMenu';
 import FinishingTouchesMenu from './FinishingTouchesMenu'; // Import the new menu
 import './CharacterCreation.css';
 import { createBlankCharacterJSON } from '@/utils/characterJsonFunctions';
+import { useRouter } from 'next/navigation';
 
 const CharacterCreation = () => {
     const { classesJson, setClassesJson } = useLocalStore();
@@ -24,6 +25,7 @@ const CharacterCreation = () => {
     const [sidebarVisible, setSidebarVisible] = useState(true);
     const [readyForScores, setReadyForScores] = useState(false);
     const [showFinishingTouches, setShowFinishingTouches] = useState(false); // New state for finishing touches
+    const router = useRouter();
 
     useEffect(() => {
         const fetchClasses = async () => {
@@ -85,6 +87,10 @@ const CharacterCreation = () => {
         setReadyForScores(false); // Hide the ability scores menu
         setShowFinishingTouches(true); // Show finishing touches menu
     };
+
+    const handleFinishingTouches = () => {
+        router.push("/playerhome")
+    }
 
 
     const getClassDescription = (className) => {
@@ -155,7 +161,9 @@ const CharacterCreation = () => {
                     onFinish={handleFinishAbilityScores} // Pass the finish function here
                 />
             ) : showFinishingTouches ? (
-                <FinishingTouchesMenu />
+                <FinishingTouchesMenu 
+                    onFinish={handleFinishingTouches}
+                />
             ) : null}
 
             {showPopup && (

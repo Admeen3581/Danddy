@@ -20,11 +20,12 @@ import Actions from "../../components/combat/Actions/actions";
 
 const Combat = () => {
   const { classesJson, setClassesJson } = useLocalStore();
-  readDatabaseRoute("characters/testerCharacterCreation")
+  if(classesJson.user_id == ""){
+    readDatabaseRoute("characters/testerCharacterCreation")
     .then((result) => {
       setClassesJson(result)
     })
-  
+  }
 
   return (
    <>
