@@ -10,8 +10,23 @@ export interface Enemy {
     name: string;
     enemies: Enemy[];
   }
+
+  export function setUpEncouters(data: JSON){
+    var dmEncoutners: Encounter[] = []
+    for(var encounterName in data){
+        const encounter: Encounter = {
+            name: encounterName,
+            enemies: []
+        }
+        for(var enemy in data[encounterName]){
+            //Add enemy stats
+        }
+        dmEncoutners.push(encounter)
+    }
+    return dmEncoutners
+  }
   
-  export const encounters: Encounter[] = [
+  export var encounters: Encounter[] = [
     {
       name: "Goblin Ambush",
       enemies: [

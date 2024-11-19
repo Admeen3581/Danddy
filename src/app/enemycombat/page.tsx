@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import './enemycombat.css';
-import { Encounter, encounters } from './enemycombat';
+import { Encounter, encounters, setUpEncouters } from './enemycombat';
 import { readDatabaseRoute } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
 
@@ -14,10 +14,9 @@ const EnemyCombat: React.FC = () => {
   useEffect(() => {
     readDatabaseRoute(`rooms/${roomId}/encounters`).then(
         (result) => {
-            console.log(result)
+            console.log(setUpEncouters(result))
         }
     )
-
   }, [])
 
   const handleEncounterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
