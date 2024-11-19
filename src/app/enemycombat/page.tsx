@@ -10,11 +10,13 @@ const EnemyCombat: React.FC = () => {
   const [selectedEncounter, setSelectedEncounter] = useState<Encounter | null>(null);
   const [openEnemy, setOpenEnemy] = useState<string | null>(null);
   const { roomId, setRoomId } = useLocalStore();
+  var encounters: Encounter[] = []
 
   useEffect(() => {
     readDatabaseRoute(`rooms/${roomId}/encounters`).then(
         (result) => {
-            console.log(setUpEncouters(result))
+            encounters = setUpEncouters(result)
+            console.log(encounters)
         }
     )
   }, [])
@@ -58,7 +60,7 @@ const EnemyCombat: React.FC = () => {
                 <th>Type</th>
                 <th>HP</th>
                 <th>AC</th>
-                <th>Attack</th>
+                <th>CR</th>
                 <th></th>
               </tr>
             </thead>
@@ -68,9 +70,9 @@ const EnemyCombat: React.FC = () => {
                   <tr onClick={() => handleRowClick(enemy.name)}>
                     <td>{enemy.name}</td>
                     <td>{enemy.type}</td>
-                    <td>{enemy.hp}</td>
-                    <td>{enemy.ac}</td>
-                    <td>{enemy.attack}</td>
+                    <td>{enemy.hit_points}</td>
+                    <td>{enemy.armor_class}</td>
+                    <td>{enemy.challenge_rating}</td>
                     <td className="expandable">
                       <span className={`arrow ${openEnemy === enemy.name ? 'open' : ''}`}>
                         {openEnemy === enemy.name ? '▲' : '▼'}
