@@ -1,12 +1,24 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './enemycombat.css';
 import { Encounter, encounters } from './enemycombat';
+import { readDatabaseRoute } from '@/utils/httpRequester';
+import useLocalStore from '@/utils/store';
 
-const App: React.FC = () => {
+const EnemyCombat: React.FC = () => {
   const [selectedEncounter, setSelectedEncounter] = useState<Encounter | null>(null);
   const [openEnemy, setOpenEnemy] = useState<string | null>(null);
+  const { roomId, setRoomId } = useLocalStore();
+
+  useEffect(() => {
+    readDatabaseRoute(`rooms/${roomId}/encounters`).then(
+        (result) => {
+            console.log(result)
+        }
+    )
+
+  }, [])
 
   const handleEncounterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const encounterName = event.target.value;
@@ -84,4 +96,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default EnemyCombat;
