@@ -3,14 +3,26 @@
 import './dm.css';
 import React, { useEffect, useRef } from 'react';
 import DMNotes from '../../components/dmPage/DMNotes/dmnotes';
-import { createRoom, deleteDatabaseRoute, generateRoomCode, patchDatabaseRoute, readDatabaseRoute, updateDatabaseRoute, generateCampaignId } from '@/utils/httpRequester';
+import { createRoom, generateRoomCode, patchDatabaseRoute, generateCampaignId } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
 import DMHeader from '../../components/dmPage/DMHeader/dmheader';
 import DMActivePlayers from '../../components/dmPage/DMActivePlayers/dmactive';
 import MapViewer from '../../components/dmPage/MapViewer';
 import { MessageRecievePopUp } from "@/components/messaging/messageRecievedPopUp";
+import {useRouter} from "next/navigation";
 
 const DMHome = () => {
+
+  //Checks for log in status.
+  const userInfo = useLocalStore();
+  const userUid = userInfo.userId;
+  const router = useRouter();
+
+  if(!userUid)
+  {
+    router.push("./signin");
+  }
+
   const isRoomCreated = useRef(false)
   const {roomId, setRoomId, userId, setUserId} = useLocalStore()
 

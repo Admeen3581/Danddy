@@ -12,6 +12,7 @@ const DMHeader = () => {
           <button className="dmmenu-button">☰</button>
           <div className="dmmenu-content">
             <ul>
+                <li><Link href="./">Home</Link></li>
                 <li><Link href="/combat">Characters</Link></li>
                 <li><Link href="/NPC">NPC</Link></li>
                 <li><Link href="/encountercreation">Enemy</Link></li>
