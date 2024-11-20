@@ -1,25 +1,28 @@
-"use client"
+'use client'
 
 import React, { useEffect, useState } from 'react';
 import './enemycombat.css';
-import { Encounter, encounters, setUpEncouters } from './enemycombat';
+import { Encounter, setUpEncouters } from './enemycombat';
 import { readDatabaseRoute } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
 
 const EnemyCombat: React.FC = () => {
+  const [encounters, setEncounters] = useState<Encounter[]>([]); // State to store encounters
   const [selectedEncounter, setSelectedEncounter] = useState<Encounter | null>(null);
   const [openEnemy, setOpenEnemy] = useState<string | null>(null);
-  const { roomId, setRoomId } = useLocalStore();
-  var encounters: Encounter[] = []
+  const { roomId } = useLocalStore();
+  const [loading, setLoading] = useState<boolean>(true); // State for loading indicator
 
   useEffect(() => {
+    // Fetch encounters and update the state
     readDatabaseRoute(`rooms/${roomId}/encounters`).then(
-        (result) => {
-            encounters = setUpEncouters(result)
-            console.log(encounters)
-        }
-    )
-  }, [])
+      (result) => {
+        const loadedEncounters = setUpEncouters(result);
+        setEncounters(loadedEncounters); // Set encounters into state
+        setLoading(false); // Hide loading once data is fetched
+      }
+    );
+  }, [roomId]); // Re-run this effect when roomId changes
 
   const handleEncounterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const encounterName = event.target.value;
@@ -50,48 +53,52 @@ const EnemyCombat: React.FC = () => {
         </select>
       </div>
 
-      {selectedEncounter && (
-        <div className="encounter-details">
-          <h2>Enemies in {selectedEncounter.name}</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>HP</th>
-                <th>AC</th>
-                <th>CR</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {selectedEncounter.enemies.map(enemy => (
-                <React.Fragment key={enemy.name}>
-                  <tr onClick={() => handleRowClick(enemy.name)}>
-                    <td>{enemy.name}</td>
-                    <td>{enemy.type}</td>
-                    <td>{enemy.hit_points}</td>
-                    <td>{enemy.armor_class}</td>
-                    <td>{enemy.challenge_rating}</td>
-                    <td className="expandable">
-                      <span className={`arrow ${openEnemy === enemy.name ? 'open' : ''}`}>
-                        {openEnemy === enemy.name ? '▲' : '▼'}
-                      </span>
-                    </td>
-                  </tr>
-                  <tr className={`details-row ${openEnemy === enemy.name ? 'open' : ''}`}>
-                    <td colSpan={6}>
-                      <div>
-                        <strong>Details:</strong>
-                        <p>Full character page with additional information about {enemy.name}.</p>
-                      </div>
-                    </td>
-                  </tr>
-                </React.Fragment>
-              ))}
-            </tbody>
-          </table>
-        </div>
+      {loading ? (
+        <p>Loading encounters...</p> // Show loading message while data is being fetched
+      ) : (
+        selectedEncounter && (
+          <div className="encounter-details">
+            <h2>Enemies in {selectedEncounter.name}</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>HP</th>
+                  <th>AC</th>
+                  <th>CR</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {selectedEncounter.enemies.map(enemy => (
+                  <React.Fragment key={enemy.name}>
+                    <tr onClick={() => handleRowClick(enemy.name)}>
+                      <td>{enemy.name}</td>
+                      <td>{enemy.type}</td>
+                      <td>{enemy.hit_points}</td>
+                      <td>{enemy.armor_class[0]["value"]}</td>
+                      <td>{enemy.challenge_rating}</td>
+                      <td className="expandable">
+                        <span className={`arrow ${openEnemy === enemy.name ? 'open' : ''}`}>
+                          {openEnemy === enemy.name ? '▲' : '▼'}
+                        </span>
+                      </td>
+                    </tr>
+                    <tr className={`details-row ${openEnemy === enemy.name ? 'open' : ''}`}>
+                      <td colSpan={6}>
+                        <div>
+                          <strong>Details:</strong>
+                          <p>Full character page with additional information about {enemy.name} coming soon.</p>
+                        </div>
+                      </td>
+                    </tr>
+                  </React.Fragment>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )
       )}
     </div>
   );

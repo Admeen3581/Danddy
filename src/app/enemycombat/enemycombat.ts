@@ -45,7 +45,7 @@ export interface Enemy {
         count: data["count"],
         dexterity: data["dexterity"],
         hit_dice: data["hit_dice"],
-        hit_points: data["hit_point"],
+        hit_points: data["hit_points"],
         hit_points_roll: data["hit_points_roll"],
         image: data["image"],
         index: data["index"],
