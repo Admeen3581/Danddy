@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+
 .hero-section {
   display: flex;
   flex-direction: column;
@@ -10,6 +12,7 @@
   color: white;
   position: relative;
   overflow: hidden;
+  font-family: 'Cinzel', serif; /* Apply the Cinzel font */
 }
 
 .hero-section::before {
