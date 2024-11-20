@@ -25,14 +25,23 @@
 }
 
 .headerBox {
-   position: relative;
-   text-align: center;
-   justify-content: center;
-   border-radius: 2px; 
-   width: 100%;
-   padding: 10px;
-   background-color: #ECEEE8;
- }
+    position: relative;
+    text-align: center;
+    justify-content: center;
+    border-radius: 2px; 
+    width: 100%;
+    padding: 10px;
+    color: #fff;
+    background: linear-gradient(-45deg, #303e7a, #0b034f, #fcfcfc, #0b4f93);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
  
  .dmmenu-container {
    position: absolute;
