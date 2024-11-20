@@ -17,9 +17,14 @@ const MapViewer: React.FC = () => {
     { name: 'Map 2: Manor', filePath: '../maps/map2.webp' },
   ];
 
+  const handleSelectMap = (filePath: string) => {
+    console.log('Selected map:', filePath);
+    setSelectedMap(filePath);
+  };
+
   return (
     <div>
-      <DMButtons maps={maps} onSelectMap={setSelectedMap} />
+      <DMButtons maps={maps} onSelectMap={handleSelectMap} />
       <MapDis selectedMap={selectedMap} />
     </div>
   );
