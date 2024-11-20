@@ -1,8 +1,8 @@
 import React from 'react';
 
 interface SidebarMenuProps {
-    fetchedRaces: JSON[];
-    fetchedClasses: JSON[];
+    fetchedRaces: { index: string; name: string }[];
+    fetchedClasses: { index: string; name: string }[];
     loadingRaces: boolean;
     loadingClasses: boolean;
     selectedRace: string;
@@ -41,8 +41,8 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
                 </button>
                 {raceDropdownOpen && (
                     <ul className="dropdown-list" style={{ display: loadingRaces ? 'none' : 'block' }}>
-                        {fetchedRaces.map((race: any) => (
-                            <li key={race['index']} onClick={() => handleRaceChange(race['name'])}>
+                        {fetchedRaces.map((race: { index: string; name: string }) => (
+                            <li key={race.index} onClick={() => handleRaceChange(race.name)}>
                                 <img src={iconUrl} alt={race.name} />
                                 {race['name']}
                             </li>
@@ -59,8 +59,8 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
                 </button>
                 {classDropdownOpen && (
                     <ul className="dropdown-list" style={{ display: loadingClasses ? 'none' : 'block' }}>
-                        {fetchedClasses.map((dndClass: any) => (
-                            <li key={dndClass['index']} onClick={() => handleClassChange(dndClass['name'])}>
+                        {fetchedClasses.map((dndClass: { index: string; name: string }) => (
+                            <li key={dndClass.index} onClick={() => handleClassChange(dndClass.name)}>
                                 <img src={iconUrl} alt={dndClass.name} />
                                 {dndClass['name']}
                             </li>
