@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  background-color: #34495e;
+  background-color: #082037;
   border-radius: 5px;
 }
 
@@ -11,5 +11,5 @@
 }
 
 .stat-value {
-  color: #1abc9c;
+  color: #dadada;
 }
