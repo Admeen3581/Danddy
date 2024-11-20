@@ -140,8 +140,16 @@ const CharacterCreation = () => {
                     loadingClasses={loadingClasses}
                     selectedRace={selectedRace}
                     selectedClass={selectedClass}
-                    toggleRaceDropdown={() => setRaceDropdownOpen(prev => !prev)}
-                    toggleClassDropdown={() => setClassDropdownOpen(prev => !prev)}
+                    toggleRaceDropdown={() => {
+                        setRaceDropdownOpen(prev => !prev);
+                        setClassDropdownOpen(false); // Close class dropdown
+                        setShowPopup(false); // Reset popup state
+                    }}
+                    toggleClassDropdown={() => {
+                        setClassDropdownOpen(prev => !prev);
+                        setRaceDropdownOpen(false); // Close race dropdown
+                        setShowPopup(false); // Reset popup state
+                    }}
                     handleRaceChange={handleRaceChange}
                     handleClassChange={handleClassChange}
                     raceDropdownOpen={raceDropdownOpen}
