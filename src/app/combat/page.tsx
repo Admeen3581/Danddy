@@ -1,30 +1,31 @@
 "use client"
 
-import SavingThrows from "../../../components/Combat/Saving/savingThrows";
-import SensesStats from "../../../components/Combat/Senses/sensesStats";
-import IntSkills from "../../../components/Combat/Skills/intSkills";
-import DexSkills from "../../../components/Combat/Skills/dexSkills";
-import WisSkills from "../../../components/Combat/Skills/wisSkills";
-import CharacterStats from "../../../components/Combat/Stats/characterStats";
-import ChaSkills from "../../../components/Combat/Skills/chaSkills";
-import StrSkills from "../../../components/Combat/Skills/strSkills";
-import HPManager from "../../../components/Combat/Hp/characterHp";
-import PlayerConditions from "../../../components/Combat/Conditions/conditions";
-import Inventory from "../../../components/Combat/Inventory/inventory";
+import SavingThrows from "../../components/combat/Saving/savingThrows";
+import SensesStats from "../../components/combat/Senses/sensesStats";
+import IntSkills from "../../components/combat/Skills/intSkills";
+import DexSkills from "../../components/combat/Skills/dexSkills";
+import WisSkills from "../../components/combat/Skills/wisSkills";
+import CharacterStats from "../../components/combat/Stats/characterStats";
+import ChaSkills from "../../components/combat/Skills/chaSkills";
+import StrSkills from "../../components/combat/Skills/strSkills";
+import HPManager from "../../components/combat/Hp/characterHp";
+import PlayerConditions from "../../components/combat/Conditions/conditions";
+import Inventory from "../../components/combat/Inventory/inventory";
 import useLocalStore from '@/utils/store';
 import { readDatabaseRoute } from "@/utils/httpRequester";
-import DiceRoller from "../../../components/Combat/DiceRoller/diceroller";
+import DiceRoller from "../../components/combat/DiceRoller/diceroller";
 import './combatComp.css'
-import Armor from "../../../components/Combat/Armor/armor";
-import Actions from "../../../components/Combat/Actions/actions";
+import Armor from "../../components/combat/Armor/armor";
+import Actions from "../../components/combat/Actions/actions";
 
 const Combat = () => {
   const { classesJson, setClassesJson } = useLocalStore();
-  readDatabaseRoute("characters/testerCharacterCreation")
+  if(classesJson.user_id == ""){
+    readDatabaseRoute("characters/testerCharacterCreation")
     .then((result) => {
       setClassesJson(result)
     })
-  
+  }
 
   return (
    <>

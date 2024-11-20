@@ -1,5 +1,5 @@
 "use client"
-import SignInLogic from "../../../components/authorization/SignInLogic";
+import SignInLogic from "../../components/authorization/SignInLogic";
 
 export default function Home() {
 

@@ -1,11 +1,18 @@
+"use client"
+
 import React, { useEffect, useState } from 'react';
 import './CharacterCreation.css';
-import { getDnDAPI, updateDatabaseRoute } from '@/utils/httpRequester';
+import { generateCampaignId, getDnDAPI, updateDatabaseRoute } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
 import { findSkillInJson, setSkillInJson } from '@/utils/characterJsonFunctions';
+import { Router } from 'next/router';
 
-const FinishingTouchesMenu = () => {
-    const { classesJson, setClassesJson } = useLocalStore();
+interface FinishingProps {
+    onFinish: () => void;
+}
+
+const FinishingTouchesMenu: React.FC<FinishingProps> = ({onFinish}) => {
+    const { classesJson, setClassesJson, userId, roomId } = useLocalStore();
     const [hp, setHp] = useState('');
     const [selectedProficiencies, setSelectedProficiencies] = useState([]);
     const [proficiencyChoices, setProficiencyChoices] = useState([]);
@@ -165,11 +172,21 @@ const FinishingTouchesMenu = () => {
         classesJson.inventory = selectedItems
         //Spell
         classesJson.spells = selectedCantrips.concat(selectedLevel1Spells)
+        classesJson.user_id = userId
 
         alert('Character Created!');
         setClassesJson(classesJson)
-        updateDatabaseRoute("characters/testerCharacterCreation", classesJson);
-        console.log(classesJson)
+
+        var charId = generateCampaignId()
+        updateDatabaseRoute(`characters/${charId}`, classesJson).then(
+            () => {
+                updateDatabaseRoute(`users/${userId}/characters/${roomId}`, {charId}).then(
+                    () => {
+                        onFinish();
+                    }
+                )
+            }
+        )
     };
 
     const toggleDropdown = (type) => {
@@ -178,6 +195,7 @@ const FinishingTouchesMenu = () => {
 
     return (
         <div className="sidebar">
+            <div className='sidebar-content'>
             <h2>Finishing Touches</h2>
             <hr />
             <p>Bring your Character to Life!</p>
@@ -208,23 +226,21 @@ const FinishingTouchesMenu = () => {
             <div className="section">
                 <h3>Character Attributes</h3>
                 <hr />
-                {proficiencyChoices.map((choice, index) => (
-                    <div key={index} className="dropdown-container">
-                        <h4>Choose {choice.choose}</h4>
-                        <button onClick={() => toggleDropdown('proficiency')}>
-                            {selectedProficiencies.length > 0 ? `${selectedProficiencies.join(', ')}` : 'Select Proficiencies'}
-                        </button>
-                        {dropdownOpen.proficiency && (
-                            <ul className="dropdown-list">
-                                {choice.options.map((option, idx) => (
-                                    <li key={idx} onClick={() => handleProficiencySelect(option)}>
-                                        {option} {selectedProficiencies.includes(option) && '✓'}
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
-                ))}
+                <div className="dropdown-container">
+                    <h4>Choose {proficiencyChoices[0]?.choose}</h4>
+                    <button onClick={() => toggleDropdown('proficiency')}>
+                        {selectedProficiencies.length > 0 ? `${selectedProficiencies.join(', ')}` : 'Select Proficiencies'}
+                    </button>
+                    {dropdownOpen.proficiency && (
+                        <ul className="dropdown-list">
+                            {proficiencyChoices[0]?.options.map((option, idx) => (
+                                <li key={idx} onClick={() => handleProficiencySelect(option)}>
+                                    {option} {selectedProficiencies.includes(option) && '✓'}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
             </div>
 
             {/* Cantrips section */}
@@ -233,6 +249,7 @@ const FinishingTouchesMenu = () => {
                     <h3>Cantrips</h3>
                     <hr />
                     <div className="dropdown-container">
+                        <h4>Choose {cantripLimit}</h4>
                         <button onClick={() => toggleDropdown('cantrip')}>
                             {selectedCantrips.length > 0 ? `${selectedCantrips.join(', ')}` : 'Select Cantrips'}
                         </button>
@@ -255,6 +272,7 @@ const FinishingTouchesMenu = () => {
                     <h3>Level 1 Spells</h3>
                     <hr />
                     <div className="dropdown-container">
+                        <h4>Choose {level1SpellLimit}</h4>
                         <button onClick={() => toggleDropdown('level1Spell')}>
                             {selectedLevel1Spells.length > 0 ? `${selectedLevel1Spells.join(', ')}` : 'Select Level 1 Spells'}
                         </button>
@@ -274,26 +292,25 @@ const FinishingTouchesMenu = () => {
             <div className="section">
                 <h3>Inventory</h3>
                 <hr />
-                
-                    <div className="dropdown-container">
-                        <button onClick={() => toggleDropdown('inventory')}>
-                            {'Select Items'}
-                        </button>
-                        {dropdownOpen.inventory && (
-                            <ul className="dropdown-list">
-                                {inventoryOptions.map((pair, rowIndex) => (
-                                <li key={rowIndex} className="inventory-row">
-                                    <span onClick={() => handleItemSelect(pair[0], rowIndex)}>
-                                        {pair[0]} {selectedItems[rowIndex] === pair[0] && '✓'}
-                                    </span>
-                                    <span onClick={() => handleItemSelect(pair[1], rowIndex)}>
-                                        {pair[1]} {selectedItems[rowIndex] === pair[1] && '✓'}
-                                    </span>
-                                </li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
+                <div className="dropdown-container">
+                    <button onClick={() => toggleDropdown('inventory')}>
+                        {'Select Items'}
+                    </button>
+                    {dropdownOpen.inventory && (
+                        <ul className="dropdown-list">
+                            {inventoryOptions.map((pair, rowIndex) => (
+                            <li key={rowIndex} className="inventory-row">
+                                <span onClick={() => handleItemSelect(pair[0], rowIndex)}>
+                                    {pair[0]} {selectedItems[rowIndex] === pair[0] && '✓'}
+                                </span>
+                                <span onClick={() => handleItemSelect(pair[1], rowIndex)}>
+                                    {pair[1]} {selectedItems[rowIndex] === pair[1] && '✓'}
+                                </span>
+                            </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
             </div>
 
             <div className="content button">
@@ -301,6 +318,7 @@ const FinishingTouchesMenu = () => {
                     Finish Character
                 </button>
             </div>
+        </div>
         </div>
     );
 };

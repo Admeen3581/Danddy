@@ -1,0 +1,20 @@
+.stats {
+  padding: 20px;
+  background: radial-gradient(circle, #b0b0b0, #2c2c2c);
+  color: #ecf0f1;
+  width: 200px;
+  height: auto;
+  margin: auto;
+}
+
+.statsTitle {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+}
+
+.statsBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

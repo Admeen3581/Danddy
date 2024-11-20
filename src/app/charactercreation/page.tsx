@@ -8,6 +8,7 @@ import AbilityScoresMenu from './AbilityScoresMenu';
 import FinishingTouchesMenu from './FinishingTouchesMenu'; // Import the new menu
 import './CharacterCreation.css';
 import { createBlankCharacterJSON } from '@/utils/characterJsonFunctions';
+import { useRouter } from 'next/navigation';
 
 const CharacterCreation = () => {
     const { classesJson, setClassesJson } = useLocalStore();
@@ -24,6 +25,7 @@ const CharacterCreation = () => {
     const [sidebarVisible, setSidebarVisible] = useState(true);
     const [readyForScores, setReadyForScores] = useState(false);
     const [showFinishingTouches, setShowFinishingTouches] = useState(false); // New state for finishing touches
+    const router = useRouter();
 
     useEffect(() => {
         const fetchClasses = async () => {
@@ -86,6 +88,10 @@ const CharacterCreation = () => {
         setShowFinishingTouches(true); // Show finishing touches menu
     };
 
+    const handleFinishingTouches = () => {
+        router.push("/playerhome")
+    }
+
 
     const getClassDescription = (className) => {
         switch (className) {
@@ -134,8 +140,16 @@ const CharacterCreation = () => {
                     loadingClasses={loadingClasses}
                     selectedRace={selectedRace}
                     selectedClass={selectedClass}
-                    toggleRaceDropdown={() => setRaceDropdownOpen(prev => !prev)}
-                    toggleClassDropdown={() => setClassDropdownOpen(prev => !prev)}
+                    toggleRaceDropdown={() => {
+                        setRaceDropdownOpen(prev => !prev);
+                        setClassDropdownOpen(false); // Close class dropdown
+                        setShowPopup(false); // Reset popup state
+                    }}
+                    toggleClassDropdown={() => {
+                        setClassDropdownOpen(prev => !prev);
+                        setRaceDropdownOpen(false); // Close race dropdown
+                        setShowPopup(false); // Reset popup state
+                    }}
                     handleRaceChange={handleRaceChange}
                     handleClassChange={handleClassChange}
                     raceDropdownOpen={raceDropdownOpen}
@@ -147,7 +161,9 @@ const CharacterCreation = () => {
                     onFinish={handleFinishAbilityScores} // Pass the finish function here
                 />
             ) : showFinishingTouches ? (
-                <FinishingTouchesMenu />
+                <FinishingTouchesMenu 
+                    onFinish={handleFinishingTouches}
+                />
             ) : null}
 
             {showPopup && (

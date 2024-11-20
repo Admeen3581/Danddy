@@ -1,0 +1,20 @@
+.stats {
+  padding: 20px;
+  background: radial-gradient(circle, #b0b0b0, #2c2c2c);
+  color: #ecf0f1;
+  height: auto;
+  margin: auto;
+}
+
+.statsTitle {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.statsBox {
+  display: flex;
+  flex-direction: row; /* Aligns each stat in a row */
+  justify-content: space-between; /* Distributes the columns evenly */
+  gap: 20px; /* Adds spacing between each column */
+}

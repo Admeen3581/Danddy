@@ -2,20 +2,32 @@
 
 import './dm.css';
 import React, { useEffect, useRef } from 'react';
-import DMNotes from '../../../DmComponents/DMNotes/dmnotes';
-import { createRoom, deleteDatabaseRoute, generateRoomCode, patchDatabaseRoute, readDatabaseRoute, updateDatabaseRoute, generateCampaignId } from '@/utils/httpRequester';
+import DMNotes from '../../components/dmPage/DMNotes/dmnotes';
+import { createRoom, generateRoomCode, patchDatabaseRoute, generateCampaignId } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
-import DMHeader from '../../../DmComponents/DMHeader/dmheader';
-import DMActivePlayers from '../../../DmComponents/DMActivePlayers/dmactive';
-import MapViewer from '../../../DmComponents/MapViewer';
-import { MessageRecievePopUp } from "@/components/messageRecievedPopUp";
+import DMHeader from '../../components/dmPage/DMHeader/dmheader';
+import DMActivePlayers from '../../components/dmPage/DMActivePlayers/dmactive';
+import MapViewer from '../../components/dmPage/MapViewer';
+import { MessageRecievePopUp } from "@/components/messaging/messageRecievedPopUp";
+import {useRouter} from "next/navigation";
 
 const DMHome = () => {
+
+  //Checks for log in status.
+  const userInfo = useLocalStore();
+  const userUid = userInfo.userId;
+  const router = useRouter();
+
+  if(!userUid)
+  {
+    router.push("./signin");
+  }
+
   const isRoomCreated = useRef(false)
   const {roomId, setRoomId, userId, setUserId} = useLocalStore()
 
   useEffect(() => {
-    if(!isRoomCreated.current){
+    if(!isRoomCreated.current && roomId.length < 1){
       setRoomId("temp")
       if (userId == "") {
         setUserId("guestId")
@@ -24,11 +36,12 @@ const DMHome = () => {
       const campaignId = generateCampaignId()
       const roomJson = {
         "campaign_id": campaignId,
-        "user_id": userId,
+        "dm_id": userId,
         "participants": [""],
         "combat_log": [""],
         "start_time": new Date().toISOString(),
-        "end_time": ""
+        "end_time": "",
+        "encounters": []
       };
 
       createRoom(roomId, roomJson)
