@@ -13,7 +13,6 @@ body {
   display: ruby;
   padding: 16px;
   margin: 10px 0;
-  border: 1px solid #34495e;
   border-radius: 8px;
   transition: background-color 0.3s ease;
   text-align: center;
