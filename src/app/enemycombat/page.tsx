@@ -5,6 +5,7 @@ import './enemycombat.css';
 import { Encounter, setUpEncouters } from './enemycombat';
 import { readDatabaseRoute } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
+import { getModifier } from '@/utils/characterJsonFunctions';
 
 const EnemyCombat: React.FC = () => {
   const [encounters, setEncounters] = useState<Encounter[]>([]); // State to store encounters
@@ -88,8 +89,21 @@ const EnemyCombat: React.FC = () => {
                     <tr className={`details-row ${openEnemy === enemy.name ? 'open' : ''}`}>
                       <td colSpan={6}>
                         <div>
-                          <strong>Details:</strong>
-                          <p>Full character page with additional information about {enemy.name} coming soon.</p>
+                          <p>
+                            <strong> Name: </strong>{enemy.name}<br />
+                            <strong> Count: </strong>x{enemy.count}<br />
+                            <strong> AC: </strong>{enemy.armor_class[0]["value"]} <br />
+                            <strong> Hit Points: </strong>{enemy.hit_points} <br />
+                            <strong> Speed: </strong>{enemy.speed["walk"]} <br />
+                            <strong> ------------------------------------------------------------------------- </strong><br />
+                            <strong> Strength: </strong>{getModifier(enemy.strength) > -1 ? "+" : ""}{getModifier(enemy.strength)} ({enemy.strength})<br />
+                            <strong> Dexterity: </strong>{getModifier(enemy.dexterity) > -1 ? "+" : ""}{getModifier(enemy.dexterity)} ({enemy.dexterity})<br />
+                            <strong> Constitution: </strong>{getModifier(enemy.constitution) > -1 ? "+" : ""}{getModifier(enemy.constitution)} ({enemy.constitution})<br />
+                            <strong> Intelligence: </strong>{getModifier(enemy.intelligence) > -1 ? "+" : ""}{getModifier(enemy.intelligence)} ({enemy.intelligence})<br />
+                            <strong> Wisdom: </strong>{getModifier(enemy.wisdowm) > -1 ? "+" : ""}{getModifier(enemy.wisdowm)} ({enemy.wisdowm})<br />
+                            <strong> Charisma: </strong>{getModifier(enemy.charisma) > -1 ? "+" : ""}{getModifier(enemy.charisma)} ({enemy.charisma})<br />
+                            <strong> ------------------------------------------------------------------------- </strong><br />
+                          </p>
                         </div>
                       </td>
                     </tr>
