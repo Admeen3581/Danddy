@@ -29,7 +29,7 @@
 }
 
 .conditions-container li button {
-  background-color: #e74c3c;
+  background-color: #71190f;
   color: white;
   border: none;
   padding: 5px 10px;
@@ -39,7 +39,7 @@
 }
 
 .conditions-container li button:hover {
-  background-color: #c0392b; 
+  background-color: #71190f; 
 }
 
 .conditions-container label {
@@ -54,7 +54,7 @@
 }
 
 .conditions-container button {
-  background-color: #2ecc71; 
+  background-color: #0a572a; 
   color: white;
   border: none;
   padding: 5px 10px;

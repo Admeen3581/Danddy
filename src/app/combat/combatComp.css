@@ -1,12 +1,14 @@
 body {
   background: url('./woods.jpeg') no-repeat center center fixed;
   background-size: cover;
+  font-family: 'Cinzel', serif; /* Add this line */
 }
 
 .combats-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh; 
+  font-family: 'Cinzel', serif; /* Add this line */
 }
 
 .throws, .skills-section {
@@ -16,6 +18,7 @@ body {
   border-radius: 8px;
   transition: background-color 0.3s ease;
   text-align: center;
+  font-family: 'Cinzel', serif; /* Add this line */
 }
 
 .top-container {
@@ -23,10 +26,12 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  font-family: 'Cinzel', serif; /* Add this line */
 }
 
 .actions {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  font-family: 'Cinzel', serif; /* Add this line */
 }

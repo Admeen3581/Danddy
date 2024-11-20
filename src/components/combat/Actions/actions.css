@@ -4,6 +4,7 @@
    align-items: center; 
    text-align: center;
    background: radial-gradient(circle, #b0b0b0, #2c2c2c);
+   font-family: 'Cinzel', serif; /* Add this line */
 }
 
 .actions-container h1, h2 {
@@ -11,12 +12,14 @@
    margin-bottom: 20px;
    font-size: 1.5em;
    color: #ffff;
+   font-family: 'Cinzel', serif; /* Add this line */
 }
 
 .actions-container ul {
    list-style-type: none;
    padding: 0; 
    color: #ffff;
+   font-family: 'Cinzel', serif; /* Add this line */
 }  
 
 .actions-container li {
@@ -26,4 +29,5 @@
    gap: 10px;
    color: #ffff;
    border-bottom: 1px solid #ecf0f1;
+   font-family: 'Cinzel', serif; /* Add this line */
 }
