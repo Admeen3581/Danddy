@@ -13,8 +13,8 @@ const MapViewer: React.FC = () => {
   const [selectedMap, setSelectedMap] = useState<string | null>(null);
 
   const maps: MapItem[] = [
-    { name: 'Map 1: World', filePath: '../maps/map1.jpg' },
-    { name: 'Map 2: Manor', filePath: '../maps/map2.webp' },
+    { name: 'Map 1: World', filePath: '/maps/map1.png' },
+    { name: 'Map 2: Manor', filePath: '/maps/map2.png' },
   ];
 
   const handleSelectMap = (filePath: string) => {
