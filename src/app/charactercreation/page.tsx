@@ -19,7 +19,7 @@ const CharacterCreation = () => {
     const [selectedClass, setSelectedClass] = useState('');
     const [selectedRace, setSelectedRace] = useState('');
     const [showPopup, setShowPopup] = useState(false);
-    const [selectedMethod, setSelectedMethod] = useState('');
+    const [setSelectedMethod] = useState('');
     const [classDropdownOpen, setClassDropdownOpen] = useState(false);
     const [raceDropdownOpen, setRaceDropdownOpen] = useState(false);
     const [sidebarVisible, setSidebarVisible] = useState(true);
