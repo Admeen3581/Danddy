@@ -1,6 +1,7 @@
 .dm-sect{
   font-family: 'Cinzel', serif;
   background: url('../woods.jpeg');
+  font-weight: bold;
   width: 100vw;
   height: 100vh; 
   overflow: hidden;
