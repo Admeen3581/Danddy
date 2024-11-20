@@ -6,7 +6,6 @@ body {
 .combats-container {
   display: flex;
   flex-direction: column;
-  background-color: rgba(44, 62, 80, 0.8); /* Optional: semi-transparent overlay */
   min-height: 100vh; 
 }
 
@@ -16,7 +15,6 @@ body {
   margin: 10px 0;
   border: 1px solid #34495e;
   border-radius: 8px;
-  background-color: rgba(44, 62, 80, 0.8); /* Optional: semi-transparent overlay */
   transition: background-color 0.3s ease;
   text-align: center;
 }
@@ -26,7 +24,6 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: rgba(44, 62, 80, 0.8); /* Optional: semi-transparent overlay */
 }
 
 .actions {
