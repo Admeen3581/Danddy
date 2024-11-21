@@ -28,6 +28,7 @@ const EnemyCombat: React.FC = () => {
   const handleEncounterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const encounterName = event.target.value;
     const encounter = encounters.find(enc => enc.name === encounterName) || null;
+    console.log(encounter)
     setSelectedEncounter(encounter);
   };
 
@@ -129,6 +130,20 @@ const EnemyCombat: React.FC = () => {
                               </ul>
                             ) : (
                               <p>No senses available.</p>
+                            )}
+                            <strong> ---------------------------------------------------- </strong><br />
+                            <strong><u> Actions </u></strong><br />---<br />
+                            {enemy.actions && enemy.actions.length > 0 ? (
+                              <ul>
+                                {enemy.actions.map((action, index) => (
+                                  <li key={index}>
+                                    <strong>{action["name"]}:</strong> {action["desc"]}
+                                    <br />---
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p>No actions available.</p>
                             )}
                           </p>
                         </div>
