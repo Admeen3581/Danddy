@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import React, { useEffect, useState } from 'react';
 import './enemycombat.css';
@@ -116,6 +116,19 @@ const EnemyCombat: React.FC = () => {
                               </ul>
                             ) : (
                               <p>No proficiencies available.</p>
+                            )}
+                            <strong> ---------------------------------------------------- </strong><br />
+                            <strong><u> Senses </u></strong><br />
+                            {enemy.senses ? (
+                              <ul>
+                                {Object.entries(enemy.senses).map(([sense, value], index) => (
+                                  <li key={index}>
+                                    <strong>{sense.charAt(0).toUpperCase() + sense.slice(1).replace("_", " ")}:</strong> {value}
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p>No senses available.</p>
                             )}
                           </p>
                         </div>
