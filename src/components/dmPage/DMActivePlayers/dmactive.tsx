@@ -5,22 +5,22 @@ import useLocalStore from '@/utils/store';
 import { useRouter } from 'next/navigation';
 
 const DMActive = () => {
-  const { roomId, setRoomId, classesJson, setClassesJson } = useLocalStore();
-  const [activePlayers, setActivePlayers] = useState<any[]>([]); // Use appropriate type here
+  const { roomId, setClassesJson } = useLocalStore();
+  const [activePlayers, setActivePlayers] = useState<{ uid: String; playerName: String }[]>([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   // Function to load active players
   const loadActivePlayers = async (roomId: String) => {
     setLoading(true); // Set loading to true while the data is being fetched
-    var ret: {'uid':String, 'playerName':String}[] = [];
+    let ret: { uid: String; playerName: String }[] = [];
     await readDatabaseRoute('users').then(
       async (users) => {
         await readDatabaseRoute(`rooms/${roomId}/participants`).then(
           async (participants) => {
-            for (var part in participants) {
-              var selectedUser = {'uid': "", 'playerName': ""};
-              for (var user in users) {
+            for (let part in participants) {
+              let selectedUser = { uid: "", playerName: "" };
+              for (let user in users) {
                 if (users[user]['uid'] === participants[part]) {
                   selectedUser.uid = users[user]['uid'];
                   selectedUser.playerName = users[user]['username'];
@@ -46,7 +46,7 @@ const DMActive = () => {
   }, [roomId]);
 
   // Handle click on a player's name (button)
-  const handlePlayerClick = (playerName: string) => {
+  const handlePlayerClick = (playerName: String) => {
     readDatabaseRoute(`users/${playerName}/characters/${roomId}`).then(
       result => {
         if(result != null){
