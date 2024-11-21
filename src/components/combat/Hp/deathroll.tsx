@@ -23,7 +23,7 @@ const DeathComponent: React.FC<DeathComponentProps> = ({ onReset }) => {
   };
 
   if (deathCount === 3) {
-    return <h1> You're character has died</h1>
+    return <h1> You&apos;re character has died</h1>
   }
 
   return (
