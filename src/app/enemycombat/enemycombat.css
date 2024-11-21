@@ -197,3 +197,19 @@
     margin: 5px 0;
     border-radius: 5px;
   }
+
+  .next-turn {
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    font-size: 1.2rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
+  .next-turn:hover {
+    background-color: darkblue;
+  }
+  
