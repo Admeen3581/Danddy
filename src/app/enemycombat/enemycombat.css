@@ -95,3 +95,105 @@
     transform: rotate(360deg);
   }
   
+  .enemy-combat-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    margin-top: 20px;
+  }
+  
+  .dropdown-container {
+    margin-bottom: 20px;
+  }
+  
+  select {
+    padding: 8px;
+    font-size: 1rem;
+    margin-left: 10px;
+    background-color: gray;
+  }
+  
+  /* Table styles */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    padding: 10px;
+    border: 1px solid black;
+    text-align: left;
+  }
+  
+  th {
+    background-color: rgb(32, 32, 80);
+    color: white;
+  }
+  
+  td {
+    background-color: gray;
+    color: black;
+  }
+  
+  tr:nth-child(even) td {
+    background-color: darkgrey;
+    color: black;
+  }
+  
+  .sidebar {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 250px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .roll-initiative {
+    padding: 10px 20px;
+    background-color: green;
+    color: white;
+    font-size: 1.2rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .roll-initiative:hover {
+    background-color: darkgreen;
+  }
+  
+  .initiative-list {
+    margin-top: 20px;
+  }
+  
+  .initiative-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .initiative-list li {
+    background-color: lightgray;
+    color: black;
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 5px;
+  }

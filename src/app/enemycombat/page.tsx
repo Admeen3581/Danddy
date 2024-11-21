@@ -13,6 +13,8 @@ const EnemyCombat: React.FC = () => {
   const [openEnemy, setOpenEnemy] = useState<string | null>(null);
   const { roomId } = useLocalStore();
   const [loading, setLoading] = useState<boolean>(true); // State for loading indicator
+  const [showNames, setShowNames] = useState<boolean>(false); // State to control name list visibility
+  const [initiativeNames, setInitiativeNames] = useState<string[]>([]); // State for names list
 
   useEffect(() => {
     // Fetch encounters and update the state
@@ -28,7 +30,6 @@ const EnemyCombat: React.FC = () => {
   const handleEncounterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const encounterName = event.target.value;
     const encounter = encounters.find(enc => enc.name === encounterName) || null;
-    console.log(encounter)
     setSelectedEncounter(encounter);
   };
 
@@ -38,6 +39,15 @@ const EnemyCombat: React.FC = () => {
     } else {
       setOpenEnemy(enemyName);
     }
+  };
+
+  const handleRollInitiative = () => {
+    // Example names for initiative
+    const names = [
+      "Alice", "Bob", "Charlie", "David", "Eve", "Frank", "Grace", "Hannah", "Ivy", "Jack"
+    ];
+    setInitiativeNames(names); // Set the names to the state
+    setShowNames(true); // Make the names list visible
   };
 
   return (
@@ -56,7 +66,7 @@ const EnemyCombat: React.FC = () => {
       </div>
 
       {loading ? (
-        <p>Loading encounters...</p> // Show loading message while data is being fetched
+        <p>Loading encounters...</p>
       ) : (
         selectedEncounter && (
           <div className="encounter-details">
@@ -170,6 +180,25 @@ const EnemyCombat: React.FC = () => {
           </div>
         )
       )}
+
+      {/* Sidebar Section */}
+      <div className="sidebar">
+        <button className="roll-initiative" onClick={handleRollInitiative}>
+          Roll Initiative
+        </button>
+
+        {/* Show the list of names after initiative roll */}
+        {showNames && (
+          <div className="initiative-list">
+            <h3>Initiative Order:</h3>
+            <ul>
+              {initiativeNames.map((name, index) => (
+                <li key={index}>{name}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
