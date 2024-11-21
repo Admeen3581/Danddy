@@ -18,7 +18,6 @@ import './directMessagePopup.css';
 import {useState} from "react";
 import { DoorOpen, SquarePen } from 'lucide-react';
 import {ScrollArea} from "@/components/ui/scroll-area";
-import {useCollectionData} from "react-firebase-hooks/firestore";
 import {initFirestore} from "@/lib/messenger";
 import {addDoc, collection, serverTimestamp} from "firebase/firestore";
 import useLocalStore from "@/utils/store";
