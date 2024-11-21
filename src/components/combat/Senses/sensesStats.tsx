@@ -3,7 +3,7 @@ import Stat from "../../charSheets/CSStats/Stat";
 import styles from './sensesStats.module.css'
 
 const SensesStats = () => {
-  const { classesJson, setClassesJson } = useLocalStore();
+  const { classesJson } = useLocalStore();
   
   const stats = {
     perception: classesJson.stats.wisdom.value,
