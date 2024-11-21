@@ -90,19 +90,33 @@ const EnemyCombat: React.FC = () => {
                       <td colSpan={6}>
                         <div>
                           <p>
+                            <strong><u> Enemy Details </u></strong><br />
                             <strong> Name: </strong>{enemy.name}<br />
                             <strong> Count: </strong>x{enemy.count}<br />
                             <strong> AC: </strong>{enemy.armor_class[0]["value"]} <br />
                             <strong> Hit Points: </strong>{enemy.hit_points} <br />
                             <strong> Speed: </strong>{enemy.speed["walk"]} <br />
-                            <strong> ------------------------------------------------------------------------- </strong><br />
+                            <strong> ---------------------------------------------------- </strong><br />
+                            <strong><u> Stats </u></strong><br />
                             <strong> Strength: </strong>{getModifier(enemy.strength) > -1 ? "+" : ""}{getModifier(enemy.strength)} ({enemy.strength})<br />
                             <strong> Dexterity: </strong>{getModifier(enemy.dexterity) > -1 ? "+" : ""}{getModifier(enemy.dexterity)} ({enemy.dexterity})<br />
                             <strong> Constitution: </strong>{getModifier(enemy.constitution) > -1 ? "+" : ""}{getModifier(enemy.constitution)} ({enemy.constitution})<br />
                             <strong> Intelligence: </strong>{getModifier(enemy.intelligence) > -1 ? "+" : ""}{getModifier(enemy.intelligence)} ({enemy.intelligence})<br />
                             <strong> Wisdom: </strong>{getModifier(enemy.wisdowm) > -1 ? "+" : ""}{getModifier(enemy.wisdowm)} ({enemy.wisdowm})<br />
                             <strong> Charisma: </strong>{getModifier(enemy.charisma) > -1 ? "+" : ""}{getModifier(enemy.charisma)} ({enemy.charisma})<br />
-                            <strong> ------------------------------------------------------------------------- </strong><br />
+                            <strong> ---------------------------------------------------- </strong><br />
+                            <strong><u> Proficiencies </u></strong><br />
+                            {enemy.proficiencies && enemy.proficiencies.length > 0 ? (
+                              <ul>
+                                {enemy.proficiencies.map((proficiency, index) => (
+                                  <li key={index}>
+                                    <strong>{proficiency["proficiency"].name}:</strong> {proficiency.value}
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p>No proficiencies available.</p>
+                            )}
                           </p>
                         </div>
                       </td>
