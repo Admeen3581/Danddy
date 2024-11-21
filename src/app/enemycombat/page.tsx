@@ -132,6 +132,20 @@ const EnemyCombat: React.FC = () => {
                               <p>No senses available.</p>
                             )}
                             <strong> ---------------------------------------------------- </strong><br />
+                            <strong><u> Special Abilities </u></strong><br />---<br />
+                            {enemy.special_abilities && enemy.special_abilities.length > 0 ? (
+                              <ul>
+                                {enemy.special_abilities.map((ability, index) => (
+                                  <li key={index}>
+                                    <strong>{ability["name"]}:</strong> {ability["desc"]}
+                                    <br />---
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p>No actions available.</p>
+                            )}
+                            <strong> ---------------------------------------------------- </strong><br />
                             <strong><u> Actions </u></strong><br />---<br />
                             {enemy.actions && enemy.actions.length > 0 ? (
                               <ul>
