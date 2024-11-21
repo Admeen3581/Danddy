@@ -4,11 +4,11 @@ import savingStyles from './savingThrows.module.css'
 import { getModifier } from "@/utils/characterJsonFunctions";
 
 const SavingThrows = () => {
-  const { classesJson, setClassesJson } = useLocalStore();
+  const { classesJson } = useLocalStore();
 
-  var numStats = []
+  let numStats = []
 
-  for(var stat in classesJson.stats){
+  for(let stat in classesJson.stats){
     if(classesJson.stats[stat].saving_throw) numStats.push(getModifier(classesJson.stats[stat].value) + 2)
     else numStats.push(getModifier(classesJson.stats[stat].value))
   }
