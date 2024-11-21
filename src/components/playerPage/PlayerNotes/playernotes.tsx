@@ -1,11 +1,43 @@
-import React, { useState } from 'react';
+"use client"
+import React, { useState, useEffect } from 'react';
 import './playernotes.css';
+import { readDatabaseRoute, patchDatabaseRoute } from '@/utils/httpRequester';
+import useLocalStore from '@/utils/store';
 
 const PlayerNotes = () => {
   const [notes, setNotes] = useState('');
+  const { userId } = useLocalStore();
 
-  const handleNotesChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setNotes(e.target.value);
+  useEffect(() => {
+    const loadNotes = async () => {
+      if (userId) {
+        try {
+          const data = await readDatabaseRoute(`users/${userId}/notes`);
+          if (data) {
+            setNotes(data.content || '');
+          }
+        } catch (error) {
+          console.error('Error loading notes:', error);
+        }
+      }
+    };
+    loadNotes();
+  }, [userId]);
+
+  const handleNotesChange = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newNotes = e.target.value;
+    setNotes(newNotes);
+    
+    if (userId) {
+      try {
+        await patchDatabaseRoute(`users/${userId}/notes`, {
+          content: newNotes,
+          lastUpdated: Date.now()
+        });
+      } catch (error) {
+        console.error('Error saving notes:', error);
+      }
+    }
   };
 
   return (
