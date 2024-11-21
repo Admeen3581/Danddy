@@ -4,11 +4,11 @@ import Stat from "../../charSheets/CSStats/Stat";
 import styles from './intSkills.module.css'
 
 const IntSkills = () => {
-  const { classesJson, setClassesJson } = useLocalStore();
+  const { classesJson } = useLocalStore();
   
-  var numStats = []
+  let numStats = []
 
-  for(var stat in classesJson.stats.intelligence.skills){
+  for(let stat in classesJson.stats.intelligence.skills){
     if(classesJson.stats.intelligence.skills[stat]) numStats.push(getModifier(classesJson.stats.intelligence.value)+2);
     else numStats.push(getModifier(classesJson.stats.intelligence.value))
   }
