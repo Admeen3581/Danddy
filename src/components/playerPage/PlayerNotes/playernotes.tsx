@@ -6,6 +6,7 @@ import useLocalStore from '@/utils/store';
 
 const PlayerNotes = () => {
   const [notes, setNotes] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
   const { userId } = useLocalStore();
 
   useEffect(() => {
@@ -24,18 +25,22 @@ const PlayerNotes = () => {
     loadNotes();
   }, [userId]);
 
-  const handleNotesChange = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newNotes = e.target.value;
-    setNotes(newNotes);
-    
+  const handleNotesChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setNotes(e.target.value);
+  };
+
+  const handleSave = async () => {
     if (userId) {
+      setIsSaving(true);
       try {
         await patchDatabaseRoute(`users/${userId}/notes`, {
-          content: newNotes,
+          content: notes,
           lastUpdated: Date.now()
         });
       } catch (error) {
         console.error('Error saving notes:', error);
+      } finally {
+        setIsSaving(false);
       }
     }
   };
@@ -50,6 +55,12 @@ const PlayerNotes = () => {
           onChange={handleNotesChange}
           placeholder="Type your notes here..."
         />
+        <button 
+          onClick={handleSave}
+          disabled={isSaving}
+        >
+          {isSaving ? 'Saving...' : 'Save'}
+        </button>
       </div>
     </div>
   );
