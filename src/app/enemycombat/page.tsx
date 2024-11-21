@@ -41,7 +41,7 @@ const EnemyCombat: React.FC = () => {
   };
 
   return (
-    <div className="app-container">
+    <div className="enemy-combat-container">
       <h1>D&D Encounter Viewer</h1>
       <div className="dropdown-container">
         <label htmlFor="encounter">Select Encounter:</label>
