@@ -30,7 +30,7 @@ const DiceRoller: React.FC = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [handleClickOutside]);
 
   const rollDice = (sides: number) => {
     const rolledValue = Math.floor(Math.random() * sides) + 1;
