@@ -1,5 +1,5 @@
 import {initFireRealBase} from "@/lib/messenger";
-import {equalTo, get, onValue, orderByChild, query, ref} from "firebase/database";
+import { get, onValue, ref} from "firebase/database";
 
 const realDB = initFireRealBase();
 

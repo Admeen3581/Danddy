@@ -25,7 +25,7 @@ export interface Enemy {
     strength: number;
     type: string;
     url: string;
-    wisdowm: number;
+    wisdom: number;
     xp: number;
   }
   
@@ -62,7 +62,7 @@ export interface Enemy {
         strength: data["strength"],
         type: data["type"],
         url: data["url"],
-        wisdowm: data["wisdom"],
+        wisdom: data["wisdom"],
         xp: data["xp"]
     }
     return enemy
