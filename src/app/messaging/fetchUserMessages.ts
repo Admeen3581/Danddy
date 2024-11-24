@@ -30,7 +30,7 @@ const findExternalUsernames = async (username: string) => {
             const userId = Object.keys(users).find(
                 (key) => users[key].username === username
             );
-            return userId;
+            return userId | null;
         } else {
             console.log("No users found.");
             return null;

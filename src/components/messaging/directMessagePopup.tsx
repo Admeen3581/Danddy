@@ -23,6 +23,8 @@ import findExternalUsernames from "@/app/messaging/fetchUserMessages";
 import {push, serverTimestamp} from "@firebase/database";
 import {getDatabase, ref, set} from "firebase/database";
 import {readDatabaseRoute} from "@/utils/httpRequester";
+import {util} from "zod";
+import find = util.find;
 
 type convo = {
     uid: string;
@@ -41,7 +43,7 @@ const db = getDatabase();
 
 export function DirectMessagePopup({style})
 {
-    const [selectedMessage, setSelectedMessage] = useState<convo | null>(null);
+    const [selectedConversation, setSelectedConversation] = useState<convo | null>(null);
     const [conversations, setConversations] = useState([]);
     const [newUsername, setNewUsername] = useState('');
     const [creatingMessage, setCreatingMessage] = useState(false);
@@ -62,10 +64,9 @@ export function DirectMessagePopup({style})
                     const data = await readDatabaseRoute(`users/${userInfo.userId}/directMessages/${tempHelp}`);
                     const messagesArray = Object.entries(data || {}).map(([id, message]) => ({
                         id,
-                        ...message,
+                        ...message,//contains sentByYou, content, timeStamp
                     }));
                     setHeardMessages(messagesArray);
-                    console.log(heardMessages);
                 } catch (error) {
                     console.error(`Error loading user ${userInfo.userId} messages: `, error);
                 } finally {
@@ -77,7 +78,7 @@ export function DirectMessagePopup({style})
     }, [isSending]);
 
     /**
-     * Checks for new messages
+     * Checks for new conversations
      * @author Adam Long
      * @async
      */
@@ -102,9 +103,6 @@ export function DirectMessagePopup({style})
         loadConvos();
     }, [isSending]);
 
-    const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-
     const tempHelp = "LMJj6Ne1LoabiXW8iYKbCARkACi2"//remove when done
 
     /**
@@ -121,7 +119,9 @@ export function DirectMessagePopup({style})
      * @author Adam Long
      * @async
      */
-    const handleCreateConversation = async () => {
+    const handleCreateConversation = async (event) => {
+        event.preventDefault();
+
         if (newUsername.trim() && newMessage.trim()) {
             // Add logic to create conversation (e.g., update state or API call)
             console.log("Creating conversation with:", newUsername, newMessage);
@@ -131,7 +131,8 @@ export function DirectMessagePopup({style})
                 content: [newMessage]
             } as convo;
 
-            setSelectedMessage(newConvo);
+            setSelectedConversation(newConvo);
+
 
             try {
                 //Saves new conversation object
@@ -163,7 +164,7 @@ export function DirectMessagePopup({style})
      * @author Adam Long
      */
     const handleSelectConvo = (conversation: convo) => {
-        setSelectedMessage(conversation);
+        setSelectedConversation(conversation);
     };
 
     /**
@@ -171,7 +172,7 @@ export function DirectMessagePopup({style})
      * @author Adam Long
      */
     const handleSelectConvoReturn = () => {
-        setSelectedMessage(null);
+        setSelectedConversation(null);
     }
 
     /**
@@ -193,7 +194,7 @@ export function DirectMessagePopup({style})
             console.log(`Sending message: ${newMessage}`);
 
             //backend (pushes new message to database
-            const recievingUserId = await findExternalUsernames(selectedMessage!.username);
+            const recievingUserId = await findExternalUsernames(selectedConversation!.username);
             const timeStamp = serverTimestamp();
 
             if (recievingUserId && userInfo.userId) {
@@ -244,7 +245,7 @@ export function DirectMessagePopup({style})
                     </div>
                 </SheetHeader>
 
-                {selectedMessage ? (
+                {selectedConversation ? (
                     <>
                         <div className="messages-container">
                             <div className='messages-header'>
@@ -252,13 +253,16 @@ export function DirectMessagePopup({style})
                                     <DoorOpen/>
                                 </div>
                                 <div className='nameTitle'>
-                                    <span className='user'>{selectedMessage.username}</span>
+                                    <span className='user'>{selectedConversation.username}</span>
                                 </div>
                             </div>
                             <br/>
                             {/*Look here for message UI changes.*/}
                             <div className='message-content'>
                                 <ScrollArea>
+                                    <div className='message outgoing'>
+                                        <p className='content'>{selectedConversation.content[0]}</p>
+                                    </div>
                                     {heardMessages.length > 0 ? (
                                         heardMessages.map((msg) => (
                                             <div
@@ -269,7 +273,7 @@ export function DirectMessagePopup({style})
                                             </div>
                                         ))
                                     ) : (
-                                        <p>No messages yet</p>
+                                        <div/>//empty div
                                     )}
                                 </ScrollArea>
                             </div>
