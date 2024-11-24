@@ -15,14 +15,13 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet";
 import './directMessagePopup.css';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import { DoorOpen, SquarePen } from 'lucide-react';
 import {ScrollArea} from "@/components/ui/scroll-area";
-import {useCollectionData} from "react-firebase-hooks/firestore";
-import {initFirestore} from "@/lib/messenger";
-import {addDoc, collection, serverTimestamp} from "firebase/firestore";
 import useLocalStore from "@/utils/store";
 import findExternalUsernames from "@/app/messaging/fetchUserMessages";
+import {patchDatabaseRoute, readDatabaseRoute} from "@/utils/httpRequester";
+import {serverTimestamp} from "@firebase/database";
 
 type convo = {
     uid: string;
@@ -30,22 +29,42 @@ type convo = {
     content: string;
 };
 
+//Temp Remove when no longer necessary
 const tempConvos = [
-    {uid: "1", user: 'Alice the wicked witch', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},
+    {uid: "1", user: 'Alice the wicked witch', content: 'Lorem Ipsum'},
     {uid: "2", user: 'Bob', content: 'Are you free to chat?' },
     {uid: "3", user: 'Charlie', content: 'Let’s meet up tomorrow.' },
 ];
 
 export function DirectMessagePopup({style})
 {
+    /**
+     * Checks for new messages
+     * @author Adam Long
+     * @async
+     */
+    useEffect(() => {
+        const loadMessages = async () => {
+            if (userInfo.userId) {
+                try {
+                    const dataReceived = await readDatabaseRoute(`users/${userInfo.userId}/directMessages/received`);
+                    const dataSent = await readDatabaseRoute(`users/${userInfo.userId}/directMessages/sent`)
+                    // if (data) {
+                    //     setNotes(data.content || '');
+                    // }
+                } catch (error) {
+                    console.error(`Error loading user ${userInfo.userId} messages: `, error);
+                }
+            }
+        };
+        loadMessages();
+    });
+
     const [selectedMessage, setSelectedMessage] = useState<convo | null>(null);
     const [newUsername, setNewUsername] = useState('');
     const [creatingMessage, setCreatingMessage] = useState(false);
     const [newMessage, setNewMessage] = useState('');
     const userInfo = useLocalStore();
-
-    //Firebase vars
-    const firestoreDB = initFirestore();
 
     /**
      * Changes state if user is currently creating a new conversation.
@@ -85,7 +104,7 @@ export function DirectMessagePopup({style})
      * Changes state is user exits current conversation.
      * @author Adam Long
      */
-    const handleSelectConvoReturn = () => { //exits current conversation
+    const handleSelectConvoReturn = () => {
         setSelectedMessage(null);
     }
 
@@ -110,12 +129,26 @@ export function DirectMessagePopup({style})
             //backend (pushes new message to database
             const recievingUserId = await findExternalUsernames(selectedMessage!.user);
 
-            await addDoc(collection(firestoreDB, 'directMessages'), {
-                text: newMessage,
-                uid: userInfo.userId,
-                createdAt: serverTimestamp(),
-                sentTo: recievingUserId,
-            })
+            if (recievingUserId || userInfo.userId) {
+                try {
+                    //Saves receiver messages
+                    await patchDatabaseRoute(`users/${recievingUserId}/directMessages/received/${userInfo.userId}`, {
+                        content: newMessage,
+                        lastUpdated: serverTimestamp()
+                    });
+                } catch (error) {
+                    console.error(`Error saving received direct message to user ${recievingUserId}:`, error);
+                }
+                try {
+                    //Saves sender messages
+                    await patchDatabaseRoute(`users/${userInfo.userId}/directMessages/sent/${recievingUserId}`, {
+                        content: newMessage,
+                        lastUpdated: serverTimestamp()
+                    });
+                } catch (error) {
+                    console.error(`Error saving sent direct message to user ${userInfo.userId}:`, error);
+                }
+            }
 
             setNewMessage('');
         }
