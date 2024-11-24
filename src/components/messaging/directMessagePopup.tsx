@@ -133,7 +133,7 @@ export function DirectMessagePopup({style})
             const recievingUserId = await findExternalUsernames(selectedMessage!.user);
             const timeStamp = serverTimestamp();
 
-            if (recievingUserId || userInfo.userId) {
+            if (recievingUserId || userInfo.userId) {//ENSURE TO CHANGE THIS TO &&
                 try {
                     //Saves receiver messages
                     const receiverMessagesRef = ref(db, `users/${recievingUserId}/directMessages/received/${userInfo.userId}`);
