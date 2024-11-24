@@ -20,9 +20,9 @@ import { DoorOpen, SquarePen } from 'lucide-react';
 import {ScrollArea} from "@/components/ui/scroll-area";
 import useLocalStore from "@/utils/store";
 import findExternalUsernames from "@/app/messaging/fetchUserMessages";
-import {patchDatabaseRoute, readDatabaseRoute} from "@/utils/httpRequester";
+import {readDatabaseRoute} from "@/utils/httpRequester";
 import {push, serverTimestamp} from "@firebase/database";
-import {getDatabase, ref, set} from "firebase/database";
+import {getDatabase, onValue, ref, set} from "firebase/database";
 
 type convo = {
     uid: string;
@@ -34,40 +34,44 @@ type convo = {
 const tempConvos = [
     {uid: "1", user: 'Alice the wicked witch', content: 'Lorem Ipsum'},
     {uid: "2", user: 'Bob', content: 'Are you free to chat?' },
-    {uid: "3", user: 'Charlie', content: 'Let’s meet up tomorrow.' },
+    {uid: "3", user: 'Desroi', content: 'Let’s meet up tomorrow.' },
 ];
 
 const db = getDatabase();
 
 export function DirectMessagePopup({style})
 {
+    const [selectedMessage, setSelectedMessage] = useState<convo | null>(null);
+    const [newUsername, setNewUsername] = useState('');
+    const [creatingMessage, setCreatingMessage] = useState(false);
+    const [newMessage, setNewMessage] = useState('');
+    const [heardMessages, setHeardMessages] = useState([]);
+    const userInfo = useLocalStore();
+
     /**
      * Checks for new messages
      * @author Adam Long
      * @async
      */
     useEffect(() => {
-        const loadMessages = async () => {
-            if (userInfo.userId) {
-                try {
-                    const dataReceived = await readDatabaseRoute(`users/${userInfo.userId}/directMessages/received`);
-                    const dataSent = await readDatabaseRoute(`users/${userInfo.userId}/directMessages/sent`)
-                    // if (data) {
-                    //     setNotes(data.content || '');
-                    // }
-                } catch (error) {
-                    console.error(`Error loading user ${userInfo.userId} messages: `, error);
-                }
-            }
-        };
-        loadMessages();
-    });
+        listenToMessages((newMessages) => {
+            setHeardMessages(newMessages);
+        })
+    }, [userInfo]);
 
-    const [selectedMessage, setSelectedMessage] = useState<convo | null>(null);
-    const [newUsername, setNewUsername] = useState('');
-    const [creatingMessage, setCreatingMessage] = useState(false);
-    const [newMessage, setNewMessage] = useState('');
-    const userInfo = useLocalStore();
+    const tempHelp = "LMJj6Ne1LoabiXW8iYKbCARkACi2"
+
+    /**
+     * Updates UI based on database update for receiver messages
+     * @param callback Retrieves data - reference var
+     */
+    const listenToMessages = (callback) => {
+        const receiverMessagesRef = ref(db, `users/${userInfo.userId}/directMessages/${tempHelp}`);
+        onValue(receiverMessagesRef, (snapshot) => {
+            const messages = snapshot.val();
+            callback(messages);
+        });
+    }
 
     /**
      * Changes state if user is currently creating a new conversation.
@@ -136,10 +140,11 @@ export function DirectMessagePopup({style})
             if (recievingUserId || userInfo.userId) {//ENSURE TO CHANGE THIS TO &&
                 try {
                     //Saves receiver messages
-                    const receiverMessagesRef = ref(db, `users/${recievingUserId}/directMessages/received/${userInfo.userId}`);
+                    const receiverMessagesRef = ref(db, `users/${recievingUserId}/directMessages/${userInfo.userId}`);
                     const receiverMessagesRefKey = push(receiverMessagesRef);
                     set(receiverMessagesRefKey, {
                         content: newMessage,
+                        sentByYou: false,
                         timeStamp: timeStamp,
                     }).catch((e) => {
                         throw e;
@@ -149,10 +154,11 @@ export function DirectMessagePopup({style})
                 }
                 try {
                     //Saves sender messages
-                    const senderMessagesRef = ref(db, `users/${userInfo.userId}/directMessages/sent/${recievingUserId}`);
+                    const senderMessagesRef = ref(db, `users/${userInfo.userId}/directMessages/${recievingUserId}`);
                     const senderMessagesRefKey = push(senderMessagesRef);
                     set(senderMessagesRefKey, {
                         content: newMessage,
+                        sentByYou: true,
                         timeStamp: timeStamp,
                     }).catch((e) => {
                         throw e;
@@ -196,12 +202,9 @@ export function DirectMessagePopup({style})
                                     <div className="message incoming">
                                         <p className="content">{selectedMessage.content}</p>
                                     </div>
-                                    {tempConvos.map((message) => (
-                                        // eslint-disable-next-line react/jsx-key
-                                        <div className="message outgoing">
-                                            {message.content}
-                                        </div>
-                                    ))}
+                                    <div className="message outgoing">
+                                        <p className='content'>{selectedMessage.content}</p>
+                                    </div>
                                 </ScrollArea>
                             </div>
                         </div>
