@@ -21,20 +21,20 @@ import {ScrollArea} from "@/components/ui/scroll-area";
 import useLocalStore from "@/utils/store";
 import findExternalUsernames from "@/app/messaging/fetchUserMessages";
 import {push, serverTimestamp} from "@firebase/database";
-import {getDatabase, onValue, ref, set} from "firebase/database";
+import {getDatabase, ref, set} from "firebase/database";
 import {readDatabaseRoute} from "@/utils/httpRequester";
 
 type convo = {
     uid: string;
-    user: string;
-    content: string;
+    username: string;
+    content: string[];
 };
 
 //Temp Remove when no longer necessary
 const tempConvos = [
-    {uid: "1", user: 'Alice the wicked witch', content: 'Lorem Ipsum'},
-    {uid: "2", user: 'Bob', content: 'Are you free to chat?' },
-    {uid: "3", user: 'Desroi', content: 'Let’s meet up tomorrow.' },
+    {uid: "1", username: 'Alice the wicked witch', content: ['Lorem Ipsum', 'New element in array']},
+    {uid: "2", username: 'Bob', content: ['Are you free to chat?']},
+    {uid: "3", username: 'Desroi', content: ['Let’s meet up tomorrow.']},
 ];
 
 const db = getDatabase();
@@ -42,6 +42,7 @@ const db = getDatabase();
 export function DirectMessagePopup({style})
 {
     const [selectedMessage, setSelectedMessage] = useState<convo | null>(null);
+    const [conversations, setConversations] = useState([]);
     const [newUsername, setNewUsername] = useState('');
     const [creatingMessage, setCreatingMessage] = useState(false);
     const [newMessage, setNewMessage] = useState('');
@@ -75,7 +76,36 @@ export function DirectMessagePopup({style})
         loadMessages();
     }, [isSending]);
 
-    const tempHelp = "LMJj6Ne1LoabiXW8iYKbCARkACi2"
+    /**
+     * Checks for new messages
+     * @author Adam Long
+     * @async
+     */
+    useEffect(() => {
+        const loadConvos = async () => {
+            if (userInfo.userId) {
+                try {
+                    const data = await readDatabaseRoute(`users/${userInfo.userId}/conversations`);
+                    const convosArray = Object.entries(data || {}).map(([id, convo]) => ({
+                        id,
+                        ...convo,//contains uid, username, & content
+                    }));
+                    console.log(convosArray)
+                    setConversations(convosArray);
+                } catch (error) {
+                    console.error(`Error loading user ${userInfo.userId} messages: `, error);
+                } finally {
+                    setIsSending(false);
+                }
+            }
+        };
+        loadConvos();
+    }, [isSending]);
+
+    const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+
+    const tempHelp = "LMJj6Ne1LoabiXW8iYKbCARkACi2"//remove when done
 
     /**
      * Changes state if user is currently creating a new conversation.
@@ -89,11 +119,36 @@ export function DirectMessagePopup({style})
     /**
      * Creates new conversation based on input fields upon a button press.
      * @author Adam Long
+     * @async
      */
-    const handleCreateConversation = () => {
+    const handleCreateConversation = async () => {
         if (newUsername.trim() && newMessage.trim()) {
             // Add logic to create conversation (e.g., update state or API call)
             console.log("Creating conversation with:", newUsername, newMessage);
+            const newConvo = {
+                uid: await findExternalUsernames(newUsername),
+                username: newUsername,
+                content: [newMessage]
+            } as convo;
+
+            setSelectedMessage(newConvo);
+
+            try {
+                //Saves new conversation object
+                const convosRef = ref(db, `users/${userInfo.userId}/conversations`);
+                const convosRefKey = push(convosRef);
+                set(convosRefKey, {
+                    uid: newConvo.uid,
+                    username: newConvo.username,
+                    content: newConvo.content,
+                }).catch((e) => {
+                    throw e;
+                })
+            } catch (error) {
+                console.error(`Error saving conversation of user ${newConvo.uid} for ${userInfo.userId}:`, error);
+            }
+
+            setIsSending(true);
 
             // Reset input fields
             setNewUsername("");
@@ -138,7 +193,7 @@ export function DirectMessagePopup({style})
             console.log(`Sending message: ${newMessage}`);
 
             //backend (pushes new message to database
-            const recievingUserId = await findExternalUsernames(selectedMessage!.user);
+            const recievingUserId = await findExternalUsernames(selectedMessage!.username);
             const timeStamp = serverTimestamp();
 
             if (recievingUserId && userInfo.userId) {
@@ -197,7 +252,7 @@ export function DirectMessagePopup({style})
                                     <DoorOpen/>
                                 </div>
                                 <div className='nameTitle'>
-                                    <span className='user'>{selectedMessage.user}</span>
+                                    <span className='user'>{selectedMessage.username}</span>
                                 </div>
                             </div>
                             <br/>
@@ -253,17 +308,17 @@ export function DirectMessagePopup({style})
                     ) : (
                         <div className="conversations-container">
                             <ScrollArea>
-                                {tempConvos.map(convo => (
-                                    <div key={convo.user} className="conversation-preview" onClick={() => handleSelectConvo(convo)}>
+                                {conversations.map(convo => (
+                                    <div key={convo.uid} className="conversation-preview" onClick={() => handleSelectConvo(convo)}>
                                     <span className="user">
-                                        {convo.user.slice(0,21)}
-                                        {convo.user.length > 21 && (
+                                        {convo.username.slice(0,21)}
+                                        {convo.username.length > 21 && (
                                             "..."
                                         )}
                                     </span>
                                         <p className="preview-content">
-                                            {convo.content.slice(0,30)} {/*change to most recent message*/}
-                                            {convo.content.length > 30 && (
+                                            {convo.content[convo.content.length-1].slice(0,30)} {/*change to most recent message*/}
+                                            {convo.content[convo.content.length-1].length > 30 && (
                                                 "..."
                                             )}
                                         </p>
