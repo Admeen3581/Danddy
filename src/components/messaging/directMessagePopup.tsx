@@ -20,9 +20,9 @@ import { DoorOpen, SquarePen } from 'lucide-react';
 import {ScrollArea} from "@/components/ui/scroll-area";
 import useLocalStore from "@/utils/store";
 import findExternalUsernames from "@/app/messaging/fetchUserMessages";
-import {readDatabaseRoute} from "@/utils/httpRequester";
 import {push, serverTimestamp} from "@firebase/database";
 import {getDatabase, onValue, ref, set} from "firebase/database";
+import {readDatabaseRoute} from "@/utils/httpRequester";
 
 type convo = {
     uid: string;
@@ -46,6 +46,7 @@ export function DirectMessagePopup({style})
     const [creatingMessage, setCreatingMessage] = useState(false);
     const [newMessage, setNewMessage] = useState('');
     const [heardMessages, setHeardMessages] = useState([]);
+    const [isSending, setIsSending] = useState(false);
     const userInfo = useLocalStore();
 
     /**
@@ -54,24 +55,27 @@ export function DirectMessagePopup({style})
      * @async
      */
     useEffect(() => {
-        listenToMessages((newMessages) => {
-            setHeardMessages(newMessages);
-        })
-    }, [userInfo]);
+        const loadMessages = async () => {
+            if (userInfo.userId) {
+                try {
+                    const data = await readDatabaseRoute(`users/${userInfo.userId}/directMessages/${tempHelp}`);
+                    const messagesArray = Object.entries(data || {}).map(([id, message]) => ({
+                        id,
+                        ...message,
+                    }));
+                    setHeardMessages(messagesArray);
+                    console.log(heardMessages);
+                } catch (error) {
+                    console.error(`Error loading user ${userInfo.userId} messages: `, error);
+                } finally {
+                    setIsSending(false);
+                }
+            }
+        };
+        loadMessages();
+    }, [isSending]);
 
     const tempHelp = "LMJj6Ne1LoabiXW8iYKbCARkACi2"
-
-    /**
-     * Updates UI based on database update for receiver messages
-     * @param callback Retrieves data - reference var
-     */
-    const listenToMessages = (callback) => {
-        const receiverMessagesRef = ref(db, `users/${userInfo.userId}/directMessages/${tempHelp}`);
-        onValue(receiverMessagesRef, (snapshot) => {
-            const messages = snapshot.val();
-            callback(messages);
-        });
-    }
 
     /**
      * Changes state if user is currently creating a new conversation.
@@ -137,7 +141,7 @@ export function DirectMessagePopup({style})
             const recievingUserId = await findExternalUsernames(selectedMessage!.user);
             const timeStamp = serverTimestamp();
 
-            if (recievingUserId || userInfo.userId) {//ENSURE TO CHANGE THIS TO &&
+            if (recievingUserId && userInfo.userId) {
                 try {
                     //Saves receiver messages
                     const receiverMessagesRef = ref(db, `users/${recievingUserId}/directMessages/${userInfo.userId}`);
@@ -166,6 +170,7 @@ export function DirectMessagePopup({style})
                 } catch (error) {
                     console.error(`Error saving sent direct message to user ${userInfo.userId}:`, error);
                 }
+                setIsSending(true);
             }
 
             setNewMessage('');
@@ -203,7 +208,17 @@ export function DirectMessagePopup({style})
                                         <p className="content">{selectedMessage.content}</p>
                                     </div>
                                     <div className="message outgoing">
-                                        <p className='content'>{selectedMessage.content}</p>
+                                        <p className='content'>
+                                            {heardMessages.length > 0 ? (
+                                                heardMessages.map((message) => (
+                                                    <div key={message.id}>
+                                                        <p>{message.content}</p>
+                                                    </div>
+                                                ))
+                                            ) : (
+                                                <p>Nah dawg</p>
+                                            )}
+                                        </p>
                                     </div>
                                 </ScrollArea>
                             </div>
