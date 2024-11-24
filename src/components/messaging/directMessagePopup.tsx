@@ -21,7 +21,8 @@ import {ScrollArea} from "@/components/ui/scroll-area";
 import useLocalStore from "@/utils/store";
 import findExternalUsernames from "@/app/messaging/fetchUserMessages";
 import {patchDatabaseRoute, readDatabaseRoute} from "@/utils/httpRequester";
-import {serverTimestamp} from "@firebase/database";
+import {push, serverTimestamp} from "@firebase/database";
+import {getDatabase, ref, set} from "firebase/database";
 
 type convo = {
     uid: string;
@@ -35,6 +36,8 @@ const tempConvos = [
     {uid: "2", user: 'Bob', content: 'Are you free to chat?' },
     {uid: "3", user: 'Charlie', content: 'Let’s meet up tomorrow.' },
 ];
+
+const db = getDatabase();
 
 export function DirectMessagePopup({style})
 {
@@ -128,23 +131,32 @@ export function DirectMessagePopup({style})
 
             //backend (pushes new message to database
             const recievingUserId = await findExternalUsernames(selectedMessage!.user);
+            const timeStamp = serverTimestamp();
 
             if (recievingUserId || userInfo.userId) {
                 try {
                     //Saves receiver messages
-                    await patchDatabaseRoute(`users/${recievingUserId}/directMessages/received/${userInfo.userId}`, {
+                    const receiverMessagesRef = ref(db, `users/${recievingUserId}/directMessages/received/${userInfo.userId}`);
+                    const receiverMessagesRefKey = push(receiverMessagesRef);
+                    set(receiverMessagesRefKey, {
                         content: newMessage,
-                        lastUpdated: serverTimestamp()
-                    });
+                        timeStamp: timeStamp,
+                    }).catch((e) => {
+                        throw e;
+                    })
                 } catch (error) {
                     console.error(`Error saving received direct message to user ${recievingUserId}:`, error);
                 }
                 try {
                     //Saves sender messages
-                    await patchDatabaseRoute(`users/${userInfo.userId}/directMessages/sent/${recievingUserId}`, {
+                    const senderMessagesRef = ref(db, `users/${userInfo.userId}/directMessages/sent/${recievingUserId}`);
+                    const senderMessagesRefKey = push(senderMessagesRef);
+                    set(senderMessagesRefKey, {
                         content: newMessage,
-                        lastUpdated: serverTimestamp()
-                    });
+                        timeStamp: timeStamp,
+                    }).catch((e) => {
+                        throw e;
+                    })
                 } catch (error) {
                     console.error(`Error saving sent direct message to user ${userInfo.userId}:`, error);
                 }
