@@ -52,7 +52,7 @@ export function DirectMessagePopup({style})
         const loadMessages = async () => {
             if (userInfo.userId) {
                 try {
-                    const data = await readDatabaseRoute(`users/${userInfo.userId}/directMessages/${tempHelp}`);
+                    const data = await readDatabaseRoute(`users/${userInfo.userId}/directMessages/${selectedConversation!.uid}`);
                     const messagesArray = Object.entries(data || {}).map(([id, message]) => ({
                         id,
                         ...message,//contains sentByYou, content, timeStamp
@@ -66,8 +66,7 @@ export function DirectMessagePopup({style})
             }
         };
         loadMessages();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isSending, selectedConversation]);
+    }, [isSending]);
 
     /**
      * Checks for new conversations
@@ -116,14 +115,14 @@ export function DirectMessagePopup({style})
         if (newUsername.trim() && newMessage.trim()) {
             // Add logic to create conversation (e.g., update state or API call)
             console.log("Creating conversation with:", newUsername, newMessage);
+            const receivingId = await findExternalUsernames(newUsername);
             const newConvo = {
-                uid: await findExternalUsernames(newUsername),
+                uid: receivingId,
                 username: newUsername,
                 content: [newMessage]
             } as convo;
 
             setSelectedConversation(newConvo);
-
 
             try {
                 //Saves new conversation object
@@ -156,7 +155,6 @@ export function DirectMessagePopup({style})
      */
     const handleSelectConvo = (conversation: convo) => {
         setSelectedConversation(conversation);
-        setIsSending(true);
     };
 
     /**
