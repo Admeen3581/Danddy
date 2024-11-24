@@ -204,22 +204,18 @@ export function DirectMessagePopup({style})
                             {/*Look here for message UI changes.*/}
                             <div className='message-content'>
                                 <ScrollArea>
-                                    <div className="message incoming">
-                                        <p className="content">{selectedMessage.content}</p>
-                                    </div>
-                                    <div className="message outgoing">
-                                        <p className='content'>
-                                            {heardMessages.length > 0 ? (
-                                                heardMessages.map((message) => (
-                                                    <div key={message.id}>
-                                                        <p>{message.content}</p>
-                                                    </div>
-                                                ))
-                                            ) : (
-                                                <p>Nah dawg</p>
-                                            )}
-                                        </p>
-                                    </div>
+                                    {heardMessages.length > 0 ? (
+                                        heardMessages.map((msg) => (
+                                            <div
+                                                key={msg.id}
+                                                className={`message ${msg.sentByYou ? "outgoing" : "incoming"}`}
+                                            >
+                                                <p className="content">{msg.content}</p>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <p>No messages yet</p>
+                                    )}
                                 </ScrollArea>
                             </div>
                         </div>
