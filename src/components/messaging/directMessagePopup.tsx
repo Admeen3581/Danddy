@@ -1,6 +1,6 @@
 /**
  * @Author Adam Long
- * @Date 10/29/24
+ * @Date 11/24/24
  * @Project SCRUM-113 & SCRUM-157
  */
 
@@ -23,21 +23,12 @@ import findExternalUsernames from "@/app/messaging/fetchUserMessages";
 import {push, serverTimestamp} from "@firebase/database";
 import {getDatabase, ref, set} from "firebase/database";
 import {readDatabaseRoute} from "@/utils/httpRequester";
-import {util} from "zod";
-import find = util.find;
 
 type convo = {
     uid: string;
     username: string;
     content: string[];
 };
-
-//Temp Remove when no longer necessary
-const tempConvos = [
-    {uid: "1", username: 'Alice the wicked witch', content: ['Lorem Ipsum', 'New element in array']},
-    {uid: "2", username: 'Bob', content: ['Are you free to chat?']},
-    {uid: "3", username: 'Desroi', content: ['Let’s meet up tomorrow.']},
-];
 
 const db = getDatabase();
 
@@ -75,7 +66,8 @@ export function DirectMessagePopup({style})
             }
         };
         loadMessages();
-    }, [isSending]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isSending, selectedConversation]);
 
     /**
      * Checks for new conversations
@@ -91,7 +83,6 @@ export function DirectMessagePopup({style})
                         id,
                         ...convo,//contains uid, username, & content
                     }));
-                    console.log(convosArray)
                     setConversations(convosArray);
                 } catch (error) {
                     console.error(`Error loading user ${userInfo.userId} messages: `, error);
@@ -165,6 +156,7 @@ export function DirectMessagePopup({style})
      */
     const handleSelectConvo = (conversation: convo) => {
         setSelectedConversation(conversation);
+        setIsSending(true);
     };
 
     /**
