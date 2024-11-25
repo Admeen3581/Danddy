@@ -40,11 +40,11 @@ export default function AuthForm({ type, onSubmit }: AuthFormProps) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-zinc-900">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-400 via-blue-500  via-blue-700 via-blue-900 to-blue-950 bg-[length:200%_200%] animate-gradient">
       <section className="auth-form w-full max-w-md p-8 bg-white shadow-lg rounded-lg text-lg">
         <header className="flex flex-col gap-5 md:gap-8 text-center text-4xl">
           <h1 className="form-heading">
-            {type === 'danddy' ? 'Danddy' : 'Danddy'}
+            {type === 'danddy' ? 'Danddy' : 'Welcome to Danddy'}
           </h1>
         </header>
 
