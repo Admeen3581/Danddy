@@ -24,14 +24,10 @@ const DMHome = () => {
   }
 
   const isRoomCreated = useRef(false)
-  const {roomId, setRoomId, userId, setUserId} = useLocalStore()
+  const {roomId, setRoomId, userId} = useLocalStore()
 
   useEffect(() => {
     if(!isRoomCreated.current && roomId.length < 1){
-      setRoomId("temp")
-      if (userId == "") {
-        setUserId("guestId")
-      }
       const roomId = generateRoomCode()
       const roomJson = {
         "dm_id": userId,
