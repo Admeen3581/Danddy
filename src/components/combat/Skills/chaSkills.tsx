@@ -6,9 +6,9 @@ import { getModifier } from "@/utils/characterJsonFunctions";
 const ChaSkills = () => {
   const { classesJson } = useLocalStore();
   
-  let numStats = []
+  const numStats = []
 
-  for(let stat in classesJson.stats.charisma.skills){
+  for(const stat in classesJson.stats.charisma.skills){
     if(classesJson.stats.charisma.skills[stat]) numStats.push(getModifier(classesJson.stats.charisma.value)+2);
     else numStats.push(getModifier(classesJson.stats.charisma.value))
   }

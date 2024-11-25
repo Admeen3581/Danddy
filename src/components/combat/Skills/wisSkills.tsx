@@ -6,9 +6,9 @@ import { getModifier } from "@/utils/characterJsonFunctions";
 const WisSkills = () => {
   const { classesJson } = useLocalStore();
   
-  let numStats = []
+  const numStats = []
 
-  for(let stat in classesJson.stats.wisdom.skills){
+  for(const stat in classesJson.stats.wisdom.skills){
     if(classesJson.stats.wisdom.skills[stat]) numStats.push(getModifier(classesJson.stats.wisdom.value)+2);
     else numStats.push(getModifier(classesJson.stats.wisdom.value))
   }

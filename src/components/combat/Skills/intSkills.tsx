@@ -6,9 +6,9 @@ import styles from './intSkills.module.css'
 const IntSkills = () => {
   const { classesJson } = useLocalStore();
   
-  let numStats = []
+  const numStats = []
 
-  for(let stat in classesJson.stats.intelligence.skills){
+  for(const stat in classesJson.stats.intelligence.skills){
     if(classesJson.stats.intelligence.skills[stat]) numStats.push(getModifier(classesJson.stats.intelligence.value)+2);
     else numStats.push(getModifier(classesJson.stats.intelligence.value))
   }

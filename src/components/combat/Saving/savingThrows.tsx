@@ -6,9 +6,9 @@ import { getModifier } from "@/utils/characterJsonFunctions";
 const SavingThrows = () => {
   const { classesJson } = useLocalStore();
 
-  let numStats = []
+  const numStats = []
 
-  for(let stat in classesJson.stats){
+  for(const stat in classesJson.stats){
     if(classesJson.stats[stat].saving_throw) numStats.push(getModifier(classesJson.stats[stat].value) + 2)
     else numStats.push(getModifier(classesJson.stats[stat].value))
   }

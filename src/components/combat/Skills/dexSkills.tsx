@@ -7,9 +7,9 @@ const IntSkills = () => {
 
   const { classesJson } = useLocalStore();
   
-  let numStats = []
+  const numStats = []
 
-  for(let stat in classesJson.stats.dexterity.skills){
+  for(const stat in classesJson.stats.dexterity.skills){
     if(classesJson.stats.dexterity.skills[stat]) numStats.push(getModifier(classesJson.stats.dexterity.value)+2);
     else numStats.push(getModifier(classesJson.stats.dexterity.value))
   }

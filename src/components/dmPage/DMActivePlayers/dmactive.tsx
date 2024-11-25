@@ -13,14 +13,14 @@ const DMActive = () => {
   // Function to load active players
   const loadActivePlayers = async (roomId: String) => {
     setLoading(true); // Set loading to true while the data is being fetched
-    let ret: { uid: String; playerName: String }[] = [];
+    const ret: { uid: String; playerName: String }[] = [];
     await readDatabaseRoute('users').then(
       async (users) => {
         await readDatabaseRoute(`rooms/${roomId}/participants`).then(
           async (participants) => {
-            for (let part in participants) {
-              let selectedUser = { uid: "", playerName: "" };
-              for (let user in users) {
+            for (const part in participants) {
+              const selectedUser = { uid: "", playerName: "" };
+              for (const user in users) {
                 if (users[user]['uid'] === participants[part]) {
                   selectedUser.uid = users[user]['uid'];
                   selectedUser.playerName = users[user]['username'];
