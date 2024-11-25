@@ -44,7 +44,7 @@ export default function AuthForm({ type, onSubmit }: AuthFormProps) {
       <section className="auth-form w-full max-w-md p-8 bg-white shadow-lg rounded-lg">
         <header className="flex flex-col gap-5 md:gap-8 text-center">
           <h1 className="form-heading">
-            {type === 'sign-in' ? 'Sign In' : 'Sign Up'}
+            {type === 'danddy' ? 'Danddy' : 'Danddy'}
           </h1>
           <p className="text-gray-600 mt-2">
             {type === 'sign-in'
