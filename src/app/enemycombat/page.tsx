@@ -41,7 +41,7 @@ const EnemyCombat: React.FC = () => {
     }
   };
 
-  const handleRollInitiative = () => {
+  const handleRollInitiative = async () => {
 
     if(selectedEncounter == null)
       return
@@ -50,6 +50,25 @@ const EnemyCombat: React.FC = () => {
       name: enemy.name,
       initiative: (Math.floor(Math.random() * 20) + 1) + (getModifier(enemy.dexterity))
     }));
+
+    await readDatabaseRoute(`rooms/${roomId}/participants`).then(
+      async (roomResult) => {
+        for(const player in roomResult){
+          await readDatabaseRoute(`users/${roomResult}/characters/${roomId}/charId`).then(
+            async (userResult) => {
+              await readDatabaseRoute(`characters/${userResult}`).then(
+                async (charResult) => {
+                  await initiativeData.push({
+                    name: charResult.name,
+                    initiative: (Math.floor(Math.random() * 20) + 1) + (getModifier(charResult.stats.dexterity.value))
+                  })
+                }
+              )
+            }
+          )
+        }
+      }
+    )
 
     initiativeData.sort((a, b) => b.initiative - a.initiative);
 
