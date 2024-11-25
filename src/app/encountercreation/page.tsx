@@ -98,19 +98,19 @@ const EncounterCreation = () => {
         });
         modalStr += "--------------------------------\n";
 
-        for(let prof in result["proficiencies"]){
+        for(const prof in result["proficiencies"]){
             modalStr += "- "+result["proficiencies"][prof]["proficiency"]["name"]+": "+result["proficiencies"][prof]["value"]+"\n";
         }
 
-        for(let res in result["damage_immunities"]){
+        for(const res in result["damage_immunities"]){
             modalStr += "- Damage Immunity: "+result["damage_immunities"][res]+"\n";
         }
 
-        for(let res in result["damage_resistances"]){
+        for(const res in result["damage_resistances"]){
             modalStr += "- Damage Resistance: "+result["damage_resistances"][res]+"\n";
         }
 
-        for(let res in result["damage_vulnerabilities"]){
+        for(const res in result["damage_vulnerabilities"]){
             modalStr += "- Damage Vulnerability: "+result["damage_vulnerabilities"][res]+"\n";
         }
         modalStr += "--------------------------------\n";
@@ -123,13 +123,13 @@ const EncounterCreation = () => {
         modalStr += "Challenge: "+result["challenge_rating"]+"\n";
         modalStr += "--------------------------------\n";
 
-        for(let res in result["special_abilities"]){
+        for(const res in result["special_abilities"]){
             modalStr += "- "+result["special_abilities"][res]["name"]+": "+result["special_abilities"][res]["desc"]+"\n";
         }
         modalStr += "--------------------------------\n";
 
         modalStr += "Actions\n";
-        for(let res in result["actions"]){
+        for(const res in result["actions"]){
             modalStr += "- "+result["actions"][res]["name"]+": "+result["actions"][res]["desc"]+"\n";
         }
 
