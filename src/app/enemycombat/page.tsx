@@ -42,21 +42,14 @@ const EnemyCombat: React.FC = () => {
   };
 
   const handleRollInitiative = () => {
-    const names = [
-      "Alice", "Bob", "Charlie", "David", "Eve", "Frank", "Grace", "Hannah", "Ivy", "Jack"
-    ];
 
-    const initiativeData = names.map((name) => ({
-      name,
-      initiative: Math.floor(Math.random() * 20) + 1,
+    if(selectedEncounter == null)
+      return
+
+    const initiativeData = selectedEncounter.enemies.map((enemy) => ({
+      name: enemy.name,
+      initiative: (Math.floor(Math.random() * 20) + 1) + (getModifier(enemy.dexterity))
     }));
-
-    for(const enemy in selectedEncounter?.enemies){
-      initiativeData.push({
-        name: selectedEncounter.enemies[enemy].name,
-        initiative: (Math.floor(Math.random() * 20) + 1) + (getModifier(selectedEncounter.enemies[enemy].dexterity))
-      })
-    }
 
     initiativeData.sort((a, b) => b.initiative - a.initiative);
 
