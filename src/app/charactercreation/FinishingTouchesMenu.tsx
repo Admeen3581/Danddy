@@ -111,7 +111,7 @@ const FinishingTouchesMenu: React.FC<FinishingProps> = ({onFinish}) => {
         };
 
         fetchClassData();
-    }, [classesJson.class]);
+    }, [classesJson.class, inventoryOptions]);
 
     const handleProficiencySelect = (proficiency) => {
         const newSelections = [...selectedProficiencies];
@@ -164,7 +164,7 @@ const FinishingTouchesMenu: React.FC<FinishingProps> = ({onFinish}) => {
         classesJson.health.current_health = parseInt(hp);
         classesJson.health.max_health = classesJson.health.current_health;
         //Prof
-        for(let prof in selectedProficiencies){
+        for(const prof in selectedProficiencies){
             setSkillInJson(selectedProficiencies[prof], classesJson, true)
         }
         //Invetory
@@ -176,7 +176,7 @@ const FinishingTouchesMenu: React.FC<FinishingProps> = ({onFinish}) => {
         alert('Character Created!');
         setClassesJson(classesJson)
 
-        let charId = generateCampaignId()
+        const charId = generateCampaignId()
         updateDatabaseRoute(`characters/${charId}`, classesJson).then(
             () => {
                 updateDatabaseRoute(`users/${userId}/characters/${roomId}`, {charId}).then(
