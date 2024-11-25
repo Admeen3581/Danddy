@@ -43,8 +43,8 @@ export default function SignUpLogic() {
       });
 
       alert('Sign-up successful! Please check your email to verify your account then sign in.');
-    } catch (error: any) {
-      console.error('Failed to sign up:', error);
+    } catch (error) {
+      console.error('Failed to sign up:', error instanceof Error ? error.message : error);
       setError('Failed to sign up. Please try again.');
     } finally {
       setLoading(false);

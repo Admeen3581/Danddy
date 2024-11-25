@@ -1,7 +1,7 @@
 import React from 'react';
 import './Stat.css';
 
-const Stat = ({ label, value }: { label: string; value: any }) => {
+const Stat = ({ label, value }: { label: string; value: number | string }) => {
   return (
     <div className="stat">
       <span className="stat-label">{label}:</span>

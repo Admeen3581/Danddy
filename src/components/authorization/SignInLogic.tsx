@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/firebaseConfig';
@@ -11,7 +11,7 @@ export default function SignInLogic() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const { userId, setUserId } = useLocalStore();
+  const { setUserId } = useLocalStore();
 
   const handleSubmit = async (data: { email: string; password: string }) => {
     setError(null);

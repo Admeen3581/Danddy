@@ -4,11 +4,11 @@ import styles from './wisSkills.module.css'
 import { getModifier } from "@/utils/characterJsonFunctions";
 
 const WisSkills = () => {
-  const { classesJson, setClassesJson } = useLocalStore();
+  const { classesJson } = useLocalStore();
   
-  var numStats = []
+  let numStats = []
 
-  for(var stat in classesJson.stats.wisdom.skills){
+  for(let stat in classesJson.stats.wisdom.skills){
     if(classesJson.stats.wisdom.skills[stat]) numStats.push(getModifier(classesJson.stats.wisdom.value)+2);
     else numStats.push(getModifier(classesJson.stats.wisdom.value))
   }
