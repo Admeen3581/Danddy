@@ -41,17 +41,18 @@ export default function AuthForm({ type, onSubmit }: AuthFormProps) {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-zinc-900">
-      <section className="auth-form w-full max-w-md p-8 bg-white shadow-lg rounded-lg">
-        <header className="flex flex-col gap-5 md:gap-8 text-center">
+      <section className="auth-form w-full max-w-md p-8 bg-white shadow-lg rounded-lg text-lg">
+        <header className="flex flex-col gap-5 md:gap-8 text-center text-2xl">
           <h1 className="form-heading">
             {type === 'danddy' ? 'Danddy' : 'Danddy'}
           </h1>
-          <p className="text-gray-600 mt-2">
+        </header>
+
+        <p className="text-gray-600 mt-2 flex flex-col gap-5 md:gap-8 text-center">
             {type === 'sign-in'
               ? 'Enter your credentials to continue.'
               : 'Fill in your details to create an account.'}
-          </p>
-        </header>
+        </p>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8 mt-5">
