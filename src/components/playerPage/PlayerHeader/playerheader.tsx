@@ -1,24 +1,26 @@
 import React from 'react';
 import './playerheader.css';
 import Link from 'next/link';
-import {DirectMessagePopup} from "@/components/messaging/directMessagePopup";
+import { MessagePopUp } from "@/components/messaging/messageDrawer";
+import { DirectMessagePopup } from "@/components/messaging/directMessagePopup";
 
 const PlayerHeader = () => {
-
   return (
-    <div className="PAHome-section">
+    <div className="player-sect">
       <div className="headerBox">
         <div className="menu-container">
           <button className="menu-button">☰</button>
           <div className="menu-content">
             <ul>
-              <li><Link href="/combat">Combat</Link></li>
-              <li><DirectMessagePopup style={'msgButton'}/></li>
-              <li><Link href="/Users/Public">Home</Link></li>
+              <li><Link href="/">Home</Link></li>
+              <li><Link href="/combat">Characters</Link></li>
+              <li><Link href="/enemycombat">Combat</Link></li>
+              <li><Link href="/encountercreation">Enemy</li>
+              <MessagePopUp />
+              <DirectMessagePopup style={'button'} />
             </ul>
           </div>
         </div>
-
         <h1 className="glow-text">
           <span>PLAYER</span>
           <span> </span>
@@ -32,5 +34,3 @@ const PlayerHeader = () => {
 };
 
 export default PlayerHeader;
-
-//<button className='msgButton' onClick={openMessageButtonState}>Direct Message</button>
