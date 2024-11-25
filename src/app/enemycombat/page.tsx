@@ -8,25 +8,24 @@ import useLocalStore from '@/utils/store';
 import { getModifier } from '@/utils/characterJsonFunctions';
 
 const EnemyCombat: React.FC = () => {
-  const [encounters, setEncounters] = useState<Encounter[]>([]); // State to store encounters
+  const [encounters, setEncounters] = useState<Encounter[]>([]);
   const [selectedEncounter, setSelectedEncounter] = useState<Encounter | null>(null);
   const [openEnemy, setOpenEnemy] = useState<string | null>(null);
   const { roomId } = useLocalStore();
-  const [loading, setLoading] = useState<boolean>(true); // State for loading indicator
-  const [showNames, setShowNames] = useState<boolean>(false); // State to control name list visibility
-  const [initiativeNames, setInitiativeNames] = useState<string[]>([]); // State for names list
-  const [currentTurn, setCurrentTurn] = useState<number>(0); // Track the current turn index
+  const [loading, setLoading] = useState<boolean>(true);
+  const [showNames, setShowNames] = useState<boolean>(false);
+  const [initiativeNames, setInitiativeNames] = useState<{ name: string; initiative: number }[]>([]);
+  const [currentTurn, setCurrentTurn] = useState<number>(0);
 
   useEffect(() => {
-    // Fetch encounters and update the state
     readDatabaseRoute(`rooms/${roomId}/encounters`).then(
       (result) => {
         const loadedEncounters = setUpEncouters(result);
-        setEncounters(loadedEncounters); // Set encounters into state
-        setLoading(false); // Hide loading once data is fetched
+        setEncounters(loadedEncounters);
+        setLoading(false);
       }
     );
-  }, [roomId]); // Re-run this effect when roomId changes
+  }, [roomId]);
 
   const handleEncounterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const encounterName = event.target.value;
@@ -42,17 +41,43 @@ const EnemyCombat: React.FC = () => {
     }
   };
 
-  const handleRollInitiative = () => {
-    // Example names for initiative
-    const names = [
-      "Alice", "Bob", "Charlie", "David", "Eve", "Frank", "Grace", "Hannah", "Ivy", "Jack"
-    ];
-    setInitiativeNames(names); // Set the names to the state
-    setShowNames(true); // Make the names list visible
+  const handleRollInitiative = async () => {
+
+    if(selectedEncounter == null)
+      return
+
+    const initiativeData = selectedEncounter.enemies.map((enemy) => ({
+      name: enemy.name,
+      initiative: (Math.floor(Math.random() * 20) + 1) + (getModifier(enemy.dexterity))
+    }));
+
+    await readDatabaseRoute(`rooms/${roomId}/participants`).then(
+      async (roomResult) => {
+        for(const player in roomResult){
+          await readDatabaseRoute(`users/${roomResult}/characters/${roomId}/charId`).then(
+            async (userResult) => {
+              await readDatabaseRoute(`characters/${userResult}`).then(
+                async (charResult) => {
+                  await initiativeData.push({
+                    name: charResult.name,
+                    initiative: (Math.floor(Math.random() * 20) + 1) + (getModifier(charResult.stats.dexterity.value))
+                  })
+                }
+              )
+            }
+          )
+        }
+      }
+    )
+
+    initiativeData.sort((a, b) => b.initiative - a.initiative);
+
+    setInitiativeNames(initiativeData);
+    setShowNames(true);
   };
 
   const handleNextTurn = () => {
-    setCurrentTurn((prevTurn) => (prevTurn + 1) % initiativeNames.length); // Increment turn, loop back to 0 if at the end
+    setCurrentTurn((prevTurn) => (prevTurn + 1) % initiativeNames.length);
   };
 
   return (
@@ -191,18 +216,16 @@ const EnemyCombat: React.FC = () => {
         )
       )}
 
-      {/* Sidebar Section */}
       <div className="sidebar">
         <button className="roll-initiative" onClick={handleRollInitiative}>
           Roll Initiative
         </button>
 
-        {/* Show the list of names after initiative roll */}
         {showNames && (
           <div className="initiative-list">
             <h3>Initiative Order:</h3>
             <ul>
-              {initiativeNames.map((name, index) => (
+              {initiativeNames.map((entry, index) => (
                 <li
                   key={index}
                   style={{
@@ -210,7 +233,7 @@ const EnemyCombat: React.FC = () => {
                     color: currentTurn === index ? 'black' : 'black',
                   }}
                 >
-                  {name}
+                  {entry.name} ({entry.initiative})
                 </li>
               ))}
             </ul>
