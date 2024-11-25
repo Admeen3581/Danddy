@@ -4,7 +4,7 @@ import styles from './characterStats.module.css';
 import useLocalStore from '@/utils/store';
 
 const CharacterStats = () => {
-  const { classesJson, setClassesJson } = useLocalStore();
+  const { classesJson } = useLocalStore();
 
   const stats = {
     strength: classesJson.stats.strength.value,

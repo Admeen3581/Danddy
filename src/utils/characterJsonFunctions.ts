@@ -1,4 +1,3 @@
-
 export interface Health {
     max_health: number;
     current_health: number;
@@ -127,9 +126,9 @@ export interface Health {
   }
   
 export function findSkillInJson(skill: String, character: Character): boolean{
-  var formattedSkill = skill.toLowerCase().replace(" ", "_");
-  for(var stat in character.stats){
-    for(var skil in character.stats[stat].skills){
+  const formattedSkill = skill.toLowerCase().replace(" ", "_");
+  for(const stat in character.stats){
+    for(const skil in character.stats[stat].skills){
       if(formattedSkill == skil)
         return character.stats[stat].skills[skil]
     }
@@ -138,9 +137,9 @@ export function findSkillInJson(skill: String, character: Character): boolean{
 }
 
 export function setSkillInJson(skill: String, character: Character, flag: boolean){
-  var formattedSkill = skill.toLowerCase().replace(" ", "_");
-  for(var stat in character.stats){
-    for(var skil in character.stats[stat].skills){
+  const formattedSkill = skill.toLowerCase().replace(" ", "_");
+  for(const stat in character.stats){
+    for(const skil in character.stats[stat].skills){
       if(formattedSkill == skil){
         character.stats[stat].skills[skil] = flag
         return
