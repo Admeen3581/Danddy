@@ -1,5 +1,6 @@
 import {initFireRealBase} from "@/lib/messenger";
-import {equalTo, get, onValue, orderByChild, query, ref} from "firebase/database";
+import {get, onValue, ref} from "firebase/database";
+import {readDatabaseRoute} from "@/utils/httpRequester";
 
 const realDB = initFireRealBase();
 
@@ -29,7 +30,7 @@ const findExternalUsernames = async (username: string) => {
             const userId = Object.keys(users).find(
                 (key) => users[key].username === username
             );
-            return userId || null; // Return userId or null if not found
+            return userId;
         } else {
             console.log("No users found.");
             return null;
@@ -39,5 +40,15 @@ const findExternalUsernames = async (username: string) => {
         return null;
     }
 };
+
+export const findUsernameGivenId = async (id: string) => {
+    try{
+        return await readDatabaseRoute(`users/${id}/username`);
+    }catch(error){
+        console.error(`Error finding username: `, error);
+    }
+    return null;
+}
+
 
 export default findExternalUsernames;

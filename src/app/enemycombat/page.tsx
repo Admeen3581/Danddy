@@ -1,10 +1,11 @@
-'use client'
+"use client"
 
 import React, { useEffect, useState } from 'react';
 import './enemycombat.css';
 import { Encounter, setUpEncouters } from './enemycombat';
 import { readDatabaseRoute } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
+import { getModifier } from '@/utils/characterJsonFunctions';
 
 const EnemyCombat: React.FC = () => {
   const [encounters, setEncounters] = useState<Encounter[]>([]); // State to store encounters
@@ -12,6 +13,9 @@ const EnemyCombat: React.FC = () => {
   const [openEnemy, setOpenEnemy] = useState<string | null>(null);
   const { roomId } = useLocalStore();
   const [loading, setLoading] = useState<boolean>(true); // State for loading indicator
+  const [showNames, setShowNames] = useState<boolean>(false); // State to control name list visibility
+  const [initiativeNames, setInitiativeNames] = useState<string[]>([]); // State for names list
+  const [currentTurn, setCurrentTurn] = useState<number>(0); // Track the current turn index
 
   useEffect(() => {
     // Fetch encounters and update the state
@@ -38,8 +42,21 @@ const EnemyCombat: React.FC = () => {
     }
   };
 
+  const handleRollInitiative = () => {
+    // Example names for initiative
+    const names = [
+      "Alice", "Bob", "Charlie", "David", "Eve", "Frank", "Grace", "Hannah", "Ivy", "Jack"
+    ];
+    setInitiativeNames(names); // Set the names to the state
+    setShowNames(true); // Make the names list visible
+  };
+
+  const handleNextTurn = () => {
+    setCurrentTurn((prevTurn) => (prevTurn + 1) % initiativeNames.length); // Increment turn, loop back to 0 if at the end
+  };
+
   return (
-    <div className="app-container">
+    <div className="enemy-combat-container">
       <h1>D&D Encounter Viewer</h1>
       <div className="dropdown-container">
         <label htmlFor="encounter">Select Encounter:</label>
@@ -54,7 +71,7 @@ const EnemyCombat: React.FC = () => {
       </div>
 
       {loading ? (
-        <p>Loading encounters...</p> // Show loading message while data is being fetched
+        <p>Loading encounters...</p>
       ) : (
         selectedEncounter && (
           <div className="encounter-details">
@@ -88,8 +105,81 @@ const EnemyCombat: React.FC = () => {
                     <tr className={`details-row ${openEnemy === enemy.name ? 'open' : ''}`}>
                       <td colSpan={6}>
                         <div>
-                          <strong>Details:</strong>
-                          <p>Full character page with additional information about {enemy.name} coming soon.</p>
+                          <p>
+                            <strong><u>Enemy Details</u></strong><br />
+                            <strong>Name:</strong> {enemy.name}<br />
+                            <strong>Count:</strong> x{enemy.count}<br />
+                            <strong>AC:</strong> {enemy.armor_class[0]["value"]} <br />
+                            <strong>Hit Points:</strong> {enemy.hit_points} <br />
+                            <strong>Speed:</strong> {enemy.speed["walk"]} <br />
+                            <strong>----------------------------------------------------</strong><br />
+                            
+                            <strong><u>Stats</u></strong><br />
+                            <strong>Strength:</strong> {getModifier(enemy.strength) > -1 ? "+" : ""}{getModifier(enemy.strength)} ({enemy.strength})<br />
+                            <strong>Dexterity:</strong> {getModifier(enemy.dexterity) > -1 ? "+" : ""}{getModifier(enemy.dexterity)} ({enemy.dexterity})<br />
+                            <strong>Constitution:</strong> {getModifier(enemy.constitution) > -1 ? "+" : ""}{getModifier(enemy.constitution)} ({enemy.constitution})<br />
+                            <strong>Intelligence:</strong> {getModifier(enemy.intelligence) > -1 ? "+" : ""}{getModifier(enemy.intelligence)} ({enemy.intelligence})<br />
+                            <strong>Wisdom:</strong> {getModifier(enemy.wisdowm) > -1 ? "+" : ""}{getModifier(enemy.wisdowm)} ({enemy.wisdowm})<br />
+                            <strong>Charisma:</strong> {getModifier(enemy.charisma) > -1 ? "+" : ""}{getModifier(enemy.charisma)} ({enemy.charisma})<br />
+                            <strong>----------------------------------------------------</strong><br />
+                            
+                            <strong><u>Proficiencies</u></strong><br />
+                            {enemy.proficiencies && enemy.proficiencies.length > 0 ? (
+                              <ul>
+                                {enemy.proficiencies.map((proficiency, index) => (
+                                  <li key={index}>
+                                    <strong>{proficiency["proficiency"].name}:</strong> {proficiency.value}
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p>No proficiencies available.</p>
+                            )}
+                            <strong>----------------------------------------------------</strong><br />
+                            
+                            <strong><u>Senses</u></strong><br />
+                            {enemy.senses ? (
+                              <ul>
+                                {Object.entries(enemy.senses).map(([sense, value], index) => (
+                                  <li key={index}>
+                                    <strong>{sense.charAt(0).toUpperCase() + sense.slice(1).replace("_", " ")}:</strong> {value}
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p>No senses available.</p>
+                            )}
+                            <strong>----------------------------------------------------</strong><br />
+                            
+                            <strong><u>Special Abilities</u></strong><br />---
+                            {enemy.special_abilities && enemy.special_abilities.length > 0 ? (
+                              <ul>
+                                {enemy.special_abilities.map((ability, index) => (
+                                  <li key={index}>
+                                    <strong>{ability["name"]}:</strong> {ability["desc"]}
+                                    <br />---
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p>No special abilities available.</p>
+                            )}
+                            <strong>----------------------------------------------------</strong><br />
+                            
+                            <strong><u>Actions</u></strong><br />---
+                            {enemy.actions && enemy.actions.length > 0 ? (
+                              <ul>
+                                {enemy.actions.map((action, index) => (
+                                  <li key={index}>
+                                    <strong>{action["name"]}:</strong> {action["desc"]}
+                                    <br />---
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p>No actions available.</p>
+                            )}
+                          </p>
                         </div>
                       </td>
                     </tr>
@@ -100,6 +190,36 @@ const EnemyCombat: React.FC = () => {
           </div>
         )
       )}
+
+      {/* Sidebar Section */}
+      <div className="sidebar">
+        <button className="roll-initiative" onClick={handleRollInitiative}>
+          Roll Initiative
+        </button>
+
+        {/* Show the list of names after initiative roll */}
+        {showNames && (
+          <div className="initiative-list">
+            <h3>Initiative Order:</h3>
+            <ul>
+              {initiativeNames.map((name, index) => (
+                <li
+                  key={index}
+                  style={{
+                    backgroundColor: currentTurn === index ? '#f1c40f' : 'lightgray',
+                    color: currentTurn === index ? 'black' : 'black',
+                  }}
+                >
+                  {name}
+                </li>
+              ))}
+            </ul>
+            <button className="next-turn" onClick={handleNextTurn}>
+              Next Turn
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 /**
  * @Author Adam Long
- * @Date 10/29/24
+ * @Date 11/24/24
  * @Project SCRUM-113 & SCRUM-157
  */
 
@@ -15,37 +15,85 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet";
 import './directMessagePopup.css';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import { DoorOpen, SquarePen } from 'lucide-react';
 import {ScrollArea} from "@/components/ui/scroll-area";
-import {useCollectionData} from "react-firebase-hooks/firestore";
-import {initFirestore} from "@/lib/messenger";
-import {addDoc, collection, serverTimestamp} from "firebase/firestore";
 import useLocalStore from "@/utils/store";
 import findExternalUsernames from "@/app/messaging/fetchUserMessages";
+import {push, serverTimestamp} from "@firebase/database";
+import {getDatabase, ref, set} from "firebase/database";
+import {readDatabaseRoute} from "@/utils/httpRequester";
 
 type convo = {
     uid: string;
-    user: string;
-    content: string;
+    username: string;
+    content: string[];
 };
 
-const tempConvos = [
-    {uid: "1", user: 'Alice the wicked witch', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},
-    {uid: "2", user: 'Bob', content: 'Are you free to chat?' },
-    {uid: "3", user: 'Charlie', content: 'Let’s meet up tomorrow.' },
-];
+const db = getDatabase();
 
 export function DirectMessagePopup({style})
 {
-    const [selectedMessage, setSelectedMessage] = useState<convo | null>(null);
+    const [selectedConversation, setSelectedConversation] = useState<convo | null>(null);
+    const [conversations, setConversations] = useState([]);
     const [newUsername, setNewUsername] = useState('');
     const [creatingMessage, setCreatingMessage] = useState(false);
     const [newMessage, setNewMessage] = useState('');
+    const [heardMessages, setHeardMessages] = useState([]);
+    const [isSending, setIsSending] = useState(false);
     const userInfo = useLocalStore();
 
-    //Firebase vars
-    const firestoreDB = initFirestore();
+    /**
+     * Checks for new messages
+     * @author Adam Long
+     * @async
+     */
+    useEffect(() => {
+        const loadMessages = async () => {
+            if (userInfo.userId) {
+                try {
+                    const data = await readDatabaseRoute(`users/${userInfo.userId}/directMessages/${selectedConversation!.uid}`);
+                    const messagesArray = Object.entries(data || {}).map(([id, message]) => ({
+                        id,
+                        ...message,//contains sentByYou, content, timeStamp
+                    }));
+                    setHeardMessages(messagesArray);
+                } catch (error) {
+                    console.error(`Error loading user ${userInfo.userId} messages: `, error);
+                } finally {
+                    setIsSending(false);
+                }
+            }
+        };
+        loadMessages();
+    }, [isSending]);
+
+    /**
+     * Checks for new conversations
+     * @author Adam Long
+     * @async
+     */
+    useEffect(() => {
+        const loadConvos = async () => {
+            if (userInfo.userId) {
+                try {
+                    const data = await readDatabaseRoute(`users/${userInfo.userId}/conversations`);
+                    const convosArray = Object.entries(data || {}).map(([id, convo]) => ({
+                        id,
+                        ...convo,//contains uid, username, & content
+                    }));
+                    setConversations(convosArray);
+                } catch (error) {
+                    console.error(`Error loading user ${userInfo.userId} messages: `, error);
+                } finally {
+                    setIsSending(false);
+                }
+            }
+        };
+        loadConvos();
+    }, [isSending]);
+
+    const tempHelp = "LMJj6Ne1LoabiXW8iYKbCARkACi2"//remove when done
 
     /**
      * Changes state if user is currently creating a new conversation.
@@ -59,11 +107,39 @@ export function DirectMessagePopup({style})
     /**
      * Creates new conversation based on input fields upon a button press.
      * @author Adam Long
+     * @async
      */
-    const handleCreateConversation = () => {
+    const handleCreateConversation = async (event) => {
+        event.preventDefault();
+
         if (newUsername.trim() && newMessage.trim()) {
             // Add logic to create conversation (e.g., update state or API call)
             console.log("Creating conversation with:", newUsername, newMessage);
+            const receivingId = await findExternalUsernames(newUsername);
+            const newConvo = {
+                uid: receivingId,
+                username: newUsername,
+                content: [newMessage]
+            } as convo;
+
+            setSelectedConversation(newConvo);
+
+            try {
+                //Saves new conversation object
+                const convosRef = ref(db, `users/${userInfo.userId}/conversations`);
+                const convosRefKey = push(convosRef);
+                set(convosRefKey, {
+                    uid: newConvo.uid,
+                    username: newConvo.username,
+                    content: newConvo.content,
+                }).catch((e) => {
+                    throw e;
+                })
+            } catch (error) {
+                console.error(`Error saving conversation of user ${newConvo.uid} for ${userInfo.userId}:`, error);
+            }
+
+            setIsSending(true);
 
             // Reset input fields
             setNewUsername("");
@@ -78,15 +154,15 @@ export function DirectMessagePopup({style})
      * @author Adam Long
      */
     const handleSelectConvo = (conversation: convo) => {
-        setSelectedMessage(conversation);
+        setSelectedConversation(conversation);
     };
 
     /**
      * Changes state is user exits current conversation.
      * @author Adam Long
      */
-    const handleSelectConvoReturn = () => { //exits current conversation
-        setSelectedMessage(null);
+    const handleSelectConvoReturn = () => {
+        setSelectedConversation(null);
     }
 
     /**
@@ -108,14 +184,40 @@ export function DirectMessagePopup({style})
             console.log(`Sending message: ${newMessage}`);
 
             //backend (pushes new message to database
-            const recievingUserId = await findExternalUsernames(selectedMessage!.user);
+            const recievingUserId = await findExternalUsernames(selectedConversation!.username);
+            const timeStamp = serverTimestamp();
 
-            await addDoc(collection(firestoreDB, 'directMessages'), {
-                text: newMessage,
-                uid: userInfo.userId,
-                createdAt: serverTimestamp(),
-                sentTo: recievingUserId,
-            })
+            if (recievingUserId && userInfo.userId) {
+                try {
+                    //Saves receiver messages
+                    const receiverMessagesRef = ref(db, `users/${recievingUserId}/directMessages/${userInfo.userId}`);
+                    const receiverMessagesRefKey = push(receiverMessagesRef);
+                    set(receiverMessagesRefKey, {
+                        content: newMessage,
+                        sentByYou: false,
+                        timeStamp: timeStamp,
+                    }).catch((e) => {
+                        throw e;
+                    })
+                } catch (error) {
+                    console.error(`Error saving received direct message to user ${recievingUserId}:`, error);
+                }
+                try {
+                    //Saves sender messages
+                    const senderMessagesRef = ref(db, `users/${userInfo.userId}/directMessages/${recievingUserId}`);
+                    const senderMessagesRefKey = push(senderMessagesRef);
+                    set(senderMessagesRefKey, {
+                        content: newMessage,
+                        sentByYou: true,
+                        timeStamp: timeStamp,
+                    }).catch((e) => {
+                        throw e;
+                    })
+                } catch (error) {
+                    console.error(`Error saving sent direct message to user ${userInfo.userId}:`, error);
+                }
+                setIsSending(true);
+            }
 
             setNewMessage('');
         }
@@ -133,7 +235,7 @@ export function DirectMessagePopup({style})
                     </div>
                 </SheetHeader>
 
-                {selectedMessage ? (
+                {selectedConversation ? (
                     <>
                         <div className="messages-container">
                             <div className='messages-header'>
@@ -141,22 +243,28 @@ export function DirectMessagePopup({style})
                                     <DoorOpen/>
                                 </div>
                                 <div className='nameTitle'>
-                                    <span className='user'>{selectedMessage.user}</span>
+                                    <span className='user'>{selectedConversation.username}</span>
                                 </div>
                             </div>
                             <br/>
                             {/*Look here for message UI changes.*/}
                             <div className='message-content'>
                                 <ScrollArea>
-                                    <div className="message incoming">
-                                        <p className="content">{selectedMessage.content}</p>
+                                    <div className='message outgoing'>
+                                        <p className='content'>{selectedConversation.content[0]}</p>
                                     </div>
-                                    {tempConvos.map((message) => (
-                                        // eslint-disable-next-line react/jsx-key
-                                        <div className="message outgoing">
-                                            {message.content}
-                                        </div>
-                                    ))}
+                                    {heardMessages.length > 0 ? (
+                                        heardMessages.map((msg) => (
+                                            <div
+                                                key={msg.id}
+                                                className={`message ${msg.sentByYou ? "outgoing" : "incoming"}`}
+                                            >
+                                                <p className="content">{msg.content}</p>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <div/>//empty div
+                                    )}
                                 </ScrollArea>
                             </div>
                         </div>
@@ -194,17 +302,17 @@ export function DirectMessagePopup({style})
                     ) : (
                         <div className="conversations-container">
                             <ScrollArea>
-                                {tempConvos.map(convo => (
-                                    <div key={convo.user} className="conversation-preview" onClick={() => handleSelectConvo(convo)}>
+                                {conversations.map(convo => (
+                                    <div key={convo.uid} className="conversation-preview" onClick={() => handleSelectConvo(convo)}>
                                     <span className="user">
-                                        {convo.user.slice(0,21)}
-                                        {convo.user.length > 21 && (
+                                        {convo.username.slice(0,21)}
+                                        {convo.username.length > 21 && (
                                             "..."
                                         )}
                                     </span>
                                         <p className="preview-content">
-                                            {convo.content.slice(0,30)} {/*change to most recent message*/}
-                                            {convo.content.length > 30 && (
+                                            {convo.content[convo.content.length-1].slice(0,30)} {/*change to most recent message*/}
+                                            {convo.content[convo.content.length-1].length > 30 && (
                                                 "..."
                                             )}
                                         </p>
