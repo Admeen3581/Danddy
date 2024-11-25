@@ -51,6 +51,13 @@ const EnemyCombat: React.FC = () => {
       initiative: Math.floor(Math.random() * 20) + 1,
     }));
 
+    for(const enemy in selectedEncounter?.enemies){
+      initiativeData.push({
+        name: selectedEncounter.enemies[enemy].name,
+        initiative: (Math.floor(Math.random() * 20) + 1) + (getModifier(selectedEncounter.enemies[enemy].dexterity))
+      })
+    }
+
     initiativeData.sort((a, b) => b.initiative - a.initiative);
 
     setInitiativeNames(initiativeData);
