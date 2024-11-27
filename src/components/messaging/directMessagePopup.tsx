@@ -71,7 +71,7 @@ export function DirectMessagePopup({style})
             }
         };
         loadMessages();
-    }, [isSending]);
+    }, [selectedConversation]);
 
     /**
      * Checks for new conversations
