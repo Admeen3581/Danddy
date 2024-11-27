@@ -50,6 +50,7 @@ export function DirectMessagePopup({style})
      */
     useEffect(() => {
         const loadMessages = async () => {
+            const oldMessages = heardMessages;
             if (userInfo.userId) {
                 try {
                     const data = await readDatabaseRoute(`users/${userInfo.userId}/directMessages/${selectedConversation!.uid}`);
@@ -62,6 +63,10 @@ export function DirectMessagePopup({style})
                     console.error(`Error loading user ${userInfo.userId} messages: `, error);
                 } finally {
                     setIsSending(false);
+                }
+                if(oldMessages !== heardMessages)
+                {
+                    alert("Message recieved from: " + selectedConversation!.username);
                 }
             }
         };
