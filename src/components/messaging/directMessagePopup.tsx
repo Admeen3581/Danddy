@@ -1,7 +1,7 @@
 /**
  * @Author Adam Long
- * @Date 11/24/24
- * @Project SCRUM-113 & SCRUM-157
+ * @Date 11/27/24
+ * @Project SCRUM-113 & SCRUM-157 & SCRUM-33
  */
 
 'use client'
@@ -92,8 +92,6 @@ export function DirectMessagePopup({style})
         };
         loadConvos();
     }, [isSending]);
-
-    const tempHelp = "LMJj6Ne1LoabiXW8iYKbCARkACi2"//remove when done
 
     /**
      * Changes state if user is currently creating a new conversation.
