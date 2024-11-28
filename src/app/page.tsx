@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useEffect } from 'react';
 import Footer from "../components/footer/Footer";
 import Hero from "../components/hero/Hero";
 import NavBar from "../components/navBar/NavBar";
@@ -8,9 +9,12 @@ import useLocalStore from '@/utils/store';
 import { useRouter } from "next/navigation";
 
 export default function Home() {
-    const userInfo = useLocalStore();
-    const userId = userInfo.userId;
+    const { userId, setRoomId } = useLocalStore();
     const router = useRouter();
+
+    useEffect(() => {
+        setRoomId("");
+    }, [setRoomId]);
 
     if (!userId) {
         router.push("./signin");

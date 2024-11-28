@@ -10,13 +10,11 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import {FieldPath, useForm, UseFormReturn} from "react-hook-form";
+import {FieldPath, UseFormReturn} from "react-hook-form";
 import {z} from "zod";
-import {zodResolver} from "@hookform/resolvers/zod";
 import {authFormSchema} from "./User";
 
 const formSchema = authFormSchema('sign-up');
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface InputFieldProps {
     form: UseFormReturn<z.infer<typeof formSchema>>;
     name: FieldPath<z.infer<typeof formSchema>>;

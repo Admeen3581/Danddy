@@ -5,7 +5,7 @@ export default function Contact() {
         <div className="contact-container">
             <h1>Contact Us</h1>
             <p>
-                We'd love to hear from you! Whether you have a question, feedback, or just want to chat about Dungeons & Dragons, feel free to reach out.
+                We&apos;d love to hear from you! Whether you have a question, feedback, or just want to chat about Dungeons & Dragons, feel free to reach out.
             </p>
 
             <section className="contact-info">

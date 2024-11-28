@@ -4,11 +4,11 @@ import styles from './strSkills.module.css'
 import { getModifier } from "@/utils/characterJsonFunctions";
 
 const StrSkills = () => {
-  const { classesJson, setClassesJson } = useLocalStore();
+  const { classesJson } = useLocalStore();
     
-  var numStats = []
+  const numStats = []
 
-  for(var stat in classesJson.stats.dexterity.skills){
+  for(const stat in classesJson.stats.dexterity.skills){
     if(classesJson.stats.strength.skills[stat]) numStats.push(getModifier(classesJson.stats.strength.value)+2);
     else numStats.push(getModifier(classesJson.stats.strength.value))
   }

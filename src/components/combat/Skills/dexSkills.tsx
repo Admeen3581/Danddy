@@ -5,11 +5,11 @@ import { getModifier } from "@/utils/characterJsonFunctions";
 
 const IntSkills = () => {
 
-  const { classesJson, setClassesJson } = useLocalStore();
+  const { classesJson } = useLocalStore();
   
-  var numStats = []
+  const numStats = []
 
-  for(var stat in classesJson.stats.dexterity.skills){
+  for(const stat in classesJson.stats.dexterity.skills){
     if(classesJson.stats.dexterity.skills[stat]) numStats.push(getModifier(classesJson.stats.dexterity.value)+2);
     else numStats.push(getModifier(classesJson.stats.dexterity.value))
   }

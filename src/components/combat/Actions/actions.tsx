@@ -2,7 +2,7 @@ import useLocalStore from "@/utils/store";
 import './actions.css'
 
 const Actions = () => {
-  const { classesJson, setClassesJson } = useLocalStore();
+  const { classesJson } = useLocalStore();
 
   // Check if classesJson is defined and has spells
   const spells = classesJson?.spells?.map((spell: string) => {

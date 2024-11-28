@@ -4,8 +4,7 @@ import React, { useEffect, useState } from 'react';
 import './CharacterCreation.css';
 import { generateCharacterId, getDnDAPI, updateDatabaseRoute } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
-import { findSkillInJson, setSkillInJson } from '@/utils/characterJsonFunctions';
-import { Router } from 'next/router';
+import { setSkillInJson } from '@/utils/characterJsonFunctions';
 
 interface FinishingProps {
     onFinish: () => void;
@@ -97,7 +96,7 @@ const FinishingTouchesMenu: React.FC<FinishingProps> = ({onFinish}) => {
 
                 if (response && response.starting_equipment_options) {
                     const options = response.starting_equipment_options.map(option => {
-                        var description : string = option.desc;
+                        let description : string = option.desc;
                         if(!description.includes("or")) return [description, "nothing"];
                         description = description.substring(3)
                         const items = description.split(" or (b)").map(item => item.trim()).filter(item => item);
@@ -112,7 +111,7 @@ const FinishingTouchesMenu: React.FC<FinishingProps> = ({onFinish}) => {
         };
 
         fetchClassData();
-    }, [classesJson.class]);
+    }, [classesJson.class, inventoryOptions]);
 
     const handleProficiencySelect = (proficiency) => {
         const newSelections = [...selectedProficiencies];
@@ -165,7 +164,7 @@ const FinishingTouchesMenu: React.FC<FinishingProps> = ({onFinish}) => {
         classesJson.health.current_health = parseInt(hp);
         classesJson.health.max_health = classesJson.health.current_health;
         //Prof
-        for(var prof in selectedProficiencies){
+        for(const prof in selectedProficiencies){
             setSkillInJson(selectedProficiencies[prof], classesJson, true)
         }
         //Invetory

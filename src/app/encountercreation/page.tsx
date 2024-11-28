@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import './EncounterCreation.css';
-import { getDnDAPI, patchDatabaseRoute, readDatabaseRoute, updateDatabaseRoute } from '@/utils/httpRequester';
+import { getDnDAPI, readDatabaseRoute, updateDatabaseRoute } from '@/utils/httpRequester';
 import { getModifier } from '@/utils/characterJsonFunctions';
 import useLocalStore from '@/utils/store';
 
@@ -19,7 +19,7 @@ const EncounterCreation = () => {
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [editableStats, setEditableStats] = useState({});
     const [templateName, setTemplateName] = useState(''); // New state for template name
-    const { roomId, setRoomId } = useLocalStore();
+    const { roomId } = useLocalStore();
 
     useEffect(() => {
         const fetchEncounters = async () => {
@@ -34,7 +34,7 @@ const EncounterCreation = () => {
         };
 
         fetchEncounters();
-    }, []);
+    }, );
 
     const loadRoomEncounters = async () => {
         readDatabaseRoute(`rooms/${roomId}/encounters`).then((result) => {
@@ -98,19 +98,19 @@ const EncounterCreation = () => {
         });
         modalStr += "--------------------------------\n";
 
-        for(var prof in result["proficiencies"]){
+        for(const prof in result["proficiencies"]){
             modalStr += "- "+result["proficiencies"][prof]["proficiency"]["name"]+": "+result["proficiencies"][prof]["value"]+"\n";
         }
 
-        for(var res in result["damage_immunities"]){
+        for(const res in result["damage_immunities"]){
             modalStr += "- Damage Immunity: "+result["damage_immunities"][res]+"\n";
         }
 
-        for(var res in result["damage_resistances"]){
+        for(const res in result["damage_resistances"]){
             modalStr += "- Damage Resistance: "+result["damage_resistances"][res]+"\n";
         }
 
-        for(var res in result["damage_vulnerabilities"]){
+        for(const res in result["damage_vulnerabilities"]){
             modalStr += "- Damage Vulnerability: "+result["damage_vulnerabilities"][res]+"\n";
         }
         modalStr += "--------------------------------\n";
@@ -123,13 +123,13 @@ const EncounterCreation = () => {
         modalStr += "Challenge: "+result["challenge_rating"]+"\n";
         modalStr += "--------------------------------\n";
 
-        for(var res in result["special_abilities"]){
+        for(const res in result["special_abilities"]){
             modalStr += "- "+result["special_abilities"][res]["name"]+": "+result["special_abilities"][res]["desc"]+"\n";
         }
         modalStr += "--------------------------------\n";
 
         modalStr += "Actions\n";
-        for(var res in result["actions"]){
+        for(const res in result["actions"]){
             modalStr += "- "+result["actions"][res]["name"]+": "+result["actions"][res]["desc"]+"\n";
         }
 

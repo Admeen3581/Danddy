@@ -1,5 +1,5 @@
 import {initFireRealBase} from "@/lib/messenger";
-import {get, onValue, ref} from "firebase/database";
+import { get, onValue, ref} from "firebase/database";
 import {readDatabaseRoute} from "@/utils/httpRequester";
 
 const realDB = initFireRealBase();

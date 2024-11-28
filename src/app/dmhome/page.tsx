@@ -42,7 +42,7 @@ const DMHome = () => {
       setRoomId(roomId);
       isRoomCreated.current = true;
     }
-  }, []);
+  }, );
 
   useEffect(() => {
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {

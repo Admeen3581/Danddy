@@ -25,7 +25,7 @@ export interface Enemy {
     strength: number;
     type: string;
     url: string;
-    wisdowm: number;
+    wisdom: number;
     xp: number;
   }
   
@@ -35,7 +35,7 @@ export interface Enemy {
   }
 
   function newEnemy(data: JSON): Enemy{
-    var enemy : Enemy = {
+    const enemy : Enemy = {
         actions: data["actions"],
         alignment: data["alignment"],
         armor_class: data["armor_class"],
@@ -62,21 +62,21 @@ export interface Enemy {
         strength: data["strength"],
         type: data["type"],
         url: data["url"],
-        wisdowm: data["wisdom"],
+        wisdom: data["wisdom"],
         xp: data["xp"]
     }
     return enemy
   }
 
   export function setUpEncouters(data: JSON){
-    var dmEncoutners: Encounter[] = []
-    for(var encounterName in data){
+    const dmEncoutners: Encounter[] = []
+    for(const encounterName in data){
         const encounter: Encounter = {
             name: encounterName,
             enemies: []
         }
-        for(var enemy in data[encounterName]){
-            var enem = newEnemy(data[encounterName][enemy])
+        for(const enemy in data[encounterName]){
+            const enem = newEnemy(data[encounterName][enemy])
             encounter.enemies.push(enem)
         }
         dmEncoutners.push(encounter)
