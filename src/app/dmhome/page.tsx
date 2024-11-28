@@ -33,8 +33,6 @@ const DMHome = () => {
         "dm_id": userId,
         "participants": [""],
         "combat_log": [""],
-        "start_time": new Date().toISOString(),
-        "end_time": "",
         "encounters": []
       };
 
@@ -43,20 +41,6 @@ const DMHome = () => {
       isRoomCreated.current = true;
     }
   }, );
-
-  useEffect(() => {
-    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-      const endTime = new Date().toISOString();
-      patchDatabaseRoute(`rooms/${roomId}`, {end_time: endTime})
-      event.preventDefault();
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  })
 
   return (
     <>
