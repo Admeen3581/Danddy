@@ -181,7 +181,11 @@ const FinishingTouchesMenu: React.FC<FinishingProps> = ({onFinish}) => {
             () => {
                 updateDatabaseRoute(`users/${userId}/characters/${roomId}`, {charId}).then(
                     () => {
-                        onFinish();
+                        updateDatabaseRoute(`rooms/${roomId}/characters/`, {charId}).then(
+                            () =>{
+                                onFinish();
+                            }
+                        )
                     }
                 )
             }
