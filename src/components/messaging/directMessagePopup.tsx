@@ -1,7 +1,7 @@
 /**
  * @Author Adam Long
- * @Date 11/24/24
- * @Project SCRUM-113 & SCRUM-157
+ * @Date 11/27/24
+ * @Project SCRUM-113 & SCRUM-157 & SCRUM-33
  */
 
 'use client'
@@ -50,6 +50,7 @@ export function DirectMessagePopup({style})
      */
     useEffect(() => {
         const loadMessages = async () => {
+            const oldMessages = heardMessages;
             if (userInfo.userId) {
                 try {
                     const data = await readDatabaseRoute(`users/${userInfo.userId}/directMessages/${selectedConversation!.uid}`);
@@ -63,10 +64,14 @@ export function DirectMessagePopup({style})
                 } finally {
                     setIsSending(false);
                 }
+                if(oldMessages !== heardMessages)
+                {
+                    alert("Message recieved from: " + selectedConversation!.username);
+                }
             }
         };
         loadMessages();
-    }, [isSending]);
+    }, [selectedConversation]);
 
     /**
      * Checks for new conversations
@@ -92,8 +97,6 @@ export function DirectMessagePopup({style})
         };
         loadConvos();
     }, [isSending]);
-
-    const tempHelp = "LMJj6Ne1LoabiXW8iYKbCARkACi2"//remove when done
 
     /**
      * Changes state if user is currently creating a new conversation.
