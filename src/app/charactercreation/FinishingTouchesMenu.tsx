@@ -176,7 +176,7 @@ const FinishingTouchesMenu: React.FC<FinishingProps> = ({onFinish}) => {
         alert('Character Created!');
         setClassesJson(classesJson)
 
-        var charId = generateCharacterId()
+        const charId = generateCharacterId()
         updateDatabaseRoute(`characters/${charId}`, classesJson).then(
             () => {
                 updateDatabaseRoute(`users/${userId}/characters/${roomId}`, {charId}).then(
