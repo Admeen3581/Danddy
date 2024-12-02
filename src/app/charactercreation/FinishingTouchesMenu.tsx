@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import './CharacterCreation.css';
-import { generateCampaignId, getDnDAPI, updateDatabaseRoute } from '@/utils/httpRequester';
+import { generateCharacterId, getDnDAPI, updateDatabaseRoute } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
 import { setSkillInJson } from '@/utils/characterJsonFunctions';
 
@@ -176,12 +176,16 @@ const FinishingTouchesMenu: React.FC<FinishingProps> = ({onFinish}) => {
         alert('Character Created!');
         setClassesJson(classesJson)
 
-        const charId = generateCampaignId()
+        var charId = generateCharacterId()
         updateDatabaseRoute(`characters/${charId}`, classesJson).then(
             () => {
                 updateDatabaseRoute(`users/${userId}/characters/${roomId}`, {charId}).then(
                     () => {
-                        onFinish();
+                        updateDatabaseRoute(`rooms/${roomId}/characters/`, {charId}).then(
+                            () =>{
+                                onFinish();
+                            }
+                        )
                     }
                 )
             }

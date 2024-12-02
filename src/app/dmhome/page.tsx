@@ -3,7 +3,7 @@
 import './dm.css';
 import React, { useEffect, useRef } from 'react';
 import DMNotes from '../../components/dmPage/DMNotes/dmnotes';
-import { createRoom, generateRoomCode, patchDatabaseRoute, generateCampaignId } from '@/utils/httpRequester';
+import { createRoom, generateRoomCode, patchDatabaseRoute } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
 import DMHeader from '../../components/dmPage/DMHeader/dmheader';
 import DMActivePlayers from '../../components/dmPage/DMActivePlayers/dmactive';
@@ -24,23 +24,15 @@ const DMHome = () => {
   }
 
   const isRoomCreated = useRef(false)
-  const {roomId, setRoomId, userId, setUserId} = useLocalStore()
+  const {roomId, setRoomId, userId} = useLocalStore()
 
   useEffect(() => {
     if(!isRoomCreated.current && roomId.length < 1){
-      setRoomId("temp")
-      if (userId == "") {
-        setUserId("guestId")
-      }
       const roomId = generateRoomCode()
-      const campaignId = generateCampaignId()
       const roomJson = {
-        "campaign_id": campaignId,
         "dm_id": userId,
         "participants": [""],
         "combat_log": [""],
-        "start_time": new Date().toISOString(),
-        "end_time": "",
         "encounters": []
       };
 
@@ -49,20 +41,6 @@ const DMHome = () => {
       isRoomCreated.current = true;
     }
   }, );
-
-  useEffect(() => {
-    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-      const endTime = new Date().toISOString();
-      patchDatabaseRoute(`rooms/${roomId}`, {end_time: endTime})
-      event.preventDefault();
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  })
 
   return (
     <>
