@@ -16,6 +16,8 @@ interface SidebarMenuProps {
     classDropdownOpen: boolean;
 }
 
+const iconUrl = 'https://img.icons8.com/?size=512&id=104704&format=png';
+
 const SidebarMenu: React.FC<SidebarMenuProps> = ({
     fetchedRaces,
     fetchedClasses,
@@ -30,8 +32,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
     raceDropdownOpen,
     classDropdownOpen
 }) => {
-    const iconUrl = 'https://img.icons8.com/?size=512&id=104704&format=png';
-
+    
     return (
         <div className="sidebar">
             <h2>Select a Race</h2>
