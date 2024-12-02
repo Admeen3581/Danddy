@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { getDnDAPI } from '@/utils/httpRequester';
 import useLocalStore from '@/utils/store';
 import SidebarMenu from './SidebarMenu';
@@ -169,23 +168,13 @@ const CharacterCreation = () => {
 
             {showPopup && (
                 <div className="popup">
-                    <Image 
-                        className="dragon-image" 
-                        src="https://png.pngtree.com/png-clipart/20230907/ourmid/pngtree-cute-cartoon-baby-dragon-png-image_10021331.png" 
-                        alt="Dragon"
-                        width={200}
-                        height={200}
-                    />
+                    <img className="dragon-image" src="https://png.pngtree.com/png-clipart/20230907/ourmid/pngtree-cute-cartoon-baby-dragon-png-image_10021331.png" alt="Dragon" />
+
                     <div className="popup-content">
                         <h2>{`${selectedRace} ${selectedClass}`}</h2>
                         <p>{getRaceDescription(selectedRace)}</p>
                         <p>{getClassDescription(selectedClass)}</p>
-                        <Image 
-                            src="https://img.icons8.com/?size=512&id=104704&format=png" 
-                            alt="Class Logo"
-                            width={100}
-                            height={100}
-                        />
+                        <img src="https://img.icons8.com/?size=512&id=104704&format=png" alt="Class Logo" />
                         <button onClick={handleConfirmSelection}>Confirm Selection</button>
                     </div>
                 </div>
