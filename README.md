@@ -185,19 +185,19 @@
 **Lorenz**: "Worked on UI to make it appealing. Implemented Combat,About and Contact Pages." </br>
 - `Jira Task: Add visually appealing styles on the homepage` </br>
     - [SCRUM-126](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-126), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-126-add-visually-appealing-styles-) </br>
-- `Jira Task: Implement About Us Page
+- `Jira Task: Implement About Us Page` </br>
     - [SCRUM-130](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-130), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-130-implement-about-us-page) </br>
-- `Jira Task: Implement Combat Components
+- `Jira Task: Implement Combat Components` </br>
     - [SCRUM-137](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-137), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-137-implement-combat-components) </br>
-- `Jira Task: Implement Player Conditions component for combat
+- `Jira Task: Implement Player Conditions component for combat`</br>
     - [SCRUM-138](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-138), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-138-implement-player-conditions-co) </br>
-- `Jira Task: Implement Inventory Components for players
+- `Jira Task: Implement Inventory Components for players` </br>
     - [SCRUM-139](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-139), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-139-implement-inventory-components) </br>
-- `Jira Task: Redesign Combat Page for the player and add all components
+- `Jira Task: Redesign Combat Page for the player and add all components` </br>
     - [SCRUM-140](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-140), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-140-redesign-combat-page-for-the-p) </br>
-- `Jira Task: Pull data from the player to show Spells/Actions
+- `Jira Task: Pull data from the player to show Spells/Actions` </br>
     - [SCRUM-125](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-125), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-125-pull-data-from-the-player-to-s) </br>
-- `Jira Task: Implement Contact Us Page UI
+- `Jira Task: Implement Contact Us Page UI` </br>
     - [SCRUM-136](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-136), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-136-implement-contact-us-page-ui) </br>
 
 ### Reports
@@ -227,6 +227,90 @@
 **Lorenz**:
    >- Notes system on front-end and backend</br>
    >- Fixes on build, styling and etc.. </br>
+   
+## Sprint 3
+
+#### Contributions
+
+**Adam**: "Finalized Messaging System and Added DM Buttons" </br>
+- `Jira Task: Set Up Player Message Notifications`</br>
+    - [SCRUM-33](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-33), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-33-set-up-player-message-notificat) </br>
+- `Jira Task: Implement message receiving` </br>
+    - [SCRUM-116](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-116), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-116-implement-message-receiving) </br>
+- `Jira Task: Integrate Message History and Logging` </br>
+    - [SCRUM-35](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-35), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-35-integrate-message-history-and-l) </br>
+- `Jira Task: Create home button (DM)` </br>
+    - [SCRUM-169](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-169), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-169-create-home-button-dm) </br>
+- `Jira Task: Implement message sending` </br>
+    - [SCRUM-115](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-115), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-115-implement-message-sending) </br>
+- `Jira Task: Reformat directories` </br>
+    - [SCRUM-150](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-150), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-150-reformat-directories) </br>
+- `Jira Task: Create enemy creation button` </br>
+    - [SCRUM-170](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-170), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-170-create-enemy-creation-button) </br>
+
+**Joshua**: "Finalized Combat and Connectivity" </br>
+-  `Jira Task: Allow DM's to look at other player's character sheets` </br>
+    - [SCRUM-135](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-135), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-135-add-loading-units-into-combat-) </br>
+- `Jira Task: Prompt players with character creation if they have no character in room` </br>
+    - [SCRUM-162](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-162), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-162-prompt-players-with-character-) </br>
+- `Jira Task: Add in syncing encounters into combat` </br>
+    - [SCRUM-167](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-167), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-167-add-in-syncing-encounters-into) </br>
+- `Jira Task: Reformat encounter syncing for DM` </br>
+    - [SCRUM-187](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-187), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-187-reformat-encounter-syncing-for) </br>
+- `Jira Task: Add initiative flow into combat menu` </br>
+    - [SCRUM-166](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-166), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-166-add-initiative-flow-into-comba) </br>
+- `Jira Task: Sync combat initiative for across active players` </br>
+    - [SCRUM-165](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-165), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-165-sync-combat-initiative-for-acr) </br>
+- `Jira Task: Add in Encounter creation into DM screen` </br>
+    - [SCRUM-164](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-164), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-164-add-in-encounter-creation-into) </br>
+- `Jira Task: Save templates to user/load from user` </br>
+    - [SCRUM-159](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-159), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-159-save-templates-to-user-load-fr) </br>
+
+**Olivia**: "Cleaned up the UI, made it consistent across all pages, and reworked the homescreen" </br>
+- `Jira Task: Clean up DM UI` </br>
+    - [SCRUM-178](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-178), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-178-clean-up-dm-ui) </br>
+- `Jira Task: Clean up Player UI` </br>
+    - [SCRUM-179](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-179), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-179-clean-up-player-ui) </br>
+- `Jira Task: Fixing css in signup signin` </br>
+    - [SCRUM-177](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-177), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-177-fixing-css-in-signup-signin) </br>
+- `Jira Task: Adjusting homescreen colors` </br>
+    - [SCRUM-190](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-190), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-190-adjusting-homescreen-colors) </br>
+- `Jira Task: Rework Homescreen` </br>
+    - [SCRUM-182](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-182), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-182-rework-homescreen) </br>
+- `Jira Task: Make sure all UI is consistent` </br>
+    - [SCRUM-180](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-180), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-180-make-sure-all-ui-is-consistent) </br>
+- `Jira Task: Fixing CSS bugs` </br>
+    - [SCRUM-181](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-181), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-181-fixing-css-bugs) </br>
+
+**Roman**: "Finshed the Sign In and Sign Up system, including storing userId's for use elsewhere." </br>
+- `Jira Task: Deploy Danddy` </br>
+    - [SCRUM-171](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-171), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-171-deploy-danddy) </br>
+- `Jira Task: Defaults to Last Room Joined` </br>
+    - [SCRUM-173](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-173), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/bugfix/SCRUM-173-defaults-to-last-room-joined) </br>
+- `Jira Task: Change UserId to Primary User Key` </br>
+    - [SCRUM-183](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-183), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-183-change-userid-to-primary-key) </br>
+- `Jira Task: Restructure Room Objects in Database` </br>
+    - [SCRUM-184](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-184), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-184-restructure-room-objects) </br>
+- `Jira Task: Fix Issue With Maps Not Appearing` </br>
+    - [SCRUM-185](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-185), [Bitbucket Branch](https://cs3398-luna-fall24.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-185) </br>
+
+**Lorenz**: "Helped polishing UI, added notes functionality, and assisted in debugging builds" </br>
+- `Jira Task: Ensure that all notes are saved and persist across multiple sessions, allowing users to reference past notes from earlier sessions.` </br>
+    - [SCRUM-65](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-65), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-65-ensure-that-all-notes-are-saved) </br>
+- `Jira Task: Attempt to fix bugs to build the project` </br>
+    - [SCRUM-176](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-176), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-176-attempt-to-fix-bugs-to-build-t) </br>
+- `Jira Task: Polish character creation screen` </br>
+    - [SCRUM-151](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-151), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-151-polish-character-creation-scre) </br>
+- `Jira Task: Add hotfix for Build`</br>
+    - [SCRUM-191](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-191), [Bitbucket Branch](https://bitbucket.org/cs3398-luna-f24/%7B7ebd87c8-49ae-4c7a-9442-fc3ca9fa4d1c%7D/branch/SCRUM-191-add-hotfix-for-build) </br>
+- `Jira Task: Fix consistent style across all pages` </br>
+    - [SCRUM-174](https://cs3398-luna-fall24.atlassian.net/browse/SCRUM-174), [Bitbucket Branch](https://cs3398-luna-fall24.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-174) </br>
+
+### Reports
+
+![Burnup Chart](research-and-conceptual/burnupCharts/sprint3-burnup.png)
+
+
    
 ## Contact
 Adam Long  
