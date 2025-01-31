@@ -22,7 +22,7 @@
 
 
 ## Technologies Used
-- [React Native](https://reactnative.dev/)
+- [React](https://react.dev/)
 - [Type-Script](https://www.typescriptlang.org/)
 - [Cloud Tunnel](https://www.cloudflare.com/products/tunnel/)
 
