@@ -20,6 +20,8 @@
 ## General Information 
 ![Logo](./assets/logo.jpg)
 
+##Collaborated On
+- [Jira](https://cs3398-luna-fall24.atlassian.net/jira/software/projects/SCRUM/boards/1)
 
 ## Technologies Used
 - [React](https://react.dev/)
